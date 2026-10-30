@@ -43,15 +43,38 @@
     </section>
   </main>
   <script>
-    function searchDrug() {
-      const query = document.getElementById('searchInput').value;
-      const resultContainer = document.getElementById('result');
-      if (query.trim() === "") {
-        resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة اسم الدواء!</span>";
-        return;
-      }
-      resultContainer.innerHTML = "جاري البحث عن معلومات وبدائل الدواء: <strong>" + query + "</strong>...";
-    }
+  const medicines = [
+  { name: "Panadol", active: "Paracetamol", price: "1.50 JOD", alternative: "Adol, Revanin" },
+  { name: "Amoxil", active: "Amoxicillin", price: "3.00 JOD", alternative: "Ospamox" },
+  { name: "بابونج", active: "Chamomile", price: "متغير", alternative: "مهدئ طبيعي ومضاد للالتهاب" }
+];
+
+function searchDrug() {
+  const query = document.getElementById('searchInput').value.toLowerCase();
+  const resultContainer = document.getElementById('result');
+  if (query.trim() === "") {
+    resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة اسم الدواء!</span>";
+    return;
+  }
+  
+  const found = medicines.filter(med => 
+    med.name.toLowerCase().includes(query) || med.active.toLowerCase().includes(query)
+  );
+
+  if (found.length > 0) {
+    let html = "<ul style='list-style: none; padding: 0;'>";
+    found.forEach(med => {
+      html += `<li style='background: #f1f5f9; margin-bottom: 10px; padding: 15px; border-radius: 8px;'>
+      <strong>${med.name}</strong> <br> المادة الفعالة: ${med.active} <br> السعر: ${med.price} <br> البدائل: <span style='color: #f97316;'>${med.alternative}</span></li>`;
+    });
+    html += "</ul>";
+    resultContainer.innerHTML = html;
+  } else {
+    resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على الدواء.</span>";
+  }
+}
+
+    
   </script>
 </body>
 </html>
