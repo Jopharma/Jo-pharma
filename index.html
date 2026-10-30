@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jo Pharma | المرجع الدوائي الأردني</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+    body { font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; background-color: #f8fafc; }
+    header { background-color: #1e3a8a; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px; }
+    .logo { font-size: 24px; font-weight: bold; }
+    .logo .o { color: #f97316; }
+    nav a { color: white; text-decoration: none; margin-right: 15px; font-size: 14px; font-weight: bold; }
+    .search-section { text-align: center; padding: 40px 15px; background-color: white; margin: 30px auto; width: 90%; max-width: 800px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    h1 { color: #1e3a8a; font-size: 22px; }
+    p { font-size: 14px; color: #475569; }
+    .search-box { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    input { padding: 12px; width: 100%; max-width: 250px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Tajawal'; font-size: 15px; }
+    button { padding: 12px 25px; background-color: #f97316; color: white; border: none; border-radius: 6px; font-family: 'Tajawal'; font-weight: bold; font-size: 15px; }
+    #result { margin-top: 20px; font-size: 16px; color: #334155; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <span class="j">J</span><span class="o">O</span> Pharma
+    </div>
+    <nav>
+      <a href="#">البحث الدوائي</a>
+      <a href="#">البدائل</a>
+      <a href="#">الأعشاب</a>
+    </nav>
+  </header>
+  <main>
+    <section class="search-section">
+      <h1>المرجع الدوائي والنباتي الأردني</h1>
+      <p>ابحث عن الأدوية وبدائلها المتوفرة في الأردن</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="اسم الدواء...">
+        <button onclick="searchDrug()">بحث</button>
+      </div>
+      <div id="result"></div>
+    </section>
+  </main>
+  <script>
+    function searchDrug() {
+      const query = document.getElementById('searchInput').value;
+      const resultContainer = document.getElementById('result');
+      if (query.trim() === "") {
+        resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة اسم الدواء!</span>";
+        return;
+      }
+      resultContainer.innerHTML = "جاري البحث عن معلومات وبدائل الدواء: <strong>" + query + "</strong>...";
+    }
+  </script>
+</body>
+</html>
