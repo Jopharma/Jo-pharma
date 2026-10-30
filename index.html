@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jo Pharma: المرجع الدوائي والأمراض والأعشاب الأردني للبحث عن الأدوية، أسعارها، وبدائلها الطبية.">
+  <title>Jo Pharma | المرجع الدوائي والأمراض والأعشاب الأردني</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8fafc;
+      color: #334155;
+    }
+
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo .o {
+      color: #f97316;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      font-family: 'Tajawal';
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    nav button:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #f97316;
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .section-card {
+      background-color: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #1e3a8a;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .search-box {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      max-width: 380px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: 'Tajawal';
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #1e3a8a;
+    }
+
+    .main-btn {
+      padding: 12px 25px;
+      background-color: #f97316;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Tajawal';
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .main-btn:hover {
+      background-color: #ea580c;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .item-card {
+      background: #f1f5f9;
+      padding: 18px;
+      border-radius: 8px;
+      border-right: 4px solid #1e3a8a;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .item-card:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+    }
+
+    .item-card h3 {
+      margin: 0 0 8px 0;
+      color: #1e3a8a;
+      font-size: 18px;
+    }
+
+    .details-box {
+      margin-top: 15px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      text-align: right;
+    }
+
+    .result-item {
+      background: #f1f5f9;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: right;
+      border-right: 4px solid #f97316;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <span class="j">J</span><span class="o">O</span> Pharma
+    </div>
+    <nav>
+      <button onclick="showSection('searchSection')">الرئيسية والبحث</button>
+      <button onclick="showSection('diseasesSection')">دليل الأمراض</button>
+      <button onclick="showSection('herbsSection')">موسوعة الأعشاب</button>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- قسم البحث الذكي -->
+    <div id="searchSection" class="section-card">
+      <h1>المرجع الدوائي والنباتي الأردني</h1>
+      <p>ابحث عن الأدوية، المادة الفعالة، الاستخدام، أو الأسعار الرسمية المعتمدة في الأردن</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="ابحث هنا (مثال: Panadol, سكري، غثيان)...">
+        <button class="main-btn" onclick="searchDrug()">بحث</button>
+      </div>
+      <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- قسم الأمراض المزمنة -->
+    <div id="diseasesSection" class="section-card hidden" style="text-align: right;">
+      <h1>دليل الأمراض المزمنة والأدوية المرتبطة بها</h1>
+      <p>اختر الحالة المرضية لعرض وصفها الطبي والأدوية المعتمدة لعلاجها في السوق الأردني:</p>
+      <div class="grid-container" id="diseasesGrid"></div>
+    </div>
+
+    <!-- قسم الأعشاب الطبية -->
+    <div id="herbsSection" class="section-card hidden" style="text-align: right;">
+      <h1>موسوعة الأعشاب والعلاج النباتي</h1>
+      <p>اضغط على أي عشبة لمعرفة معلوماتها الكاملة وكيفية الاستفادة منها وعلاجها:</p>
+      <div class="grid-container" id="herbsGrid"></div>
+    </div>
+
+  </div>
+
+  <footer>
+    جميع الحقوق محفوظة © Jo Pharma 2026 - المرجع الصيدلاني الأردني
+  </footer>
+
+  <script>
+    // قاعدة البيانات الشاملة للأدوية
+    const medicines = [
+      { name: "Panadol Advance", active: "Paracetamol 500mg", indication: "مسكن ألم وخافض للحرارة", price: "1.55 JOD", alternative: "Adol (1.20 JOD), Revanin (1.10 JOD)" },
+      { name: "Prof 400mg", active: "Ibuprofen 400mg", indication: "مسكن ألم ومضاد للالتهاب", price: "1.35 JOD", alternative: "Brufen (1.80 JOD), Nurofen (2.00 JOD)" },
+      { name: "Glucophage 500mg", active: "Metformin", indication: "علاج السكري النوع الثاني وتنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00 JOD), Metfor (1.80 JOD)" },
+      { name: "Amaryl 2mg", active: "Glimepiride", indication: "تحفيز إفراز الإنسولين لعلاج السكري النوع الثاني", price: "4.50 JOD", alternative: "Glimax (3.00 JOD), Diaryl (2.80 JOD)" },
+      { name: "Concor 5mg", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90 JOD), Bisocor (2.50 JOD)" },
+      { name: "Diovan 160mg", active: "Valsartan", indication: "علاج ارتفاع ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50 JOD), Tareg (7.90 JOD)" },
+      { name: "Lipitor 20mg", active: "Atorvastatin", indication: "خافض للكوليسترول والدهنيات", price: "13.50 JOD", alternative: "Atorva (7.00 JOD), Lorvast (6.50 JOD)" },
+      { name: "Nexium 40mg", active: "Esomeprazole", indication: "علاج حرقة المعدة والارتداد المريئي", price: "14.00 JOD", alternative: "Esomep (8.00 JOD), Nexmezol (7.50 JOD)" }
+    ];
+
+    // قاعدة بيانات الأمراض
+    const diseasesData = [
+      { 
+        title: "مرض السكري - النوع الأول (Type 1 Diabetes)", 
+        desc: "حالة مزمنة يهاجم فيها الجهاز المناعي خلايا بيتا في البنكرياس، مما يمنع إنتاج الإنسولين تماماً.", 
+        drugs: "يعتمد العلاج الأساسي والرئيسي على حقن الإنسولين بأنواعه (مثل: Lantus, Novorapid) بالإضافة لمتابعة قياس السكر المستمرة." 
+      },
+      { 
+        title: "مرض السكري - النوع الثاني (Type 2 Diabetes)", 
+        desc: "حالة تصبح فيها الخلايا مقاومة للإنسولين، أو لا ينتج البنكرياس ما يكفي منه.", 
+        drugs: "الأدوية المستعملة: Metformin (مثل Glucophage و Formit)، و Glimepiride (مثل Amaryl)." 
+      },
+      { 
+        title: "ارتفاع ضغط الدم (Hypertension)", 
+        desc: "مرض صامت يشكل فيه ضغط الدم على جدران الشرايين مستويات مرتفعة باستمرار.", 
+        drugs: "الأدوية المستعملة: Bisoprolol (مثل Concor)، Valsartan (مثل Diovan)، و Amlodipine." 
+      }
+    ];
+
+    // قاعدة بيانات الأعشاب
+    const herbsData = [
+      { 
+        name: "البابونج (Chamomile)", 
+        benefits: "يحتوي على مضادات أكسدة قوية تساعد في تهدئة الجهاز العصبي، تحسين النوم، ومحاربة الأرق.", 
+        uses: "يُشرب كشاي دافئ لتخفيف آلام المغص، تقلصات المعدة، وتسكين التهابات الحلق الخفيفة." 
+      },
+      { 
+        name: "اليانسون (Anise)", 
+        benefits: "غني بالزيوت العطرية الطاردة للغازات والمقوية لصحة الجهاز الهضمي.", 
+        uses: "مفيد جداً لتخفيف السعال، طرد البلغم، وتسكين مغص الأطفال والبالغين." 
+      },
+      { 
+        name: "الزعتر (Thyme)", 
+        benefits: "يمتلك خصائص مضادة للبكتيريا والفطريات وقوية لمقاومة التهابات الجهاز التنفسي.", 
+        uses: "يُستخدم لمنقوع الصدر، تخفيف نوبات الربو، تنظيف المجاري التنفسية ومحاربة السعال." 
+      }
+    ];
+
+    function showSection(sectionId) {
+      document.getElementById('searchSection').classList.add('hidden');
+      document.getElementById('diseasesSection').classList.add('hidden');
+      document.getElementById('herbsSection').classList.add('hidden');
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function searchDrug() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const resultContainer = document.getElementById('result');
+      
+      if (query.trim() === "") {
+        resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة كلمة للبحث عنها!</span>";
+        return;
+      }
+      
+      const found = medicines.filter(med => 
+        med.name.toLowerCase().includes(query) || med.active.toLowerCase().includes(query) || med.indication.includes(query)
+      );
+
+      if (found.length > 0) {
+        let html = "";
+        found.forEach(med => {
+          html += `<div class='result-item'>
+          <strong style='font-size: 18px; color: #1e3a8a;'>${med.name}</strong> <br> 
+          <span style='color: #475569;'><strong>الاستخدام:</strong> ${med.indication}</span> <br>
+          <span style='color: #475569;'><strong>المادة الفعالة:</strong> ${med.active}</span> <br> 
+          <span style='color: #475569;'><strong>السعر الرسمي:</strong> ${med.price}</span> <br> 
+          <span style='color: #ea580c;'><strong>البدائل الأردنية:</strong> ${med.alternative}</span></div>`;
+        });
+        resultContainer.innerHTML = html;
+      } else {
+        resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على نتائج مطابقة لبحثك.</span>";
+      }
+    }
+
+    function loadDiseases() {
+      const grid = document.getElementById('diseasesGrid');
+      diseasesData.forEach((dis, index) => {
+        grid.innerHTML += `
+          <div class="item-card" onclick="toggleDisease(${index})">
+            <h3>${dis.title}</h3>
+            <p>${dis.desc}</p>
+            <div id="dis-details-${index}" class="details-box hidden">
+              <strong style="color: #ea580c;">الأدوية والعلاج المستعمل:</strong>
+              <p style="margin-top: 5px; color: #1e293b;">${dis.drugs}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function toggleDisease(index) {
+      document.getElementById(`dis-details-${index}`).classList.toggle('hidden');
+    }
+
+    function loadHerbs() {
+      const grid = document.getElementById('herbsGrid');
+      herbsData.forEach((herb, index) => {
+        grid.innerHTML += `
+          <div class="item-card" onclick="toggleHerb(${index})">
+            <h3>🌿 ${herb.name}</h3>
+            <p>اضغط لعرض الفوائد العلاجية وطريقة الاستفادة</p>
+            <div id="herb-details-${index}" class="details-box hidden">
+              <strong style="color: #1e3a8a;">الفوائد والخصائص:</strong>
+              <p style="margin: 5px 0; color: #1e293b;">${herb.benefits}</p>
+              <strong style="color: #ea580c;">طريقة الاستفادة والاستخدام:</strong>
+              <p style="margin-top: 5px; color: #1e293b;">${herb.uses}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    function toggleHerb(index) {
+      document.getElementById(`herb-details-${index}`).classList.toggle('hidden');
+    }
+
+    window.onload = function() {
+      loadDiseases();
+      loadHerbs();
+    };
+  </script>
+</body>
+</html>
