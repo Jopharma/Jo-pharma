@@ -3,177 +3,364 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> ⁠<meta name="description" content="Jo Pharma: المرجع الدوائي الأردني للبحث عن الأدوية، أسعارها، وبدائلها الطبية والعشبية.">⁠
-
-    Jo Pharma | المرجع الدوائي الأردني</title>
+  <title>Jo Pharma | المرجع الدوائي والأمراض والأعشاب الأردني</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
-    body { font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; background-color: #f8fafc; }
-    header { background-color: #1e3a8a; color: white; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 10px; }
-    .logo { font-size: 24px; font-weight: bold; }
-    .logo .o { color: #f97316; }
-    nav a { color: white; text-decoration: none; margin-right: 15px; font-size: 14px; font-weight: bold; }
-    .search-section { text-align: center; padding: 40px 15px; background-color: white; margin: 30px auto; width: 90%; max-width: 800px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-    h1 { color: #1e3a8a; font-size: 22px; }
-    p { font-size: 14px; color: #475569; }
-    .search-box { margin-top: 20px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    input { padding: 12px; width: 100%; max-width: 250px; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'Tajawal'; font-size: 15px; }
-    button { padding: 12px 25px; background-color: #f97316; color: white; border: none; border-radius: 6px; font-family: 'Tajawal'; font-weight: bold; font-size: 15px; }
-    #result { margin-top: 20px; font-size: 16px; color: #334155; font-weight: bold; }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8fafc;
+      color: #334155;
+    }
+
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .logo .o {
+      color: #f97316;
+    }
+
+    nav {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: white;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: bold;
+      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 4px;
+      transition: background 0.3s;
+    }
+
+    nav button:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #f97316;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 15px;
+    }
+
+    .section-card {
+      background-color: white;
+      padding: 30px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #1e3a8a;
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #475569;
+    }
+
+    .search-box {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      max-width: 350px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-family: 'Tajawal';
+      font-size: 15px;
+    }
+
+    .main-btn {
+      padding: 12px 25px;
+      background-color: #f97316;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-family: 'Tajawal';
+      font-weight: bold;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .main-btn:hover {
+      background-color: #ea580c;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* تصميم الكروت والأزرار التفاعلية للأعشاب والأمراض */
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+      text-align: right;
+    }
+
+    .item-card {
+      background: #f1f5f9;
+      padding: 15px;
+      border-radius: 8px;
+      border-right: 4px solid #1e3a8a;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .item-card:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+    }
+
+    .item-card h3 {
+      margin: 0 0 5px 0;
+      color: #1e3a8a;
+      font-size: 18px;
+    }
+
+    .details-box {
+      margin-top: 15px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      text-align: right;
+    }
+
+    .result-item {
+      background: #f1f5f9;
+      margin-bottom: 12px;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: right;
+      border-right: 4px solid #f97316;
+    }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo">
       <span class="j">J</span><span class="o">O</span> Pharma
     </div>
     <nav>
-      <a href="#">البحث الدوائي</a>
-      <a href="#">البدائل</a>
-      <a href="#">الأعشاب</a>
+      <button onclick="showSection('searchSection')">الرئيسية والبحث</button>
+      <button onclick="showSection('diseasesSection')">دليل الأمراض والأدوية</button>
+      <button onclick="showSection('herbsSection')">موسوعة الأعشاب</button>
     </nav>
   </header>
-  <main>
-    <section class="search-section">
+
+  <div class="container">
+
+    <!-- قسم البحث -->
+    <div id="searchSection" class="section-card">
       <h1>المرجع الدوائي والنباتي الأردني</h1>
-      <p>ابحث عن الأدوية وبدائلها المتوفرة في الأردن</p>
+      <p>ابحث عن الأدوية، المواد الفعالة، أسعارها، وبدائلها المتوفرة في السوق الأردني</p>
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="اسم الدواء...">
-        <button onclick="searchDrug()">بحث</button>
+        <input type="text" id="searchInput" placeholder="ابحث عن اسم الدواء، المادة، أو الاستخدام...">
+        <button class="main-btn" onclick="searchDrug()">بحث</button>
       </div>
-      <div id="result"></div>
-    </section>
-  </main>
+      <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <!-- قسم الأمراض والأدوية -->
+    <div id="diseasesSection" class="section-card hidden" style="text-align: right;">
+      <h1>دليل الأمراض المزمنة والأدوية المرتبطة بها</h1>
+      <p>اختر الحالة المرضية لعرض وصفها الطبي والأدوية المعتمدة لعلاجها في الأردن:</p>
+      
+      <div class="grid-container" id="diseasesGrid">
+        <!-- يتم تعبئتها عبر البرمجة -->
+      </div>
+    </div>
+
+    <!-- قسم الأعشاب العلاجية -->
+    <div id="herbsSection" class="section-card hidden" style="text-align: right;">
+      <h1>موسوعة الأعشاب والعلاج النباتي</h1>
+      <p>اضغط على أي عشبة لمعرفة معلوماتها الكاملة وكيفية الاستفادة منها وعلاجها:</p>
+      
+      <div class="grid-container" id="herbsGrid">
+        <!-- يتم تعبئتها عبر البرمجة -->
+      </div>
+    </div>
+
+  </div>
+
   <script>
-  const medicines = [
-  // مسكنات وخافضات حرارة
-  { name: "Panadol Advance", active: "Paracetamol 500mg", indication: "مسكن ألم وخافض للحرارة", price: "1.55 JOD", alternative: "Adol (1.20 JOD), Revanin (1.10 JOD)" },
-  { name: "Prof 400mg", active: "Ibuprofen 400mg", indication: "مسكن ألم ومضاد للالتهاب (NSAID)", price: "1.35 JOD", alternative: "Brufen (1.80 JOD), Nurofen (2.00 JOD)" },
-  { name: "Voltaren 50mg", active: "Diclofenac Sodium", indication: "مسكن ألم ومضاد لالتهابات المفاصل والعضلات", price: "3.50 JOD", alternative: "Diclogesic (2.00 JOD), Jo-Fenac (1.80 JOD)" },
-  { name: "Ponstan Forte", active: "Mefenamic acid", indication: "مسكن لآلام الدورة الشهرية والأسنان", price: "2.75 JOD", alternative: "Fenamic (2.00 JOD), Mafac (1.90 JOD)" },
-  { name: "Flutab", active: "Paracetamol/Pseudoephedrine", indication: "تخفيف أعراض الرشح والزكام والاحتقان", price: "2.50 JOD", alternative: "Congestal (1.50 JOD)" },
+    // قاعدة بيانات الأدوية والأعشاب والأمراض المتكاملة
+    const medicines = [
+      { name: "Panadol Advance", active: "Paracetamol 500mg", indication: "مسكن ألم وخافض للحرارة", price: "1.55 JOD", alternative: "Adol (1.20 JOD), Revanin (1.10 JOD)" },
+      { name: "Prof 400mg", active: "Ibuprofen 400mg", indication: "مسكن ألم ومضاد للالتهاب", price: "1.35 JOD", alternative: "Brufen (1.80 JOD), Nurofen (2.00 JOD)" },
+      { name: "Glucophage 500mg", active: "Metformin", indication: "علاج السكري النوع الثاني وتنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00 JOD), Metfor (1.80 JOD)" },
+      { name: "Amaryl 2mg", active: "Glimepiride", indication: "تحفيز إفراز الانسولين لعلاج السكري النوع الثاني", price: "4.50 JOD", alternative: "Glimax (3.00 JOD), Diaryl (2.80 JOD)" },
+      { name: "Concor 5mg", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90 JOD), Bisocor (2.50 JOD)" },
+      { name: "Diovan 160mg", active: "Valsartan", indication: "علاج ارتفاع ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50 JOD), Tareg (7.90 JOD)" },
+      { name: "Lipitor 20mg", active: "Atorvastatin", indication: "خافض للكوليسترول والدهنيات", price: "13.50 JOD", alternative: "Atorva (7.00 JOD), Lorvast (6.50 JOD)" },
+      { name: "Nexium 40mg", active: "Esomeprazole", indication: "علاج حرقة المعدة والارتداد المريئي", price: "14.00 JOD", alternative: "Esomep (8.00 JOD), Nexmezol (7.50 JOD)" }
+    ];
 
-  // مضادات حيوية
-  { name: "Amoxil 500mg", active: "Amoxicillin", indication: "مضاد حيوي لعلاج الالتهابات البكتيرية (الحلق، الأذن)", price: "3.15 JOD", alternative: "Ospamox (2.50 JOD), Hiconcil (2.80 JOD)" },
-  { name: "Augmentin 1g", active: "Amoxicillin/Clavulanate", indication: "مضاد حيوي واسع الطيف للالتهابات القوية", price: "11.20 JOD", alternative: "Curam (8.50 JOD), Amoclan (7.90 JOD)" },
-  { name: "Zithromax 500mg", active: "Azithromycin", indication: "مضاد حيوي لالتهابات الجهاز التنفسي والجيوب", price: "9.50 JOD", alternative: "Zomax (5.50 JOD), Azimycin (4.90 JOD)" },
-  { name: "Cipro 500mg", active: "Ciprofloxacin", indication: "مضاد حيوي لالتهابات المسالك البولية والأمعاء", price: "6.00 JOD", alternative: "Ciprocin (4.50 JOD), Bactiflox (4.00 JOD)" },
-  { name: "Flagyl 500mg", active: "Metronidazole", indication: "مضاد بكتيري وطفيلي (للالتهابات المعوية والمهبلية)", price: "2.50 JOD", alternative: "Dumozol (1.90 JOD), Nidazole (1.75 JOD)" },
+    const diseasesData = [
+      { 
+        title: "مرض السكري - النوع الأول (Type 1 Diabetes)", 
+        desc: "حالة مزمنة يهاجم فيها الجهاز المناعي خلايا بيتا في البنكرياس، مما يمنع إنتاج الإنسولين تماماً.", 
+        drugs: "يعتمد العلاج الأساسي والرئيسي على حقن الإنسولين بأنواعه (مثل: Lantus, Novorapid) بالإضافة لمتابعة قياس السكر المستمرة." 
+      },
+      { 
+        title: "مرض السكري - النوع الثاني (Type 2 Diabetes)", 
+        desc: "حالة تصبح فيها الخلايا مقاومة للإنسولين، أو لا ينتج البنكرياس ما يكفي منه.", 
+        drugs: "الأدوية المستعملة: Metformin (مثل Glucophage و Formit)، و Glimepiride (مثل Amaryl)، وقد يتطور الأمر لاحقاً لاحتياج الإنسولين." 
+      },
+      { 
+        title: "ارتفاع ضغط الدم (Hypertension)", 
+        desc: "مرض صامت يشكل فيه ضغط الدم على جدران الشرايين مستويات مرتفعة باستمرار.", 
+        drugs: "الأدوية المستعملة: Bisoprolol (مثل Concor)، Valsartan (مثل Diovan)، و Amlodipine." 
+      }
+    ];
 
-  // أدوية الجهاز الهضمي
-  { name: "Nexium 40mg", active: "Esomeprazole", indication: "علاج حرقة المعدة، الارتداد المريئي، وقرحة المعدة", price: "14.00 JOD", alternative: "Esomep (8.00 JOD), Nexmezol (7.50 JOD)" },
-  { name: "Losec 20mg", active: "Omeprazole", indication: "علاج قرحة وحموضة المعدة", price: "7.50 JOD", alternative: "Omedar (4.00 JOD), Gastril (3.50 JOD)" },
-  { name: "Rennie", active: "Calcium/Magnesium", indication: "مضاد سريع لحموضة وحرقة المعدة", price: "2.50 JOD", alternative: "Maalox (2.00 JOD)" },
-  { name: "Gaviscon Advance", active: "Sodium Alginate", indication: "علاج الارتداد المريئي المزعج", price: "5.50 JOD", alternative: "Algicon (3.50 JOD)" },
-  { name: "Buscopan", active: "Hyoscine butylbromide", indication: "مضاد للمغص والتقلصات المعوية", price: "2.75 JOD", alternative: "Spasmopan (1.50 JOD)" },
-  { name: "Duspatalin 135mg", active: "Mebeverine", indication: "علاج تشنجات وآلام القولون العصبي", price: "5.50 JOD", alternative: "Mebecol (3.50 JOD), Colospa (3.00 JOD)" },
-  { name: "Motilium 10mg", active: "Domperidone", indication: "مضاد للغثيان والقيء", price: "3.50 JOD", alternative: "Dompy (2.00 JOD), Peridon (1.80 JOD)" },
-  { name: "Primperan 10mg", active: "Metoclopramide", indication: "علاج الغثيان الشديد وتسهيل حركة الأمعاء", price: "2.20 JOD", alternative: "Meclodin (1.50 JOD)" },
+    const herbsData = [
+      { 
+        name: "البابونج (Chamomile)", 
+        benefits: "يحتوي على مضادات أكسدة قوية تساعد في تهدئة الجهاز العصبي، تحسين النوم، ومحاربة الأرق.", 
+        uses: "يُشرب كشاي دافئ لتخفيف آلام المغص، تقلصات المعدة، وتسكين التهابات الحلق الخفيفة." 
+      },
+      { 
+        name: "اليانسون (Anise)", 
+        benefits: "غني بالزيوت العطرية الطاردة للغازات والمقوية لصحة الجهاز الهضمي.", 
+        uses: "مفيد جداً لتخفيف السعال، طرد البلغم، وتسكين مغص الأطفال والبالغين." 
+      },
+      { 
+        name: "الزعتر (Thyme)", 
+        benefits: "يمتلك خصائص مضادة للبكتيريا والفطريات وقوية لمقاومة التهابات الجهاز التنفسي.", 
+        uses: "يُستخدم لمنقوع الصدر، تخفيف نوبات الربو، تنظيف المجاري التنفسية ومحاربة السعال الديكي." 
+      }
+    ];
 
-  // أدوية السكري
-  { name: "Glucophage 500mg", active: "Metformin", indication: "منظم لسكر الدم (النوع الثاني)", price: "3.00 JOD", alternative: "Formit (2.00 JOD), Metfor (1.80 JOD)" },
-  { name: "Daonil 5mg", active: "Glibenclamide", indication: "خافض لسكر الدم", price: "2.20 JOD", alternative: "Glibil (1.50 JOD)" },
-  { name: "Amaryl 2mg", active: "Glimepiride", indication: "خافض لسكر الدم", price: "4.50 JOD", alternative: "Glimax (3.00 JOD), Diaryl (2.80 JOD)" },
+    // التنقل بين الأقسام
+    function showSection(sectionId) {
+      document.getElementById('searchSection').classList.add('hidden');
+      document.getElementById('diseasesSection').classList.add('hidden');
+      document.getElementById('herbsSection').classList.add('hidden');
+      
+      document.getElementById(sectionId).classList.remove('hidden');
+    }
 
-  // أدوية الضغط والقلب والدهنيات
-  { name: "Concor 5mg", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتنظيم ضربات القلب", price: "4.20 JOD", alternative: "Biso (2.90 JOD), Bisocor (2.50 JOD)" },
-  { name: "Tenormin 50mg", active: "Atenolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "3.80 JOD", alternative: "Ateno (2.50 JOD), Blokium (2.20 JOD)" },
-  { name: "Diovan 160mg", active: "Valsartan", indication: "علاج ارتفاع ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50 JOD), Tareg (7.90 JOD)" },
-  { name: "Lipitor 20mg", active: "Atorvastatin", indication: "خافض للكوليسترول والدهنيات الثلاثية", price: "13.50 JOD", alternative: "Atorva (7.00 JOD), Lorvast (6.50 JOD)" },
-  { name: "Crestor 10mg", active: "Rosuvastatin", indication: "خافض قوي للكوليسترول في الدم", price: "15.00 JOD", alternative: "Rosuva (8.00 JOD), Rovast (7.50 JOD)" },
-  { name: "Lasix 40mg", active: "Furosemide", indication: "مدر للبول لعلاج احتباس السوائل والضغط", price: "1.80 JOD", alternative: "Diurex (1.20 JOD)" },
-  { name: "Aldactone 25mg", active: "Spironolactone", indication: "مدر للبول حافظ للبوتاسيوم", price: "3.20 JOD", alternative: "SpiroTone (2.00 JOD)" },
-  { name: "Plavix 75mg", active: "Clopidogrel", indication: "مميع للدم لمنع التجلطات القلبية والدماغية", price: "24.00 JOD", alternative: "Clopid (12.00 JOD), Pidor (10.00 JOD)" },
-  { name: "Aspirin Protect 100mg", active: "Acetylsalicylic acid", indication: "مميع للدم بجرعة منخفضة للوقاية من الجلطات", price: "2.50 JOD", alternative: "Jusprin (1.50 JOD)" },
+    // محرك البحث
+    function searchDrug() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const resultContainer = document.getElementById('result');
+      
+      if (query.trim() === "") {
+        resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة كلمة للبحث عنها!</span>";
+        return;
+      }
+      
+      const found = medicines.filter(med => 
+        med.name.toLowerCase().includes(query) || med.active.toLowerCase().includes(query) || med.indication.includes(query)
+      );
 
-  // الغدة الدرقية
-  { name: "Eltroxin 100mcg", active: "Levothyroxine", indication: "علاج خمول (نقص نشاط) الغدة الدرقية", price: "3.50 JOD", alternative: "Thyrox (2.50 JOD)" },
+      if (found.length > 0) {
+        let html = "";
+        found.forEach(med => {
+          html += `<div class='result-item'>
+          <strong style='font-size: 18px; color: #1e3a8a;'>${med.name}</strong> <br> 
+          <span style='color: #475569;'><strong>الاستخدام:</strong> ${med.indication}</span> <br>
+          <span style='color: #475569;'><strong>المادة الفعالة:</strong> ${med.active}</span> <br> 
+          <span style='color: #475569;'><strong>السعر الرسمي:</strong> ${med.price}</span> <br> 
+          <span style='color: #ea580c;'><strong>البدائل الأردنية:</strong> ${med.alternative}</span></div>`;
+        });
+        resultContainer.innerHTML = html;
+      } else {
+        resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على نتائج مطابقة لبحثك.</span>";
+      }
+    }
 
-  // أدوية التنفسية والحساسية
-  { name: "Ventolin Inhaler", active: "Salbutamol", indication: "موسع للقصبات لعلاج نوبات الربو", price: "3.60 JOD", alternative: "Butalin Inhaler (2.50 JOD)" },
-  { name: "Symbicort 160/4.5", active: "Budesonide/Formoterol", indication: "بخاخ وقائي وعلاجي للربو والانسداد الرئوي", price: "32.00 JOD", alternative: "Bufomix (22.00 JOD)" },
-  { name: "Zyrtec 10mg", active: "Cetirizine", indication: "مضاد حساسية للرشح والحكة", price: "4.50 JOD", alternative: "Finallerg (2.50 JOD), Cetrak (2.00 JOD)" },
-  { name: "Claritin 10mg", active: "Loratadine", indication: "مضاد حساسية لا يسبب النعاس الشديد", price: "5.00 JOD", alternative: "Lorine (3.00 JOD), Ramitin (2.50 JOD)" },
-  { name: "Aerius 5mg", active: "Desloratadine", indication: "مضاد حساسية من الجيل الحديث", price: "6.50 JOD", alternative: "Desto (4.00 JOD), Neoloridin (3.50 JOD)" },
-  { name: "Telfast 120mg", active: "Fexofenadine", indication: "مضاد حساسية طويل المفعول", price: "7.50 JOD", alternative: "Fexo (4.50 JOD), Fexodine (4.00 JOD)" },
-  { name: "Otrivin 0.1%", active: "Xylometazoline", indication: "قطرة/بخاخ لإزالة احتقان الأنف", price: "2.35 JOD", alternative: "Xylo (1.50 JOD), Rino (1.20 JOD)" },
+    // تعبئة قسم الأمراض تلقائياً
+    function loadDiseases() {
+      const grid = document.getElementById('diseasesGrid');
+      diseasesData.forEach((dis, index) => {
+        grid.innerHTML += `
+          <div class="item-card" onclick="toggleDisease(${index})">
+            <h3>${dis.title}</h3>
+            <p>${dis.desc}</p>
+            <div id="dis-details-${index}" class="details-box hidden">
+              <strong style="color: #ea580c;">الأدوية والعلاج المستعمل:</strong>
+              <p style="margin-top: 5px; color: #1e293b;">${dis.drugs}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
 
-  // الكريمات والمطهرات (الجلدية)
-  { name: "Betadine Solution", active: "Povidone-iodine", indication: "مطهر ومعقم للجروح", price: "4.00 JOD", alternative: "Poviodine (2.50 JOD)" },
-  { name: "Fucidin Cream", active: "Fusidic acid", indication: "كريم مضاد حيوي للالتهابات الجلدية البكتيرية", price: "3.50 JOD", alternative: "Fudic (2.00 JOD), Fusiderm (1.80 JOD)" },
-  { name: "Zovirax Cream", active: "Acyclovir", indication: "كريم مضاد للفيروسات لعلاج تقرحات البرد (الهربس)", price: "4.50 JOD", alternative: "Lovir (2.50 JOD), Acyvir (2.00 JOD)" },
-  { name: "Daktarin Cream", active: "Miconazole", indication: "كريم مضاد للفطريات الجلدية", price: "3.20 JOD", alternative: "Micoderm (2.00 JOD)" },
-  { name: "Canesten Cream", active: "Clotrimazole", indication: "واسع الطيف لعلاج الالتهابات الفطرية", price: "3.50 JOD", alternative: "Candistan (2.00 JOD)" },
+    function toggleDisease(index) {
+      const box = document.getElementById(`dis-details-${index}`);
+      box.classList.toggle('hidden');
+    }
 
-  // الفيتامينات والمعادن
-  { name: "Centrum Lutein", active: "Multivitamins", indication: "مكمل غذائي شامل لدعم الصحة والمناعة", price: "10.50 JOD", alternative: "Materna (7.00 JOD)" },
-  { name: "Neurobion", active: "Vitamin B complex", indication: "مقوي للأعصاب وعلاج نقص فيتامين ب", price: "3.50 JOD", alternative: "Tribion (2.50 JOD)" },
-  { name: "Ferose", active: "Iron", indication: "علاج فقر الدم (الأنيميا) الناتج عن نقص الحديد", price: "4.50 JOD", alternative: "Fefol (3.00 JOD)" },
-  { name: "Ostocare", active: "Calcium/Vit D/Zinc", indication: "مكمل لدعم صحة العظام والأسنان", price: "6.50 JOD", alternative: "Caltrate (5.00 JOD)" },
+    // تعبئة قسم الأعشاب تلقائياً
+    function loadHerbs() {
+      const grid = document.getElementById('herbsGrid');
+      herbsData.forEach((herb, index) => {
+        grid.innerHTML += `
+          <div class="item-card" onclick="toggleHerb(${index})">
+            <h3>🌿 ${herb.name}</h3>
+            <p>اضغط لعرض الفوائد العلاجية وطريقة الاستفادة</p>
+            <div id="herb-details-${index}" class="details-box hidden">
+              <strong style="color: #1e3a8a;">الفوائد والخصائص:</strong>
+              <p style="margin: 5px 0; color: #1e293b;">${herb.benefits}</p>
+              <strong style="color: #ea580c;">طريقة الاستفادة والاستخدام:</strong>
+              <p style="margin-top: 5px; color: #1e293b;">${herb.uses}</p>
+            </div>
+          </div>
+        `;
+      });
+    }
 
-  // قسم الأعشاب الطبية
-  { name: "بابونج", active: "Chamomile (عشبة طبية)", indication: "مهدئ للأعصاب، مخفف للمغص ومضاد للالتهاب", price: "متوفر لدى العطارين", alternative: "لا يوجد كيميائي، يمكن شربه كشاي" },
-  { name: "يانسون", active: "Anise (عشبة طبية)", indication: "طارد للغازات، مخفف لآلام البطن ومهدئ للسعال", price: "متوفر لدى العطارين", alternative: "شاي عشبي بديل لقطرات المغص الخفيفة" },
-  { name: "زعتر", active: "Thyme (عشبة طبية)", indication: "مقشع للبلغم، مطهر للجهاز التنفسي", price: "متوفر لدى العطارين", alternative: "بديل طبيعي لبعض أدوية السعال" }
-];
+    function toggleHerb(index) {
+      const box = document.getElementById(`herb-details-${index}`);
+      box.classList.toggle('hidden');
+    }
 
-function searchDrug() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
-  const resultContainer = document.getElementById('result');
-  
-  if (query.trim() === "") {
-    resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة اسم الدواء!</span>";
-    return;
-  }
-  
-  const found = medicines.filter(med => 
-    med.name.toLowerCase().includes(query) || med.active.toLowerCase().includes(query) || med.indication.includes(query)
-  );
-
-  if (found.length > 0) {
-    let html = "<ul style='list-style: none; padding: 0;'>";
-    found.forEach(med => {
-      html += `<li style='background: #f1f5f9; margin-bottom: 10px; padding: 15px; border-radius: 8px; text-align: right;'>
-      <strong style='font-size: 18px; color: #1e3a8a;'>${med.name}</strong> <br> 
-      <span style='color: #475569;'><strong>الاستخدام:</strong> ${med.indication}</span> <br>
-      <span style='color: #475569;'><strong>المادة الفعالة:</strong> ${med.active}</span> <br> 
-      <span style='color: #475569;'><strong>السعر:</strong> ${med.price}</span> <br> 
-      <span style='color: #ea580c;'><strong>البدائل الأردنية:</strong> ${med.alternative}</span></li>`;
-    });
-    html += "</ul>";
-    resultContainer.innerHTML = html;
-  } else {
-    resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على الدواء في قاعدة البيانات الحالية.</span>";
-  }
-}
-
-
-function searchDrug() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
-  const resultContainer = document.getElementById('result');
-  if (query.trim() === "") {
-    resultContainer.innerHTML = "<span style='color: red;'>يرجى كتابة اسم الدواء!</span>";
-    return;
-  }
-  
-  const found = medicines.filter(med => 
-    med.name.toLowerCase().includes(query) || med.active.toLowerCase().includes(query)
-  );
-
-  if (found.length > 0) {
-    let html = "<ul style='list-style: none; padding: 0;'>";
-    found.forEach(med => {
-      html += `<li style='background: #f1f5f9; margin-bottom: 10px; padding: 15px; border-radius: 8px;'>
-      <strong>${med.name}</strong> <br> المادة الفعالة: ${med.active} <br> السعر: ${med.price} <br> البدائل: <span style='color: #f97316;'>${med.alternative}</span></li>`;
-    });
-    html += "</ul>";
-    resultContainer.innerHTML = html;
-  } else {
-    resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على الدواء.</span>";
-  }
-}
-
-    
+    // تشغيل الدوال عند فتح الصفحة
+    window.onload = function() {
+      loadDiseases();
+      loadHerbs();
+    };
   </script>
 </body>
 </html>
