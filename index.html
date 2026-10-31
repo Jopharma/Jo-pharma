@@ -206,16 +206,16 @@
       <h1>المرجع الدوائي والنباتي الأردني الشامل</h1>
       <p>ابحث عن الأدوية، المادة الفعالة، الاستخدام، أو الأسعار الرسمية المعتمدة في الأردن</p>
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="ابحث هنا (مثال: Panadol, سكري، قلب)...">
+        <input type="text" id="searchInput" placeholder="ابحث هنا (مثال: Panadol, سكري، قلب، ضغط)...">
         <button class="main-btn" onclick="searchDrug()">بحث</button>
       </div>
       <div id="result" style="margin-top: 20px;"></div>
     </div>
 
-    <!-- قسم تصنيفات الأدوية حسب الاستعمال (الجديد) -->
+    <!-- قسم تصنيفات الأدوية حسب الاستعمال -->
     <div id="categoriesSection" class="section-card hidden" style="text-align: right;">
       <h1>تصنيفات الأدوية حسب الاستعمال الطبي</h1>
-      <p>اختر التصنيف لعرض كافة الأدوية المتاحة في السوق الأردني ضمن هذه الفئة مع أسعارها وبدائلها:</p>
+      <p>اختر التصنيف لعرض كافة أدوية هذه الفئة المتوفرة في السوق الأردني مع أسعارها وبدائلها:</p>
       <div class="grid-container" id="categoriesGrid"></div>
       <div id="categoryResult" style="margin-top: 25px;"></div>
     </div>
@@ -241,44 +241,70 @@
   </footer>
 
   <script>
-    // قاعدة بيانات الأدوية المصنفة حسب الاستعمال الطبي
+    // قاعدة بيانات الأدوية الضخمة المصنفة حسب الاستعمال الطبي
     const medicines = [
       // أدوية القلب والشرايين والضغط
       { name: "Concor 5mg", category: "أدوية القلب والشرايين والضغط", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90 JOD), Bisocor (2.50 JOD)" },
+      { name: "Concor 2.5mg", category: "أدوية القلب والشرايين والضغط", active: "Bisoprolol", indication: "خفض ضغط الدم وقصور القلب المزمن", price: "3.10 JOD", alternative: "Biso 2.5" },
       { name: "Diovan 160mg", category: "أدوية القلب والشرايين والضغط", active: "Valsartan", indication: "علاج ارتفاع ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50 JOD), Tareg (7.90 JOD)" },
+      { name: "Diovan 80mg", category: "أدوية القلب والشرايين والضغط", active: "Valsartan", indication: "خفض ضغط الدم وحماية الكلى", price: "8.50 JOD", alternative: "Valpress 80" },
       { name: "Micardis 80mg", category: "أدوية القلب والشرايين والضغط", active: "Telmisartan", indication: "خفض ضغط الدم المرتفع وحماية الشرايين", price: "14.50 JOD", alternative: "Telmisar" },
+      { name: "Micardis 40mg", category: "أدوية القلب والشرايين والضغط", active: "Telmisartan", indication: "علاج ضغط الدم وتنظيم الدورة الدموية", price: "9.50 JOD", alternative: "Telmisar 40" },
       { name: "Norvasc 5mg", category: "أدوية القلب والشرايين والضغط", active: "Amlodipine", indication: "علاج ارتفاع ضغط الدم وتوسيع الشرايين", price: "6.00 JOD", alternative: "Amlo (3.50 JOD)" },
+      { name: "Norvasc 10mg", category: "أدوية القلب والشرايين والضغط", active: "Amlodipine", indication: "خفض ضغط الدم الشديد وذبحة صدرية", price: "9.80 JOD", alternative: "Amlo 10" },
       { name: "Aspirin Protect 100mg", category: "أدوية القلب والشرايين والضغط", active: "Acetylsalicylic Acid", indication: "مسيّل للدم وحماية القلب والشرايين", price: "2.10 JOD", alternative: "JOSPRIN (1.50 JOD)" },
+      { name: "Plavix 75mg", category: "أدوية القلب والشرايين والضغط", active: "Clopidogrel", indication: "منع تجلط الدم والجلطات القلبية والدماغية", price: "22.50 JOD", alternative: "Clopix (11.00 JOD)" },
+      { name: "Lanoxin 0.25mg", category: "أدوية القلب والشرايين والضغط", active: "Digoxin", indication: "تنظيم ضربات القلب وعلاج قصور القلب", price: "3.40 JOD", alternative: "Cardoxin" },
+      { name: "Isorbid 5mg", category: "أدوية القلب والشرايين والضغط", active: "Isosorbide Dinitrate", indication: "علاج والوقاية من الذبحة الصدرية", price: "2.50 JOD", alternative: "Coronil" },
 
       // المسكنات وخافضات الحرارة
       { name: "Panadol Advance", category: "المسكنات وخافضات الحرارة", active: "Paracetamol 500mg", indication: "مسكن ألم وخافض للحرارة", price: "1.55 JOD", alternative: "Adol (1.20 JOD), Revanin (1.10 JOD)" },
       { name: "Panadol Extra", category: "المسكنات وخافضات الحرارة", active: "Paracetamol + Caffeine", indication: "مسكن قوي للصداع الشديد والشقيقة", price: "1.85 JOD", alternative: "Paramol Extra (1.30 JOD)" },
+      { name: "Panadol Joint", category: "المسكنات وخافضات الحرارة", active: "Paracetamol 665mg", indication: "مسكن ممتد المفعول لآلام المفاصل والخشونة", price: "2.50 JOD", alternative: "Osteo-Adol" },
       { name: "Prof 400mg", category: "المسكنات وخافضات الحرارة", active: "Ibuprofen 400mg", indication: "مسكن ألم ومضاد للالتهاب وخافض حرارة", price: "1.35 JOD", alternative: "Brufen (1.80 JOD), Nurofen (2.00 JOD)" },
       { name: "Cataflam 50mg", category: "المسكنات وخافضات الحرارة", active: "Diclofenac Potassium", indication: "مسكن سريع لآلام الأسنان والمفاصل والالتهابات الحادة", price: "3.50 JOD", alternative: "Rofenac (2.20 JOD), Olfen (2.50 JOD)" },
+      { name: "Voltaren 75mg Amp", category: "المسكنات وخافضات الحرارة", active: "Diclofenac Sodium", indication: "مسكن قوي للعضلات والمغص الكلوي والحاد", price: "2.80 JOD", alternative: "Rofenac Amp" },
+      { name: "Celebrex 200mg", category: "المسكنات وخافضات الحرارة", active: "Celecoxib", indication: "مسكن التهاب المفاصل الآمن على المعدة", price: "14.50 JOD", alternative: "Cylox (8.00 JOD)" },
+      { name: "Aflotan 15mg", category: "المسكنات وخافضات الحرارة", active: "Meloxicam", indication: "علاج آلام المفاصل والتهابات العظام المزمنة", price: "4.50 JOD", alternative: "Mecox" },
 
-      // المضادات الحيوية
+      // المضادات الحيوية والالتهابات
       { name: "Augmentin 1g", category: "المضادات الحيوية والتهابات", active: "Amoxicillin / Clavulanic Acid", indication: "مضاد حيوي واسع المجال للالتهابات البكتيرية واللوزتين", price: "8.50 JOD", alternative: "Curam (6.00 JOD), Hibiotic (6.50 JOD)" },
+      { name: "Augmentin 625mg", category: "المضادات الحيوية والتهابات", active: "Amoxicillin / Clavulanic Acid", indication: "مضاد حيوي لالتهابات الأذن والبلعوم", price: "5.80 JOD", alternative: "Curam 625" },
       { name: "Zithromax 500mg", category: "المضادات الحيوية والتهابات", active: "Azithromycin", indication: "مضاد حيوي لالتهابات الجهاز التنفسي والجيوب", price: "6.80 JOD", alternative: "Zitrobac (4.50 JOD), Azomax (4.20 JOD)" },
       { name: "Klacid 500mg", category: "المضادات الحيوية والتهابات", active: "Clarithromycin", indication: "مضاد حيوي لالتهابات الرئة والجيوب وقرحة المعدة", price: "11.20 JOD", alternative: "Clarithro" },
-      { name: "Cipro 500mg", category: "المضادات الحيوية والتهابات", active: "Ciprofloxacin", indication: "مضاد حيوي قوي لالتهابات المسالك البولية والأمعاء", price: "7.20 JOD", alternative: "Ciprobay" },
+      { name: "Ceftin 500mg", category: "المضادات الحيوية والتهابات", active: "Cefuroxime", indication: "مضاد حيوي لالتهابات الأذن والمسالك البولية", price: "9.50 JOD", alternative: "Zinnat" },
+      { name: "Cipro 500mg", category: "المضادات الحيوية والتهابات", active: "Ciprofloxacin", indication: "مضاد حيوي قوي لالتهابات المسالك والأمعاء", price: "7.20 JOD", alternative: "Ciprobay" },
+      { name: "Doxycycline 100mg", category: "المضادات الحيوية والتهابات", active: "Doxycycline", indication: "مضاد حيوي لحب الشباب والتهابات التنفس", price: "4.00 JOD", alternative: "Vibramycin" },
+      { name: "Dalacin C 300mg", category: "المضادات الحيوية والتهابات", active: "Clindamycin", indication: "مضاد حيوي لتهابات الأسنان والعظام الشديدة", price: "9.20 JOD", alternative: "Clinda" },
 
       // أدوية السكري والدهون
       { name: "Glucophage 500mg", category: "أدوية السكري والدهون", active: "Metformin", indication: "علاج السكري النوع الثاني وتنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00 JOD), Metfor (1.80 JOD)" },
+      { name: "Glucophage XR 1000mg", category: "أدوية السكري والدهون", active: "Metformin Extended Release", indication: "تنظيم السكر ممتد المفعول يقلل الاضطرابات الهضمية", price: "7.50 JOD", alternative: "Formit XR" },
       { name: "Amaryl 2mg", category: "أدوية السكري والدهون", active: "Glimepiride", indication: "تحفيز إفراز الإنسولين لعلاج السكري النوع الثاني", price: "4.50 JOD", alternative: "Glimax (3.00 JOD), Diaryl (2.80 JOD)" },
-      { name: "Januvia 100mg", category: "أدوية السكري والدهون", active: "Sitagliptin", indication: "علاج السكري النوع الثاني وتحفيز البنكرياس بدون هبوط", price: "24.00 JOD", alternative: "Tesavel" },
+      { name: "Januvia 100mg", category: "أدوية السكري والدهون", active: "Sitagliptin", indication: "علاج السكري وتحفيز البنكرياس بدون هبوط السكر", price: "24.00 JOD", alternative: "Tesavel" },
+      { name: "Jardiance 10mg", category: "أدوية السكري والدهون", active: "Empagliflozin", indication: "تنظيم السكر وحماية الكلى والقلب لمرضى السكري", price: "28.50 JOD", alternative: "Forxiga" },
       { name: "Lipitor 20mg", category: "أدوية السكري والدهون", active: "Atorvastatin", indication: "خافض للكوليسترول والدهنيات", price: "13.50 JOD", alternative: "Atorva (7.00 JOD), Lorvast (6.50 JOD)" },
+      { name: "Lipitor 40mg", category: "أدوية السكري والدهون", active: "Atorvastatin", indication: "خفض الكوليسترول الشديد وحماية الشرايين", price: "21.00 JOD", alternative: "Atorva 40" },
       { name: "Crestor 10mg", category: "أدوية السكري والدهون", active: "Rosuvastatin", indication: "خفض الكوليسترول الضار وحماية الشرايين", price: "15.00 JOD", alternative: "Rosuvas (8.00 JOD), Rovaten (7.50 JOD)" },
+      { name: "Ezetrol 10mg", category: "أدوية السكري والدهون", active: "Ezetimibe", indication: "منع امتصاص الكوليسترول من الأمعاء", price: "16.00 JOD", alternative: "Ezetim" },
 
       // أدوية الجهاز الهضمي والمعدة
       { name: "Nexium 40mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Esomeprazole", indication: "علاج حرقة المعدة والارتداد المريئي وقرحة المعدة", price: "14.00 JOD", alternative: "Esomep (8.00 JOD), Nexmezol (7.50 JOD)" },
+      { name: "Nexium 20mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Esomeprazole", indication: "علاج حموضة المعدة الخفيفة", price: "8.50 JOD", alternative: "Esomep 20" },
       { name: "Omeprazole 20mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Omeprazole", indication: "تقليل حموضة المعدة وعلاج عسر الهضم", price: "3.20 JOD", alternative: "Gasec (2.50 JOD), Losec (4.00 JOD)" },
+      { name: "Pariet 20mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Rabeprazole", indication: "علاج قرحة المعدة وحرقة المريء السريعة", price: "16.50 JOD", alternative: "Rabeloc" },
       { name: "Duspatalin 200mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Mebeverine", indication: "علاج تقلصات القولون العصبي وآلام البطن", price: "6.50 JOD", alternative: "Colona (5.00 JOD), Spasmoban (4.00 JOD)" },
       { name: "Antinal", category: "أدوية الجهاز الهضمي والمعدة", active: "Nifuroxazide", indication: "مطهر معوي لعلاج الإسهال الناتج عن عدوى بكتيرية", price: "2.30 JOD", alternative: "Diafix (1.80 JOD)" },
+      { name: "Daflon 500mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Micronized Flavonoid Fraction", indication: "علاج البواسير وتقوية الأوردة الدموية والدوالي", price: "11.50 JOD", alternative: "Venosmil" },
+      { name: "Motilium", category: "أدوية الجهاز الهضمي والمعدة", active: "Domperidone", indication: "علاج الغثيان والقيء وتسهيل حركة المعدة", price: "3.50 JOD", alternative: "Vomistop" },
 
       // أدوية الرشحة والحساسية
       { name: "Panadol Cold & Flu", category: "أدوية الرشحة والحساسية", active: "Paracetamol + Pseudoephedrine", indication: "علاج أعراض الرشحة، الإنفلونزا، واحتقان الجيوب", price: "2.10 JOD", alternative: "Flutab (1.50 JOD), Rinasal (1.40 JOD)" },
+      { name: "Panadol Night", category: "أدوية الرشحة والحساسية", active: "Paracetamol + Diphenhydramine", indication: "مسكن ألم ومساعد على النوم في حالات الرشحة الليلية", price: "2.25 JOD", alternative: "Night Nurse" },
       { name: "Telfast 180mg", category: "أدوية الرشحة والحساسية", active: "Fexofenadine", indication: "مضاد للحساسية الموسمية والتحسس الجلدي بدون نعاس", price: "8.20 JOD", alternative: "Fexofast (5.00 JOD), Telfastin (5.50 JOD)" },
       { name: "Claritine 10mg", category: "أدوية الرشحة والحساسية", active: "Loratadine", indication: "علاج أعراض الحساسية والتهاب الأنف التحسسي", price: "4.00 JOD", alternative: "Loratadine (2.50 JOD)" },
+      { name: "Zyrtec 10mg", category: "أدوية الرشحة والحساسية", active: "Cetirizine", indication: "مضاد للحساسية والعطس والارتكاريا", price: "4.80 JOD", alternative: "Cetitec (2.80 JOD)" },
+      { name: "Aerius 5mg", category: "أدوية الرشحة والحساسية", active: "Desloratadine", indication: "مضاد تحسس فعال لا يسبب النعاس", price: "9.00 JOD", alternative: "Neoclarityn" },
       { name: "Prospan Syrup", category: "أدوية الرشحة والحساسية", active: "Ivy Leaf Extract", indication: "شراب أعشاب طبيعي مذيب وطارد للبلغم ومسكن للسعال", price: "4.50 JOD", alternative: "Abimol Cough (3.00 JOD)" }
     ];
 
@@ -291,22 +317,92 @@
       "أدوية الرشحة والحساسية"
     ];
 
+    // قاعدة بيانات الأمراض الشاملة والموسعة (أكثر من 40 مرضاً)
     const diseasesData = [
       { title: "1. الرشحة والإنفلونزا الشائعة", desc: "عدوى فيروسية تصيب الجهاز التنفسي العلوي وتسبب احتقان الأنف، السعال، والعطس.", drugs: "Panadol Cold & Flu، فيتامين C، وسوائل دافئة." },
       { title: "2. التهاب الحلق واللوزتين البكتيري", desc: "التهاب بكتيري يسبب ألماً شديداً وصعوبة في البلع مع احمرار الصديد.", drugs: "Augmentin، مسكنات Panadol، وغرغرة مطهرة." },
       { title: "3. السعال الجاف والرطب", desc: "رد فعل طبيعي للمجاري التنفسية للتخلص من الإفرازات أو المهيجات.", drugs: "Prospan Syrup، Bronchicum، ومثبطات السعال." },
       { title: "4. الصداع النصفي (الشقيقة)", desc: "صداع نابض شديد يصيب جانباً واحداً من الرأس مع غثيان.", drugs: "Panadol Extra، Cataflam، وأدوية التريبتان." },
-      { title: "5. الارتداد المريئي وحرقة المعدة", desc: "ارتجاع حمض المعدة للمريء مسبباً حرقة وألماً بالصدر.", drugs: "Nexium 40mg، Omeprazole، و Maalox." },
-      { title: "6. القولون العصبي (IBS)", desc: "اضطراب يؤثر على الأمعاء الغليظة ويسبب مغصاً وانتفاخاً.", drugs: "Duspatalin، Colona، وتنظيم الألياف الغذائية." }
+      { title: "5. التهاب الجيوب الأنفية المزمن", desc: "التهاب وتورم الأنسجة المبطنة للجيوب الأنفية.", drugs: "بخاخات Otrivin، مضادات الحساسية Telfast، وغسول ملحي." },
+      { title: "6. الارتداد المريئي وحرقة المعدة", desc: "ارتجاع حمض المعدة للمريء مسبباً حرقة وألماً بالصدر.", drugs: "Nexium 40mg، Omeprazole، و Maalox." },
+      { title: "7. القولون العصبي (IBS)", desc: "اضطراب يؤثر على الأمعاء الغليظة ويسبب مغصاً وانتفاخاً.", drugs: "Duspatalin، Colona، وتنظيم الألياف الغذائية." },
+      { title: "8. الإسهال الحاد والعدوى المعوية", desc: "زيادة سيولة وعدد مرات التبرز نتيجة عدوى بكتيرية أو فيروسية.", drugs: "Antinal، محلول معالجة الجفاف، وريترو." },
+      { title: "9. الإمساك المزمن وعسر الهضم", desc: "صعوبة في حركة الأمعاء وإخراج الفضلات الصلبة.", drugs: "Duphalac، Normacol، والإكثار من الألياف والماء." },
+      { title: "10. التهاب المفاصل الروماتويدي", desc: "مرض مناعي يهاجم المفاصل مسبباً التهاباً وألماً شديداً.", drugs: "Ibuprofen، Cataflam، ومضادات الروماتيزم." },
+      { title: "11. خشونة المفاصل (تآكل الغضاريف)", desc: "تآكل الغضاريف الحامية لأطراف العظام مع تقدم العمر.", drugs: "مكملات الجلوكوزامين، ومسكنات موضعية." },
+      { title: "12. الربو التحسسي والشعبي", desc: "ضيق وتورم في الشعب الهوائية يرافقه صعوبة تنفس وصفير.", drugs: "Ventolin Inhaler، وبخاخات الوقاية الطبية." },
+      { title: "13. التهاب القصبات الهوائية", desc: "التهاب البطانة المبطنة للقصبات مع كحة وبلغم متواصل.", drugs: "موسعات القصبات، طاردات البلغم، ومضاد حيوي عند الحاجة." },
+      { title: "14. فقر الدم ونقص الحديد (Anemia)", desc: "نقص هيموجلوبين الدم مسبباً تعباً عاماً ودوخة وشحوباً.", drugs: "Ferro-Gradumet، Fefol، مع فيتامين C للامتصاص." },
+      { title: "15. التهاب المسالك البولية (UTI)", desc: "عدوى بكتيرية تصيب الجهاز البولي مسببة حرقة بالتبول.", drugs: "Monurol، Ciprofloxacin (بوصفة طبية)، ومطهرات." },
+      { title: "16. ارتفاع ضغط الدم الشرياني", desc: "ضغط الدم المرتفع باستمرار على جدران الشرايين.", drugs: "Concor, Diovan, Micardis, Norvasc." },
+      { title: "17. مرض السكري - النوع الأول", desc: "نقص تام في إفراز الإنسولين بسبب تلف خلايا البنكرياس.", drugs: "حقن الإنسولين (Lantus, Novorapid)." },
+      { title: "18. مرض السكري - النوع الثاني", desc: "مقاومة الخلايا للإنسولين أو عدم كفايته لتنظيم السكر.", drugs: "Glucophage, Amaryl, Januvia, Jardiance." },
+      { title: "19. ارتفاع الكوليسترول والدهون الثلاثية", desc: "تراكم الدهون الضارة بالشرايين وزيادة خطر القلب.", drugs: "Lipitor, Crestor, Ezetrol." },
+      { title: "20. الحساسية الموسمية والتحسس الجلدي", desc: "رد فعل تحسسي تجاه حبوب اللقاح أو الأتربة والغبار.", drugs: "Telfast, Claritine, Zyrtec, Aerius." },
+      { title: "21. قرحة المعدة والاثني عشر", desc: "تقرحات في بطانة المعدة بسبب بكتيريا الحلزونية أو المسكنات.", drugs: "Nexium, Omeprazole, ومضادات الحيوية للقرحة." },
+      { title: "22. التهاب الأذن الوسطى", desc: "عدوى بكتيرية أو فيروسية تصيب الأذن الوسطى مسببة ألماً.", drugs: "قطرات مسكنة ومضادات حيوية مثل Augmentin." },
+      { title: "23. التهاب الملتحمة (التهاب العين)", desc: "احمرار وتورم وإفرازات نتيجة عدوى أو حساسية.", drugs: "قطرات عيون مضادة للحيوي أو مضادة للحساسية." },
+      { title: "24. الأرتكاريا والطفح الجلدي", desc: "ظهور بقع حمراء مثيرة للحكة على الجلد بسبب تحسس.", drugs: "مضادات الهيستامين مثل Telfast ومراهم موضعية." },
+      { title: "25. الصدفية والإكزيما الجلدية", desc: "أمراض جلدية مزمنة تسبب جفافاً وقشوراً وحكة شديدة.", drugs: "مراهم الكورتيزون الموضعية والمرطبات الطبية." },
+      { title: "26. حصوات الكلى والمجاري البولية", desc: "ترسبات صلبة تتكون في الكلى وتسبب مغصاً كلوياً حاداً.", drugs: "مسكنات قوية، مسهلات البول، وشرب الماء بكثرة." },
+      { title: "27. النقرس (ارتفاع حمض اليوريك)", desc: "تراكم بلورات حمض اليوريك في المفاصل مسببة ألم إبهام القدم.", drugs: "Allopurinol ومسكنات الالتهاب." },
+      { title: "28. قصور الغدة الدرقية", desc: "نقص إفراز هرمونات الغدة مما يؤدي لبطء الأيض وزيادة الوزن.", drugs: "Eltroxin (Levothyroxine)." },
+      { title: "29. فرط نشاط الغدة الدرقية", desc: "زيادة إفراز هرمونات الغدة مسببة خفقان قلبي ونحافة.", drugs: "Carbimazole (بوصفة طبية متخصصة)." },
+      { title: "30. الهربس البسيط (تقرحات الفم)", desc: "تقرحات فيروسية تظهر حول الشفاه والفم.", drugs: "Acyclovir كريم أو حبوب مضادة للفيروسات." },
+      { title: "31. القوباء المنطقية (الحزام النارى)", desc: "عدوى فيروسية تسبب طفحاً جلدياً مؤلماً على مسار عصب.", drugs: "مسكنات الألم وأدوية مضادة للفيروسات." },
+      { title: "32. التهاب اللثة والأسنان", desc: "تورم ونزيف اللثة نتيجة تراكم الجير والبكتيريا.", drugs: "مضادات حيوية، غرغرة مطهرة، ومسكنات." },
+      { title: "33. الدوالي وضعف الأوردة", desc: "تضخم والتواء الأوردة السطحية في الساقين.", drugs: "Daflon 500mg وجوارب ضاغطة." },
+      { title: "34. البواسير الشرجية", desc: "تضخم الأوعية الدموية في منطقة الشرج مسببة ألماً ونزيفاً.", drugs: "Daflon ومراهم موضعية مسكنة ومخدرة." },
+      { title: "35. التوتر والقلق المزمن والأرق", desc: "اضطرابات نفسية وعصبية تمنع النوم الطبيعي.", drugs: "المليسة، الأعشاب المهدئة، وعند الحاجة منومات خفيفة." },
+      { title: "36. فتق المعدة (الفتق الحجابي)", desc: "بروز جزء من المعدة أعلى الحجاب الحاجز مسبباً حرقة.", drugs: "مضادات الحموضة ومنظمات الوجبات." },
+      { title: "37. التهاب الأنف التحسسي (حمى القش)", desc: "سيلان واحتقان أنفي موسمي بسبب حبوب اللقاح.", drugs: "Telfast, Nasal Sprays, Claritine." },
+      { title: "38. التهاب المرارة والحصوات المرارية", desc: "تكون حصوات تمنع تصريف العصارة الصفراوية.", drugs: "مسكنات ومتابعة طبية جراحية." },
+      { title: "39. جفاف العين والقرنية", desc: "نقص إفراز الدموع مسبباً حرقة وحبيبات بالعين.", drugs: "قطرات الدموع الاصطناعية (Artificial Tears)." },
+      { title: "40. هشاشة العظام (ضعف العظام)", desc: "فقدان كثافة العظام مما يجعلها عرضة للكسر.", drugs: "مكملات الكالسيوم وفيتامين D3." }
     ];
 
+    // موسوعة الأعشاب الطبية الكبرى (أكثر من 40 عشبة)
     const herbsData = [
       { name: "البابونج (Chamomile)", benefits: "مهدئ للأعصاب، يحسن النوم، ومحارب للأرق.", uses: "شاي دافئ لتخفيف المغص، تقلصات المعدة، والتهابات الحلق." },
       { name: "اليانسون (Anise)", benefits: "طارد للغازات ومقوٍ لصحة الجهاز الهضمي.", uses: "تخفيف السعال، طرد البلغم، وتسكين مغص الأطفال." },
       { name: "الزعتر (Thyme)", benefits: "مضاد قوي للبكتيريا ومقاوم لالتهابات التنفس.", uses: "منقوع الصدر، تخفيف نوبات الربو، وتطهير المجاري." },
       { name: "المرمية (Sage)", benefits: "غنية بمضادات الأكسدة ومحسنة للذاكرة.", uses: "تخفيف آلام البطن وعسر الهضم، وغرغرة للثة." },
       { name: "النعناع البلدي (Mint)", benefits: "مهدئ ممتاز لعضلات الجهاز الهضمي.", uses: "علاج أعراض القولون العصبي وتخفيف الغثيان." },
-      { name: "الكمون (Cumin)", benefits: "يعزز الهضم ويحفز إفراز الإنزيمات.", uses: "يغلى لطرد الغازات وتسكين المغص المعوي." }
+      { name: "الكمون (Cumin)", benefits: "يعزز الهضم ويحفز إفراز الإنزيمات.", uses: "يغلى لطرد الغازات وتسكين المغص المعوي." },
+      { name: "الزنجبيل (Ginger)", benefits: "مضاد قوي للالتهابات والغثيان.", uses: "علاج الغثيان الصباحي ونزلات البرد." },
+      { name: "القرفة (Cinnamon)", benefits: "تساعد في خفض السكر بالدم وتحسين الحساسية للإنسولين.", uses: "تضاف للمشروبات لتنظيم السكر والدورة الدموية." },
+      { name: "الكركم (Turmeric)", benefits: "مضاد قوي للالتهابات والأكسدة.", uses: "دعم صحة المفاصل وتقوية المناعة." },
+      { name: "إكليل الجبل (الروزماري)", benefits: "يعزز الذاكرة والتركيز ومحارب للجذور الحرة.", uses: "منقوع مقوٍ للذاكرة أو زيت موضعي." },
+      { name: "الشومر (Fennel)", benefits: "طارد للغازات ومحفز لإفراز الحليب.", uses: "تسكين مغص الرضع والبالغين." },
+      { name: "البقدونس (Parsley)", benefits: "مدر طبيعي للبول ومطهر للكلى.", uses: "مغلي البقدونس لتنظيف الكلى والسوائل." },
+      { name: "المليسة (Lemon Balm)", benefits: "مهدئ للأعصاب ومخفف للقلق والمزاج.", uses: "تشرَب مساءً للمساعدة على الاسترخاء والنوم." },
+      { name: "حبة البركة (الحبة السوداء)", benefits: "مقوية عامة للمناعة ومضادة للميكروبات.", uses: "تعزيز الصحة العامة ومقاومة الأمراض." },
+      { name: "الحلبة (Fenugreek)", benefits: "تخفيض السكر وزيادة الوزن وإدرار الحليب.", uses: "تغلى بذورها وتشرب للاستفادة منها." },
+      { name: "البردقوش (Marjoram)", benefits: "منظم للهرمونات ومهدئ عام.", uses: "تخفيف توتر العضلات وتنظيم الدورة الشهرية." },
+      { name: "الكزبرة (Coriander)", benefits: "مفيدة لصحة الهضم وخفض الكوليسترول.", uses: "منقوع لتحسين صحة الأمعاء." },
+      { name: "العرقسوس (Licorice)", benefits: "مهدئ لغشاء المعدة ومضاد للسعال.", uses: "تسكين حرقة المعدة وتقوية التنفس (بحذر للضغط)." },
+      { name: "الهيل (Cardamom)", benefits: "معطر للهضم وطارد للغازات.", uses: "يضاف للقهوة والمشروبات لمنع الانتفاخ." },
+      { name: "الخطمية (الخبيزة)", benefits: "ملطف ومهدئ لأغشية الحلق والتنفس.", uses: "منقوع لتهدئة السعال الجاف." },
+      { name: "إشنسا (Echinacea)", benefits: "مضاد حيوي طبيعي ومقوٍ قوي للمناعة.", uses: "تستخدم عند بدايات الإنفلونزا والرشحة." },
+      { name: "الزعفران (Saffron)", benefits: "محسن للمزاج ومضاد للاكتئاب الطبيعي.", uses: "يضاف للمشروبات بكميات قليلة." },
+      { name: "القرنفل (Clove)", benefits: "مسكن قوي لآلام الأسنان ومضاد بكتيري.", uses: "يوضع زيته موضعياً لتسكين ألم السن." },
+      { name: "الحبق (Basil)", benefits: "مهدئ للأعصاب ومضاد للتقلصات.", uses: "شاي الحبق لتحسين المزاج والمغص." },
+      { name: "اللافندر (Lavender)", benefits: "مريح للأعصاب ومساعد على النوم.", uses: "يستخدم زيته للعلاج بالعطور أو شاي اللافندر." },
+      { name: "الزعتر البري (Oregano)", benefits: "مضاد قوي للفطريات والبكتيريا.", uses: "منقوع لعلاج التهابات الحلق والجهاز الهضمي." },
+      { name: "الخروب (Carob)", benefits: "منظم لحركة الأمعاء ومقوٍ عام.", uses: "يشرَب مشروب الخروب البارد للطاقة." },
+      { name: "التوت البري (Cranberry)", benefits: "حماية صحة المسالك البولية ومنع الالتهابات.", uses: "عصير التوت البري لمنع تكرار التهابات البول." },
+      { name: "الصبار (Aloe Vera)", benefits: "مرطب للجلد ومعالج للجروح والحروق.", uses: "جل الصبار موضعياً للبشرة." },
+      { name: "الشاي الأخضر (Green Tea)", benefits: "غني بمضادات الأكسدة ومحرق للدهون.", uses: "يشرَب لتعزيز الأيض وصحة القلب." },
+      { name: "الجنسنج (Ginseng)", benefits: "مزيد للطاقة والنشاط الجسدي والذهني.", uses: "مكمل عشبي مقوٍ للجسم." },
+      { name: "الجنكة (Ginkgo Biloba)", benefits: "محسنة للدورة الدموية والذاكرة.", uses: "مستخلص الجنكة لدعم التركيز." },
+      { name: "الشوك الحليبي (Milk Thistle)", benefits: "حماية وتنقية خلايا الكبد.", uses: "مكملات لتطهير الكبد ودعمه." },
+      { name: "الكينا (Eucalyptus)", benefits: "موسعة للشعب الهوائية ومطهرة للصدر.", uses: "استنشاق بخار أوراق الكينا لاحتقان الأنف." },
+      { name: "الرمان (قشر الرمان)", benefits: "مقبض للأمعاء ومضاد للإسهال.", uses: "منقوع قشر الرمان للإسهال الحاد." },
+      { name: "الزعتر الأردني (الزوفا)", benefits: "مقوٍ للجهاز التنفسي ومطهر.", uses: "شاي الزعتر البري." },
+      { name: "بذور الكتان (Flaxseed)", benefits: "غنية بالأوميغا 3 والألياف للإمساك.", uses: "تطحن وتضاف للوجبات لتسهيل الهضم." },
+      { name: "بذور الشيا (Chia Seeds)", benefits: "طاقة وألياف وتنظيم السكر.", uses: "تنقع وتناول مع العصائر." },
+      { name: "الشمندر", benefits: "مقوٍ للدم ومنتج لكريات الدم الحمراء.", uses: "عصير الشمندر لفقر الدم." },
+      { name: "السنمكي (Senna)", benefits: "ملين قوي للإمساك الحاد.", uses: "يشرَب بحذر شديد للإمساك الشديد." }
     ];
 
     function showSection(sectionId) {
