@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jo Pharma: المرجع الدوائي والأمراض والأعشاب الأردني للبحث عن الأدوية، أسعارها الرسمية، وبدائلها الطبية.">
-  <title>Jo Pharma | المرجع الدوائي والأمراض والأعشاب الأردني</title>
+  <meta name="description" content="Jo Pharma: المرجع الدوائي والأمراض والأعشاب الأردني الشامل للبحث عن الأدوية وتصنيفها حسب الاستعمال.">
+  <title>Jo Pharma | المرجع الدوائي والأمراض والأعشاب الأردني الشامل</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap');
     
@@ -39,7 +39,7 @@
 
     nav {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -47,11 +47,11 @@
       background: none;
       border: none;
       color: white;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       font-family: 'Tajawal';
       cursor: pointer;
-      padding: 6px 12px;
+      padding: 6px 10px;
       border-radius: 6px;
       transition: background 0.3s, color 0.3s;
     }
@@ -193,6 +193,7 @@
     </div>
     <nav>
       <button onclick="showSection('searchSection')">الرئيسية والبحث</button>
+      <button onclick="showSection('categoriesSection')">تصنيفات الأدوية</button>
       <button onclick="showSection('diseasesSection')">دليل الأمراض</button>
       <button onclick="showSection('herbsSection')">موسوعة الأعشاب</button>
     </nav>
@@ -202,25 +203,33 @@
 
     <!-- قسم البحث الذكي -->
     <div id="searchSection" class="section-card">
-      <h1>المرجع الدوائي والنباتي الأردني</h1>
+      <h1>المرجع الدوائي والنباتي الأردني الشامل</h1>
       <p>ابحث عن الأدوية، المادة الفعالة، الاستخدام، أو الأسعار الرسمية المعتمدة في الأردن</p>
       <div class="search-box">
-        <input type="text" id="searchInput" placeholder="ابحث هنا (مثال: Panadol, سكري، غثيان)...">
+        <input type="text" id="searchInput" placeholder="ابحث هنا (مثال: Panadol, سكري، قلب)...">
         <button class="main-btn" onclick="searchDrug()">بحث</button>
       </div>
       <div id="result" style="margin-top: 20px;"></div>
     </div>
 
-    <!-- قسم الأمراض المزمنة -->
+    <!-- قسم تصنيفات الأدوية حسب الاستعمال (الجديد) -->
+    <div id="categoriesSection" class="section-card hidden" style="text-align: right;">
+      <h1>تصنيفات الأدوية حسب الاستعمال الطبي</h1>
+      <p>اختر التصنيف لعرض كافة الأدوية المتاحة في السوق الأردني ضمن هذه الفئة مع أسعارها وبدائلها:</p>
+      <div class="grid-container" id="categoriesGrid"></div>
+      <div id="categoryResult" style="margin-top: 25px;"></div>
+    </div>
+
+    <!-- قسم الأمراض الشامل -->
     <div id="diseasesSection" class="section-card hidden" style="text-align: right;">
-      <h1>دليل الأمراض المزمنة والأدوية المرتبطة بها</h1>
+      <h1>دليل الأمراض والحالات الصحية الموسع</h1>
       <p>اختر الحالة المرضية لعرض وصفها الطبي والأدوية المعتمدة لعلاجها في السوق الأردني:</p>
       <div class="grid-container" id="diseasesGrid"></div>
     </div>
 
-    <!-- قسم الأعشاب الطبية -->
+    <!-- قسم الأعشاب الكبرى -->
     <div id="herbsSection" class="section-card hidden" style="text-align: right;">
-      <h1>موسوعة الأعشاب والعلاج النباتي</h1>
+      <h1>موسوعة الأعشاب والعلاج النباتي الكبرى</h1>
       <p>اضغط على أي عشبة لمعرفة معلوماتها الكاملة وكيفية الاستفادة منها وعلاجها:</p>
       <div class="grid-container" id="herbsGrid"></div>
     </div>
@@ -228,77 +237,118 @@
   </div>
 
   <footer>
-    جميع الحقوق محفوظة © Jo Pharma 2026 - المرجع الصيدلاني الأردني
+    جميع الحقوق محفوظة © Jo Pharma 2026 - المرجع الصيدلاني الأردني الشامل
   </footer>
 
   <script>
+    // قاعدة بيانات الأدوية المصنفة حسب الاستعمال الطبي
     const medicines = [
-      { name: "Panadol Advance", active: "Paracetamol 500mg", indication: "مسكن ألم وخافض للحرارة", price: "1.55 JOD", alternative: "Adol (1.20 JOD), Revanin (1.10 JOD)" },
-      { name: "Prof 400mg", active: "Ibuprofen 400mg", indication: "مسكن ألم ومضاد للالتهاب", price: "1.35 JOD", alternative: "Brufen (1.80 JOD), Nurofen (2.00 JOD)" },
-      { name: "Glucophage 500mg", active: "Metformin", indication: "علاج السكري النوع الثاني وتنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00 JOD), Metfor (1.80 JOD)" },
-      { name: "Amaryl 2mg", active: "Glimepiride", indication: "تحفيز إفراز الإنسولين لعلاج السكري النوع الثاني", price: "4.50 JOD", alternative: "Glimax (3.00 JOD), Diaryl (2.80 JOD)" },
-      { name: "Concor 5mg", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90 JOD), Bisocor (2.50 JOD)" },
-      { name: "Diovan 160mg", active: "Valsartan", indication: "علاج ارتفاع ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50 JOD), Tareg (7.90 JOD)" },
-      { name: "Lipitor 20mg", active: "Atorvastatin", indication: "خافض للكوليسترول والدهنيات", price: "13.50 JOD", alternative: "Atorva (7.00 JOD), Lorvast (6.50 JOD)" },
-      { name: "Nexium 40mg", active: "Esomeprazole", indication: "علاج حرقة المعدة والارتداد المريئي", price: "14.00 JOD", alternative: "Esomep (8.00 JOD), Nexmezol (7.50 JOD)" }
+      // أدوية القلب والشرايين والضغط
+      { name: "Concor 5mg", category: "أدوية القلب والشرايين والضغط", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90 JOD), Bisocor (2.50 JOD)" },
+      { name: "Diovan 160mg", category: "أدوية القلب والشرايين والضغط", active: "Valsartan", indication: "علاج ارتفاع ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50 JOD), Tareg (7.90 JOD)" },
+      { name: "Micardis 80mg", category: "أدوية القلب والشرايين والضغط", active: "Telmisartan", indication: "خفض ضغط الدم المرتفع وحماية الشرايين", price: "14.50 JOD", alternative: "Telmisar" },
+      { name: "Norvasc 5mg", category: "أدوية القلب والشرايين والضغط", active: "Amlodipine", indication: "علاج ارتفاع ضغط الدم وتوسيع الشرايين", price: "6.00 JOD", alternative: "Amlo (3.50 JOD)" },
+      { name: "Aspirin Protect 100mg", category: "أدوية القلب والشرايين والضغط", active: "Acetylsalicylic Acid", indication: "مسيّل للدم وحماية القلب والشرايين", price: "2.10 JOD", alternative: "JOSPRIN (1.50 JOD)" },
+
+      // المسكنات وخافضات الحرارة
+      { name: "Panadol Advance", category: "المسكنات وخافضات الحرارة", active: "Paracetamol 500mg", indication: "مسكن ألم وخافض للحرارة", price: "1.55 JOD", alternative: "Adol (1.20 JOD), Revanin (1.10 JOD)" },
+      { name: "Panadol Extra", category: "المسكنات وخافضات الحرارة", active: "Paracetamol + Caffeine", indication: "مسكن قوي للصداع الشديد والشقيقة", price: "1.85 JOD", alternative: "Paramol Extra (1.30 JOD)" },
+      { name: "Prof 400mg", category: "المسكنات وخافضات الحرارة", active: "Ibuprofen 400mg", indication: "مسكن ألم ومضاد للالتهاب وخافض حرارة", price: "1.35 JOD", alternative: "Brufen (1.80 JOD), Nurofen (2.00 JOD)" },
+      { name: "Cataflam 50mg", category: "المسكنات وخافضات الحرارة", active: "Diclofenac Potassium", indication: "مسكن سريع لآلام الأسنان والمفاصل والالتهابات الحادة", price: "3.50 JOD", alternative: "Rofenac (2.20 JOD), Olfen (2.50 JOD)" },
+
+      // المضادات الحيوية
+      { name: "Augmentin 1g", category: "المضادات الحيوية والتهابات", active: "Amoxicillin / Clavulanic Acid", indication: "مضاد حيوي واسع المجال للالتهابات البكتيرية واللوزتين", price: "8.50 JOD", alternative: "Curam (6.00 JOD), Hibiotic (6.50 JOD)" },
+      { name: "Zithromax 500mg", category: "المضادات الحيوية والتهابات", active: "Azithromycin", indication: "مضاد حيوي لالتهابات الجهاز التنفسي والجيوب", price: "6.80 JOD", alternative: "Zitrobac (4.50 JOD), Azomax (4.20 JOD)" },
+      { name: "Klacid 500mg", category: "المضادات الحيوية والتهابات", active: "Clarithromycin", indication: "مضاد حيوي لالتهابات الرئة والجيوب وقرحة المعدة", price: "11.20 JOD", alternative: "Clarithro" },
+      { name: "Cipro 500mg", category: "المضادات الحيوية والتهابات", active: "Ciprofloxacin", indication: "مضاد حيوي قوي لالتهابات المسالك البولية والأمعاء", price: "7.20 JOD", alternative: "Ciprobay" },
+
+      // أدوية السكري والدهون
+      { name: "Glucophage 500mg", category: "أدوية السكري والدهون", active: "Metformin", indication: "علاج السكري النوع الثاني وتنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00 JOD), Metfor (1.80 JOD)" },
+      { name: "Amaryl 2mg", category: "أدوية السكري والدهون", active: "Glimepiride", indication: "تحفيز إفراز الإنسولين لعلاج السكري النوع الثاني", price: "4.50 JOD", alternative: "Glimax (3.00 JOD), Diaryl (2.80 JOD)" },
+      { name: "Januvia 100mg", category: "أدوية السكري والدهون", active: "Sitagliptin", indication: "علاج السكري النوع الثاني وتحفيز البنكرياس بدون هبوط", price: "24.00 JOD", alternative: "Tesavel" },
+      { name: "Lipitor 20mg", category: "أدوية السكري والدهون", active: "Atorvastatin", indication: "خافض للكوليسترول والدهنيات", price: "13.50 JOD", alternative: "Atorva (7.00 JOD), Lorvast (6.50 JOD)" },
+      { name: "Crestor 10mg", category: "أدوية السكري والدهون", active: "Rosuvastatin", indication: "خفض الكوليسترول الضار وحماية الشرايين", price: "15.00 JOD", alternative: "Rosuvas (8.00 JOD), Rovaten (7.50 JOD)" },
+
+      // أدوية الجهاز الهضمي والمعدة
+      { name: "Nexium 40mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Esomeprazole", indication: "علاج حرقة المعدة والارتداد المريئي وقرحة المعدة", price: "14.00 JOD", alternative: "Esomep (8.00 JOD), Nexmezol (7.50 JOD)" },
+      { name: "Omeprazole 20mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Omeprazole", indication: "تقليل حموضة المعدة وعلاج عسر الهضم", price: "3.20 JOD", alternative: "Gasec (2.50 JOD), Losec (4.00 JOD)" },
+      { name: "Duspatalin 200mg", category: "أدوية الجهاز الهضمي والمعدة", active: "Mebeverine", indication: "علاج تقلصات القولون العصبي وآلام البطن", price: "6.50 JOD", alternative: "Colona (5.00 JOD), Spasmoban (4.00 JOD)" },
+      { name: "Antinal", category: "أدوية الجهاز الهضمي والمعدة", active: "Nifuroxazide", indication: "مطهر معوي لعلاج الإسهال الناتج عن عدوى بكتيرية", price: "2.30 JOD", alternative: "Diafix (1.80 JOD)" },
+
+      // أدوية الرشحة والحساسية
+      { name: "Panadol Cold & Flu", category: "أدوية الرشحة والحساسية", active: "Paracetamol + Pseudoephedrine", indication: "علاج أعراض الرشحة، الإنفلونزا، واحتقان الجيوب", price: "2.10 JOD", alternative: "Flutab (1.50 JOD), Rinasal (1.40 JOD)" },
+      { name: "Telfast 180mg", category: "أدوية الرشحة والحساسية", active: "Fexofenadine", indication: "مضاد للحساسية الموسمية والتحسس الجلدي بدون نعاس", price: "8.20 JOD", alternative: "Fexofast (5.00 JOD), Telfastin (5.50 JOD)" },
+      { name: "Claritine 10mg", category: "أدوية الرشحة والحساسية", active: "Loratadine", indication: "علاج أعراض الحساسية والتهاب الأنف التحسسي", price: "4.00 JOD", alternative: "Loratadine (2.50 JOD)" },
+      { name: "Prospan Syrup", category: "أدوية الرشحة والحساسية", active: "Ivy Leaf Extract", indication: "شراب أعشاب طبيعي مذيب وطارد للبلغم ومسكن للسعال", price: "4.50 JOD", alternative: "Abimol Cough (3.00 JOD)" }
+    ];
+
+    const categoriesList = [
+      "أدوية القلب والشرايين والضغط",
+      "المسكنات وخافضات الحرارة",
+      "المضادات الحيوية والتهابات",
+      "أدوية السكري والدهون",
+      "أدوية الجهاز الهضمي والمعدة",
+      "أدوية الرشحة والحساسية"
     ];
 
     const diseasesData = [
-      { 
-        title: "مرض السكري - النوع الأول (Type 1 Diabetes)", 
-        desc: "حالة مزمنة يهاجم فيها الجهاز المناعي خلايا بيتا في البنكرياس، مما يمنع إنتاج الإنسولين تماماً.", 
-        drugs: "يعتمد العلاج الأساسي والرئيسي على حقن الإنسولين بأنواعه (مثل: Lantus, Novorapid) بالإضافة لمتابعة قياس السكر المستمرة." 
-      },
-      { 
-        title: "مرض السكري - النوع الثاني (Type 2 Diabetes)", 
-        desc: "حالة تصبح فيها الخلايا مقاومة للإنسولين، أو لا ينتج البنكرياس ما يكفي منه.", 
-        drugs: "الأدوية المستعملة: Metformin (مثل Glucophage و Formit)، و Glimepiride (مثل Amaryl)." 
-      },
-      { 
-        title: "ارتفاع ضغط الدم (Hypertension)", 
-        desc: "مرض صامت يشكل فيه ضغط الدم على جدران الشرايين مستويات مرتفعة باستمرار.", 
-        drugs: "الأدوية المستعملة: Bisoprolol (مثل Concor)، Valsartan (مثل Diovan)، و Amlodipine." 
-      }
+      { title: "1. الرشحة والإنفلونزا الشائعة", desc: "عدوى فيروسية تصيب الجهاز التنفسي العلوي وتسبب احتقان الأنف، السعال، والعطس.", drugs: "Panadol Cold & Flu، فيتامين C، وسوائل دافئة." },
+      { title: "2. التهاب الحلق واللوزتين البكتيري", desc: "التهاب بكتيري يسبب ألماً شديداً وصعوبة في البلع مع احمرار الصديد.", drugs: "Augmentin، مسكنات Panadol، وغرغرة مطهرة." },
+      { title: "3. السعال الجاف والرطب", desc: "رد فعل طبيعي للمجاري التنفسية للتخلص من الإفرازات أو المهيجات.", drugs: "Prospan Syrup، Bronchicum، ومثبطات السعال." },
+      { title: "4. الصداع النصفي (الشقيقة)", desc: "صداع نابض شديد يصيب جانباً واحداً من الرأس مع غثيان.", drugs: "Panadol Extra، Cataflam، وأدوية التريبتان." },
+      { title: "5. الارتداد المريئي وحرقة المعدة", desc: "ارتجاع حمض المعدة للمريء مسبباً حرقة وألماً بالصدر.", drugs: "Nexium 40mg، Omeprazole، و Maalox." },
+      { title: "6. القولون العصبي (IBS)", desc: "اضطراب يؤثر على الأمعاء الغليظة ويسبب مغصاً وانتفاخاً.", drugs: "Duspatalin، Colona، وتنظيم الألياف الغذائية." }
     ];
 
     const herbsData = [
-      { 
-        name: "البابونج (Chamomile)", 
-        benefits: "يحتوي على مضادات أكسدة قوية تساعد في تهدئة الجهاز العصبي، تحسين النوم، ومحاربة الأرق.", 
-        uses: "يُشرب كشاي دافئ لتخفيف آلام المغص، تقلصات المعدة، وتسكين التهابات الحلق الخفيفة." 
-      },
-      { 
-        name: "اليانسون (Anise)", 
-        benefits: "غني بالزيوت العطرية الطاردة للغازات والمقوية لصحة الجهاز الهضمي.", 
-        uses: "مفيد جداً لتخفيف السعال، طرد البلغم، وتسكين مغص الأطفال والبالغين." 
-      },
-      { 
-        name: "الزعتر (Thyme)", 
-        benefits: "يمتلك خصائص مضادة للبكتيريا والفطريات وقوية لمقاومة التهابات الجهاز التنفسي.", 
-        uses: "يُستخدم لمنقوع الصدر، تخفيف نوبات الربو، تنظيف المجاري التنفسية ومحاربة السعال." 
-      },
-      { 
-        name: "المرمية (Sage)", 
-        benefits: "غنية بمضادات الأكسدة ومفيدة لتحسين الذاكرة ووظائف الدماغ وتخفيف أعراض عسر الهضم.", 
-        uses: "تُشرب مغلياً أو تضاف للشاي لتخفيف آلام البطن، وتستخدم كغرغرة لتسكين آلام الأسنان والتهابات اللثة." 
-      },
-      { 
-        name: "النعناع البلدي (Mint)", 
-        benefits: "مهدئ ممتاز لعضلات الجهاز الهضمي ومضاد للتقلصات والغازات.", 
-        uses: "يُستخدم لعلاج أعراض القولون العصبي، تخفيف الغثيان، وعسر الهضم بعد الوجبات." 
-      },
-      { 
-        name: "الكمون (Cumin)", 
-        benefits: "يعزز عملية الهضم ويحفز إفراز الإنزيمات الهضمية ويقوي المناعة لاحتوائه على الحديد.", 
-        uses: "يُغلى ويشرب لطرد الغازات، تخفيف الانتفاخات، وتسكين المغص المعوي." 
-      }
+      { name: "البابونج (Chamomile)", benefits: "مهدئ للأعصاب، يحسن النوم، ومحارب للأرق.", uses: "شاي دافئ لتخفيف المغص، تقلصات المعدة، والتهابات الحلق." },
+      { name: "اليانسون (Anise)", benefits: "طارد للغازات ومقوٍ لصحة الجهاز الهضمي.", uses: "تخفيف السعال، طرد البلغم، وتسكين مغص الأطفال." },
+      { name: "الزعتر (Thyme)", benefits: "مضاد قوي للبكتيريا ومقاوم لالتهابات التنفس.", uses: "منقوع الصدر، تخفيف نوبات الربو، وتطهير المجاري." },
+      { name: "المرمية (Sage)", benefits: "غنية بمضادات الأكسدة ومحسنة للذاكرة.", uses: "تخفيف آلام البطن وعسر الهضم، وغرغرة للثة." },
+      { name: "النعناع البلدي (Mint)", benefits: "مهدئ ممتاز لعضلات الجهاز الهضمي.", uses: "علاج أعراض القولون العصبي وتخفيف الغثيان." },
+      { name: "الكمون (Cumin)", benefits: "يعزز الهضم ويحفز إفراز الإنزيمات.", uses: "يغلى لطرد الغازات وتسكين المغص المعوي." }
     ];
 
     function showSection(sectionId) {
       document.getElementById('searchSection').classList.add('hidden');
+      document.getElementById('categoriesSection').classList.add('hidden');
       document.getElementById('diseasesSection').classList.add('hidden');
       document.getElementById('herbsSection').classList.add('hidden');
       document.getElementById(sectionId).classList.remove('hidden');
+    }
+
+    function loadCategories() {
+      const grid = document.getElementById('categoriesGrid');
+      grid.innerHTML = "";
+      categoriesList.forEach((cat) => {
+        grid.innerHTML += `
+          <div class="item-card" onclick="filterByCategory('${cat}')">
+            <h3>💊 ${cat}</h3>
+            <p>اضغط لعرض كافة أدوية هذه الفئة المتوفرة في الأردن</p>
+          </div>
+        `;
+      });
+    }
+
+    function filterByCategory(categoryName) {
+      const resultContainer = document.getElementById('categoryResult');
+      const filtered = medicines.filter(med => med.category === categoryName);
+
+      let html = `<h3 style="color: #1e3a8a; border-bottom: 2px solid #f97316; padding-bottom: 5px; margin-bottom: 15px;">تصنيف: ${categoryName}</h3>`;
+      
+      if (filtered.length > 0) {
+        filtered.forEach(med => {
+          html += `<div class='result-item'>
+          <strong style='font-size: 18px; color: #1e3a8a;'>${med.name}</strong> <br> 
+          <span style='color: #475569;'><strong>الاستخدام:</strong> ${med.indication}</span> <br>
+          <span style='color: #475569;'><strong>المادة الفعالة:</strong> ${med.active}</span> <br> 
+          <span style='color: #475569;'><strong>السعر الرسمي:</strong> ${med.price}</span> <br> 
+          <span style='color: #ea580c;'><strong>البدائل الأردنية:</strong> ${med.alternative}</span></div>`;
+        });
+      } else {
+        html += "<p style='color: orange;'>لا توجد أدوية مسجلة حالياً في هذا التصنيف.</p>";
+      }
+      resultContainer.innerHTML = html;
     }
 
     function searchDrug() {
@@ -326,7 +376,7 @@
         });
         resultContainer.innerHTML = html;
       } else {
-        resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على نتائج مطابقة لبحثك.</span>";
+        resultContainer.innerHTML = "<span style='color: orange;'>لم يتم العثور على نتائج مطابقة لبحثك. جرب كلمة أخرى.</span>";
       }
     }
 
@@ -360,7 +410,7 @@
             <div id="herb-details-${index}" class="details-box hidden">
               <strong style="color: #1e3a8a;">الفوائد والخصائص:</strong>
               <p style="margin: 5px 0; color: #1e293b;">${herb.benefits}</p>
-              <strong style="color: #ea580c;">طريقة الاستفادة والاستخدام:</strong>
+              <strong style="color: #ea580c;">الاستخدام والعلاج:</strong>
               <p style="margin-top: 5px; color: #1e293b;">${herb.uses}</p>
             </div>
           </div>
@@ -373,6 +423,7 @@
     }
 
     window.onload = function() {
+      loadCategories();
       loadDiseases();
       loadHerbs();
     };
