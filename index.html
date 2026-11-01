@@ -1,327 +1,155 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0b1220">
-  <meta name="description" content="JO Pharma - دليلك للأدوية ومعلوماتها وأسعارها في الأردن">
-  <title>JO Pharma | دليلك الدوائي بالأردن</title>
+  <meta name="description" content="Jo Pharma: المرجع الدوائي الأردني الشامل للأدوية، الأسعار الرسمية، البدائل، دليل الأمراض، وموسوعة الأعشاب.">
+  <title>Jo Pharma | المرجع الدوائي والصيدلاني الأردني</title>
+  
+  <!-- إدراج مكتبات GSAP و ScrollTrigger و Lenis -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+    
     :root {
-      --bg:#f4f7fb; --card:#fff; --text:#172338;
-      --muted:#718096; --primary:#087f70; --light:#e2f5ef;
-      --border:#e4eaf1; --shadow:0 8px 30px #14213d0a;
+      --primary: #1e3a8a;
+      --primary-hover: #172554;
+      --accent: #f97316;
+      --accent-hover: #ea580c;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-dark: #0f172a;
+      --text-muted: #475569;
+      --border: #e2e8f0;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     }
-    * { box-sizing:border-box; }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    /* إعدادات Lenis للـ Smooth Scroll */
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
     body {
-      margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-      background:var(--bg); color:var(--text); line-height:1.7;
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    button,input,select { font:inherit; }
-    button { cursor:pointer; }
-    .container { width:min(1100px,92%); margin:auto; }
+
     header {
-      background:#fff; border-bottom:1px solid var(--border);
-      position:sticky; top:0; z-index:10;
+      background-color: var(--primary);
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-    .nav { min-height:72px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .brand { display:flex; align-items:center; gap:10px; font-size:23px; font-weight:850; color:var(--primary); }
+
     .logo {
-      display:grid; place-items:center; width:42px; height:42px;
-      background:var(--light); border-radius:14px; font-size:25px;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
     }
-    .nav-tag { color:var(--muted); font-size:12px; }
-    .hero { padding:44px 0 30px; }
-    .hero-box {
-      background:linear-gradient(130deg,#073f49,#087f70 65%,#18a58b);
-      border-radius:26px; padding:32px 26px; color:#fff;
-      position:relative; overflow:hidden;
+    .logo span { color: var(--accent); }
+
+    nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
     }
-    .hero-box:after {
-      content:"✚"; position:absolute; left:20px; top:-32px;
-      font-size:170px; color:#ffffff12; transform:rotate(-12deg);
+    nav button {
+      background: transparent;
+      border: none;
+      color: #e2e8f0;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Tajawal', sans-serif;
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 0.25s ease;
     }
-    .eyebrow { color:#c4f6e8; font-size:13px; font-weight:700; }
-    h1 { font-size:clamp(27px,5vw,43px); line-height:1.3; margin:10px 0; }
-    .hero p { color:#e0f5ef; margin:0 0 22px; }
-    .search { display:flex; gap:9px; position:relative; z-index:1; }
-    .search input {
-      min-width:0; flex:1; padding:14px 16px; border:0;
-      border-radius:13px; outline:none; background:#fff; color:#172338;
+    nav button:hover, nav button.active {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: white;
     }
-    .btn {
-      border:0; border-radius:12px; padding:12px 18px;
-      font-weight:750; background:var(--primary); color:#fff;
+
+    .container {
+      max-width: 1100px;
+      margin: 30px auto;
+      padding: 0 16px;
+      position: relative;
     }
-    .search .btn { background:#fff; color:#075d52; }
-    .section { padding:12px 0 28px; }
-    .section-head { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:16px; }
-    h2 { font-size:21px; margin:0; }
-    .muted { color:var(--muted); font-size:13px; }
-    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
-    .stat,.panel,.medicine,.notice {
-      background:var(--card); border:1px solid var(--border);
-      border-radius:17px; box-shadow:var(--shadow);
+
+    /* React Bits: Light Rays Adaptation */
+    .light-rays-bg {
+      position: absolute;
+      top: -50%; left: -50%;
+      width: 200%; height: 200%;
+      background: repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(30, 58, 138, 0.03) 10deg, transparent 20deg);
+      animation: rotateRays 120s linear infinite;
+      pointer-events: none;
+      z-index: 0;
     }
-    .stat { padding:17px; }
-    .stat strong { display:block; font-size:22px; color:var(--primary); }
-    .stat span { font-size:12px; color:var(--muted); }
-    .filters { display:flex; gap:8px; overflow:auto; padding:3px 0 14px; }
-    .chip {
-      flex-shrink:0; border:1px solid var(--border); background:#fff;
-      border-radius:30px; padding:8px 14px; color:#526174;
+    @keyframes rotateRays {
+      100% { transform: rotate(360deg); }
     }
-    .chip.active { background:var(--light); color:var(--primary); border-color:#a9e4d3; font-weight:750; }
-    .results-bar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; }
-    select {
-      max-width:58%; padding:9px; border:1px solid var(--border);
-      border-radius:10px; background:#fff; color:var(--text);
+    @media (prefers-reduced-motion: reduce) {
+      .light-rays-bg { animation: none; }
     }
-    .grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
-    .medicine { padding:17px; display:flex; flex-direction:column; min-width:0; }
-    .med-icon {
-      width:45px; height:45px; display:grid; place-items:center;
-      border-radius:13px; background:var(--light); font-size:23px;
+
+    .section-card {
+      background-color: var(--card-bg);
+      padding: 32px 24px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      margin-bottom: 30px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      /* GSAP Start state */
+      opacity: 0; 
+      transform: translateY(30px);
     }
-    .med-top { display:flex; justify-content:space-between; gap:8px; align-items:center; }
-    .tag { font-size:11px; padding:4px 8px; border-radius:20px; background:#eef2f7; color:#526174; }
-    .medicine h3 { margin:13px 0 2px; font-size:18px; overflow-wrap:anywhere; }
-    .generic { color:var(--muted); font-size:13px; }
-    .description { font-size:13px; margin:12px 0; flex:1; }
-    .price {
-      padding-top:12px; border-top:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between; gap:8px;
+
+    .section-content {
+      position: relative;
+      z-index: 1;
     }
-    .price strong { color:var(--primary); font-size:17px; }
-    .price small { display:block; color:var(--muted); font-size:10px; }
-    .details-btn { border:0; background:var(--light); color:var(--primary); padding:8px 10px; border-radius:9px; font-weight:700; }
-    .empty { grid-column:1/-1; text-align:center; padding:35px 12px; color:var(--muted); }
-    .notice { padding:17px; margin:12px 0 26px; font-size:13px; color:#59687a; }
-    footer { background:#101c2a; color:#d7e4ed; padding:27px 0; margin-top:20px; font-size:13px; }
-    footer strong { color:#79dfc5; }
-    .footer-row { display:flex; justify-content:space-between; gap:15px; flex-wrap:wrap; }
-    .modal {
-      display:none; position:fixed; inset:0; z-index:30; background:#07111dcc;
-      padding:18px; align-items:center; justify-content:center;
+
+    .section-header { text-align: center; margin-bottom: 24px; }
+    
+    /* React Bits: Blur Text preparation */
+    .blur-text {
+      color: var(--primary);
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
     }
-    .modal.open { display:flex; }
-    .modal-box {
-      background:#fff; color:var(--text); border-radius:20px; width:min(480px,100%);
-      max-height:85vh; overflow:auto; padding:22px;
+    .blur-text span {
+      display: inline-block;
+      opacity: 0;
+      filter: blur(8px);
     }
-    .modal-head { display:flex; justify-content:space-between; align-items:center; gap:10px; }
-    .close { border:0; background:#edf1f6; border-radius:50%; width:38px; height:38px; font-size:22px; }
-    .modal-box h3 { margin-bottom:5px; }
-    .modal-box p { font-size:14px; }
-    @media(max-width:760px) {
-      .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-      .medicine { padding:13px; }
-      .hero-box { padding:26px 18px; }
-      .nav-tag { display:none; }
+
+    p.subtitle {
+      font-size: 15px;
+      color: var(--text-muted);
     }
-    @media(max-width:390px) {
-      .grid { grid-template-columns:1fr; }
-      .stats { gap:7px; }
-      .stat { padding:11px; }
-      .stat strong { font-size:19px; }
-      .search { flex-direction:column; }
-      .search .btn { width:100%; }
-    }
-  </style>
-</head>
-<body>
-<header>
-  <div class="container nav">
-    <div class="brand"><span class="logo">✚</span><span>JO Pharma</span></div>
-    <span class="nav-tag">دليلك الدوائي في الأردن 🇯🇴</span>
-  </div>
-</header>
 
-<main class="container">
-  <section class="hero">
-    <div class="hero-box">
-      <div class="eyebrow">YOUR JORDANIAN PHARMACEUTICAL GUIDE</div>
-      <h1>كل معلومة دوائية<br>بمكان واحد</h1>
-      <p>ابحث عن الأدوية، تعرّف على استخداماتها، وتحقق من أسعارها ومصادرها.</p>
-      <form class="search" id="searchForm">
-        <input id="searchInput" type="search" placeholder="اسم الدواء أو المادة الفعالة..." aria-label="ابحث عن دواء">
-        <button class="btn" type="submit">ابحث الآن 🔍</button>
-      </form>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="stats">
-      <div class="stat"><strong id="medicineCount">0</strong><span>دواء في قاعدة البيانات التجريبية</span></div>
-      <div class="stat"><strong>24/7</strong><span>تصفح المعلومات</span></div>
-      <div class="stat"><strong>JO</strong><span>الأردن أولاً</span></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-head">
-      <h2>استكشف الأدوية</h2>
-      <span class="muted">قاعدة تجريبية</span>
-    </div>
-    <div class="filters" id="filters">
-      <button class="chip active" data-category="الكل">الكل</button>
-      <button class="chip" data-category="مسكنات">مسكنات</button>
-      <button class="chip" data-category="حساسية">حساسية</button>
-      <button class="chip" data-category="معدة">المعدة</button>
-      <button class="chip" data-category="فيتامينات">فيتامينات</button>
-      <button class="chip" data-category="أخرى">أخرى</button>
-    </div>
-    <div class="results-bar">
-      <span class="muted" id="resultCount">النتائج</span>
-      <select id="sortSelect" aria-label="ترتيب النتائج">
-        <option value="name">الترتيب الأبجدي</option>
-        <option value="price">السعر: من الأقل</option>
-      </select>
-    </div>
-    <div class="grid" id="medicineGrid"></div>
-  </section>
-
-  <section class="notice">
-    <strong>مهم:</strong> هذه النسخة نموذج أولي وليست قاعدة بيانات رسمية للأدوية الأردنية.
-    الأسعار غير مدخلة ما لم يتم التحقق منها من مصدر موثوق؛ لا تعتمد على المعلومات هنا لاتخاذ قرار علاجي.
-    اسأل الصيدلي أو الطبيب عن الجرعة والاستعمال المناسبين.
-  </section>
-</main>
-
-<footer>
-  <div class="container footer-row">
-    <div><strong>JO Pharma</strong><br>دليلك الدوائي في الأردن</div>
-    <div>المعلومات للتوعية فقط ولا تغني عن استشارة المختص.</div>
-    <div>© <span id="year"></span> JO Pharma</div>
-  </div>
-</footer>
-
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="modal-box">
-    <div class="modal-head">
-      <h3 id="modalTitle">معلومات الدواء</h3>
-      <button class="close" id="closeModal" aria-label="إغلاق">×</button>
-    </div>
-    <div id="modalContent"></div>
-  </div>
-</div>
-
-<script>
-"use strict";
-
-/*
-  بيانات تجريبية للتعريف بالواجهة فقط.
-  لا تمثل قائمة شاملة للأدوية الأردنية، ولا تعني أن المنتجات أو
-  الأسعار أو التوافر قد تم التحقق منها في السوق الأردني.
-*/
-const medicines = [
-  {id:1,name:"Panadol",generic:"Paracetamol",category:"مسكنات",form:"أقراص",price:null,description:"يُستخدم لتخفيف الألم وخفض الحرارة. تختلف الجرعة المناسبة حسب العمر والتركيز والحالة الصحية.",warning:"تجنب تناول مستحضرات أخرى تحتوي على الباراسيتامول بالتزامن دون مراجعة مختص."},
-  {id:2,name:"Brufen",generic:"Ibuprofen",category:"مسكنات",form:"أقراص",price:null,description:"مسكن ومضاد التهاب من مجموعة NSAIDs.",warning:"قد لا يناسب المصابين بقرحة المعدة أو أمراض الكلى وبعض الحالات الأخرى. استشر الصيدلي."},
-  {id:3,name:"Cataflam",generic:"Diclofenac potassium",category:"مسكنات",form:"أقراص",price:null,description:"مضاد التهاب غير ستيرويدي لتخفيف بعض أنواع الألم.",warning:"له مخاطر معدية وكلوية وقلبية محتملة. لا تستخدمه دون التأكد من ملاءمته لك."},
-  {id:4,name:"Claritin",generic:"Loratadine",category:"حساسية",form:"أقراص",price:null,description:"مضاد للهيستامين لتخفيف أعراض الحساسية.",warning:"راجع النشرة الدوائية واسأل المختص عن الجرعة المناسبة."},
-  {id:5,name:"Zyrtec",generic:"Cetirizine",category:"حساسية",form:"أقراص",price:null,description:"مضاد للهيستامين لأعراض الحساسية.",warning:"قد يسبب النعاس لدى بعض الأشخاص."},
-  {id:6,name:"Nexium",generic:"Esomeprazole",category:"معدة",form:"كبسولات",price:null,description:"يقلل إفراز حمض المعدة ويستخدم في حالات محددة يقيّمها المختص.",warning:"الاستعمال الطويل أو الأعراض المستمرة تستلزم مراجعة الطبيب."},
-  {id:7,name:"Gaviscon",generic:"مكونات تختلف حسب المنتج",category:"معدة",form:"معلق أو أقراص",price:null,description:"بعض أنواعه تساعد في تخفيف أعراض الارتجاع والحموضة.",warning:"تحقق من تركيبة المنتج المحلي وتعليمات العبوة."},
-  {id:8,name:"Vitamin D3",generic:"Cholecalciferol",category:"فيتامينات",form:"أشكال متعددة",price:null,description:"فيتامين مهم لصحة العظام، وتختلف الجرعات حسب الحاجة.",warning:"الجرعات العالية قد تكون ضارة؛ لا تستخدم جرعات علاجية دون توجيه مختص."},
-  {id:9,name:"Vitamin C",generic:"Ascorbic acid",category:"فيتامينات",form:"أشكال متعددة",price:null,description:"فيتامين أساسي لوظائف الجسم الطبيعية.",warning:"الاحتياج والجرعة يختلفان حسب العمر والحالة الصحية."},
-  {id:10,name:"ORS",generic:"Oral Rehydration Salts",category:"أخرى",form:"أكياس",price:null,description:"محلول أملاح الإماهة الفموية لتعويض السوائل والأملاح في حالات مناسبة.",warning:"الجفاف الشديد أو الخمول أو عدم القدرة على الشرب يستدعي رعاية طبية عاجلة."}
-];
-
-const grid = document.getElementById("medicineGrid");
-const input = document.getElementById("searchInput");
-const sort = document.getElementById("sortSelect");
-const modal = document.getElementById("modal");
-const modalContent = document.getElementById("modalContent");
-let activeCategory = "الكل";
-
-function safeText(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  })[char]);
-}
-
-function render() {
-  const query = input.value.trim().toLowerCase();
-  let results = medicines.filter(m => {
-    const matchesCategory = activeCategory === "الكل" || m.category === activeCategory;
-    const searchable = [m.name,m.generic,m.category,m.form].join(" ").toLowerCase();
-    return matchesCategory && searchable.includes(query);
-  });
-
-  if (sort.value === "name") {
-    results.sort((a,b) => a.name.localeCompare(b.name));
-  } else {
-    results.sort((a,b) => (a.price ?? Infinity) - (b.price ?? Infinity));
-  }
-
-  document.getElementById("medicineCount").textContent = medicines.length;
-  document.getElementById("resultCount").textContent = `${results.length} نتيجة`;
-
-  if (!results.length) {
-    grid.innerHTML = '<div class="empty">ما لقينا نتائج. جرّب اسمًا آخر.</div>';
-    return;
-  }
-
-  grid.innerHTML = results.map(m => `
-    <article class="medicine">
-      <div class="med-top">
-        <span class="med-icon">💊</span>
-        <span class="tag">${safeText(m.category)}</span>
-      </div>
-      <h3>${safeText(m.name)}</h3>
-      <div class="generic">${safeText(m.generic)}</div>
-      <p class="description">${safeText(m.description)}</p>
-      <div class="price">
-        <div><strong>${m.price == null ? "غير متوفر" : safeText(m.price.toFixed(2)) + " د.أ"}</strong><small>${m.price == null ? "السعر بحاجة إلى تحقق" : "سعر مسجل"}</small></div>
-        <button class="details-btn" data-id="${m.id}">التفاصيل</button>
-      </div>
-    </article>
-  `).join("");
-}
-
-document.getElementById("searchForm").addEventListener("submit", e => {
-  e.preventDefault();
-  render();
-});
-input.addEventListener("input", render);
-sort.addEventListener("change", render);
-
-document.getElementById("filters").addEventListener("click", e => {
-  const button = e.target.closest("button[data-category]");
-  if (!button) return;
-  activeCategory = button.dataset.category;
-  document.querySelectorAll(".chip").forEach(chip => {
-    chip.classList.toggle("active", chip === button);
-  });
-  render();
-});
-
-grid.addEventListener("click", e => {
-  const button = e.target.closest("button[data-id]");
-  if (!button) return;
-  const m = medicines.find(item => item.id === Number(button.dataset.id));
-  if (!m) return;
-
-  document.getElementById("modalTitle").textContent = m.name;
-  modalContent.innerHTML = `
-    <p><strong>المادة الفعالة:</strong> ${safeText(m.generic)}</p>
-    <p><strong>الشكل:</strong> ${safeText(m.form)}</p>
-    <p><strong>الفئة:</strong> ${safeText(m.category)}</p>
-    <p><strong>الاستخدام العام:</strong> ${safeText(m.description)}</p>
-    <p><strong>تنبيه:</strong> ${safeText(m.warning)}</p>
-    <p><strong>السعر في الأردن:</strong> غير متحقق منه في هذه النسخة.</p>
-    <p class="muted">تحقق من النشرة المحلية واسأل الصيدلي قبل الاستخدام.</p>
-  `;
-  modal.classList.add("open");
-});
-
-function closeModal() { modal.classList.remove("open"); }
-document.getElementById("closeModal").addEventListener("click", closeModal);
-modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
-document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
-document.getElementById("year").textContent = new Date().getFullYear();
-
-render();
-</script>
-</body>
+    /* Stats Counter Section */
+    .stats-container {
+      display: flex;
+      justify-content: center;
+      
