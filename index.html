@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JOPharma - دليل الأدوية والأعشاب والأمراض الشامل</title>
+  <title>JOPharma - دليل الأدوية والأعشاب والأمراض</title>
   <style>
     * {
       box-sizing: border-box;
@@ -50,6 +50,7 @@
       display: none;
       border: 2px solid #ffc107;
       background-color: #fffdf5;
+      margin-bottom: 20px;
     }
     .admin-form input, .admin-form select, .admin-form textarea {
       width: 100%;
@@ -69,7 +70,7 @@
       font-weight: bold;
     }
 
-    /* التابات (الأقسام) */
+    /* تصميم خانات الأقسام (التابات) */
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -96,7 +97,6 @@
       color: #fff;
       box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
     }
-    
     /* مربع البحث */
     .search-box {
       margin-bottom: 25px;
@@ -113,8 +113,7 @@
     .search-box input:focus {
       border-color: #0d6efd;
     }
-
-    /* النتائج والكروت */
+    /* تصميم الكروت والنتائج */
     .results {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -152,6 +151,7 @@
       color: #fff;
       font-weight: bold;
       white-space: nowrap;
+      margin-right: 10px;
     }
     .badge.medicine { background-color: #0d6efd; }
     .badge.herb { background-color: #20c997; }
@@ -162,6 +162,9 @@
       margin-top: 6px;
       line-height: 1.5;
       color: #555;
+    }
+    .card-detail strong {
+      color: #212529;
     }
     .price-tag {
       display: inline-block;
@@ -175,17 +178,17 @@
       color: #888;
       padding: 20px;
       grid-column: 1 / -1;
-      font-size: 16px;
+      font-size: 18px;
     }
-    
-    /* تنبيه الواتساب */
+
+    /* تنبيه الواتساب (معدل لاتجاه الأرقام والصح) */
     .whatsapp-notice {
       position: fixed;
       bottom: 20px;
       right: 20px;
       background-color: #25D366;
       color: white;
-      padding: 12px 16px;
+      padding: 12px 18px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       font-size: 13px;
@@ -197,9 +200,10 @@
       color: white;
       font-weight: bold;
       text-decoration: none;
-      font-size: 15px;
+      font-size: 14px;
       display: block;
       margin-top: 5px;
+      direction: ltr; /* لحل مشكلة قلب الأرقام */
     }
   </style>
 </head>
@@ -208,7 +212,7 @@
   <!-- زر الأدمن -->
   <button class="admin-btn-top" onclick="checkAdmin()">دخول الأدمن ⚙️</button>
 
-  <!-- لوحة الأدمن (مخفية) -->
+  <!-- لوحة الأدمن -->
   <div class="container" id="adminPanel">
     <h2 style="color: #ffc107; margin-bottom: 15px;">لوحة الإدارة - إضافة دواء جديد</h2>
     <div class="admin-form">
@@ -224,7 +228,7 @@
   <div class="container">
     <h1>JOPharma 💊🌿🦠</h1>
     
-    <!-- التابات -->
+    <!-- الخانات (التابات) -->
     <div class="tabs">
       <button class="tab-btn active" onclick="filterCategory('all', this)">الكل / All</button>
       <button class="tab-btn" onclick="filterCategory('medicine', this)">الأدوية 💊</button>
@@ -247,4 +251,18 @@
   <!-- تنبيه الواتساب -->
   <div class="whatsapp-notice">
     للاقتراحات وللتنبيه عن الاخطاء العلمية والاملائية
-    <a href="https://wa.me/962781775710" target="_blank">📞 +9627
+    <a href="https://wa.me/962781775710" target="_blank">📞 +962781775710 واتس اب</a>
+  </div>
+
+  <script>
+    const allData = [];
+
+    // 1. توليد الـ 1000 دواء
+    const medNames = ["باراسيتامول / Paracetamol", "أوميبرازول / Omeprazole", "أموكسيسيلين / Amoxicillin", "إيبوبروفين / Ibuprofen", "سيتريزين / Cetirizine", "ميتفورمين / Metformin", "أملوديبين / Amlodipine", "أسبرين / Aspirin", "أزيثروماكس / Azithromycin", "فولتارين / Diclofenac", "كتافاست / Kefast", "أوجمنتين / Augmentin", "كونكور / Bisoprolol", "إنديوسيد / Indocid", "سيمفاستاتين / Simvastatin", "لوراتادين / Loratadine", "رانيتيدين / Ranitidine", "ديكلوفيناك / Diclofenac Sodium", "أبرازولام / Alprazolam", "كلونازيبام / Clonazepam"];
+    const medCats = ["أدوية المسكنات وخافضات الحرارة", "أدوية الجهاز الهضمي", "المضادات الحيوية", "أدوية المسكنات ومضادات الالتهاب", "أدوية الحساسية ومضادات الهيستامين", "أدوية السكري", "أدوية ضغط الدم والقلب", "أدوية سيولة الدم", "أدوية الأمراض العصبية والنفسية", "أدوية الفيتامينات والمكملات الغذائية"];
+    
+    let currentPrice = 1.15;
+    for (let i = 1; i <= 1000; i++) {
+      let nIndex = (i - 1) % 20;
+      let cIndex = (i - 1) % 10;
+      let baseName
