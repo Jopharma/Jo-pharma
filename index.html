@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head> 
+  <meta name="google-site-verification" content="hUSRMLJd3CXDTIPbcKgzYP3fhzLcsjBmc7dh0ObH1Xc" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jo Pharma: المرجع الدوائي الأردني الشامل للأدوية، الأسعار، البدائل، الأمراض، والأعشاب.">
   <title>Jo Pharma | المرجع الدوائي والصيدلاني الأردني</title>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
@@ -22,105 +27,35 @@
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); color: var(--text-dark); line-height: 1.6; }
-    
-    header { background-color: var(--primary); color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; gap: 10px; }
-    .logo { font-size: 26px; font-weight: 800; cursor: pointer; }
+    html.lenis { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto; }
+    .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+    .lenis.lenis-stopped { overflow: hidden; }
+
+    body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+    header { background-color: var(--primary); color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    .logo { font-size: 26px; font-weight: 800; }
     .logo span { color: var(--accent); }
-    
-    nav { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; }
     nav button { background: transparent; border: none; color: #e2e8f0; font-size: 15px; font-weight: 700; font-family: 'Tajawal', sans-serif; cursor: pointer; padding: 8px 16px; border-radius: 8px; transition: all 0.25s ease; }
     nav button:hover, nav button.active { background-color: rgba(255, 255, 255, 0.15); color: white; }
-    .admin-nav-btn { background-color: var(--accent) !important; color: white !important; }
 
-    .container { max-width: 1100px; margin: 30px auto; padding: 0 16px; }
-    .section-card { background-color: var(--card-bg); padding: 32px 24px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 30px; border: 1px solid var(--border); }
+    .container { max-width: 1100px; margin: 30px auto; padding: 0 16px; position: relative; }
+    
+    .light-rays-bg { position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: repeating-conic-gradient(from 0deg at 50% 50%, transparent 0deg, rgba(30, 58, 138, 0.03) 10deg, transparent 20deg); animation: rotateRays 120s linear infinite; pointer-events: none; z-index: 0; }
+    @keyframes rotateRays { 100% { transform: rotate(360deg); } }
+
+    .section-card { background-color: var(--card-bg); padding: 32px 24px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 30px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+    .section-content { position: relative; z-index: 1; }
     .section-header { text-align: center; margin-bottom: 24px; }
+    
     .blur-text { color: var(--primary); font-size: 28px; font-weight: 800; margin-bottom: 8px; }
     p.subtitle { font-size: 15px; color: var(--text-muted); }
 
-    .search-box { display: flex; justify-content: center; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
-    .search-input-wrapper { flex: 1; min-width: 260px; }
-    input[type="text"], input[type="password"] { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 16px; outline: none; background: #fff; }
-    
-    .star-border-btn { padding: 14px 28px; background-color: var(--accent); color: white; border: none; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer; transition: background 0.2s; }
-    .star-border-btn:hover { background-color: var(--accent-hover); }
-    
-    .hidden { display: none !important; }
-    .admin-panel { max-width: 400px; margin: 20px auto; text-align: center; }
-    .error-msg { color: #ef4444; margin-top: 10px; font-size: 14px; font-weight: 600; }
-    
-    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 20px; }
-    .item-card { background: #f8fafc; border: 1px solid var(--border); padding: 16px; border-radius: 10px; text-align: right; }
-    .item-card h3 { color: var(--primary); margin-bottom: 6px; font-size: 18px; }
-    .item-card p { font-size: 14px; margin-bottom: 4px; color: var(--text-muted); }
-    .item-card span { color: var(--accent); font-weight: bold; }
-  </style>
-</head>
-<body>
+    .stats-container { display: flex; justify-content: center; gap: 20px; margin: 20px 0; color: var(--primary); font-weight: 700; font-size: 18px; flex-wrap: wrap;}
+    .stats-container div { background: rgba(30, 58, 138, 0.05); padding: 10px 20px; border-radius: 12px; border: 1px solid var(--border); }
+    .counter { color: var(--accent); font-size: 22px; }
 
-  <header>
-    <div class="logo" onclick="switchTab('home')">Jo<span>Pharma</span></div>
-    <nav>
-      <button id="btn-home" class="active" onclick="switchTab('home')">الرئيسية</button>
-      <button id="btn-medicines" onclick="switchTab('medicines')">الأدوية</button>
-      <button id="btn-alternatives" onclick="switchTab('alternatives')">البدائل</button>
-      <button id="btn-health" onclick="switchTab('health')">الأمراض والأعشاب</button>
-      <button id="btn-admin" class="admin-nav-btn" onclick="switchTab('admin')">لوحة التحكم</button>
-    </nav>
-  </header>
-
-  <div class="container">
-    
-    <!-- قسم الرئيسية -->
-    <div id="section-home" class="section-card">
-      <div class="section-header">
-        <h1 class="blur-text">المرجع الدوائي الأردني</h1>
-        <p class="subtitle">ابحث عن الأدوية، الأسعار، البدائل الطبية، والأعشاب بكل سهولة.</p>
-      </div>
-      <div class="search-box">
-        <div class="search-input-wrapper">
-          <input type="text" id="global-search" placeholder="ابحث عن اسم الدواء أو المادة الدوائية..." oninput="handleGlobalSearch()" />
-        </div>
-        <button class="star-border-btn" onclick="handleGlobalSearch()">بحث</button>
-      </div>
-      <div id="home-results" class="results-grid"></div>
-    </div>
-
-    <!-- قسم الأدوية -->
-    <div id="section-medicines" class="section-card hidden">
-      <div class="section-header">
-        <h2 class="blur-text">قائمة الأدوية</h2>
-        <p class="subtitle">استعرض جميع الأدوية المتاحة وأسعارها.</p>
-      </div>
-      <div class="search-box">
-        <div class="search-input-wrapper">
-          <input type="text" id="med-search" placeholder="ابحث عن دواء..." oninput="filterMedicines()" />
-        </div>
-      </div>
-      <div id="medicines-container" class="results-grid"></div>
-    </div>
-
-    <!-- قسم البدائل -->
-    <div id="section-alternatives" class="section-card hidden">
-      <div class="section-header">
-        <h2 class="blur-text">البدائل الطبية</h2>
-        <p class="subtitle">تعرف على البدائل المتاحة للأدوية.</p>
-      </div>
-      <div class="search-box">
-        <div class="search-input-wrapper">
-          <input type="text" id="alt-search" placeholder="ابحث عن بديل دواء..." oninput="filterAlternatives()" />
-        </div>
-      </div>
-      <div id="alternatives-container" class="results-grid"></div>
-    </div>
-
-    <!-- قسم الأمراض والأعشاب -->
-    <div id="section-health" class="section-card hidden">
-      <div class="section-header">
-        <h2 class="blur-text">الأمراض والأعشاب الطبية</h2>
-        <p class="subtitle">دليل الأمراض والأعشاب العلاجية وطرق الاستخدام.</p>
-      </div>
-      <div class="search-box" style="margin-bottom: 20px;">
-        <div class="search-input-wrapper">
-          <input type="text" id="health-search" placeholder="ابحث عن مرض
+    .search-box { display: flex; justify-content: center; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; position: relative; }
+    .search-input-wrapper { flex: 1; min-width: 260px; position: relative; }
+    input[type="text"], input[type="password"], input[type="number"], select { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; background: #fff
