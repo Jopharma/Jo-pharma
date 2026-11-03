@@ -15,6 +15,7 @@
       background-color: #f4f7f6;
       color: #333;
       padding: 20px;
+      position: relative;
     }
     .container {
       max-width: 1000px;
@@ -23,13 +24,51 @@
       padding: 25px;
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
     }
     h1 {
       text-align: center;
       color: #0d6efd;
       margin-bottom: 20px;
     }
-    /* تصميم خانات الأقسام (التابات) */
+    /* زر ولوحة الأدمن */
+    .admin-btn-top {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      padding: 8px 15px;
+      background-color: #343a40;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .admin-btn-top:hover { background-color: #23272b; }
+    
+    #adminPanel {
+      display: none;
+      border: 2px solid #ffc107;
+      background-color: #fffdf5;
+    }
+    .admin-form input, .admin-form select, .admin-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ced4da;
+      border-radius: 6px;
+    }
+    .add-btn {
+      background-color: #198754;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* التابات */
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -48,18 +87,13 @@
       color: #555;
       transition: 0.3s;
     }
-    .tab-btn:hover {
-      background-color: #dee2e6;
-    }
     .tab-btn.active {
       background-color: #0d6efd;
       color: #fff;
       box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
     }
     /* مربع البحث */
-    .search-box {
-      margin-bottom: 25px;
-    }
+    .search-box { margin-bottom: 25px; }
     .search-box input {
       width: 100%;
       padding: 14px 18px;
@@ -67,12 +101,10 @@
       border: 2px solid #e0e0e0;
       border-radius: 8px;
       outline: none;
-      transition: border-color 0.3s;
     }
-    .search-box input:focus {
-      border-color: #0d6efd;
-    }
-    /* تصميم الكروت والنتائج */
+    .search-box input:focus { border-color: #0d6efd; }
+    
+    /* الكروت */
     .results {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -83,13 +115,8 @@
       background-color: #fafbfc;
       border-radius: 8px;
       padding: 18px;
-      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
-    }
-    .card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
     .card-header {
       display: flex;
@@ -97,12 +124,50 @@
       align-items: flex-start;
       margin-bottom: 10px;
     }
-    .card-title {
-      font-size: 16px;
-      font-weight: bold;
-      color: #198754;
-      line-height: 1.4;
-    }
+    .card-title { font-size: 16px; font-weight: bold; color: #198754; }
     .badge {
-      font-size: 12px;
-      padding:
+      font-size: 12px; padding: 4px 8px; border-radius: 6px; color: #fff; font-weight: bold;
+    }
+    .badge.medicine { background-color: #0d6efd; }
+    .badge.herb { background-color: #20c997; }
+    .badge.disease { background-color: #dc3545; }
+    
+    .card-detail { font-size: 13px; margin-top: 6px; color: #555; }
+    .price-tag { display: inline-block; margin-top: 10px; font-weight: bold; color: #0d6efd; }
+    
+    /* إشعار الواتساب */
+    .whatsapp-notice {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.5;
+      z-index: 1000;
+    }
+    .whatsapp-notice a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 15px;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- زر الأدمن -->
+  <button class="admin-btn-top" onclick="checkAdmin()">دخول الأدمن ⚙️</button>
+
+  <!-- لوحة الأدمن (مخفية افتراضياً) -->
+  <div class="container" id="adminPanel">
+    <h2 style="color: #ffc107; margin-bottom: 15px;">لوحة الإدارة - إضافة دواء جديد</h2>
+    <div class="admin-form">
+      <input type="text" id="addName" placeholder="اسم الدواء (عربي / إنجليزي)" />
+      <input type="number" id="addPrice" placeholder="السعر بالدينار الأردني" step="
