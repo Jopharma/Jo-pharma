@@ -45,7 +45,6 @@
     @keyframes rotateRays { 100% { transform: rotate(360deg); } }
     @media (prefers-reduced-motion: reduce) { .light-rays-bg { animation: none; } }
 
-    /* تم إزالة opacity: 0 لمنع الشاشة البيضاء */
     .section-card { background-color: var(--card-bg); padding: 32px 24px; border-radius: 16px; box-shadow: var(--shadow); margin-bottom: 30px; border: 1px solid var(--border); position: relative; overflow: hidden; }
     .section-content { position: relative; z-index: 1; }
     .section-header { text-align: center; margin-bottom: 24px; }
@@ -59,9 +58,15 @@
     .stats-container div { background: rgba(30, 58, 138, 0.05); padding: 10px 20px; border-radius: 12px; border: 1px solid var(--border); }
     .counter { color: var(--accent); font-size: 22px; }
 
-    .search-box { display: flex; justify-content: center; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; }
-    input[type="text"] { flex: 1; min-width: 260px; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
+    .search-box { display: flex; justify-content: center; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; position: relative; }
+    .search-input-wrapper { flex: 1; min-width: 260px; position: relative; }
+    input[type="text"] { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
     input[type="text"]:focus { border-color: var(--primary); }
+
+    /* صندوق الاقتراحات التلقائية */
+    .suggestions-box { position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; border: 1px solid var(--border); border-top: none; border-radius: 0 0 10px 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 99; max-height: 200px; overflow-y: auto; text-align: right; }
+    .suggestion-item { padding: 10px 15px; cursor: pointer; border-bottom: 1px solid #f1f5f9; font-size: 14px; transition: background 0.2s; }
+    .suggestion-item:hover { background: #f8fafc; color: var(--primary); font-weight: bold; }
 
     .star-border-btn { position: relative; padding: 14px 28px; background-color: var(--accent); color: white; border: none; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer; overflow: hidden; z-index: 1; transition: transform 0.1s; }
     .star-border-btn::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, rgba(255,255,255,0.7), transparent 30%); animation: spinBorder 3s linear infinite; z-index: -1; }
@@ -117,11 +122,14 @@
           </div>
         </div>
         <div class="search-box">
-          <div class="price-notice" style="background: #fff3cd; color: #856404; padding: 12px 15px; border-radius: 8px; font-size: 13px; margin: 15px 0; text-align: center; border: 1px solid #ffeeba;">
-    ⚠️ <strong>تنبيه هام:</strong> الأسعار المذكورة هي للإرشاد وقد تختلف اختلافاً طفيفاً من صيدلية لأخرى أو بناءً على التحديثات الرسمية.
-</div>
+          <div class="price-notice" style="background: #fff3cd; color: #856404; padding: 12px 15px; border-radius: 8px; font-size: 13px; margin: 15px 0; text-align: center; border: 1px solid #ffeeba; width: 100%;">
+            ⚠️ <strong>تنبيه هام:</strong> الأسعار المذكورة هي للإرشاد وقد تختلف اختلافاً طفيفاً من صيدلية لأخرى أو بناءً على التحديثات الرسمية.
+          </div>
 
-          <input type="text" id="searchInput" placeholder="اكتب اسم الدواء أو المادة الفعالة (مثال: Panadol, سكري)...">
+          <div class="search-input-wrapper">
+            <input type="text" id="searchInput" placeholder="اكتب اسم الدواء أو المادة الفعالة (مثال: Panadol, باراسيتامول)..." oninput="handleSearchInput()" autocomplete="off">
+            <div id="suggestionsBox" class="suggestions-box hidden"></div>
+          </div>
           <button class="star-border-btn" onclick="executeSearch()">بحث الآن</button>
         </div>
         <div id="searchResults" style="margin-top: 24px;"></div>
@@ -162,7 +170,6 @@
   <footer>جميع الحقوق محفوظة © Jo Pharma 2026 - المرجع الصيدلاني المعتمد</footer>
 
   <script>
-    // الحماية لمنع الشاشة البيضاء في حال تعطل GSAP
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let gsapLoaded = (typeof gsap !== 'undefined');
 
@@ -185,81 +192,80 @@
       });
     }
 
-    // قاعدة بيانات الأدوية (موسعة لأقصى سعة)
+    // قاعدة بيانات الأدوية (تم إضافة الأسماء العربية والإنجليزية معاً لضمان دعم البحث باللغتين)
     const medicinesData = [
-      { name: "Concor 5mg", category: "القلب والضغط", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90), Bisocor (2.50)" },
-      { name: "Concor 2.5mg", category: "القلب والضغط", active: "Bisoprolol", indication: "قصور القلب المزمن", price: "3.10 JOD", alternative: "Biso 2.5" },
-      { name: "Concor 10mg", category: "القلب والضغط", active: "Bisoprolol", indication: "ضغط الدم المرتفع الشديد", price: "6.50 JOD", alternative: "Bisocor 10" },
-      { name: "Diovan 160mg", category: "القلب والضغط", active: "Valsartan", indication: "علاج ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50), Tareg (7.90)" },
-      { name: "Diovan 80mg", category: "القلب والضغط", active: "Valsartan", indication: "ضغط الدم", price: "8.50 JOD", alternative: "Valpress 80" },
-      { name: "Co-Diovan 160/12.5", category: "القلب والضغط", active: "Valsartan + HCTZ", indication: "ضغط الدم مع مدر للبول", price: "13.00 JOD", alternative: "Valpress Plus" },
-      { name: "Micardis 80mg", category: "القلب والضغط", active: "Telmisartan", indication: "ضغط الدم وحماية الشرايين", price: "14.50 JOD", alternative: "Telmisar (9.00)" },
-      { name: "Micardis Plus", category: "القلب والضغط", active: "Telmisartan + HCTZ", indication: "ضغط الدم المعند", price: "16.00 JOD", alternative: "Telmisar Plus" },
-      { name: "Norvasc 5mg", category: "القلب والضغط", active: "Amlodipine", indication: "توسيع الشرايين والضغط", price: "6.00 JOD", alternative: "Amlo (3.50)" },
-      { name: "Norvasc 10mg", category: "القلب والضغط", active: "Amlodipine", indication: "الضغط والذبحة الصدرية", price: "9.80 JOD", alternative: "Amlo 10" },
-      { name: "Exforge 5/160", category: "القلب والضغط", active: "Amlodipine + Valsartan", indication: "ضغط الدم المركب", price: "18.00 JOD", alternative: "Amloval" },
-      { name: "Aspirin Protect 100", category: "القلب والضغط", active: "Acetylsalicylic Acid", indication: "مسيّل للدم", price: "2.10 JOD", alternative: "JOSPRIN (1.50)" },
-      { name: "Plavix 75mg", category: "القلب والضغط", active: "Clopidogrel", indication: "منع تجلط الدم", price: "22.50 JOD", alternative: "Clopix (11.00)" },
-      { name: "Lanoxin 0.25mg", category: "القلب والضغط", active: "Digoxin", indication: "تنظيم ضربات القلب", price: "3.40 JOD", alternative: "Cardoxin" },
-      { name: "Aldactone 25mg", category: "القلب والضغط", active: "Spironolactone", indication: "مدر للبول وحماية القلب", price: "4.00 JOD", alternative: "Spiro" },
-      { name: "Lasix 40mg", category: "القلب والضغط", active: "Furosemide", indication: "مدر سريع للبول", price: "2.50 JOD", alternative: "Furosem" },
+      { name: "Concor 5mg / كونكور 5 ملغ", category: "القلب والضغط", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90), Bisocor (2.50)" },
+      { name: "Concor 2.5mg / كونكور 2.5 ملغ", category: "القلب والضغط", active: "Bisoprolol", indication: "قصور القلب المزمن", price: "3.10 JOD", alternative: "Biso 2.5" },
+      { name: "Concor 10mg / كونكور 10 ملغ", category: "القلب والضغط", active: "Bisoprolol", indication: "ضغط الدم المرتفع الشديد", price: "6.50 JOD", alternative: "Bisocor 10" },
+      { name: "Diovan 160mg / ديوفان 160 ملغ", category: "القلب والضغط", active: "Valsartan", indication: "علاج ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50), Tareg (7.90)" },
+      { name: "Diovan 80mg / ديوفان 80 ملغ", category: "القلب والضغط", active: "Valsartan", indication: "ضغط الدم", price: "8.50 JOD", alternative: "Valpress 80" },
+      { name: "Co-Diovan 160/12.5 / كودیوفان", category: "القلب والضغط", active: "Valsartan + HCTZ", indication: "ضغط الدم مع مدر للبول", price: "13.00 JOD", alternative: "Valpress Plus" },
+      { name: "Micardis 80mg / ميكارديس 80 ملغ", category: "القلب والضغط", active: "Telmisartan", indication: "ضغط الدم وحماية الشرايين", price: "14.50 JOD", alternative: "Telmisar (9.00)" },
+      { name: "Micardis Plus / ميكارديس بلس", category: "القلب والضغط", active: "Telmisartan + HCTZ", indication: "ضغط الدم المعند", price: "16.00 JOD", alternative: "Telmisar Plus" },
+      { name: "Norvasc 5mg / نيرفاسك 5 ملغ", category: "القلب والضغط", active: "Amlodipine", indication: "توسيع الشرايين والضغط", price: "6.00 JOD", alternative: "Amlo (3.50)" },
+      { name: "Norvasc 10mg / نيرفاسك 10 ملغ", category: "القلب والضغط", active: "Amlodipine", indication: "الضغط والذبحة الصدرية", price: "9.80 JOD", alternative: "Amlo 10" },
+      { name: "Exforge 5/160 / إكسفورج", category: "القلب والضغط", active: "Amlodipine + Valsartan", indication: "ضغط الدم المركب", price: "18.00 JOD", alternative: "Amloval" },
+      { name: "Aspirin Protect 100 / أسبارين بروتكت", category: "القلب والضغط", active: "Acetylsalicylic Acid", indication: "مسيّل للدم", price: "2.10 JOD", alternative: "JOSPRIN (1.50)" },
+      { name: "Plavix 75mg / بلافيكس 75 ملغ", category: "القلب والضغط", active: "Clopidogrel", indication: "منع تجلط الدم", price: "22.50 JOD", alternative: "Clopix (11.00)" },
+      { name: "Lanoxin 0.25mg / لانوكسين", category: "القلب والضغط", active: "Digoxin", indication: "تنظيم ضربات القلب", price: "3.40 JOD", alternative: "Cardoxin" },
+      { name: "Aldactone 25mg / ألداكتون 25 ملغ", category: "القلب والضغط", active: "Spironolactone", indication: "مدر للبول وحماية القلب", price: "4.00 JOD", alternative: "Spiro" },
+      { name: "Lasix 40mg / لازكس 40 ملغ", category: "القلب والضغط", active: "Furosemide", indication: "مدر سريع للبول", price: "2.50 JOD", alternative: "Furosem" },
       
-      { name: "Panadol Advance", category: "المسكنات والحرارة", active: "Paracetamol", indication: "مسكن وخافض حرارة", price: "1.55 JOD", alternative: "Adol (1.20), Revanin (1.10)" },
-      { name: "Panadol Extra", category: "المسكنات والحرارة", active: "Paracetamol + Caffeine", indication: "صداع وشقيقة", price: "1.85 JOD", alternative: "Paramol Extra" },
-      { name: "Panadol Joint", category: "المسكنات والحرارة", active: "Paracetamol 665mg", indication: "آلام المفاصل", price: "2.50 JOD", alternative: "Osteo-Adol" },
-      { name: "Panadol Cold & Flu", category: "الرشحة والحساسية", active: "Paracetamol + Pseudoephedrine", indication: "رشحة واحتقان", price: "2.10 JOD", alternative: "Flutab (1.50)" },
-      { name: "Panadol Night", category: "الرشحة والحساسية", active: "Paracetamol + Diphenhydramine", indication: "مسكن ومنوم خفيف", price: "2.25 JOD", alternative: "Night Nurse" },
-      { name: "Prof 400mg", category: "المسكنات والحرارة", active: "Ibuprofen", indication: "مسكن ومضاد التهاب", price: "1.35 JOD", alternative: "Brufen (1.80)" },
-      { name: "Prof 600mg", category: "المسكنات والحرارة", active: "Ibuprofen", indication: "مسكن آلام قوي", price: "1.80 JOD", alternative: "Brufen 600" },
-      { name: "Cataflam 50mg", category: "المسكنات والحرارة", active: "Diclofenac Potassium", indication: "آلام الأسنان والمفاصل", price: "3.50 JOD", alternative: "Rofenac (2.20)" },
-      { name: "Voltaren 50mg", category: "المسكنات والحرارة", active: "Diclofenac Sodium", indication: "التهاب المفاصل", price: "3.00 JOD", alternative: "Olfen" },
-      { name: "Voltaren Amp", category: "المسكنات والحرارة", active: "Diclofenac Sodium", indication: "حقن للمغص الكلوي", price: "2.80 JOD", alternative: "Rofenac Amp" },
-      { name: "Celebrex 200mg", category: "المسكنات والحرارة", active: "Celecoxib", indication: "مسكن آمن للمعدة", price: "14.50 JOD", alternative: "Cylox (8.00)" },
-      { name: "Arcoxia 90mg", category: "المسكنات والحرارة", active: "Etoricoxib", indication: "التهاب المفاصل والنقرس", price: "16.00 JOD", alternative: "Etoxia" },
+      { name: "Panadol Advance / بانادول أدفانس", category: "المسكنات والحرارة", active: "Paracetamol", indication: "مسكن وخافض حرارة", price: "1.55 JOD", alternative: "Adol (1.20), Revanin (1.10)" },
+      { name: "Panadol Extra / بانادول إكسترا", category: "المسكنات والحرارة", active: "Paracetamol + Caffeine", indication: "صداع وشقيقة", price: "1.85 JOD", alternative: "Paramol Extra" },
+      { name: "Panadol Joint / بانادول للمفاصل", category: "المسكنات والحرارة", active: "Paracetamol 665mg", indication: "آلام المفاصل", price: "2.50 JOD", alternative: "Osteo-Adol" },
+      { name: "Panadol Cold & Flu / بانادول كولد أند فلو", category: "الرشحة والحساسية", active: "Paracetamol + Pseudoephedrine", indication: "رشحة واحتقان", price: "2.10 JOD", alternative: "Flutab (1.50)" },
+      { name: "Panadol Night / بانادول نايت", category: "الرشحة والحساسية", active: "Paracetamol + Diphenhydramine", indication: "مسكن ومنوم خفيف", price: "2.25 JOD", alternative: "Night Nurse" },
+      { name: "Prof 400mg / بروف 400 ملغ", category: "المسكنات والحرارة", active: "Ibuprofen", indication: "مسكن ومضاد التهاب", price: "1.35 JOD", alternative: "Brufen (1.80)" },
+      { name: "Prof 600mg / بروف 600 ملغ", category: "المسكنات والحرارة", active: "Ibuprofen", indication: "مسكن آلام قوي", price: "1.80 JOD", alternative: "Brufen 600" },
+      { name: "Cataflam 50mg / كاتافلام 50 ملغ", category: "المسكنات والحرارة", active: "Diclofenac Potassium", indication: "آلام الأسنان والمفاصل", price: "3.50 JOD", alternative: "Rofenac (2.20)" },
+      { name: "Voltaren 50mg / فولتارين 50 ملغ", category: "المسكنات والحرارة", active: "Diclofenac Sodium", indication: "التهاب المفاصل", price: "3.00 JOD", alternative: "Olfen" },
+      { name: "Voltaren Amp / إبر فولتارين", category: "المسكنات والحرارة", active: "Diclofenac Sodium", indication: "حقن للمغص الكلوي", price: "2.80 JOD", alternative: "Rofenac Amp" },
+      { name: "Celebrex 200mg / سيليبركس 200 ملغ", category: "المسكنات والحرارة", active: "Celecoxib", indication: "مسكن آمن للمعدة", price: "14.50 JOD", alternative: "Cylox (8.00)" },
+      { name: "Arcoxia 90mg / أركوكسيا 90 ملغ", category: "المسكنات والحرارة", active: "Etoricoxib", indication: "التهاب المفاصل والنقرس", price: "16.00 JOD", alternative: "Etoxia" },
       
-      { name: "Augmentin 1g", category: "المضادات الحيوية", active: "Amoxicillin + Clavulanic", indication: "التهاب اللوزتين والتنفسي", price: "8.50 JOD", alternative: "Curam (6.00), Hibiotic" },
-      { name: "Augmentin 625mg", category: "المضادات الحيوية", active: "Amoxicillin + Clavulanic", indication: "التهاب الأذن والبلعوم", price: "5.80 JOD", alternative: "Curam 625" },
-      { name: "Zithromax 500mg", category: "المضادات الحيوية", active: "Azithromycin", indication: "التهاب الجهاز التنفسي", price: "6.80 JOD", alternative: "Zitrobac (4.50)" },
-      { name: "Zithromax Susp", category: "المضادات الحيوية", active: "Azithromycin", indication: "شراب للأطفال", price: "5.50 JOD", alternative: "Azomax" },
-      { name: "Cipro 500mg", category: "المضادات الحيوية", active: "Ciprofloxacin", indication: "التهاب المسالك والأمعاء", price: "7.20 JOD", alternative: "Ciprobay (4.50)" },
-      { name: "Klacid 500mg", category: "المضادات الحيوية", active: "Clarithromycin", indication: "التهاب الرئة والجرثومة الحلزونية", price: "11.20 JOD", alternative: "Clarithro" },
-      { name: "Flagyl 500mg", category: "المضادات الحيوية", active: "Metronidazole", indication: "طفيليات وأمراض اللثة", price: "2.20 JOD", alternative: "Metrozol" },
-      { name: "Ceftin 500mg", category: "المضادات الحيوية", active: "Cefuroxime", indication: "التهابات بكتيرية", price: "9.50 JOD", alternative: "Zinnat" },
+      { name: "Augmentin 1g / أوجمنتين 1 غرام", category: "المضادات الحيوية", active: "Amoxicillin + Clavulanic", indication: "التهاب اللوزتين والتنفسي", price: "8.50 JOD", alternative: "Curam (6.00), Hibiotic" },
+      { name: "Augmentin 625mg / أوجمنتين 625 ملغ", category: "المضادات الحيوية", active: "Amoxicillin + Clavulanic", indication: "التهاب الأذن والبلعوم", price: "5.80 JOD", alternative: "Curam 625" },
+      { name: "Zithromax 500mg / زيثروماكس 500 ملغ", category: "المضادات الحيوية", active: "Azithromycin", indication: "التهاب الجهاز التنفسي", price: "6.80 JOD", alternative: "Zitrobac (4.50)" },
+      { name: "Zithromax Susp / شراب زيثروماكس", category: "المضادات الحيوية", active: "Azithromycin", indication: "شراب للأطفال", price: "5.50 JOD", alternative: "Azomax" },
+      { name: "Cipro 500mg / سيبرو 500 ملغ", category: "المضادات الحيوية", active: "Ciprofloxacin", indication: "التهاب المسالك والأمعاء", price: "7.20 JOD", alternative: "Ciprobay (4.50)" },
+      { name: "Klacid 500mg / كلاسيد 500 ملغ", category: "المضادات الحيوية", active: "Clarithromycin", indication: "التهاب الرئة والجرثومة الحلزونية", price: "11.20 JOD", alternative: "Clarithro" },
+      { name: "Flagyl 500mg / فلاجيل 500 ملغ", category: "المضادات الحيوية", active: "Metronidazole", indication: "طفيليات وأمراض اللثة", price: "2.20 JOD", alternative: "Metrozol" },
+      { name: "Ceftin 500mg / سيفكتين 500 ملغ", category: "المضادات الحيوية", active: "Cefuroxime", indication: "التهابات بكتيرية", price: "9.50 JOD", alternative: "Zinnat" },
       
-      { name: "Glucophage 500", category: "السكري والدهون", active: "Metformin", indication: "تنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00)" },
-      { name: "Glucophage 850", category: "السكري والدهون", active: "Metformin", indication: "تنظيم السكر", price: "4.20 JOD", alternative: "Metfor 850" },
-      { name: "Amaryl 2mg", category: "السكري والدهون", active: "Glimepiride", indication: "تحفيز البنكرياس", price: "4.50 JOD", alternative: "Glimax (3.00)" },
-      { name: "Januvia 100mg", category: "السكري والدهون", active: "Sitagliptin", indication: "سكر الدم بدون هبوط", price: "24.00 JOD", alternative: "Tesavel" },
-      { name: "Jardiance 10mg", category: "السكري والدهون", active: "Empagliflozin", indication: "سكري وحماية القلب", price: "28.50 JOD", alternative: "Forxiga" },
-      { name: "Lipitor 20mg", category: "السكري والدهون", active: "Atorvastatin", indication: "خفض الكوليسترول", price: "13.50 JOD", alternative: "Atorva (7.00)" },
-      { name: "Crestor 10mg", category: "السكري والدهون", active: "Rosuvastatin", indication: "كوليسترول وشرايين", price: "15.00 JOD", alternative: "Rosuvas (8.00)" },
-      { name: "Ezetrol 10mg", category: "السكري والدهون", active: "Ezetimibe", indication: "منع امتصاص الكوليسترول", price: "16.00 JOD", alternative: "Ezetim" },
+      { name: "Glucophage 500 / جلوكوفاج 500", category: "السكري والدهون", active: "Metformin", indication: "تنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00)" },
+      { name: "Glucophage 850 / جلوكوفاج 850", category: "السكري والدهون", active: "Metformin", indication: "تنظيم السكر", price: "4.20 JOD", alternative: "Metfor 850" },
+      { name: "Amaryl 2mg / أماريل 2 ملغ", category: "السكري والدهون", active: "Glimepiride", indication: "تحفيز البنكرياس", price: "4.50 JOD", alternative: "Glimax (3.00)" },
+      { name: "Januvia 100mg / جانوفيا 100 ملغ", category: "السكري والدهون", active: "Sitagliptin", indication: "سكر الدم بدون هبوط", price: "24.00 JOD", alternative: "Tesavel" },
+      { name: "Jardiance 10mg / جاردينس 10 ملغ", category: "السكري والدهون", active: "Empagliflozin", indication: "سكري وحماية القلب", price: "28.50 JOD", alternative: "Forxiga" },
+      { name: "Lipitor 20mg / ليبيتور 20 ملغ", category: "السكري والدهون", active: "Atorvastatin", indication: "خفض الكوليسترول", price: "13.50 JOD", alternative: "Atorva (7.00)" },
+      { name: "Crestor 10mg / كريستور 10 ملغ", category: "السكري والدهون", active: "Rosuvastatin", indication: "كوليسترول وشرايين", price: "15.00 JOD", alternative: "Rosuvas (8.00)" },
+      { name: "Ezetrol 10mg / إيزيترول 10 ملغ", category: "السكري والدهون", active: "Ezetimibe", indication: "منع امتصاص الكوليسترول", price: "16.00 JOD", alternative: "Ezetim" },
       
-      { name: "Nexium 40mg", category: "المعدة والجهاز الهضمي", active: "Esomeprazole", indication: "حرقة وارتداد مريئي", price: "14.00 JOD", alternative: "Esomep (8.00)" },
-      { name: "Nexium 20mg", category: "المعدة والجهاز الهضمي", active: "Esomeprazole", indication: "حموضة خفيفة", price: "8.50 JOD", alternative: "Nexmezol" },
-      { name: "Omeprazole 20mg", category: "المعدة والجهاز الهضمي", active: "Omeprazole", indication: "عسر الهضم", price: "3.20 JOD", alternative: "Gasec (2.50)" },
-      { name: "Duspatalin 200mg", category: "المعدة والجهاز الهضمي", active: "Mebeverine", indication: "قولون عصبي", price: "6.50 JOD", alternative: "Colona (5.00)" },
-      { name: "Antinal", category: "المعدة والجهاز الهضمي", active: "Nifuroxazide", indication: "إسهال بكتيري", price: "2.30 JOD", alternative: "Diafix" },
-      { name: "Daflon 500mg", category: "المعدة والجهاز الهضمي", active: "Flavonoid", indication: "بواسير ودوالي", price: "11.50 JOD", alternative: "Venosmil" },
-      { name: "Motilium", category: "المعدة والجهاز الهضمي", active: "Domperidone", indication: "غثيان وقيء", price: "3.50 JOD", alternative: "Vomistop" },
-      { name: "Maalox", category: "المعدة والجهاز الهضمي", active: "Al + Mg Hydroxide", indication: "مضاد حموضة سريع", price: "3.20 JOD", alternative: "Mylanta" },
+      { name: "Nexium 40mg / نيكسيوم 40 ملغ", category: "المعدة والجهاز الهضمي", active: "Esomeprazole", indication: "حرقة وارتداد مريئي", price: "14.00 JOD", alternative: "Esomep (8.00)" },
+      { name: "Nexium 20mg / نيكسيوم 20 ملغ", category: "المعدة والجهاز الهضمي", active: "Esomeprazole", indication: "حموضة خفيفة", price: "8.50 JOD", alternative: "Nexmezol" },
+      { name: "Omeprazole 20mg / أوميبرازول 20 ملغ", category: "المعدة والجهاز الهضمي", active: "Omeprazole", indication: "عسر الهضم", price: "3.20 JOD", alternative: "Gasec (2.50)" },
+      { name: "Duspatalin 200mg / دوباستالين 200 ملغ", category: "المعدة والجهاز الهضمي", active: "Mebeverine", indication: "قولون عصبي", price: "6.50 JOD", alternative: "Colona (5.00)" },
+      { name: "Antinal / أنتينال", category: "المعدة والجهاز الهضمي", active: "Nifuroxazide", indication: "إسهال بكتيري", price: "2.30 JOD", alternative: "Diafix" },
+      { name: "Daflon 500mg / دافلون 500 ملغ", category: "المعدة والجهاز الهضمي", active: "Flavonoid", indication: "بواسير ودوالي", price: "11.50 JOD", alternative: "Venosmil" },
+      { name: "Motilium / موتيليوم", category: "المعدة والجهاز الهضمي", active: "Domperidone", indication: "غثيان وقيء", price: "3.50 JOD", alternative: "Vomistop" },
+      { name: "Maalox / مالوكس", category: "المعدة والجهاز الهضمي", active: "Al + Mg Hydroxide", indication: "مضاد حموضة سريع", price: "3.20 JOD", alternative: "Mylanta" },
 
-      { name: "Telfast 180mg", category: "الرشحة والحساسية", active: "Fexofenadine", indication: "حساسية بدون نعاس", price: "8.20 JOD", alternative: "Fexofast" },
-      { name: "Claritine 10mg", category: "الرشحة والحساسية", active: "Loratadine", indication: "حساسية موسمية", price: "4.00 JOD", alternative: "Loratadine (2.50)" },
-      { name: "Zyrtec 10mg", category: "الرشحة والحساسية", active: "Cetirizine", indication: "عطس وارتكاريا", price: "4.80 JOD", alternative: "Cetitec" },
-      { name: "Aerius 5mg", category: "الرشحة والحساسية", active: "Desloratadine", indication: "حساسية وتهيج جلدي", price: "9.00 JOD", alternative: "Neoclarityn" },
-      { name: "Prospan Syrup", category: "الرشحة والحساسية", active: "Ivy Leaf", indication: "مذيب للبلغم", price: "4.50 JOD", alternative: "Abimol" },
-      { name: "Sinecod", category: "الرشحة والحساسية", active: "Butamirate", indication: "سعال جاف", price: "3.80 JOD", alternative: "Tuscalman" },
+      { name: "Telfast 180mg / تلفاست 180 ملغ", category: "الرشحة والحساسية", active: "Fexofenadine", indication: "حساسية بدون نعاس", price: "8.20 JOD", alternative: "Fexofast" },
+      { name: "Claritine 10mg / كلارينيت 10 ملغ", category: "الرشحة والحساسية", active: "Loratadine", indication: "حساسية موسمية", price: "4.00 JOD", alternative: "Loratadine (2.50)" },
+      { name: "Zyrtec 10mg / زيريتك 10 ملغ", category: "الرشحة والحساسية", active: "Cetirizine", indication: "عطس وارتكاريا", price: "4.80 JOD", alternative: "Cetitec" },
+      { name: "Aerius 5mg / أريوس 5 ملغ", category: "الرشحة والحساسية", active: "Desloratadine", indication: "حساسية وتهيج جلدي", price: "9.00 JOD", alternative: "Neoclarityn" },
+      { name: "Prospan Syrup / شراب بروبسبان", category: "الرشحة والحساسية", active: "Ivy Leaf", indication: "مذيب للبلغم", price: "4.50 JOD", alternative: "Abimol" },
+      { name: "Sinecod / سينيكود", category: "الرشحة والحساسية", active: "Butamirate", indication: "سعال جاف", price: "3.80 JOD", alternative: "Tuscalman" },
       
-      { name: "Thyrox 50", category: "أخرى (غدد، عظام، فيتامينات)", active: "Levothyroxine", indication: "قصور الغدة الدرقية", price: "2.50 JOD", alternative: "Eltroxin" },
-      { name: "Vitamin C 1000", category: "أخرى (غدد، عظام، فيتامينات)", active: "Ascorbic Acid", indication: "مناعة", price: "4.50 JOD", alternative: "Redoxon" },
-      { name: "Ferro-Gradumet", category: "أخرى (غدد، عظام، فيتامينات)", active: "Ferrous Sulfate", indication: "فقر دم", price: "6.00 JOD", alternative: "Fefol" },
-      { name: "Vitamin D3 50000", category: "أخرى (غدد، عظام، فيتامينات)", active: "Cholecalciferol", indication: "نقص فيتامين د", price: "5.50 JOD", alternative: "Biodal" }
+      { name: "Thyrox 50 / ثايروكس 50", category: "أخرى (غدد، عظام، فيتامينات)", active: "Levothyroxine", indication: "قصور الغدة الدرقية", price: "2.50 JOD", alternative: "Eltroxin" },
+      { name: "Vitamin C 1000 / فيتامين سي 1000", category: "أخرى (غدد، عظام، فيتامينات)", active: "Ascorbic Acid", indication: "مناعة", price: "4.50 JOD", alternative: "Redoxon" },
+      { name: "Ferro-Gradumet / فيرو جرادوميت", category: "أخرى (غدد، عظام، فيتامينات)", active: "Ferrous Sulfate", indication: "فقر دم", price: "6.00 JOD", alternative: "Fefol" },
+      { name: "Vitamin D3 50000 / فيتامين د3 50000", category: "أخرى (غدد، عظام، فيتامينات)", active: "Cholecalciferol", indication: "نقص فيتامين د", price: "5.50 JOD", alternative: "Biodal" }
     ];
 
     const categoriesList = ["القلب والضغط", "المسكنات والحرارة", "المضادات الحيوية", "السكري والدهون", "المعدة والجهاز الهضمي", "الرشحة والحساسية", "أخرى (غدد، عظام، فيتامينات)"];
 
-    // 50 مرض
     const diseasesList = [
       { title: "1. الرشحة والإنفلونزا", desc: "عدوى فيروسية تنفسية.", symptoms: "احتقان، عطس، ألم حلق.", causes: "رينوفيروس.", drugs: "Panadol Cold & Flu, فيتامين C" },
       { title: "2. التهاب اللوزتين", desc: "التهاب بكتيري أو فيروسي.", symptoms: "صعوبة بلع، حرارة.", causes: "بكتيريا العقدية.", drugs: "Augmentin, Panadol" },
@@ -313,7 +319,6 @@
       { title: "50. متلازمة التعب المزمن", desc: "إرهاق مستمر.", symptoms: "تعب.", causes: "غير معروف.", drugs: "فيتامينات، راحة" }
     ];
 
-    // 50 عشبة
     const herbsList = [
       { name: "البابونج", benefits: "تهدئة الأعصاب والنوم.", uses: "مغلي للبطن." },
       { name: "اليانسون", benefits: "طارد للغازات.", uses: "تخفيف السعال." },
@@ -434,22 +439,84 @@
       }
     }
 
+    // وظيفة الاقتراحات التلقائية والبحث المباشر بالحروف باللغتين
+    function handleSearchInput() {
+      const query = document.getElementById('searchInput').value.trim().toLowerCase();
+      const suggestionsBox = document.getElementById('suggestionsBox');
+      
+      if (query.length === 0) {
+        suggestionsBox.classList.add('hidden');
+        suggestionsBox.innerHTML = "";
+        return;
+      }
+
+      const matches = medicinesData.filter(m => 
+        m.name.toLowerCase().includes(query) || 
+        m.active.toLowerCase().includes(query) || 
+        m.category.toLowerCase().includes(query)
+      );
+
+      if (matches.length > 0) {
+        let html = "";
+        matches.slice(0, 6).forEach(m => {
+          html += `<div class="suggestion-item" onclick="selectSuggestion('${m.name.split('/')[0].trim()}')">${m.name}</div>`;
+        });
+        suggestionsBox.innerHTML = html;
+        suggestionsBox.classList.remove('hidden');
+      } else {
+        suggestionsBox.classList.add('hidden');
+        suggestionsBox.innerHTML = "";
+      }
+    }
+
+    function selectSuggestion(name) {
+      document.getElementById('searchInput').value = name;
+      document.getElementById('suggestionsBox').classList.add('hidden');
+      executeSearch();
+    }
+
     function executeSearch() {
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
       const resultsDiv = document.getElementById('searchResults');
-      if(query === "") { resultsDiv.innerHTML = `<p style="color: #ef4444; text-align: center;">يرجى إدخال اسم للبحث!</p>`; return; }
-      const matches = medicinesData.filter(m => m.name.toLowerCase().includes(query.toLowerCase()) || m.category.toLowerCase().includes(query.toLowerCase()));
+      document.getElementById('suggestionsBox').classList.add('hidden');
+
+      if(query === "") { 
+        resultsDiv.innerHTML = `<p style="color: #ef4444; text-align: center;">يرجى إدخال اسم للبحث!</p>`; 
+        return; 
+      }
+
+      const matches = medicinesData.filter(m => 
+        m.name.toLowerCase().includes(query) || 
+        m.active.toLowerCase().includes(query) || 
+        m.category.toLowerCase().includes(query)
+      );
 
       if(matches.length > 0) {
         let html = `<p style="margin-bottom: 12px; color: var(--primary); font-weight: 700;">تم العثور على (${matches.length}) نتيجة:</p>`;
-        matches.forEach(m => { html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الاستخدام:</strong> ${m.indication}</p><p><strong>التركيبة:</strong> ${m.active}</p><p><strong>السعر:</strong> ${m.price}</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternative}</p></div>`; });
+        matches.forEach(m => { 
+          html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الاستخدام:</strong> ${m.indication}</p><p><strong>التركيبة:</strong> ${m.active}</p><p><strong>السعر:</strong> ${m.price}</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternative}</p></div>`; 
+        });
         resultsDiv.innerHTML = html;
-        if (gsapLoaded && !prefersReducedMotion) { gsap.from(".result-card", {opacity: 0, y: 20, stagger: 0.1, duration: 0.5}); ScrollTrigger.refresh(); }
-      } else { resultsDiv.innerHTML = `<p style="color: #f59e0b; text-align: center;">لم نجد أدوية مطابقة.</p>`; }
+        if (gsapLoaded && !prefersReducedMotion) { 
+          gsap.from(".result-card", {opacity: 0, y: 20, stagger: 0.1, duration: 0.5}); 
+          ScrollTrigger.refresh(); 
+        }
+      } else { 
+        resultsDiv.innerHTML = `<p style="color: #f59e0b; text-align: center;">لم نجد أدوية مطابقة.</p>`; 
+      }
     }
 
+    // إخفاء صندوق الاقتراحات عند النقر خارج حقل البحث
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.search-box')) {
+        document.getElementById('suggestionsBox').classList.add('hidden');
+      }
+    });
+
     window.onload = function() {
-      renderCategories(); renderDiseases(); renderHerbs();
+      renderCategories(); 
+      renderDiseases(); 
+      renderHerbs();
       document.getElementById('searchTab').classList.remove('hidden');
     };
   </script>
