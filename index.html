@@ -49,6 +49,10 @@
     .hidden { display: none !important; }
     .admin-panel { max-width: 400px; margin: 20px auto; text-align: center; }
     .error-msg { color: #ef4444; margin-top: 10px; font-size: 14px; font-weight: 600; }
+    
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 20px; }
+    .medicine-card { background: #f8fafc; border: 1px solid var(--border); padding: 16px; border-radius: 10px; text-align: right; }
+    .medicine-card h3 { color: var(--primary); margin-bottom: 6px; }
   </style>
 </head>
 <body>
@@ -71,10 +75,11 @@
       </div>
       <div class="search-box">
         <div class="search-input-wrapper">
-          <input type="text" placeholder="ابحث عن اسم الدواء أو المادة الدوائية..." />
+          <input type="text" id="search-input" placeholder="ابحث عن اسم الدواء أو المادة الدوائية..." oninput="searchMedicines()" />
         </div>
-        <button class="star-border-btn">بحث</button>
+        <button class="star-border-btn" onclick="searchMedicines()">بحث</button>
       </div>
+      <div id="results-container" class="results-grid"></div>
     </div>
 
     <!-- قسم تسجيل دخول الأدمن -->
@@ -105,45 +110,20 @@
   </div>
 
   <script>
-    function showSection(sectionName) {
-      document.getElementById('section-home').classList.add('hidden');
-      document.getElementById('section-admin').classList.add('hidden');
-      document.getElementById('section-admin-dashboard').classList.add('hidden');
-      
-      document.getElementById('btn-home').classList.remove('active');
-      document.getElementById('btn-admin').classList.remove('active');
+    let allMedicines = [];
 
-      if (sectionName === 'home') {
-        document.getElementById('section-home').classList.remove('hidden');
-        document.getElementById('btn-home').classList.add('active');
-      } else if (sectionName === 'admin') {
-        if (localStorage.getItem('isAdminLoggedIn') === 'true') {
-          document.getElementById('section-admin-dashboard').classList.remove('hidden');
-        } else {
-          document.getElementById('section-admin').classList.remove('hidden');
-        }
-        document.getElementById('btn-admin').classList.add('active');
+    // تحميل البيانات من ملف jopharma_data.json الموجود في مجلد public
+    async function loadMedicinesData() {
+      try {
+        const response = await fetch('./jopharma_data.json');
+        if (!response.ok) throw new Error('فشل جلب البيانات');
+        allMedicines = await response.json();
+        displayMedicines(allMedicines);
+      } catch (error) {
+        console.error('خطأ في تحميل ملف الـ JSON:', error);
       }
     }
 
-    function checkAdminPassword() {
-      const inputPass = document.getElementById('admin-password-input').value;
-      const errorDiv = document.getElementById('login-error');
-
-      if (inputPass === 'yamenaya') {
-        localStorage.setItem('isAdminLoggedIn', 'true');
-        errorDiv.classList.add('hidden');
-        document.getElementById('admin-password-input').value = '';
-        showSection('admin');
-      } else {
-        errorDiv.classList.remove('hidden');
-      }
-    }
-
-    function logoutAdmin() {
-      localStorage.removeItem('isAdminLoggedIn');
-      showSection('admin');
-    }
-  </script>
-</body>
-</html>
+    function displayMedicines(medicines) {
+      const container = document.getElementById('results-container');
+      container.innerHTML = '';
