@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>JOPharma - دليل الأدوية والأعشاب والأمراض</title>
+  <title>JOPharma - دليل الأدوية والأعشاب والأمراض الشامل</title>
   <style>
     * {
       box-sizing: border-box;
@@ -57,6 +57,7 @@
       margin-bottom: 10px;
       border: 1px solid #ced4da;
       border-radius: 6px;
+      outline: none;
     }
     .add-btn {
       background-color: #198754;
@@ -68,7 +69,7 @@
       font-weight: bold;
     }
 
-    /* التابات */
+    /* التابات (الأقسام) */
     .tabs {
       display: flex;
       flex-wrap: wrap;
@@ -87,13 +88,19 @@
       color: #555;
       transition: 0.3s;
     }
+    .tab-btn:hover {
+      background-color: #dee2e6;
+    }
     .tab-btn.active {
       background-color: #0d6efd;
       color: #fff;
       box-shadow: 0 4px 8px rgba(13, 110, 253, 0.3);
     }
+    
     /* مربع البحث */
-    .search-box { margin-bottom: 25px; }
+    .search-box {
+      margin-bottom: 25px;
+    }
     .search-box input {
       width: 100%;
       padding: 14px 18px;
@@ -101,10 +108,13 @@
       border: 2px solid #e0e0e0;
       border-radius: 8px;
       outline: none;
+      transition: border-color 0.3s;
     }
-    .search-box input:focus { border-color: #0d6efd; }
-    
-    /* الكروت */
+    .search-box input:focus {
+      border-color: #0d6efd;
+    }
+
+    /* النتائج والكروت */
     .results {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -115,8 +125,13 @@
       background-color: #fafbfc;
       border-radius: 8px;
       padding: 18px;
+      transition: transform 0.2s, box-shadow 0.2s;
       display: flex;
       flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
     .card-header {
       display: flex;
@@ -124,6 +139,112 @@
       align-items: flex-start;
       margin-bottom: 10px;
     }
-    .card-title { font-size: 16px; font-weight: bold; color: #198754; }
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #198754;
+      line-height: 1.4;
+    }
     .badge {
-      font-size: 12px; padding: 4px 8px; border-radius: 6px; color: #
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      color: #fff;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .badge.medicine { background-color: #0d6efd; }
+    .badge.herb { background-color: #20c997; }
+    .badge.disease { background-color: #dc3545; }
+    
+    .card-detail {
+      font-size: 13px;
+      margin-top: 6px;
+      line-height: 1.5;
+      color: #555;
+    }
+    .price-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-weight: bold;
+      color: #0d6efd;
+      font-size: 15px;
+    }
+    .no-results {
+      text-align: center;
+      color: #888;
+      padding: 20px;
+      grid-column: 1 / -1;
+      font-size: 16px;
+    }
+    
+    /* تنبيه الواتساب */
+    .whatsapp-notice {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #25D366;
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 13px;
+      text-align: center;
+      line-height: 1.5;
+      z-index: 1000;
+    }
+    .whatsapp-notice a {
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 15px;
+      display: block;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- زر الأدمن -->
+  <button class="admin-btn-top" onclick="checkAdmin()">دخول الأدمن ⚙️</button>
+
+  <!-- لوحة الأدمن (مخفية) -->
+  <div class="container" id="adminPanel">
+    <h2 style="color: #ffc107; margin-bottom: 15px;">لوحة الإدارة - إضافة دواء جديد</h2>
+    <div class="admin-form">
+      <input type="text" id="addName" placeholder="اسم الدواء (عربي / إنجليزي)" />
+      <input type="number" id="addPrice" placeholder="السعر بالدينار الأردني" step="0.05" />
+      <input type="text" id="addCategory" placeholder="التصنيف (مثال: أدوية المسكنات)" />
+      <textarea id="addDesc" rows="2" placeholder="الوصف الطبي"></textarea>
+      <input type="text" id="addAlt" placeholder="البدائل المتاحة" />
+      <button class="add-btn" onclick="addNewMedicine()">إضافة الدواء ➕</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>JOPharma 💊🌿🦠</h1>
+    
+    <!-- التابات -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="filterCategory('all', this)">الكل / All</button>
+      <button class="tab-btn" onclick="filterCategory('medicine', this)">الأدوية 💊</button>
+      <button class="tab-btn" onclick="filterCategory('herb', this)">الأعشاب 🌿</button>
+      <button class="tab-btn" onclick="filterCategory('disease', this)">الأمراض 🦠</button>
+    </div>
+
+    <!-- مربع البحث -->
+    <div class="search-box">
+      <input 
+        type="text" 
+        id="searchInput" 
+        placeholder="ابحث بالعربي أو الإنجليزي (اسم، تصنيف، أعراض)... / Search..."
+      />
+    </div>
+
+    <div class="results" id="resultsContainer"></div>
+  </div>
+
+  <!-- تنبيه الواتساب -->
+  <div class="whatsapp-notice">
+    للاقتراحات وللتنبيه عن الاخطاء العلمية والاملائية
+    <a href="https://wa.me/962781775710" target="_blank">📞 +9627
