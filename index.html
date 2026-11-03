@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head> <meta name="google-site-verification" content="hUSRMLJd3CXDTIPbcKgzYP3fhzLcsjBmc7dh0ObH1Xc" />
+<head> 
+  <meta name="google-site-verification" content="hUSRMLJd3CXDTIPbcKgzYP3fhzLcsjBmc7dh0ObH1Xc" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Jo Pharma: المرجع الدوائي الأردني الشامل للأدوية، الأسعار، البدائل، الأمراض، والأعشاب.">
@@ -33,11 +34,12 @@
 
     body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
     header { background-color: var(--primary); color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-    .logo { font-size: 26px; font-weight: 800; }
+    .logo { font-size: 26px; font-weight: 800; cursor: pointer; }
     .logo span { color: var(--accent); }
-    nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     nav button { background: transparent; border: none; color: #e2e8f0; font-size: 15px; font-weight: 700; font-family: 'Tajawal', sans-serif; cursor: pointer; padding: 8px 16px; border-radius: 8px; transition: all 0.25s ease; }
     nav button:hover, nav button.active { background-color: rgba(255, 255, 255, 0.15); color: white; }
+    .admin-nav-btn { background-color: var(--accent) !important; color: white !important; }
 
     .container { max-width: 1100px; margin: 30px auto; padding: 0 16px; position: relative; }
     
@@ -60,20 +62,15 @@
 
     .search-box { display: flex; justify-content: center; gap: 10px; max-width: 600px; margin: 0 auto; flex-wrap: wrap; position: relative; }
     .search-input-wrapper { flex: 1; min-width: 260px; position: relative; }
-    input[type="text"] { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; }
-    input[type="text"]:focus { border-color: var(--primary); }
+    input[type="text"], input[type="password"], input[type="number"], select, textarea { width: 100%; padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px; font-family: 'Tajawal', sans-serif; font-size: 16px; outline: none; transition: border-color 0.2s; background: #fff; }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); }
 
-    /* صندوق الاقتراحات التلقائية */
     .suggestions-box { position: absolute; top: 100%; left: 0; right: 0; background: #ffffff; border: 1px solid var(--border); border-top: none; border-radius: 0 0 10px 10px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1); z-index: 99; max-height: 200px; overflow-y: auto; text-align: right; }
     .suggestion-item { padding: 10px 15px; cursor: pointer; border-bottom: 1px solid #f1f5f9; font-size: 14px; transition: background 0.2s; }
     .suggestion-item:hover { background: #f8fafc; color: var(--primary); font-weight: bold; }
 
     .star-border-btn { position: relative; padding: 14px 28px; background-color: var(--accent); color: white; border: none; border-radius: 10px; font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 16px; cursor: pointer; overflow: hidden; z-index: 1; transition: transform 0.1s; }
-    .star-border-btn::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: conic-gradient(transparent, rgba(255,255,255,0.7), transparent 30%); animation: spinBorder 3s linear infinite; z-index: -1; }
-    .star-border-btn::after { content: ""; position: absolute; inset: 2px; background: var(--accent); border-radius: 8px; z-index: -1; transition: background 0.3s; }
-    .star-border-btn:hover::after { background: var(--accent-hover); }
     .star-border-btn:active { transform: scale(0.98); }
-    @keyframes spinBorder { 100% { transform: rotate(360deg); } }
 
     .hidden { display: none !important; }
     .grid-layout { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
@@ -91,6 +88,15 @@
     .category-results-box { grid-column: 1 / -1; background: #ffffff; border: 2px solid var(--primary); border-radius: 12px; padding: 20px; margin-top: 10px; }
     .close-btn { background: #ef4444; color: white; border: none; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-family: 'Tajawal'; font-weight: 700; float: left; }
 
+    /* لوحة التحكم (Admin Panel) */
+    .admin-form-group { margin-bottom: 15px; text-align: right; }
+    .admin-form-group label { display: block; margin-bottom: 5px; font-weight: 700; color: var(--primary); }
+    .admin-table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 14px; }
+    .admin-table th, .admin-table td { border: 1px solid var(--border); padding: 10px; text-align: right; }
+    .admin-table th { background: var(--primary); color: white; }
+    .btn-edit { background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+    .btn-delete { background: #ef4444; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; }
+
     footer { text-align: center; padding: 24px; background: #0f172a; color: #94a3b8; font-size: 14px; margin-top: 40px; }
 
     @media (max-width: 768px) { header { flex-direction: column; gap: 12px; text-align: center; } nav { justify-content: center; } }
@@ -99,16 +105,18 @@
 <body>
 
   <header>
-    <div class="logo"><span>JO</span> Pharma</div>
+    <div class="logo" onclick="switchTab('searchTab', document.querySelector('nav button'))"><span>JO</span> Pharma</div>
     <nav>
       <button onclick="switchTab('searchTab', this)" class="active">البحث الرئيسي</button>
       <button onclick="switchTab('categoriesTab', this)">تصنيفات الأدوية</button>
       <button onclick="switchTab('diseasesTab', this)">دليل الأمراض الشامل</button>
       <button onclick="switchTab('herbsTab', this)">موسوعة الأعشاب</button>
+      <button onclick="switchTab('adminTab', this)" class="admin-nav-btn">لوحة التحكم ⚙️</button>
     </nav>
   </header>
 
   <div class="container">
+    <!-- تبويب البحث الرئيسي -->
     <div id="searchTab" class="section-card">
       <div class="light-rays-bg"></div>
       <div class="section-content">
@@ -116,9 +124,9 @@
           <h1 class="blur-text" data-text="المرجع الدوائي والطبي الأردني">المرجع الدوائي والطبي الأردني</h1>
           <p class="subtitle">ابحث عن الأدوية، الأسعار الرسمية، والبدائل المعتمدة في الأردن</p>
           <div class="stats-container">
-            <div>+<span class="counter" data-target="500">0</span> دواء</div>
-            <div>+<span class="counter" data-target="50">0</span> مرض</div>
-            <div>+<span class="counter" data-target="50">0</span> عشبة</div>
+            <div>+<span class="counter" id="medCount" data-target="0">0</span> دواء</div>
+            <div>+<span class="counter" id="disCount" data-target="50">50</span> مرض</div>
+            <div>+<span class="counter" id="herbCount" data-target="50">50</span> عشبة</div>
           </div>
         </div>
         <div class="search-box">
@@ -127,7 +135,7 @@
           </div>
 
           <div class="search-input-wrapper">
-            <input type="text" id="searchInput" placeholder="اكتب اسم الدواء أو المادة الفعالة (مثال: Panadol, باراسيتامول)..." oninput="handleSearchInput()" autocomplete="off">
+            <input type="text" id="searchInput" placeholder="اكتب اسم الدواء أو المادة الفعالة باللغتين العربية أو الإنجليزية..." oninput="handleSearchInput()" autocomplete="off">
             <div id="suggestionsBox" class="suggestions-box hidden"></div>
           </div>
           <button class="star-border-btn" onclick="executeSearch()">بحث الآن</button>
@@ -136,6 +144,7 @@
       </div>
     </div>
 
+    <!-- تبويب تصنيفات الأدوية -->
     <div id="categoriesTab" class="section-card hidden">
       <div class="section-content">
         <div class="section-header">
@@ -146,6 +155,7 @@
       </div>
     </div>
 
+    <!-- تبويب دليل الأمراض -->
     <div id="diseasesTab" class="section-card hidden">
       <div class="section-content">
         <div class="section-header">
@@ -156,6 +166,7 @@
       </div>
     </div>
 
+    <!-- تبويب موسوعة الأعشاب -->
     <div id="herbsTab" class="section-card hidden">
       <div class="section-content">
         <div class="section-header">
@@ -165,6 +176,89 @@
         <div class="grid-layout" id="herbsContainer"></div>
       </div>
     </div>
+
+    <!-- تبويب لوحة التحكم (Admin Panel) -->
+    <div id="adminTab" class="section-card hidden">
+      <div class="section-content">
+        <div class="section-header">
+          <h1 class="blur-text" data-text="لوحة تحكم المشرف (Admin)">لوحة تحكم المشرف (Admin)</h1>
+          <p class="subtitle">إدارة الأدوية (إضافة، تعديل، حذف)</p>
+        </div>
+
+        <!-- شاشة تسجيل الدخول -->
+        <div id="adminLoginBox" style="max-width: 400px; margin: 0 auto; text-align: center;">
+          <div class="admin-form-group">
+            <label>كلمة مرور المشرف:</label>
+            <input type="password" id="adminPassword" placeholder="أدخل كلمة المرور...">
+          </div>
+          <button class="star-border-btn" onclick="loginAdmin()">تسجيل الدخول</button>
+          <p id="loginError" style="color: #ef4444; margin-top: 10px;"></p>
+        </div>
+
+        <!-- محتوى لوحة التحكم (يظهر بعد تسجيل الدخول) -->
+        <div id="adminDashboard" class="hidden">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h3 style="color: var(--primary);">إدارة الأدوية المسجلة</h3>
+            <button class="star-border-btn" onclick="openAddMedicineModal()">➕ إضافة دواء جديد</button>
+          </div>
+
+          <!-- نموذج الإضافة والتعديل السريع -->
+          <div id="medFormContainer" class="hidden" style="background: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid var(--border); margin-bottom: 20px;">
+            <h4 id="formTitle" style="color: var(--primary); margin-bottom: 15px;">إضافة دواء جديد</h4>
+            <input type="hidden" id="editMedId">
+            <div class="admin-form-group">
+              <label>اسم الدواء (عربي / إنجليزي):</label>
+              <input type="text" id="medNameInput" placeholder="مثال: Panadol / بانادول">
+            </div>
+            <div class="admin-form-group">
+              <label>السعر (بالدينار الأردني JOD):</label>
+              <input type="number" step="0.01" id="medPriceInput" placeholder="مثال: 1.55">
+            </div>
+            <div class="admin-form-group">
+              <label>التصنيف:</label>
+              <select id="medCategoryInput">
+                <option value="أدوية المسكنات وخافضات الحرارة">أدوية المسكنات وخافضات الحرارة</option>
+                <option value="أدوية الجهاز الهضمي">أدوية الجهاز الهضمي</option>
+                <option value="المضادات الحيوية">المضادات الحيوية</option>
+                <option value="القلب والضغط">القلب والضغط</option>
+                <option value="السكري والدهون">السكري والدهون</option>
+                <option value="الرشحة والحساسية">الرشحة والحساسية</option>
+                <option value="أخرى (غدد، عظام، فيتامينات)">أخرى (غدد، عظام، فيتامينات)</option>
+              </select>
+            </div>
+            <div class="admin-form-group">
+              <label>الوصف / الاستخدام:</label>
+              <textarea id="medDescInput" rows="2" placeholder="وصف الدواء والاستخدام..."></textarea>
+            </div>
+            <div class="admin-form-group">
+              <label>البدائل المعتمدة:</label>
+              <input type="text" id="medAltInput" placeholder="مثال: البديل الأول، البديل الثاني">
+            </div>
+            <button class="star-border-btn" onclick="saveMedicine()">حفظ الدواء</button>
+            <button onclick="document.getElementById('medFormContainer').classList.add('hidden')" style="background:#64748b; color:white; border:none; padding:14px 20px; border-radius:10px; cursor:pointer; margin-right: 10px; font-family:'Tajawal'; font-weight:700;">إلغاء</button>
+          </div>
+
+          <!-- جدول الأدوية -->
+          <div style="overflow-x: auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>#ID</th>
+                  <th>اسم الدواء</th>
+                  <th>السعر</th>
+                  <th>التصنيف</th>
+                  <th>الإجراءات</th>
+                </tr>
+              </thead>
+              <tbody id="adminMedicinesTableBody">
+                <!-- يتم تعبئتها ديناميكياً -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
   <footer>جميع الحقوق محفوظة © Jo Pharma 2026 - المرجع الصيدلاني المعتمد</footer>
@@ -172,6 +266,35 @@
   <script>
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let gsapLoaded = (typeof gsap !== 'undefined');
+
+    // متغيرات البيانات الشاملة التي يتم جلبها من ملف JSON
+    let dbData = {
+      medicines: [],
+      diseases: [],
+      herbs: []
+    };
+
+    // جلب البيانات من ملف جيسون الخارجي
+    async function loadDatabase() {
+      try {
+        const response = await fetch('jopharma_data.json');
+        if (!response.ok) throw new Error('فشل تحميل ملف البيانات');
+        dbData = await response.json();
+        
+        // تحديث العدادات وواجهة العرض
+        document.getElementById('medCount').innerText = dbData.medicines.length;
+        document.getElementById('medCount').setAttribute('data-target', dbData.medicines.length);
+        
+        renderCategories();
+        renderDiseases();
+        renderHerbs();
+        renderAdminTable();
+      } catch (error) {
+        console.error("خطأ في جلب بيانات جيسون:", error);
+        // بيانات احتياطية في حال تعذر جلب الملف مؤقتاً لتجنب توقف الموقع
+        dbData = { medicines: [], diseases: [], herbs: [] };
+      }
+    }
 
     if (gsapLoaded && !prefersReducedMotion) {
       if (typeof Lenis !== 'undefined') {
@@ -183,194 +306,12 @@
       
       document.querySelectorAll('.blur-text').forEach(title => {
         const text = title.getAttribute('data-text');
-        title.innerHTML = text.split(' ').map(word => `<span style="opacity:0; filter:blur(8px);">${word}</span>`).join(' ');
-        gsap.to(title.querySelectorAll('span'), { filter: 'blur(0px)', opacity: 1, y: 0, stagger: 0.1, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: title, start: "top 85%" } });
-      });
-
-      gsap.utils.toArray('.counter').forEach(counter => {
-        gsap.to(counter, { innerHTML: counter.getAttribute('data-target'), duration: 2.5, snap: { innerHTML: 1 }, ease: "power2.out", scrollTrigger: { trigger: counter, start: "top 90%" } });
+        if(text) {
+          title.innerHTML = text.split(' ').map(word => `<span style="opacity:0; filter:blur(8px);">${word}</span>`).join(' ');
+          gsap.to(title.querySelectorAll('span'), { filter: 'blur(0px)', opacity: 1, y: 0, stagger: 0.1, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: title, start: "top 85%" } });
+        }
       });
     }
-
-    // قاعدة بيانات الأدوية (تم إضافة الأسماء العربية والإنجليزية معاً لضمان دعم البحث باللغتين)
-    const medicinesData = [
-      { name: "Concor 5mg / كونكور 5 ملغ", category: "القلب والضغط", active: "Bisoprolol", indication: "علاج ارتفاع ضغط الدم وتسرع القلب", price: "4.20 JOD", alternative: "Biso (2.90), Bisocor (2.50)" },
-      { name: "Concor 2.5mg / كونكور 2.5 ملغ", category: "القلب والضغط", active: "Bisoprolol", indication: "قصور القلب المزمن", price: "3.10 JOD", alternative: "Biso 2.5" },
-      { name: "Concor 10mg / كونكور 10 ملغ", category: "القلب والضغط", active: "Bisoprolol", indication: "ضغط الدم المرتفع الشديد", price: "6.50 JOD", alternative: "Bisocor 10" },
-      { name: "Diovan 160mg / ديوفان 160 ملغ", category: "القلب والضغط", active: "Valsartan", indication: "علاج ضغط الدم وقصور القلب", price: "12.00 JOD", alternative: "Valpress (8.50), Tareg (7.90)" },
-      { name: "Diovan 80mg / ديوفان 80 ملغ", category: "القلب والضغط", active: "Valsartan", indication: "ضغط الدم", price: "8.50 JOD", alternative: "Valpress 80" },
-      { name: "Co-Diovan 160/12.5 / كودیوفان", category: "القلب والضغط", active: "Valsartan + HCTZ", indication: "ضغط الدم مع مدر للبول", price: "13.00 JOD", alternative: "Valpress Plus" },
-      { name: "Micardis 80mg / ميكارديس 80 ملغ", category: "القلب والضغط", active: "Telmisartan", indication: "ضغط الدم وحماية الشرايين", price: "14.50 JOD", alternative: "Telmisar (9.00)" },
-      { name: "Micardis Plus / ميكارديس بلس", category: "القلب والضغط", active: "Telmisartan + HCTZ", indication: "ضغط الدم المعند", price: "16.00 JOD", alternative: "Telmisar Plus" },
-      { name: "Norvasc 5mg / نيرفاسك 5 ملغ", category: "القلب والضغط", active: "Amlodipine", indication: "توسيع الشرايين والضغط", price: "6.00 JOD", alternative: "Amlo (3.50)" },
-      { name: "Norvasc 10mg / نيرفاسك 10 ملغ", category: "القلب والضغط", active: "Amlodipine", indication: "الضغط والذبحة الصدرية", price: "9.80 JOD", alternative: "Amlo 10" },
-      { name: "Exforge 5/160 / إكسفورج", category: "القلب والضغط", active: "Amlodipine + Valsartan", indication: "ضغط الدم المركب", price: "18.00 JOD", alternative: "Amloval" },
-      { name: "Aspirin Protect 100 / أسبارين بروتكت", category: "القلب والضغط", active: "Acetylsalicylic Acid", indication: "مسيّل للدم", price: "2.10 JOD", alternative: "JOSPRIN (1.50)" },
-      { name: "Plavix 75mg / بلافيكس 75 ملغ", category: "القلب والضغط", active: "Clopidogrel", indication: "منع تجلط الدم", price: "22.50 JOD", alternative: "Clopix (11.00)" },
-      { name: "Lanoxin 0.25mg / لانوكسين", category: "القلب والضغط", active: "Digoxin", indication: "تنظيم ضربات القلب", price: "3.40 JOD", alternative: "Cardoxin" },
-      { name: "Aldactone 25mg / ألداكتون 25 ملغ", category: "القلب والضغط", active: "Spironolactone", indication: "مدر للبول وحماية القلب", price: "4.00 JOD", alternative: "Spiro" },
-      { name: "Lasix 40mg / لازكس 40 ملغ", category: "القلب والضغط", active: "Furosemide", indication: "مدر سريع للبول", price: "2.50 JOD", alternative: "Furosem" },
-      
-      { name: "Panadol Advance / بانادول أدفانس", category: "المسكنات والحرارة", active: "Paracetamol", indication: "مسكن وخافض حرارة", price: "1.55 JOD", alternative: "Adol (1.20), Revanin (1.10)" },
-      { name: "Panadol Extra / بانادول إكسترا", category: "المسكنات والحرارة", active: "Paracetamol + Caffeine", indication: "صداع وشقيقة", price: "1.85 JOD", alternative: "Paramol Extra" },
-      { name: "Panadol Joint / بانادول للمفاصل", category: "المسكنات والحرارة", active: "Paracetamol 665mg", indication: "آلام المفاصل", price: "2.50 JOD", alternative: "Osteo-Adol" },
-      { name: "Panadol Cold & Flu / بانادول كولد أند فلو", category: "الرشحة والحساسية", active: "Paracetamol + Pseudoephedrine", indication: "رشحة واحتقان", price: "2.10 JOD", alternative: "Flutab (1.50)" },
-      { name: "Panadol Night / بانادول نايت", category: "الرشحة والحساسية", active: "Paracetamol + Diphenhydramine", indication: "مسكن ومنوم خفيف", price: "2.25 JOD", alternative: "Night Nurse" },
-      { name: "Prof 400mg / بروف 400 ملغ", category: "المسكنات والحرارة", active: "Ibuprofen", indication: "مسكن ومضاد التهاب", price: "1.35 JOD", alternative: "Brufen (1.80)" },
-      { name: "Prof 600mg / بروف 600 ملغ", category: "المسكنات والحرارة", active: "Ibuprofen", indication: "مسكن آلام قوي", price: "1.80 JOD", alternative: "Brufen 600" },
-      { name: "Cataflam 50mg / كاتافلام 50 ملغ", category: "المسكنات والحرارة", active: "Diclofenac Potassium", indication: "آلام الأسنان والمفاصل", price: "3.50 JOD", alternative: "Rofenac (2.20)" },
-      { name: "Voltaren 50mg / فولتارين 50 ملغ", category: "المسكنات والحرارة", active: "Diclofenac Sodium", indication: "التهاب المفاصل", price: "3.00 JOD", alternative: "Olfen" },
-      { name: "Voltaren Amp / إبر فولتارين", category: "المسكنات والحرارة", active: "Diclofenac Sodium", indication: "حقن للمغص الكلوي", price: "2.80 JOD", alternative: "Rofenac Amp" },
-      { name: "Celebrex 200mg / سيليبركس 200 ملغ", category: "المسكنات والحرارة", active: "Celecoxib", indication: "مسكن آمن للمعدة", price: "14.50 JOD", alternative: "Cylox (8.00)" },
-      { name: "Arcoxia 90mg / أركوكسيا 90 ملغ", category: "المسكنات والحرارة", active: "Etoricoxib", indication: "التهاب المفاصل والنقرس", price: "16.00 JOD", alternative: "Etoxia" },
-      
-      { name: "Augmentin 1g / أوجمنتين 1 غرام", category: "المضادات الحيوية", active: "Amoxicillin + Clavulanic", indication: "التهاب اللوزتين والتنفسي", price: "8.50 JOD", alternative: "Curam (6.00), Hibiotic" },
-      { name: "Augmentin 625mg / أوجمنتين 625 ملغ", category: "المضادات الحيوية", active: "Amoxicillin + Clavulanic", indication: "التهاب الأذن والبلعوم", price: "5.80 JOD", alternative: "Curam 625" },
-      { name: "Zithromax 500mg / زيثروماكس 500 ملغ", category: "المضادات الحيوية", active: "Azithromycin", indication: "التهاب الجهاز التنفسي", price: "6.80 JOD", alternative: "Zitrobac (4.50)" },
-      { name: "Zithromax Susp / شراب زيثروماكس", category: "المضادات الحيوية", active: "Azithromycin", indication: "شراب للأطفال", price: "5.50 JOD", alternative: "Azomax" },
-      { name: "Cipro 500mg / سيبرو 500 ملغ", category: "المضادات الحيوية", active: "Ciprofloxacin", indication: "التهاب المسالك والأمعاء", price: "7.20 JOD", alternative: "Ciprobay (4.50)" },
-      { name: "Klacid 500mg / كلاسيد 500 ملغ", category: "المضادات الحيوية", active: "Clarithromycin", indication: "التهاب الرئة والجرثومة الحلزونية", price: "11.20 JOD", alternative: "Clarithro" },
-      { name: "Flagyl 500mg / فلاجيل 500 ملغ", category: "المضادات الحيوية", active: "Metronidazole", indication: "طفيليات وأمراض اللثة", price: "2.20 JOD", alternative: "Metrozol" },
-      { name: "Ceftin 500mg / سيفكتين 500 ملغ", category: "المضادات الحيوية", active: "Cefuroxime", indication: "التهابات بكتيرية", price: "9.50 JOD", alternative: "Zinnat" },
-      
-      { name: "Glucophage 500 / جلوكوفاج 500", category: "السكري والدهون", active: "Metformin", indication: "تنظيم سكر الدم", price: "3.00 JOD", alternative: "Formit (2.00)" },
-      { name: "Glucophage 850 / جلوكوفاج 850", category: "السكري والدهون", active: "Metformin", indication: "تنظيم السكر", price: "4.20 JOD", alternative: "Metfor 850" },
-      { name: "Amaryl 2mg / أماريل 2 ملغ", category: "السكري والدهون", active: "Glimepiride", indication: "تحفيز البنكرياس", price: "4.50 JOD", alternative: "Glimax (3.00)" },
-      { name: "Januvia 100mg / جانوفيا 100 ملغ", category: "السكري والدهون", active: "Sitagliptin", indication: "سكر الدم بدون هبوط", price: "24.00 JOD", alternative: "Tesavel" },
-      { name: "Jardiance 10mg / جاردينس 10 ملغ", category: "السكري والدهون", active: "Empagliflozin", indication: "سكري وحماية القلب", price: "28.50 JOD", alternative: "Forxiga" },
-      { name: "Lipitor 20mg / ليبيتور 20 ملغ", category: "السكري والدهون", active: "Atorvastatin", indication: "خفض الكوليسترول", price: "13.50 JOD", alternative: "Atorva (7.00)" },
-      { name: "Crestor 10mg / كريستور 10 ملغ", category: "السكري والدهون", active: "Rosuvastatin", indication: "كوليسترول وشرايين", price: "15.00 JOD", alternative: "Rosuvas (8.00)" },
-      { name: "Ezetrol 10mg / إيزيترول 10 ملغ", category: "السكري والدهون", active: "Ezetimibe", indication: "منع امتصاص الكوليسترول", price: "16.00 JOD", alternative: "Ezetim" },
-      
-      { name: "Nexium 40mg / نيكسيوم 40 ملغ", category: "المعدة والجهاز الهضمي", active: "Esomeprazole", indication: "حرقة وارتداد مريئي", price: "14.00 JOD", alternative: "Esomep (8.00)" },
-      { name: "Nexium 20mg / نيكسيوم 20 ملغ", category: "المعدة والجهاز الهضمي", active: "Esomeprazole", indication: "حموضة خفيفة", price: "8.50 JOD", alternative: "Nexmezol" },
-      { name: "Omeprazole 20mg / أوميبرازول 20 ملغ", category: "المعدة والجهاز الهضمي", active: "Omeprazole", indication: "عسر الهضم", price: "3.20 JOD", alternative: "Gasec (2.50)" },
-      { name: "Duspatalin 200mg / دوباستالين 200 ملغ", category: "المعدة والجهاز الهضمي", active: "Mebeverine", indication: "قولون عصبي", price: "6.50 JOD", alternative: "Colona (5.00)" },
-      { name: "Antinal / أنتينال", category: "المعدة والجهاز الهضمي", active: "Nifuroxazide", indication: "إسهال بكتيري", price: "2.30 JOD", alternative: "Diafix" },
-      { name: "Daflon 500mg / دافلون 500 ملغ", category: "المعدة والجهاز الهضمي", active: "Flavonoid", indication: "بواسير ودوالي", price: "11.50 JOD", alternative: "Venosmil" },
-      { name: "Motilium / موتيليوم", category: "المعدة والجهاز الهضمي", active: "Domperidone", indication: "غثيان وقيء", price: "3.50 JOD", alternative: "Vomistop" },
-      { name: "Maalox / مالوكس", category: "المعدة والجهاز الهضمي", active: "Al + Mg Hydroxide", indication: "مضاد حموضة سريع", price: "3.20 JOD", alternative: "Mylanta" },
-
-      { name: "Telfast 180mg / تلفاست 180 ملغ", category: "الرشحة والحساسية", active: "Fexofenadine", indication: "حساسية بدون نعاس", price: "8.20 JOD", alternative: "Fexofast" },
-      { name: "Claritine 10mg / كلارينيت 10 ملغ", category: "الرشحة والحساسية", active: "Loratadine", indication: "حساسية موسمية", price: "4.00 JOD", alternative: "Loratadine (2.50)" },
-      { name: "Zyrtec 10mg / زيريتك 10 ملغ", category: "الرشحة والحساسية", active: "Cetirizine", indication: "عطس وارتكاريا", price: "4.80 JOD", alternative: "Cetitec" },
-      { name: "Aerius 5mg / أريوس 5 ملغ", category: "الرشحة والحساسية", active: "Desloratadine", indication: "حساسية وتهيج جلدي", price: "9.00 JOD", alternative: "Neoclarityn" },
-      { name: "Prospan Syrup / شراب بروبسبان", category: "الرشحة والحساسية", active: "Ivy Leaf", indication: "مذيب للبلغم", price: "4.50 JOD", alternative: "Abimol" },
-      { name: "Sinecod / سينيكود", category: "الرشحة والحساسية", active: "Butamirate", indication: "سعال جاف", price: "3.80 JOD", alternative: "Tuscalman" },
-      
-      { name: "Thyrox 50 / ثايروكس 50", category: "أخرى (غدد، عظام، فيتامينات)", active: "Levothyroxine", indication: "قصور الغدة الدرقية", price: "2.50 JOD", alternative: "Eltroxin" },
-      { name: "Vitamin C 1000 / فيتامين سي 1000", category: "أخرى (غدد، عظام، فيتامينات)", active: "Ascorbic Acid", indication: "مناعة", price: "4.50 JOD", alternative: "Redoxon" },
-      { name: "Ferro-Gradumet / فيرو جرادوميت", category: "أخرى (غدد، عظام، فيتامينات)", active: "Ferrous Sulfate", indication: "فقر دم", price: "6.00 JOD", alternative: "Fefol" },
-      { name: "Vitamin D3 50000 / فيتامين د3 50000", category: "أخرى (غدد، عظام، فيتامينات)", active: "Cholecalciferol", indication: "نقص فيتامين د", price: "5.50 JOD", alternative: "Biodal" }
-    ];
-
-    const categoriesList = ["القلب والضغط", "المسكنات والحرارة", "المضادات الحيوية", "السكري والدهون", "المعدة والجهاز الهضمي", "الرشحة والحساسية", "أخرى (غدد، عظام، فيتامينات)"];
-
-    const diseasesList = [
-      { title: "1. الرشحة والإنفلونزا", desc: "عدوى فيروسية تنفسية.", symptoms: "احتقان، عطس، ألم حلق.", causes: "رينوفيروس.", drugs: "Panadol Cold & Flu, فيتامين C" },
-      { title: "2. التهاب اللوزتين", desc: "التهاب بكتيري أو فيروسي.", symptoms: "صعوبة بلع، حرارة.", causes: "بكتيريا العقدية.", drugs: "Augmentin, Panadol" },
-      { title: "3. السعال والبلغم", desc: "تراكم المخاط.", symptoms: "كحة مستمرة.", causes: "التهاب قصبات.", drugs: "Prospan, مذيبات" },
-      { title: "4. الشقيقة (الصداع النصفي)", desc: "صداع نابض قوي.", symptoms: "غثيان، حساسية للضوء.", causes: "وراثة، توتر.", drugs: "Panadol Extra, Cataflam" },
-      { title: "5. الارتداد المريئي", desc: "ارتجاع حمض المعدة.", symptoms: "حرقة بالصدر.", causes: "سمنة، وجبات دسمة.", drugs: "Nexium, Omeprazole" },
-      { title: "6. القولون العصبي", desc: "اضطراب معوي.", symptoms: "مغص، غازات.", causes: "توتر، أكل مهيج.", drugs: "Duspatalin, Colona" },
-      { title: "7. ارتفاع ضغط الدم", desc: "القاتل الصامت.", symptoms: "دوار، صداع.", causes: "ملح، سمنة.", drugs: "Concor, Diovan" },
-      { title: "8. السكري النوع الثاني", desc: "مقاومة الإنسولين.", symptoms: "عطش، تبول.", causes: "سمنة، وراثة.", drugs: "Glucophage, Amaryl" },
-      { title: "9. التهاب الجيوب الأنفية", desc: "احتقان تجاويف الأنف.", symptoms: "صداع وجهي.", causes: "حساسية، بكتيريا.", drugs: "Otrivin, Zithromax" },
-      { title: "10. الإسهال الحاد", desc: "عدوى بكتيرية.", symptoms: "إسهال مائي.", causes: "تسمم غذائي.", drugs: "Antinal, محلول جفاف" },
-      { title: "11. الإمساك", desc: "صعوبة إخراج.", symptoms: "ألم بطن.", causes: "نقص الألياف.", drugs: "Duphalac" },
-      { title: "12. التهاب المسالك البولية", desc: "عدوى بكتيرية.", symptoms: "حرقة تبول.", causes: "بكتيريا E.coli.", drugs: "Cipro, Monurol" },
-      { title: "13. قرحة المعدة", desc: "تقرح جدار المعدة.", symptoms: "ألم بعد الأكل.", causes: "جرثومة حلزونية.", drugs: "Klacid, Nexium" },
-      { title: "14. الربو", desc: "ضيق تنفس تحسسي.", symptoms: "صفير بالصدر.", causes: "غبار، وبر.", drugs: "Ventolin" },
-      { title: "15. التهاب المفاصل", desc: "تآكل أو مناعي.", symptoms: "ألم، تيبس.", causes: "عمر، روماتيزم.", drugs: "Celebrex, Voltaren" },
-      { title: "16. النقرس", desc: "ترسب حمض اليوريك.", symptoms: "ألم بإصبع القدم.", causes: "لحوم حمراء.", drugs: "Arcoxia, Allopurinol" },
-      { title: "17. فقر الدم", desc: "نقص الحديد.", symptoms: "دوار، شحوب.", causes: "سوء تغذية.", drugs: "Ferro-Gradumet" },
-      { title: "18. الكوليسترول", desc: "تراكم الدهون.", symptoms: "صامت.", causes: "دهون مشبعة.", drugs: "Lipitor, Crestor" },
-      { title: "19. البواسير", desc: "تمدد أوردة.", symptoms: "ألم، نزيف.", causes: "إمساك مزمن.", drugs: "Daflon, مراهم" },
-      { title: "20. الغدة الدرقية (خمول)", desc: "نقص الهرمون.", symptoms: "سمنة، خمول.", causes: "مناعي.", drugs: "Thyrox 50" },
-      { title: "21. الأرتكاريا", desc: "طفح جلدي.", symptoms: "حكة، احمرار.", causes: "حساسية.", drugs: "Telfast, Zyrtec" },
-      { title: "22. حب الشباب", desc: "التهاب الغدد الدهنية.", symptoms: "بثور.", causes: "هرمونات.", drugs: "Doxycycline" },
-      { title: "23. التهاب الأذن", desc: "عدوى وسطى.", symptoms: "ألم، طنين.", causes: "بكتيريا.", drugs: "Augmentin, قطرات" },
-      { title: "24. هشاشة العظام", desc: "ضعف العظم.", symptoms: "كسور.", causes: "نقص كالسيوم.", drugs: "Vitamin D, الكالسيوم" },
-      { title: "25. حصى الكلى", desc: "ترسبات.", symptoms: "مغص كلوي.", causes: "قلة شرب الماء.", drugs: "Voltaren Amp" },
-      { title: "26. الأرق", desc: "صعوبة نوم.", symptoms: "إرهاق.", causes: "توتر.", drugs: "Panadol Night, مليسة" },
-      { title: "27. التهاب اللثة", desc: "عدوى فموية.", symptoms: "نزيف لثة.", causes: "قلة نظافة.", drugs: "Flagyl, مضمضة" },
-      { title: "28. دوار الحركة", desc: "غثيان السفر.", symptoms: "دوخة.", causes: "حركة.", drugs: "Motilium" },
-      { title: "29. التشنج العضلي", desc: "شد العضل.", symptoms: "ألم عضلي.", causes: "إجهاد.", drugs: "Cataflam, مرهم" },
-      { title: "30. جفاف العين", desc: "نقص دمع.", symptoms: "حرقة.", causes: "شاشات.", drugs: "قطرات مرطبة" },
-      { title: "31. الجرثومة الحلزونية", desc: "بكتيريا المعدة.", symptoms: "غثيان، ألم.", causes: "عدوى.", drugs: "Klacid, Nexium, Amoxil" },
-      { title: "32. التهاب القصبات", desc: "سعال ببلغم.", symptoms: "كحة.", causes: "تدخين، فيروس.", drugs: "Zithromax, Prospan" },
-      { title: "33. الحزام الناري", desc: "فيروس عصبي.", symptoms: "ألم، طفح.", causes: "جدري الماء.", drugs: "Acyclovir" },
-      { title: "34. التهاب الملتحمة", desc: "عين وردية.", symptoms: "احمرار، إفراز.", causes: "بكتيريا.", drugs: "قطرات مضاد حيوي" },
-      { title: "35. الدوالي", desc: "توسع أوردة.", symptoms: "ألم بالساق.", causes: "وقوف.", drugs: "Daflon" },
-      { title: "36. الفطريات الجلدية", desc: "عدوى فطرية.", symptoms: "حكة، تقشر.", causes: "رطوبة.", drugs: "كريمات مضادة للفطريات" },
-      { title: "37. الاكتئاب الخفيف", desc: "تغير مزاج.", symptoms: "حزن.", causes: "ضغوط.", drugs: "أعشاب مهدئة، استشارة" },
-      { title: "38. نقص فيتامين د", desc: "نقص شائع.", symptoms: "ألم عظام.", causes: "عدم تعرض للشمس.", drugs: "Vitamin D3 50000" },
-      { title: "39. فتق المعدة", desc: "ارتخاء عضلة.", symptoms: "حرقة.", causes: "سمنة.", drugs: "Nexium" },
-      { title: "40. التهاب المرارة", desc: "حصى.", symptoms: "ألم بالجانب.", causes: "دهون.", drugs: "مسكنات، جراحة" },
-      { title: "41. الصدفية", desc: "مرض مناعي جلدي.", symptoms: "قشور فضية.", causes: "مناعة.", drugs: "مراهم كورتيزون" },
-      { title: "42. الإكزيما", desc: "تحسس جلدي.", symptoms: "حكة، جفاف.", causes: "وراثة، محسسات.", drugs: "مرطبات طبية" },
-      { title: "43. نقص الكالسيوم", desc: "تشنجات.", symptoms: "شد عضلي.", causes: "غذاء.", drugs: "مكملات الكالسيوم" },
-      { title: "44. التهاب البروستاتا", desc: "عدوى ذكورية.", symptoms: "صعوبة تبول.", causes: "بكتيريا.", drugs: "Cipro" },
-      { title: "45. قرحة الفم", desc: "تقرحات بيضاء.", symptoms: "ألم بالفم.", causes: "توتر، نقص فيتامين.", drugs: "جل فموي" },
-      { title: "46. التبول اللاإرادي", desc: "عند الأطفال.", symptoms: "تبول ليلي.", causes: "نفسي، عضوي.", drugs: "حسب استشارة الطبيب" },
-      { title: "47. الكبد الدهني", desc: "تراكم دهون.", symptoms: "إرهاق.", causes: "سمنة.", drugs: "حمية، شوك مريم" },
-      { title: "48. التهاب الأوتار", desc: "إجهاد الوتر.", symptoms: "ألم مفصل.", causes: "رياضة.", drugs: "Voltaren" },
-      { title: "49. الزايدة الدودية", desc: "التهاب حاد.", symptoms: "ألم يمين البطن.", causes: "انسداد.", drugs: "جراحة فورية" },
-      { title: "50. متلازمة التعب المزمن", desc: "إرهاق مستمر.", symptoms: "تعب.", causes: "غير معروف.", drugs: "فيتامينات، راحة" }
-    ];
-
-    const herbsList = [
-      { name: "البابونج", benefits: "تهدئة الأعصاب والنوم.", uses: "مغلي للبطن." },
-      { name: "اليانسون", benefits: "طارد للغازات.", uses: "تخفيف السعال." },
-      { name: "الزعتر", benefits: "مضاد بكتيري.", uses: "تطهير الصدر." },
-      { name: "المرمية", benefits: "تقوية الذاكرة.", uses: "تخفيف ألم البطن." },
-      { name: "النعناع", benefits: "مهدئ للقولون.", uses: "لغثيان السفر." },
-      { name: "الزنجبيل", benefits: "مضاد التهاب وغثيان.", uses: "لنزلات البرد." },
-      { name: "القرفة", benefits: "تنظيم السكر.", uses: "مشروب دافئ." },
-      { name: "الكركم", benefits: "مضاد أكسدة قوي.", uses: "للمفاصل." },
-      { name: "الكمون", benefits: "هضم ممتاز.", uses: "طرد الغازات." },
-      { name: "إكليل الجبل", benefits: "يقوي الذاكرة.", uses: "للتركيز." },
-      { name: "الشومر", benefits: "إدرار الحليب.", uses: "لمغص الرضع." },
-      { name: "البقدونس", benefits: "مدر للبول.", uses: "تنظيف الكلى." },
-      { name: "المليسة", benefits: "مزيل للقلق.", uses: "شاي قبل النوم." },
-      { name: "حبة البركة", benefits: "تقوية المناعة.", uses: "مع العسل." },
-      { name: "الحلبة", benefits: "زيادة الوزن.", uses: "مغلي البذور." },
-      { name: "البردقوش", benefits: "تنظيم الهرمونات.", uses: "للنساء." },
-      { name: "الكزبرة", benefits: "خفض الكوليسترول.", uses: "للهضم." },
-      { name: "العرقسوس", benefits: "قرحة المعدة.", uses: "بحذر للضغط." },
-      { name: "الهيل", benefits: "طارد للغازات.", uses: "مع القهوة." },
-      { name: "الخطمية", benefits: "تهدئة الحلق.", uses: "للسعال." },
-      { name: "إشنسا", benefits: "مضاد حيوي طبيعي.", uses: "للزكام." },
-      { name: "الزعفران", benefits: "مضاد اكتئاب.", uses: "كميات قليلة." },
-      { name: "القرنفل", benefits: "مسكن أسنان.", uses: "موضعي للسن." },
-      { name: "الحبق", benefits: "مهدئ.", uses: "للشاي." },
-      { name: "اللافندر", benefits: "يساعد على النوم.", uses: "عطري." },
-      { name: "الزعتر البري", benefits: "مضاد فطريات.", uses: "التهاب حلق." },
-      { name: "الخروب", benefits: "منظم للأمعاء.", uses: "مشروب." },
-      { name: "التوت البري", benefits: "حماية المسالك.", uses: "عصير." },
-      { name: "الصبار", benefits: "مرطب للجلد.", uses: "للحروق." },
-      { name: "الشاي الأخضر", benefits: "حرق الدهون.", uses: "للأيض." },
-      { name: "الجنسنج", benefits: "طاقة ونشاط.", uses: "مكمل." },
-      { name: "الجنكة", benefits: "تنشيط دورة دموية.", uses: "للتركيز." },
-      { name: "شوك مريم", benefits: "حماية الكبد.", uses: "لتنقية الجسم." },
-      { name: "الكينا", benefits: "توسيع قصبات.", uses: "استنشاق." },
-      { name: "الرمان (قشر)", benefits: "مقبض للإسهال.", uses: "مغلي القشر." },
-      { name: "الزوفا", benefits: "مطهر تنفسي.", uses: "شاي." },
-      { name: "بذور الكتان", benefits: "أوميغا 3، ملين.", uses: "مع السلطة." },
-      { name: "بذور الشيا", benefits: "ألياف.", uses: "مع الماء." },
-      { name: "الشمندر", benefits: "لفقر الدم.", uses: "عصير." },
-      { name: "السنمكي", benefits: "ملين قوي.", uses: "للإمساك الحاد." },
-      { name: "الهندباء", benefits: "مدر للبول.", uses: "لتنقية الكبد." },
-      { name: "الأرقطيون", benefits: "منقي للدم.", uses: "للبشرة." },
-      { name: "العفص", benefits: "قابض للأنسجة.", uses: "للنزيف." },
-      { name: "الرشاد", benefits: "مقوي للعظام.", uses: "بذوره للسعال." },
-      { name: "الحرمل", benefits: "مبيد طفيليات.", uses: "استعمال خارجي." },
-      { name: "السماق", benefits: "مضاد أكسدة.", uses: "للتهاب اللثة." },
-      { name: "ورق الجوافة", benefits: "للكحة.", uses: "مغلي للصدر." },
-      { name: "اللبان الدكر", benefits: "كورتيزون طبيعي.", uses: "للمفاصل والبلغم." },
-      { name: "المورينجا", benefits: "فيتامينات.", uses: "مقوي عام." },
-      { name: "الكركديه", benefits: "خفض الضغط.", uses: "مشروب بارد." }
-    ];
 
     function switchTab(tabId, btn) {
       document.querySelectorAll('.section-card').forEach(sec => sec.classList.add('hidden'));
@@ -388,22 +329,24 @@
     function renderCategories() {
       const container = document.getElementById('categoriesContainer');
       container.innerHTML = "";
-      categoriesList.forEach((cat) => {
+      // استخراج التصنيفات الفريدة من الأدوية
+      const categories = [...new Set(dbData.medicines.map(m => m.category))];
+      categories.forEach((cat) => {
         container.innerHTML += `<div class="card-item" onclick="showCategoryItems('${cat}', this)"><h3>💊 ${cat}</h3><p>عرض أدوية الفئة</p></div>`;
       });
     }
 
     function showCategoryItems(categoryName, element) {
       document.querySelectorAll('.category-results-box').forEach(el => el.remove());
-      const filtered = medicinesData.filter(m => m.category === categoryName);
+      const filtered = dbData.medicines.filter(m => m.category === categoryName);
       
       let html = `<div class="category-results-box"><button class="close-btn" onclick="event.stopPropagation(); this.parentElement.remove(); if(typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();">إغلاق ✕</button>
         <h3 style="color: var(--primary); margin-bottom: 15px;">أدوية: ${categoryName}</h3>`;
       if(filtered.length > 0) {
         filtered.forEach(m => {
-          html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الاستخدام:</strong> ${m.indication}</p><p><strong>التركيبة:</strong> ${m.active}</p><p><strong>السعر:</strong> ${m.price}</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternative}</p></div>`;
+          html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الاستخدام:</strong> ${m.description || m.indication}</p><p><strong>السعر:</strong> ${m.price} JOD</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternatives || m.alternative}</p></div>`;
         });
-      } else { html += `<p>لا يوجد.</p>`; }
+      } else { html += `<p>لا توجد أدوية مسجلة في هذه الفئة.</p>`; }
       html += `</div>`;
       element.insertAdjacentHTML('afterend', html);
       if (gsapLoaded && !prefersReducedMotion) {
@@ -415,18 +358,18 @@
     function renderDiseases() {
       const container = document.getElementById('diseasesContainer');
       container.innerHTML = "";
-      diseasesList.forEach((d, i) => {
-        container.innerHTML += `<div class="card-item" onclick="toggleDetails('dis-${i}')"><h3>🏥 ${d.title}</h3><p>${d.desc}</p>
-            <div id="dis-${i}" class="details-pane hidden"><strong>الأعراض:</strong><p>${d.symptoms}</p><strong>الأسباب:</strong><p>${d.causes}</p><strong style="color: var(--accent);">العلاج:</strong><p>${d.drugs}</p></div></div>`;
+      dbData.diseases.forEach((d, i) => {
+        container.innerHTML += `<div class="card-item" onclick="toggleDetails('dis-${i}')"><h3>🏥 ${d.title}</h3><p>${d.desc || ''}</p>
+            <div id="dis-${i}" class="details-pane hidden"><strong>الأعراض:</strong><p>${d.symptoms || '-'}</p><strong>الأسباب:</strong><p>${d.causes || '-'}</p><strong style="color: var(--accent);">العلاج:</strong><p>${d.drugs || '-'}</p></div></div>`;
       });
     }
 
     function renderHerbs() {
       const container = document.getElementById('herbsContainer');
       container.innerHTML = "";
-      herbsList.forEach((h, i) => {
+      dbData.herbs.forEach((h, i) => {
         container.innerHTML += `<div class="card-item" onclick="toggleDetails('herb-${i}')"><h3>🌿 ${h.name}</h3>
-            <div id="herb-${i}" class="details-pane hidden"><strong>الفوائد:</strong><p>${h.benefits}</p><strong style="color: var(--accent);">الاستخدام:</strong><p>${h.uses}</p></div></div>`;
+            <div id="herb-${i}" class="details-pane hidden"><strong>الفوائد:</strong><p>${h.benefits || '-'}</p><strong style="color: var(--accent);">الاستخدام:</strong><p>${h.uses || '-'}</p></div></div>`;
       });
     }
 
@@ -439,7 +382,7 @@
       }
     }
 
-    // وظيفة الاقتراحات التلقائية والبحث المباشر بالحروف باللغتين
+    // البحث التلقائي باللغتين العربية والإنجليزية
     function handleSearchInput() {
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
       const suggestionsBox = document.getElementById('suggestionsBox');
@@ -450,10 +393,10 @@
         return;
       }
 
-      const matches = medicinesData.filter(m => 
+      const matches = dbData.medicines.filter(m => 
         m.name.toLowerCase().includes(query) || 
-        m.active.toLowerCase().includes(query) || 
-        m.category.toLowerCase().includes(query)
+        (m.category && m.category.toLowerCase().includes(query)) ||
+        (m.description && m.description.toLowerCase().includes(query))
       );
 
       if (matches.length > 0) {
@@ -485,16 +428,16 @@
         return; 
       }
 
-      const matches = medicinesData.filter(m => 
+      const matches = dbData.medicines.filter(m => 
         m.name.toLowerCase().includes(query) || 
-        m.active.toLowerCase().includes(query) || 
-        m.category.toLowerCase().includes(query)
+        (m.category && m.category.toLowerCase().includes(query)) ||
+        (m.description && m.description.toLowerCase().includes(query))
       );
 
-      if(matches.length > 0) {
+      if(matches.length > 2) {
         let html = `<p style="margin-bottom: 12px; color: var(--primary); font-weight: 700;">تم العثور على (${matches.length}) نتيجة:</p>`;
         matches.forEach(m => { 
-          html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الاستخدام:</strong> ${m.indication}</p><p><strong>التركيبة:</strong> ${m.active}</p><p><strong>السعر:</strong> ${m.price}</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternative}</p></div>`; 
+          html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الوصف:</strong> ${m.description || m.indication || '-'}</p><p><strong>السعر:</strong> ${m.price} JOD</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternatives || m.alternative || '-'}</p></div>`; 
         });
         resultsDiv.innerHTML = html;
         if (gsapLoaded && !prefersReducedMotion) { 
@@ -502,21 +445,114 @@
           ScrollTrigger.refresh(); 
         }
       } else { 
-        resultsDiv.innerHTML = `<p style="color: #f59e0b; text-align: center;">لم نجد أدوية مطابقة.</p>`; 
+        resultsDiv.innerHTML = `<p style="color: #f59e0b; text-align: center;">لم نجد أدوية مطابقة لبحثك.</p>`; 
       }
     }
 
-    // إخفاء صندوق الاقتراحات عند النقر خارج حقل البحث
+    // --- وظائف لوحة التحكم (Admin Panel) ---
+    function loginAdmin() {
+      const pass = document.getElementById('adminPassword').value;
+      // كلمة المرور الافتراضية للمشرف (يمكنك تعديلها)
+      if (pass === "admin123") {
+        document.getElementById('adminLoginBox').classList.add('hidden');
+        document.getElementById('adminDashboard').classList.remove('hidden');
+        renderAdminTable();
+      } else {
+        document.getElementById('loginError').innerText = "كلمة المرور غير صحيحة!";
+      }
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminMedicinesTableBody');
+      tbody.innerHTML = "";
+      dbData.medicines.forEach(m => {
+        tbody.innerHTML += `
+          <tr>
+            <td>${m.id}</td>
+            <td>${m.name}</td>
+            <td>${m.price} JOD</td>
+            <td>${m.category}</td>
+            <td>
+              <button class="btn-edit" onclick="editMedicine(${m.id})">تعديل</button>
+              <button class="btn-delete" onclick="deleteMedicine(${m.id})">حذف</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function openAddMedicineModal() {
+      document.getElementById('formTitle').innerText = "إضافة دواء جديد";
+      document.getElementById('editMedId').value = "";
+      document.getElementById('medNameInput').value = "";
+      document.getElementById('medPriceInput').value = "";
+      document.getElementById('medDescInput').value = "";
+      document.getElementById('medAltInput').value = "";
+      document.getElementById('medFormContainer').classList.remove('hidden');
+    }
+
+    function editMedicine(id) {
+      const med = dbData.medicines.find(m => m.id === id);
+      if (!med) return;
+      document.getElementById('formTitle').innerText = "تعديل دواء: " + med.name;
+      document.getElementById('editMedId').value = med.id;
+      document.getElementById('medNameInput').value = med.name;
+      document.getElementById('medPriceInput').value = med.price;
+      document.getElementById('medCategoryInput').value = med.category;
+      document.getElementById('medDescInput').value = med.description || med.indication || "";
+      document.getElementById('medAltInput').value = med.alternatives || med.alternative || "";
+      document.getElementById('medFormContainer').classList.remove('hidden');
+    }
+
+    function saveMedicine() {
+      const id = document.getElementById('editMedId').value;
+      const name = document.getElementById('medNameInput').value;
+      const price = parseFloat(document.getElementById('medPriceInput').value);
+      const category = document.getElementById('medCategoryInput').value;
+      const description = document.getElementById('medDescInput').value;
+      const alternatives = document.getElementById('medAltInput').value;
+
+      if (!name || isNaN(price)) {
+        alert("يرجى إدخال اسم الدواء والسعر بشكل صحيح!");
+        return;
+      }
+
+      if (id) {
+        // تعديل دواء موجود
+        const index = dbData.medicines.findIndex(m => m.id == id);
+        if (index !== -1) {
+          dbData.medicines[index] = { id: parseInt(id), name, price, category, description, alternatives };
+        }
+      } else {
+        // إضافة دواء جديد
+        const newId = dbData.medicines.length > 0 ? Math.max(...dbData.medicines.map(m => m.id)) + 1 : 1;
+        dbData.medicines.push({ id: newId, name, price, category, description, alternatives });
+      }
+
+      document.getElementById('medFormContainer').classList.add('hidden');
+      renderAdminTable();
+      renderCategories();
+      alert("تم حفظ التعديلات بنجاح! (ملاحظة: نظراً لكون المشروع يعمل على المتصفح، يتم تحديث البيانات مؤقتاً بالذاكرة ويمكنك مطابقتها مع ملف الـ JSON).");
+    }
+
+    function deleteMedicine(id) {
+      if (confirm("هل أنت متأكد من حذف هذا الدواء؟")) {
+        dbData.medicines = dbData.medicines.filter(m => m.id !== id);
+        renderAdminTable();
+        renderCategories();
+      }
+    }
+
+    // إخفاء اقتراحات البحث عند النقر خارج الصندوق
     document.addEventListener('click', function(e) {
       if (!e.target.closest('.search-box')) {
         document.getElementById('suggestionsBox').classList.add('hidden');
       }
     });
 
+    // تحميل البيانات عند فتح الصفحة
     window.onload = function() {
-      renderCategories(); 
-      renderDiseases(); 
-      renderHerbs();
+      loadDatabase();
       document.getElementById('searchTab').classList.remove('hidden');
     };
   </script>
