@@ -438,7 +438,8 @@
       const query = document.getElementById('searchInput').value.trim().toLowerCase();
       const resultsDiv = document.getElementById('searchResults');
       if(query === "") { resultsDiv.innerHTML = `<p style="color: #ef4444; text-align: center;">يرجى إدخال اسم للبحث!</p>`; return; }
-      const matches = medicinesData.filter(m => m.name.toLowerCase().includes(query) || m.active.toLowerCase().includes(query) || m.indication.toLowerCase().includes(query));
+      const matches = medicinesData.filter(m => m.name.toLowerCase().includes(query.toLowerCase()) || m.category.toLowerCase().includes(query.toLowerCase()));
+
       if(matches.length > 0) {
         let html = `<p style="margin-bottom: 12px; color: var(--primary); font-weight: 700;">تم العثور على (${matches.length}) نتيجة:</p>`;
         matches.forEach(m => { html += `<div class="result-card"><h4>${m.name}</h4><p><strong>الاستخدام:</strong> ${m.indication}</p><p><strong>التركيبة:</strong> ${m.active}</p><p><strong>السعر:</strong> ${m.price}</p><p><strong style="color: var(--accent);">البدائل:</strong> ${m.alternative}</p></div>`; });
