@@ -80,7 +80,7 @@
       </div>
       <div class="search-box">
         <div class="search-input-wrapper">
-          <input type="text" id="global-search" placeholder="ابحث عام في كافة الأقسام..." oninput="handleGlobalSearch()" />
+          <input type="text" id="global-search" placeholder="ابحث عن اسم الدواء أو المادة الدوائية..." oninput="handleGlobalSearch()" />
         </div>
         <button class="star-border-btn" onclick="handleGlobalSearch()">بحث</button>
       </div>
@@ -123,34 +123,4 @@
       </div>
       <div class="search-box" style="margin-bottom: 20px;">
         <div class="search-input-wrapper">
-          <input type="text" id="health-search" placeholder="ابحث عن مرض أو عشبة..." oninput="filterHealth()" />
-        </div>
-      </div>
-      <h3 style="color: var(--primary); margin-bottom: 10px;">الأعشاب الطبية</h3>
-      <div id="herbs-container" class="results-grid"></div>
-      <h3 style="color: var(--primary); margin: 30px 0 10px;">الأمراض والإمراضيات</h3>
-      <div id="diseases-container" class="results-grid"></div>
-    </div>
-
-    <!-- قسم تسجيل دخول الأدمن -->
-    <div id="section-admin" class="section-card hidden">
-      <div class="admin-panel">
-        <h2 class="blur-text" style="font-size: 22px;">تسجيل دخول المسؤول</h2>
-        <p class="subtitle" style="margin-bottom: 20px;">الرجاء إدخال كلمة المرور للمتابعة</p>
-        
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-          <input type="password" id="admin-password-input" placeholder="كلمة المرور" />
-          <button class="star-border-btn" onclick="checkAdminPassword()">دخول</button>
-        </div>
-        <div id="login-error" class="error-msg hidden">كلمة المرور غير صحيحة!</div>
-      </div>
-    </div>
-
-    <!-- لوحة التحكم الفعلية -->
-    <div id="section-admin-dashboard" class="section-card hidden">
-      <div class="section-header">
-        <h2 class="blur-text">لوحة التحكم والإدارة</h2>
-        <p class="subtitle">أهلاً بك، تم تسجيل الدخول بنجاح.</p>
-      </div>
-      <div style="text-align: center; margin-top: 20px;">
-        
+          <input type="text" id="health-search" placeholder="ابحث عن مرض
