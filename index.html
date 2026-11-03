@@ -24,7 +24,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'Tajawal', sans-serif; background-color: var(--bg); color: var(--text-dark); line-height: 1.6; }
     
-    header { background-color: var(--primary); color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+    header { background-color: var(--primary); color: white; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; flex-wrap: wrap; gap: 10px; }
     .logo { font-size: 26px; font-weight: 800; cursor: pointer; }
     .logo span { color: var(--accent); }
     
@@ -51,17 +51,22 @@
     .error-msg { color: #ef4444; margin-top: 10px; font-size: 14px; font-weight: 600; }
     
     .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 20px; }
-    .medicine-card { background: #f8fafc; border: 1px solid var(--border); padding: 16px; border-radius: 10px; text-align: right; }
-    .medicine-card h3 { color: var(--primary); margin-bottom: 6px; }
+    .item-card { background: #f8fafc; border: 1px solid var(--border); padding: 16px; border-radius: 10px; text-align: right; }
+    .item-card h3 { color: var(--primary); margin-bottom: 6px; font-size: 18px; }
+    .item-card p { font-size: 14px; margin-bottom: 4px; color: var(--text-muted); }
+    .item-card span { color: var(--accent); font-weight: bold; }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="logo" onclick="showSection('home')">Jo<span>Pharma</span></div>
+    <div class="logo" onclick="switchTab('home')">Jo<span>Pharma</span></div>
     <nav>
-      <button id="btn-home" class="active" onclick="showSection('home')">الرئيسية</button>
-      <button id="btn-admin" class="admin-nav-btn" onclick="showSection('admin')">لوحة التحكم</button>
+      <button id="btn-home" class="active" onclick="switchTab('home')">الرئيسية</button>
+      <button id="btn-medicines" onclick="switchTab('medicines')">الأدوية</button>
+      <button id="btn-alternatives" onclick="switchTab('alternatives')">البدائل</button>
+      <button id="btn-health" onclick="switchTab('health')">الأمراض والأعشاب</button>
+      <button id="btn-admin" class="admin-nav-btn" onclick="switchTab('admin')">لوحة التحكم</button>
     </nav>
   </header>
 
@@ -71,15 +76,60 @@
     <div id="section-home" class="section-card">
       <div class="section-header">
         <h1 class="blur-text">المرجع الدوائي الأردني</h1>
-        <p class="subtitle">ابحث عن الأدوية، الأسعار، البدائل الطبية، والمعلومات الصحية بكل سهولة.</p>
+        <p class="subtitle">ابحث عن الأدوية، الأسعار، البدائل الطبية، والأعشاب بكل سهولة.</p>
       </div>
       <div class="search-box">
         <div class="search-input-wrapper">
-          <input type="text" id="search-input" placeholder="ابحث عن اسم الدواء أو المادة الدوائية..." oninput="searchMedicines()" />
+          <input type="text" id="global-search" placeholder="ابحث عام في كافة الأقسام..." oninput="handleGlobalSearch()" />
         </div>
-        <button class="star-border-btn" onclick="searchMedicines()">بحث</button>
+        <button class="star-border-btn" onclick="handleGlobalSearch()">بحث</button>
       </div>
-      <div id="results-container" class="results-grid"></div>
+      <div id="home-results" class="results-grid"></div>
+    </div>
+
+    <!-- قسم الأدوية -->
+    <div id="section-medicines" class="section-card hidden">
+      <div class="section-header">
+        <h2 class="blur-text">قائمة الأدوية</h2>
+        <p class="subtitle">استعرض جميع الأدوية المتاحة وأسعارها.</p>
+      </div>
+      <div class="search-box">
+        <div class="search-input-wrapper">
+          <input type="text" id="med-search" placeholder="ابحث عن دواء..." oninput="filterMedicines()" />
+        </div>
+      </div>
+      <div id="medicines-container" class="results-grid"></div>
+    </div>
+
+    <!-- قسم البدائل -->
+    <div id="section-alternatives" class="section-card hidden">
+      <div class="section-header">
+        <h2 class="blur-text">البدائل الطبية</h2>
+        <p class="subtitle">تعرف على البدائل المتاحة للأدوية.</p>
+      </div>
+      <div class="search-box">
+        <div class="search-input-wrapper">
+          <input type="text" id="alt-search" placeholder="ابحث عن بديل دواء..." oninput="filterAlternatives()" />
+        </div>
+      </div>
+      <div id="alternatives-container" class="results-grid"></div>
+    </div>
+
+    <!-- قسم الأمراض والأعشاب -->
+    <div id="section-health" class="section-card hidden">
+      <div class="section-header">
+        <h2 class="blur-text">الأمراض والأعشاب الطبية</h2>
+        <p class="subtitle">دليل الأمراض والأعشاب العلاجية وطرق الاستخدام.</p>
+      </div>
+      <div class="search-box" style="margin-bottom: 20px;">
+        <div class="search-input-wrapper">
+          <input type="text" id="health-search" placeholder="ابحث عن مرض أو عشبة..." oninput="filterHealth()" />
+        </div>
+      </div>
+      <h3 style="color: var(--primary); margin-bottom: 10px;">الأعشاب الطبية</h3>
+      <div id="herbs-container" class="results-grid"></div>
+      <h3 style="color: var(--primary); margin: 30px 0 10px;">الأمراض والإمراضيات</h3>
+      <div id="diseases-container" class="results-grid"></div>
     </div>
 
     <!-- قسم تسجيل دخول الأدمن -->
@@ -103,27 +153,4 @@
         <p class="subtitle">أهلاً بك، تم تسجيل الدخول بنجاح.</p>
       </div>
       <div style="text-align: center; margin-top: 20px;">
-        <button class="star-border-btn" onclick="logoutAdmin()" style="background-color: #ef4444;">تسجيل الخروج</button>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    let allMedicines = [];
-
-    // تحميل البيانات من ملف jopharma_data.json الموجود في مجلد public
-    async function loadMedicinesData() {
-      try {
-        const response = await fetch('./jopharma_data.json');
-        if (!response.ok) throw new Error('فشل جلب البيانات');
-        allMedicines = await response.json();
-        displayMedicines(allMedicines);
-      } catch (error) {
-        console.error('خطأ في تحميل ملف الـ JSON:', error);
-      }
-    }
-
-    function displayMedicines(medicines) {
-      const container = document.getElementById('results-container');
-      container.innerHTML = '';
+        
