@@ -6,16 +6,20 @@
 <meta name="description" content="Jo Pharma: المرجع الدوائي الأردني للأدوية، الأسعار، البدائل، الأمراض والأعشاب.">
 <title>Jo Pharma | المرجع الدوائي والصيدلاني الأردني</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--primary:#1e3a8a;--accent:#f97316;--accent-h:#ea580c;--bg:#f8fafc;--card:#fff;--dark:#0f172a;--muted:#475569;--border:#e2e8f0}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
+body{font-family:'Tajawal','Inter',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
+html[lang="en"] body{font-family:'Inter','Tajawal',sans-serif}
 header{background:var(--primary);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:8px}
-.logo{font-size:24px;font-weight:800}.logo span{color:var(--accent)}
+.logo{font-size:24px;font-weight:800;direction:ltr}.logo span{color:var(--accent)}
 nav{display:flex;gap:6px;flex-wrap:wrap}
-nav button{background:none;border:0;color:#e2e8f0;font:700 14px 'Tajawal';padding:8px 14px;border-radius:8px;cursor:pointer}
+nav button{background:none;border:0;color:#e2e8f0;font:700 14px inherit;font-family:inherit;padding:8px 14px;border-radius:8px;cursor:pointer}
 nav button:hover,nav button.active{background:rgba(255,255,255,.15);color:#fff}
+.lang-btn{background:#fff;color:var(--primary);border:0;border-radius:20px;font-family:inherit;font-weight:800;font-size:14px;padding:7px 16px;cursor:pointer;transition:.2s}
+.lang-btn:hover{background:var(--accent);color:#fff}
 .container{max-width:1100px;margin:24px auto;padding:0 14px}
 .card{background:var(--card);padding:28px 20px;border-radius:16px;border:1px solid var(--border);box-shadow:0 4px 8px rgba(0,0,0,.04);margin-bottom:24px;animation:fade .4s}
 @keyframes fade{from{opacity:0;transform:translateY(12px)}}
@@ -28,23 +32,23 @@ h1{color:var(--primary);font-size:26px;text-align:center;margin-bottom:6px}
 .notice.info{background:#eff6ff;border-color:#dbeafe;color:#1e40af}
 .search{position:relative;max-width:620px;margin:0 auto}
 .row{display:flex;gap:8px}
-input,select,textarea{font:16px 'Tajawal';padding:12px 14px;border:2px solid var(--border);border-radius:10px;width:100%;outline:none;background:#fff}
+input,select,textarea{font-family:inherit;font-size:16px;padding:12px 14px;border:2px solid var(--border);border-radius:10px;width:100%;outline:none;background:#fff}
 input:focus,select:focus,textarea:focus{border-color:var(--primary)}
-.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;font:700 15px 'Tajawal';padding:12px 22px;cursor:pointer;white-space:nowrap}
+.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;font-family:inherit;font-weight:700;font-size:15px;padding:12px 22px;cursor:pointer;white-space:nowrap;display:inline-block}
 .btn:hover{background:var(--accent-h)}
 .btn.sec{background:var(--primary)}.btn.red{background:#ef4444}.btn.sm{padding:6px 12px;font-size:13px}
 .sugg{position:absolute;top:100%;inset-inline:0;background:#fff;border:1px solid var(--border);border-radius:0 0 10px 10px;box-shadow:0 10px 15px rgba(0,0,0,.1);z-index:20;max-height:250px;overflow:auto;display:none}
 .sugg div{padding:10px 14px;cursor:pointer;border-bottom:1px solid #f1f5f9;font-size:14px}
 .sugg div:hover{background:#f8fafc;color:var(--primary)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:18px}
-.item{background:#f8fafc;padding:18px;border-radius:12px;border:1px solid var(--border);border-right:5px solid var(--primary);cursor:pointer;transition:.2s}
+.item{background:#f8fafc;padding:18px;border-radius:12px;border:1px solid var(--border);border-inline-start:5px solid var(--primary);cursor:pointer;transition:.2s}
 .item:hover{background:#fff;transform:translateY(-3px);box-shadow:0 8px 14px rgba(0,0,0,.08)}
 .item h3{color:var(--primary);font-size:17px;margin-bottom:6px}
 .det{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);font-size:14px;display:none}
 .item.open .det{display:block}
 .det strong,.res strong{color:var(--primary)}
 .det p{margin-bottom:6px;color:var(--muted)}
-.res{background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--border);border-right:5px solid var(--accent);margin-bottom:10px}
+.res{background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--border);border-inline-start:5px solid var(--accent);margin-bottom:10px}
 .res h4{color:var(--primary);font-size:18px;margin-bottom:4px}
 .res .alt{color:var(--accent-h);font-weight:700}
 .empty{text-align:center;color:#b45309;padding:16px}
@@ -53,7 +57,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--primary)}
 .form .full{grid-column:1/-1}
 .admin-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff;flex-wrap:wrap}
 .tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.wa{position:fixed;bottom:16px;right:16px;background:#22c55e;color:#fff;padding:10px 16px;border-radius:12px;z-index:60;text-decoration:none;display:flex;flex-direction:column;align-items:flex-end;font-size:12px;box-shadow:0 4px 12px rgba(34,197,94,.3)}
+.wa{position:fixed;bottom:16px;right:16px;background:#22c55e;color:#fff;padding:10px 16px;border-radius:12px;z-index:60;text-decoration:none;display:flex;flex-direction:column;align-items:center;font-size:12px;box-shadow:0 4px 12px rgba(34,197,94,.3)}
 .wa b{direction:ltr;font-size:15px}
 footer{text-align:center;padding:22px 16px 80px;background:var(--dark);color:#94a3b8;font-size:13px;margin-top:30px}
 footer a{color:#94a3b8;cursor:pointer;text-decoration:underline}
@@ -64,26 +68,29 @@ footer a{color:#94a3b8;cursor:pointer;text-decoration:underline}
 <header>
   <div class="logo"><span>JO</span> Pharma</div>
   <nav>
-    <button data-tab="searchTab" class="active">البحث الرئيسي</button>
-    <button data-tab="categoriesTab">تصنيفات الأدوية</button>
-    <button data-tab="diseasesTab">دليل الأمراض</button>
-    <button data-tab="herbsTab">موسوعة الأعشاب</button>
-    <button data-tab="adminTab" id="adminNav" class="hidden">⚙️ لوحة المشرف</button>
+    <button data-tab="searchTab" class="active" data-i18n="tSearch">البحث الرئيسي</button>
+    <button data-tab="categoriesTab" data-i18n="tCats">تصنيفات الأدوية</button>
+    <button data-tab="diseasesTab" data-i18n="tDis">دليل الأمراض</button>
+    <button data-tab="herbsTab" data-i18n="tHerbs">موسوعة الأعشاب</button>
+    <button data-tab="adminTab" id="adminNav" class="hidden" data-i18n="tAdmin">⚙️ لوحة المشرف</button>
   </nav>
+  <button class="lang-btn" id="langBtn" type="button">English</button>
 </header>
 
 <div class="container">
   <section id="searchTab" class="card tab">
-    <h1>المرجع الدوائي والطبي الأردني</h1>
-    <p class="sub">ابحث عن الأدوية، الأسعار، والبدائل المعتمدة في الأردن</p>
+    <h1 data-i18n="h1">المرجع الدوائي والطبي الأردني</h1>
+    <p class="sub" data-i18n="sub">ابحث عن الأدوية، الأسعار، والبدائل المعتمدة في الأردن</p>
     <div class="stats">
-      <div><b id="cMeds">0</b> دواء</div><div><b id="cDis">0</b> مرض</div><div><b id="cHerbs">0</b> عشبة</div>
+      <div><b id="cMeds">0</b> <span data-i18n="statMeds">دواء</span></div>
+      <div><b id="cDis">0</b> <span data-i18n="statDis">مرض</span></div>
+      <div><b id="cHerbs">0</b> <span data-i18n="statHerbs">عشبة</span></div>
     </div>
-    <div class="notice">⚠️ الأسعار استرشادية وقد تختلف بحسب الصيدليات أو تحديثات المؤسسة العامة للغذاء والدواء. المعلومات للتثقيف فقط ولا تغني عن استشارة الطبيب أو الصيدلاني.</div>
+    <div class="notice" data-i18n="notice">⚠️ الأسعار استرشادية وقد تختلف بحسب الصيدليات أو تحديثات المؤسسة العامة للغذاء والدواء. المعلومات للتثقيف فقط ولا تغني عن استشارة الطبيب أو الصيدلاني.</div>
     <div class="search">
       <div class="row">
-        <input type="text" id="q" placeholder="اسم الدواء أو المادة الفعالة (مثال: Panadol)" autocomplete="off">
-        <button class="btn" id="goBtn">بحث</button>
+        <input type="text" id="q" data-i18n-ph="ph" placeholder="اسم الدواء أو المادة الفعالة (مثال: Panadol)" autocomplete="off">
+        <button class="btn" id="goBtn" data-i18n="go">بحث</button>
       </div>
       <div id="sugg" class="sugg"></div>
     </div>
@@ -91,18 +98,20 @@ footer a{color:#94a3b8;cursor:pointer;text-decoration:underline}
   </section>
 
   <section id="categoriesTab" class="card tab hidden">
-    <h1>تصنيفات الأدوية</h1><p class="sub">اختر الفئة لعرض أدويتها</p>
+    <h1 data-i18n="catsH">تصنيفات الأدوية</h1><p class="sub" data-i18n="catsSub">اختر الفئة لعرض أدويتها</p>
     <div class="grid" id="cats"></div>
     <div id="catResults" style="margin-top:16px"></div>
   </section>
 
   <section id="diseasesTab" class="card tab hidden">
-    <h1>الدليل الطبي للأمراض</h1><p class="sub">اضغط على المرض لعرض التفاصيل</p>
+    <h1 data-i18n="disH">الدليل الطبي للأمراض</h1><p class="sub" data-i18n="disSub">اضغط على المرض لعرض التفاصيل</p>
+    <div class="notice" data-i18n="disNotice">ℹ️ الأدوية المذكورة أمثلة تجارية للتعريف فقط، ويُحدد الطبيب العلاج المناسب والجرعة. المضادات الحيوية تُصرف بوصفة طبية ولا تُستعمل إلا عند وجود عدوى بكتيرية.</div>
     <div class="grid" id="diseases"></div>
   </section>
 
   <section id="herbsTab" class="card tab hidden">
-    <h1>موسوعة الأعشاب الطبية</h1><p class="sub">الفوائد وطريقة الاستخدام الآمنة</p>
+    <h1 data-i18n="herbsH">موسوعة الأعشاب الطبية</h1><p class="sub" data-i18n="herbsSub">الفوائد وطريقة الاستخدام الآمنة</p>
+    <div class="notice" data-i18n="herbsNotice">ℹ️ الأعشاب قد تتداخل مع الأدوية وقد لا تناسب الحوامل والمرضعات والأطفال ومرضى الأمراض المزمنة. استشر الطبيب أو الصيدلاني قبل استعمالها.</div>
     <div class="grid" id="herbs"></div>
   </section>
 
@@ -110,14 +119,13 @@ footer a{color:#94a3b8;cursor:pointer;text-decoration:underline}
 </div>
 
 <a href="https://wa.me/962781775710" target="_blank" rel="noopener" class="wa">
-  <span>للاقتراحات والتنبيه عن الأخطاء العلمية والإملائية</span><b>📞 +962781775710</b>
+  <span data-i18n="wa">للاقتراحات والتنبيه عن الأخطاء العلمية والإملائية</span><b>📞 +962781775710</b>
 </a>
-<footer>جميع الحقوق محفوظة © Jo Pharma 2026 &nbsp;|&nbsp; <a id="adminLink">دخول المشرف</a></footer>
+<footer><span data-i18n="copy">جميع الحقوق محفوظة © Jo Pharma 2026</span> &nbsp;|&nbsp; <a id="adminLink" data-i18n="adminLink">دخول المشرف</a></footer>
 
 <script type="module">
 /* =====================================================
-   1) إعدادات Firebase — الصق إعداداتك هنا (انظر الشرح)
-   
+   1) إعدادات Firebase / Firebase configuration
    ===================================================== */
 const firebaseConfig = {
   apiKey: "AIzaSyCzr8CudqT_meouBh1y32yEZg3fFumIXyM",
@@ -129,95 +137,184 @@ const firebaseConfig = {
 };
 
 /* =====================================================
-   2) الأمراض (50) والأعشاب (25 حقيقية)
+   2) قاموس الترجمة / UI dictionary
+   ===================================================== */
+const I18N = {
+  ar: {
+    pageTitle: 'Jo Pharma | المرجع الدوائي والصيدلاني الأردني',
+    tSearch: 'البحث الرئيسي', tCats: 'تصنيفات الأدوية', tDis: 'دليل الأمراض', tHerbs: 'موسوعة الأعشاب', tAdmin: '⚙️ لوحة المشرف',
+    h1: 'المرجع الدوائي والطبي الأردني',
+    sub: 'ابحث عن الأدوية، الأسعار، والبدائل المعتمدة في الأردن',
+    statMeds: 'دواء', statDis: 'مرض', statHerbs: 'عشبة',
+    notice: '⚠️ الأسعار استرشادية وقد تختلف بحسب الصيدليات أو تحديثات المؤسسة العامة للغذاء والدواء. المعلومات للتثقيف فقط ولا تغني عن استشارة الطبيب أو الصيدلاني.',
+    ph: 'اسم الدواء أو المادة الفعالة (مثال: Panadol)', go: 'بحث',
+    catsH: 'تصنيفات الأدوية', catsSub: 'اختر الفئة لعرض أدويتها',
+    disH: 'الدليل الطبي للأمراض', disSub: 'اضغط على المرض لعرض التفاصيل',
+    disNotice: 'ℹ️ الأدوية المذكورة أمثلة تجارية للتعريف فقط، ويُحدد الطبيب العلاج المناسب والجرعة. المضادات الحيوية تُصرف بوصفة طبية ولا تُستعمل إلا عند وجود عدوى بكتيرية.',
+    herbsH: 'موسوعة الأعشاب الطبية', herbsSub: 'الفوائد وطريقة الاستخدام الآمنة',
+    herbsNotice: 'ℹ️ الأعشاب قد تتداخل مع الأدوية وقد لا تناسب الحوامل والمرضعات والأطفال ومرضى الأمراض المزمنة. استشر الطبيب أو الصيدلاني قبل استعمالها.',
+    wa: 'للاقتراحات والتنبيه عن الأخطاء العلمية والإملائية',
+    copy: 'جميع الحقوق محفوظة © Jo Pharma 2026', adminLink: 'دخول المشرف',
+    noMedsYet: 'لا توجد أدوية بعد.', medsCount: n => `${n} دواء`,
+    found: n => `تم العثور على ${n} نتيجة`, first30: ' (يعرض أول 30)',
+    enterName: 'يرجى إدخال اسم للبحث.', noMatch: 'لم نجد أدوية مطابقة لبحثك.',
+    usage: 'الاستخدام:', comp: 'التركيبة:', price: 'السعر:', alts: 'البدائل:',
+    medsOf: 'أدوية:',
+    symptoms: 'الأعراض:', causes: 'الأسباب:', treatment: 'العلاج المقترح:',
+    tapHerb: 'اضغط لعرض الفوائد وطريقة الاستخدام', benefits: 'الفوائد:', howTo: 'طريقة الاستخدام:',
+    /* admin */
+    adminLoginH: 'دخول المشرف', email: 'البريد الإلكتروني', pass: 'كلمة المرور', login: 'دخول', loginErr: 'بيانات الدخول غير صحيحة.',
+    adminH: 'لوحة المشرف',
+    demo: 'الوضع التجريبي: البيانات محفوظة في متصفحك فقط ولن يراها الزوار. فعّل Firebase لنشرها للجميع.',
+    editMed: 'تعديل دواء', addMed: 'إضافة دواء',
+    fName: 'اسم الدواء *', fCat: 'التصنيف *', fActive: 'المادة الفعالة', fPrice: 'السعر (مثال: 4.20 JOD)',
+    fInd: 'الاستخدام / الاستطباب', fAlt: 'البدائل (مثال: Biso (2.90), Bisocor (2.50))',
+    saveEdit: '💾 حفظ التعديل', add: '➕ إضافة', cancel: 'إلغاء',
+    exportJson: '⬇️ تصدير JSON', importFile: '⬆️ استيراد JSON/CSV', logout: 'تسجيل خروج',
+    csvHint: 'ملف CSV: الأعمدة بالترتيب name,category,active,indication,price,alternative',
+    adminSearch: 'ابحث في الأدوية المضافة...', first100: 'يعرض أول 100، استخدم البحث للوصول للباقي.',
+    edit: 'تعديل', del: 'حذف', confirmDel: 'حذف هذا الدواء نهائياً؟',
+    reqFields: 'الاسم والتصنيف مطلوبان.', saveFail: 'فشل الحفظ: ',
+    noData: 'لا توجد بيانات صالحة في الملف.', confirmImport: n => `سيتم إضافة ${n} دواء. متابعة؟`,
+    imported: 'تم الاستيراد ✅', fileErr: 'خطأ بالملف: '
+  },
+  en: {
+    pageTitle: 'Jo Pharma | Jordanian Drug & Pharmacy Reference',
+    tSearch: 'Main Search', tCats: 'Drug Categories', tDis: 'Disease Guide', tHerbs: 'Herbal Encyclopedia', tAdmin: '⚙️ Admin Panel',
+    h1: 'Jordanian Drug & Medical Reference',
+    sub: 'Search for medicines, prices, and approved alternatives available in Jordan',
+    statMeds: 'Medicines', statDis: 'Diseases', statHerbs: 'Herbs',
+    notice: '⚠️ Prices are indicative and may vary between pharmacies or following updates by the Jordan Food and Drug Administration (JFDA). This information is for educational purposes only and does not replace consultation with a physician or pharmacist.',
+    ph: 'Drug name or active ingredient (e.g., Panadol)', go: 'Search',
+    catsH: 'Drug Categories', catsSub: 'Select a category to view its medicines',
+    disH: 'Medical Disease Guide', disSub: 'Tap a condition to view details',
+    disNotice: 'ℹ️ The medicines listed are brand-name examples for reference only. The appropriate treatment and dose must be determined by a physician. Antibiotics require a prescription and should be used only for confirmed bacterial infections.',
+    herbsH: 'Medicinal Herbs Encyclopedia', herbsSub: 'Benefits and safe use',
+    herbsNotice: 'ℹ️ Herbs may interact with medications and may not be suitable during pregnancy or breastfeeding, for children, or for patients with chronic conditions. Consult a physician or pharmacist before use.',
+    wa: 'Suggestions and reports of scientific or spelling errors',
+    copy: 'All rights reserved © Jo Pharma 2026', adminLink: 'Admin login',
+    noMedsYet: 'No medicines available yet.', medsCount: n => `${n} medicine${n === 1 ? '' : 's'}`,
+    found: n => `${n} result${n === 1 ? '' : 's'} found`, first30: ' (showing the first 30)',
+    enterName: 'Please enter a name to search.', noMatch: 'No matching medicines were found.',
+    usage: 'Indication:', comp: 'Active ingredient:', price: 'Price:', alts: 'Alternatives:',
+    medsOf: 'Medicines:',
+    symptoms: 'Symptoms:', causes: 'Causes:', treatment: 'Suggested treatment:',
+    tapHerb: 'Tap to view benefits and directions for use', benefits: 'Benefits:', howTo: 'Directions for use:',
+    adminLoginH: 'Admin Login', email: 'Email', pass: 'Password', login: 'Log in', loginErr: 'Incorrect email or password.',
+    adminH: 'Admin Panel',
+    demo: 'Demo mode: data is stored in your browser only and will not be visible to visitors. Enable Firebase to publish it for everyone.',
+    editMed: 'Edit medicine', addMed: 'Add medicine',
+    fName: 'Medicine name *', fCat: 'Category *', fActive: 'Active ingredient', fPrice: 'Price (e.g., 4.20 JOD)',
+    fInd: 'Indication / use', fAlt: 'Alternatives (e.g., Biso (2.90), Bisocor (2.50))',
+    saveEdit: '💾 Save changes', add: '➕ Add', cancel: 'Cancel',
+    exportJson: '⬇️ Export JSON', importFile: '⬆️ Import JSON/CSV', logout: 'Log out',
+    csvHint: 'CSV file: columns in this order: name,category,active,indication,price,alternative',
+    adminSearch: 'Search added medicines...', first100: 'Showing the first 100. Use search to find the rest.',
+    edit: 'Edit', del: 'Delete', confirmDel: 'Permanently delete this medicine?',
+    reqFields: 'Name and category are required.', saveFail: 'Save failed: ',
+    noData: 'No valid data found in the file.', confirmImport: n => `${n} medicine(s) will be added. Continue?`,
+    imported: 'Import completed ✅', fileErr: 'File error: '
+  }
+};
+
+/* =====================================================
+   3) الأمراض (50) والأعشاب (25) — ثنائية اللغة
+   كل مرض: [عنوان ar, en, وصف ar, en, أعراض ar, en, أسباب ar, en, علاج ar, en]
    ===================================================== */
 const diseasesList = [
-  { title: "1. الرشحة والإنفلونزا", desc: "عدوى فيروسية تنفسية.", symptoms: "احتقان، عطس، ألم حلق.", causes: "رينوفيروس.", drugs: "Panadol Cold & Flu, فيتامين C" },
-  { title: "2. التهاب اللوزتين", desc: "التهاب بكتيري أو فيروسي.", symptoms: "صعوبة بلع، حرارة.", causes: "بكتيريا العقدية.", drugs: "Augmentin, Panadol" },
-  { title: "3. السعال والبلغم", desc: "تراكم المخاط.", symptoms: "كحة مستمرة.", causes: "التهاب قصبات.", drugs: "Prospan, مذيبات البلغم" },
-  { title: "4. الشقيقة (الصداع النصفي)", desc: "صداع نابض قوي.", symptoms: "غثيان، حساسية للضوء.", causes: "وراثة، توتر.", drugs: "Panadol Extra, Cataflam" },
-  { title: "5. الارتداد المريئي", desc: "ارتجاع حمض المعدة.", symptoms: "حرقة بالصدر.", causes: "سمنة، وجبات دسمة.", drugs: "Nexium, Omeprazole" },
-  { title: "6. القولون العصبي", desc: "اضطراب معوي.", symptoms: "مغص، غازات.", causes: "توتر، أكل مهيج.", drugs: "Duspatalin, Colona" },
-  { title: "7. ارتفاع ضغط الدم", desc: "القاتل الصامت.", symptoms: "دوار، صداع.", causes: "ملح، سمنة.", drugs: "Concor, Diovan" },
-  { title: "8. السكري النوع الثاني", desc: "مقاومة الإنسولين.", symptoms: "عطش، تبول.", causes: "سمنة، وراثة.", drugs: "Glucophage, Amaryl" },
-  { title: "9. التهاب الجيوب الأنفية", desc: "احتقان تجاويف الأنف.", symptoms: "صداع وجهي.", causes: "حساسية، بكتيريا.", drugs: "Otrivin, Zithromax" },
-  { title: "10. الإسهال الحاد", desc: "عدوى بكتيرية.", symptoms: "إسهال مائي.", causes: "تسمم غذائي.", drugs: "Antinal, محلول جفاف" },
-  { title: "11. الإمساك", desc: "صعوبة إخراج.", symptoms: "ألم بطن.", causes: "نقص الألياف.", drugs: "Duphalac" },
-  { title: "12. التهاب المسالك البولية", desc: "عدوى بكتيرية.", symptoms: "حرقة تبول.", causes: "بكتيريا E.coli.", drugs: "Cipro, Monurol" },
-  { title: "13. قرحة المعدة", desc: "تقرح جدار المعدة.", symptoms: "ألم بعد الأكل.", causes: "جرثومة حلزونية.", drugs: "Klacid, Nexium" },
-  { title: "14. الربو", desc: "ضيق تنفس تحسسي.", symptoms: "صفير بالصدر.", causes: "غبار، وبر.", drugs: "Ventolin" },
-  { title: "15. التهاب المفاصل", desc: "تآكل أو مناعي.", symptoms: "ألم، تيبس.", causes: "عمر، روماتيزم.", drugs: "Celebrex, Voltaren" },
-  { title: "16. النقرس", desc: "ترسب حمض اليوريك.", symptoms: "ألم بإصبع القدم.", causes: "لحوم حمراء.", drugs: "Arcoxia, Allopurinol" },
-  { title: "17. فقر الدم", desc: "نقص الحديد.", symptoms: "دوار، شحوب.", causes: "سوء تغذية.", drugs: "Ferro-Gradumet" },
-  { title: "18. الكوليسترول", desc: "تراكم الدهون.", symptoms: "صامت.", causes: "دهون مشبعة.", drugs: "Lipitor, Crestor" },
-  { title: "19. البواسير", desc: "تمدد أوردة.", symptoms: "ألم، نزيف.", causes: "إمساك مزمن.", drugs: "Daflon, مراهم موضعية" },
-  { title: "20. الغدة الدرقية (خمول)", desc: "نقص الهرمون.", symptoms: "سمنة، خمول.", causes: "مناعي.", drugs: "Thyrox 50" },
-  { title: "21. الأرتكاريا", desc: "طفح جلدي.", symptoms: "حكة، احمرار.", causes: "حساسية.", drugs: "Telfast, Zyrtec" },
-  { title: "22. حب الشباب", desc: "التهاب الغدد الدهنية.", symptoms: "بثور.", causes: "هرمونات.", drugs: "Doxycycline" },
-  { title: "23. التهاب الأذن", desc: "عدوى وسطى.", symptoms: "ألم، طنين.", causes: "بكتيريا.", drugs: "Augmentin, قطرات" },
-  { title: "24. هشاشة العظام", desc: "ضعف العظم.", symptoms: "كسور.", causes: "نقص كالسيوم.", drugs: "Vitamin D, الكالسيوم" },
-  { title: "25. حصى الكلى", desc: "ترسبات.", symptoms: "مغص كلوي.", causes: "قلة شرب الماء.", drugs: "Voltaren Amp" },
-  { title: "26. الأرق", desc: "صعوبة نوم.", symptoms: "إرهاق.", causes: "توتر.", drugs: "Panadol Night, مليسة" },
-  { title: "27. التهاب اللثة", desc: "عدوى فموية.", symptoms: "نزيف لثة.", causes: "قلة نظافة.", drugs: "Flagyl, مضمضة" },
-  { title: "28. دوار الحركة", desc: "غثيان السفر.", symptoms: "دوخة.", causes: "حركة.", drugs: "Motilium" },
-  { title: "29. التشنج العضلي", desc: "شد العضل.", symptoms: "ألم عضلي.", causes: "إجهاد.", drugs: "Cataflam, مرهم" },
-  { title: "30. جفاف العين", desc: "نقص دمع.", symptoms: "حرقة.", causes: "شاشات.", drugs: "قطرات مرطبة" },
-  { title: "31. الجرثومة الحلزونية", desc: "بكتيريا المعدة.", symptoms: "غثيان، ألم.", causes: "عدوى.", drugs: "Klacid, Nexium, Amoxil" },
-  { title: "32. التهاب القصبات", desc: "سعال ببلغم.", symptoms: "كحة.", causes: "تدخين، فيروس.", drugs: "Zithromax, Prospan" },
-  { title: "33. الحزام الناري", desc: "فيروس عصبي.", symptoms: "ألم، طفح.", causes: "جدري الماء.", drugs: "Acyclovir" },
-  { title: "34. التهاب الملتحمة", desc: "عين وردية.", symptoms: "احمرار، إفراز.", causes: "بكتيريا.", drugs: "قطرات مضاد حيوي" },
-  { title: "35. الدوالي", desc: "توسع أوردة.", symptoms: "ألم بالساق.", causes: "وقوف.", drugs: "Daflon" },
-  { title: "36. الفطريات الجلدية", desc: "عدوى فطرية.", symptoms: "حكة، تقشر.", causes: "رطوبة.", drugs: "كريمات مضادة للفطريات" },
-  { title: "37. الاكتئاب الخفيف", desc: "تغير مزاج.", symptoms: "حزن.", causes: "ضغوط.", drugs: "أعشاب مهدئة، استشارة" },
-  { title: "38. نقص فيتامين د", desc: "نقص شائع.", symptoms: "ألم عظام.", causes: "عدم تعرض للشمس.", drugs: "Vitamin D3 50000" },
-  { title: "39. فتق المعدة", desc: "ارتخاء عضلة.", symptoms: "حرقة.", causes: "سمنة.", drugs: "Nexium" },
-  { title: "40. التهاب المرارة", desc: "حصى.", symptoms: "ألم بالجانب.", causes: "دهون.", drugs: "مسكنات، جراحة" },
-  { title: "41. الصدفية", desc: "مرض مناعي جلدي.", symptoms: "قشور فضية.", causes: "مناعة.", drugs: "مراهم كورتيزون" },
-  { title: "42. الإكزيما", desc: "تحسس جلدي.", symptoms: "حكة، جفاف.", causes: "وراثة، محسسات.", drugs: "مرطبات طبية" },
-  { title: "43. نقص الكالسيوم", desc: "تشنجات.", symptoms: "شد عضلي.", causes: "غذاء.", drugs: "مكملات الكالسيوم" },
-  { title: "44. التهاب البروستاتا", desc: "عدوى ذكورية.", symptoms: "صعوبة تبول.", causes: "بكتيريا.", drugs: "Cipro" },
-  { title: "45. قرحة الفم", desc: "تقرحات بيضاء.", symptoms: "ألم بالفم.", causes: "توتر، نقص فيتامين.", drugs: "جل فموي" },
-  { title: "46. التبول اللاإرادي", desc: "عند الأطفال.", symptoms: "تبول ليلي.", causes: "نفسي، عضوي.", drugs: "حسب استشارة الطبيب" },
-  { title: "47. الكبد الدهني", desc: "تراكم دهون.", symptoms: "إرهاق.", causes: "سمنة.", drugs: "حمية، شوك مريم" },
-  { title: "48. التهاب الأوتار", desc: "إجهاد الوتر.", symptoms: "ألم مفصل.", causes: "رياضة.", drugs: "Voltaren" },
-  { title: "49. الزايدة الدودية", desc: "التهاب حاد.", symptoms: "ألم يمين البطن.", causes: "انسداد.", drugs: "جراحة فورية" },
-  { title: "50. متلازمة التعب المزمن", desc: "إرهاق مستمر.", symptoms: "تعب.", causes: "غير معروف.", drugs: "فيتامينات، راحة" }
-];
-const herbsList = [
-  { name: "البابونج", benefits: "تهدئة الأعصاب، محاربة الأرق، وتخفيف تشنجات الجهاز الهضمي.", usage: "تُوضع ملعقة صغيرة من الأزهار في كوب ماء مغلي لمدة 5-10 دقائق، ثم يُصفى ويُشرب مرتين يومياً." },
-  { name: "اليانسون", benefits: "طارد ممتاز للغازات، مهدئ للسعال، ومحفز لإفراز الحشو المعوي.", usage: "تُغلى بذور اليانسون لمدة 3 دقائق، ثم يُغطى الكوب ويُترك ليفتتر قبل الشرب." },
-  { name: "الزعتر", benefits: "مضاد قوي للبكتيريا والميكروبات التنفسية، ومطهر رئوي.", usage: "يُحضر كمشروب دافئ بنقعه في الماء المغلي لـ 10 دقائق، أو يُستخدم كغرغرة لالتهاب الحلق." },
-  { name: "المرمية", benefits: "تقوية الذاكرة، تنظيم الهرمونات النسائية، وتخفيف آلام البطن.", usage: "تُقع الأوراق في الماء المغلي لمدة 5 دقائق (يُحذر الإكثار منها للحوامل)." },
-  { name: "النعناع", benefits: "مهدئ فعال للقولون العصبي، ومخفف لغثيان السفر وعسر الهضم.", usage: "يُضاف النعناع الأخضر الطازج أو الجاف للماء الساخن ويُشرب بعد الوجبات الدسمة." },
-  { name: "الزنجبيل", benefits: "مضاد طبيعي للالتهاب، محفز للدورة الدموية، ومزيل للغثيان والرشح.", usage: "يُبشر الجذر الطازج ويُغلى مع الماء لمدّة 5 دقائق، ويمكن إضافة العسل والليمون." },
-  { name: "القرفة", benefits: "تنظيم مستويات سكر الدم، وتحسين حساسية الإنسولين.", usage: "تُغلى أعواد القرفة أو تُضاف كمسحوق للمشروبات الدافئة باعتدال." },
-  { name: "الكركم", benefits: "مضاد أكسدة قوي جداً، يخفف آلام الالتهابات المفصلية.", usage: "يُخلط مع قليل من الفلفل الأسود والحليب أو الماء الدافئ لتعزيز الامتصاص." },
-  { name: "الكمون", benefits: "تحسين عملية الهضم، وتخفيف الانتفاخات والغازات المعوية.", usage: "تُغلى بذور الكمون وتُشرب دافئة قبل الوجبات الرئيسية." },
-  { name: "إكليل الجبل (الروزماري)", benefits: "تنشيط الذاكرة، التركيز، ومحاربة الجذور الحرة.", usage: "يُستخدم كنقيع دافئ أو يُضاف كمنكه للأطعمة بكميات مدروسة." },
-  { name: "الشومر", benefits: "مفيد لإدرار الحليب للمرضعات ومريح لمغص الرضع.", usage: "تُنقع البذور المكسورة في ماء ساخن لمدة 10 دقائق وتُصفى." },
-  { name: "البقدونس", benefits: "مدر طبيعي للبول ومساعد في تنقية الكلى.", usage: "يُغلى مغلي أوراق البقدونس الطازجة ويُشرب كأس واحد يومياً." },
-  { name: "المليسة", benefits: "مزيل قوي للقلق، التوتر، ومساعد على النوم الهادئ.", usage: "تُنقع أوراق المليسة الطازجة أو الجافة في ماء مغلي وتشرب مساءً." },
-  { name: "حبة البركة", benefits: "تعزيز جهاز المناعة العام ومقاومة الأمراض.", usage: "تُطحن طازجة وتخلط مع العسل الطبيعي وتُتناول صباحاً." },
-  { name: "الحلبة", benefits: "مفيدة لزيادة الوزن، دعم الهضم، وخفض السكر.", usage: "تُنقع البذور وتُغلى جيداً، وتُشرب مع إمكانية تحليتها بالعسل." },
-  { name: "البردقوش", benefits: "تنظيم الهرمونات وتخفيف التوتر العصبي.", usage: "يُصب الماء المغلي فوق أوراق البردقوش ويترك لـ 7 دقائق ثم يُشرب." },
-  { name: "الكزبرة", benefits: "دعم صحة الكبد وخفض الكوليسترول الضار.", usage: "تُغلى البذور وتُشرب دافئة على الريق أو بعد الأكل." },
-  { name: "العرقسوس", benefits: "مفيد لقرحة المعدة ومهدئ للسعال (يُحذر لمرضى الضغط).", usage: "يُنقع الجذور في الماء البارد أو الساخن ويُشرب بكميات قليلة." },
-  { name: "الهيل", benefits: "طارد ممتاز للغازات ومحسن لنكهة الهضم.", usage: "يُضاف إلى القهوة أو يُغلى كحبوب مهروسة." },
-  { name: "الخطمية", benefits: "تليين الحلق المتهيج ومعالجة السعال الجاف.", usage: "تُنقع الجذور أو الأزهار في ماء دافئ لفترة طويلة ثم تُشرب لزوجتها المفيدة." },
-  { name: "إشنسا", benefits: "تحفيز المناعة الذاتية لمقاومة الإنفلونزا والزكام.", usage: "تُستعمل كمستخلص سائل أو شاي عشبي عند بداية الأعراض." },
-  { name: "الزعفران", benefits: "تحسين المزاج العام ومحاربة الاكتئاب الخفيف.", usage: "يُنقع عدد خفيف من الخيوط في ماء ساخن أو حليب بكميات ضئيلة جداً." },
-  { name: "القرنفل", benefits: "مسكن فوري لآلام الأسنان وتطهير الفم.", usage: "يُستخدم الزيت المستخلص موضعياً على السن المؤلم بحذر أو يمضغ بحذر." },
-  { name: "الحبق", benefits: "مهدئ للأعصاب ومضاد للتقلصات المعوية.", usage: "تُغلى الأوراق الطازجة وتُشرب كشاي عطري دافئ." },
-  { name: "اللافندر", benefits: "المساعدة على الاسترخاء العميق وتحسين النوم.", usage: "يُستخدم منقوعه كشاي خفيف أو يستنشق زيته الطيار." }
+ ["الرشح والإنفلونزا","Common Cold and Influenza","عدوى فيروسية تصيب الجهاز التنفسي العلوي.","Viral infections of the upper respiratory tract.","احتقان الأنف، عطاس، التهاب الحلق، سعال، وارتفاع الحرارة في الإنفلونزا.","Nasal congestion, sneezing, sore throat, cough, and fever (more common with influenza).","فيروسات الرينو (الرشح) وفيروس الإنفلونزا.","Rhinoviruses (common cold) and influenza viruses.","Panadol Cold & Flu (باراسيتامول مع مضاد احتقان)، فيتامين C، سوائل وراحة.","Panadol Cold & Flu (paracetamol with a decongestant), vitamin C, fluids, and rest."],
+ ["التهاب اللوزتين","Tonsillitis","التهاب اللوزتين، وغالباً ما يكون فيروسياً وأحياناً بكتيرياً.","Inflammation of the tonsils, most often viral and sometimes bacterial.","صعوبة وألم عند البلع، ارتفاع الحرارة، تضخم الغدد اللمفاوية في الرقبة.","Painful swallowing, fever, and swollen cervical lymph nodes.","فيروسات، أو بكتيريا المكورات العقدية (Group A Streptococcus).","Viruses, or Group A Streptococcus bacteria.","Panadol (باراسيتامول) للألم والحرارة؛ Augmentin (أموكسيسيلين/حمض الكلافولانيك) عند ثبوت العدوى البكتيرية وبوصفة طبية.","Paracetamol (Panadol) for pain and fever; Augmentin (amoxicillin/clavulanic acid) only for confirmed bacterial infection and by prescription."],
+ ["السعال والبلغم","Cough and Phlegm","تراكم المخاط في المجاري التنفسية وسعال لإخراجه.","Mucus accumulation in the airways with a cough to clear it.","سعال مستمر مع بلغم، وأحياناً أزيز في الصدر.","Persistent productive cough, sometimes with wheezing.","التهاب القصبات الهوائية، عدوى تنفسية، تدخين.","Bronchitis, respiratory infections, and smoking.","Prospan (مستخلص ورق اللبلاب)، مقشعات ومذيبات البلغم.","Prospan (ivy leaf extract), expectorants, and mucolytics."],
+ ["الشقيقة (الصداع النصفي)","Migraine","اضطراب عصبي يسبب نوبات صداع نابض شديد، وغالباً في جانب واحد من الرأس.","A neurological disorder causing attacks of severe throbbing headache, usually on one side of the head.","صداع نابض، غثيان وقيء، حساسية للضوء والصوت، وقد تسبقه هالة بصرية.","Throbbing headache, nausea, vomiting, sensitivity to light and sound, sometimes preceded by visual aura.","عوامل وراثية، التوتر، التغيرات الهرمونية، قلة النوم وبعض الأطعمة.","Genetic factors, stress, hormonal changes, poor sleep, and certain foods.","Panadol Extra (باراسيتامول + كافيين)، Cataflam (ديكلوفيناك)؛ ويصف الطبيب أدوية نوعية عند الحاجة.","Panadol Extra (paracetamol + caffeine), Cataflam (diclofenac); migraine-specific drugs are prescribed when needed."],
+ ["الارتجاع المعدي المريئي","Gastroesophageal Reflux Disease (GERD)","ارتداد حمض المعدة إلى المريء.","Backflow of stomach acid into the esophagus.","حرقة في الصدر، حموضة، طعم حامض في الفم، سعال ليلي.","Heartburn, acid regurgitation, sour taste in the mouth, and nocturnal cough.","السمنة، الوجبات الدسمة والكبيرة، التدخين، الاستلقاء بعد الأكل.","Obesity, large or fatty meals, smoking, and lying down after eating.","Nexium (إيزوميبرازول)، Omeprazole (أوميبرازول)، مع تعديل نمط الحياة.","Nexium (esomeprazole), omeprazole, along with lifestyle modification."],
+ ["متلازمة القولون العصبي","Irritable Bowel Syndrome (IBS)","اضطراب وظيفي مزمن في الأمعاء دون وجود تلف عضوي.","A chronic functional bowel disorder without structural damage.","مغص، انتفاخ وغازات، وتناوب بين الإسهال والإمساك.","Abdominal cramps, bloating, gas, and alternating diarrhea and constipation.","التوتر النفسي، بعض الأطعمة المهيجة، وفرط حساسية الأمعاء.","Psychological stress, trigger foods, and gut hypersensitivity.","Duspatalin (ميبيفيرين)، Colona (ببرمنت وأعشاب مضادة للتشنج).","Duspatalin (mebeverine) and antispasmodics such as Colona (peppermint-based)."],
+ ["ارتفاع ضغط الدم","Hypertension (High Blood Pressure)","ارتفاع مزمن في ضغط الدم، ويُعرف بـ«القاتل الصامت».","Chronically elevated blood pressure, often called the 'silent killer'.","غالباً بلا أعراض؛ وقد يظهر صداع أو دوار عند الارتفاع الشديد.","Often asymptomatic; headache or dizziness may occur in severe elevation.","الإفراط في الملح، السمنة، قلة النشاط البدني، العوامل الوراثية.","Excess salt intake, obesity, physical inactivity, and genetics.","Concor (بيسوبرولول)، Diovan (فالسارتان)، وفق تقدير الطبيب.","Concor (bisoprolol), Diovan (valsartan), as determined by the physician."],
+ ["السكري من النوع الثاني","Type 2 Diabetes Mellitus","اضطراب في استقلاب السكر ناتج عن مقاومة الإنسولين ونقص إفرازه.","A metabolic disorder caused by insulin resistance and relative insulin deficiency.","عطش شديد، كثرة التبول، تعب، تأخر التئام الجروح، وتشوش الرؤية.","Excessive thirst, frequent urination, fatigue, slow wound healing, and blurred vision.","السمنة، قلة الحركة، العوامل الوراثية، والتقدم في العمر.","Obesity, physical inactivity, genetics, and advancing age.","Glucophage (ميتفورمين)، Amaryl (جليميبيرايد)، مع حمية غذائية ونشاط بدني.","Glucophage (metformin), Amaryl (glimepiride), together with diet and exercise."],
+ ["التهاب الجيوب الأنفية","Sinusitis","التهاب بطانة الجيوب الأنفية.","Inflammation of the lining of the paranasal sinuses.","ألم وضغط في الوجه، احتقان الأنف، إفرازات أنفية، وصداع.","Facial pain and pressure, nasal congestion, nasal discharge, and headache.","عدوى فيروسية غالباً، أو بكتيرية، وحساسية الأنف.","Usually viral infection; also bacterial infection and allergic rhinitis.","Otrivin (زيلوميتازولين) لفترة قصيرة، غسول الأنف بالمحلول الملحي؛ Zithromax (أزيثروميسين) عند الحاجة وبوصفة طبية.","Otrivin (xylometazoline) for a short course, saline nasal rinses; Zithromax (azithromycin) only if needed and prescribed."],
+ ["الإسهال الحاد","Acute Diarrhea","زيادة عدد مرات التبرز مع براز سائل لأقل من 14 يوماً.","Increased frequency of loose or watery stools lasting less than 14 days.","براز مائي متكرر، مغص، وخطر الجفاف.","Frequent watery stools, abdominal cramps, and risk of dehydration.","عدوى فيروسية أو بكتيرية أو تسمم غذائي.","Viral or bacterial infection, or food poisoning.","محلول معالجة الجفاف (ORS) هو الأساس؛ Antinal (نيفوروكسازيد) حسب إرشاد الطبيب.","Oral rehydration solution (ORS) is the cornerstone; Antinal (nifuroxazide) as advised by a physician."],
+ ["الإمساك","Constipation","قلة عدد مرات التبرز أو صعوبة خروج البراز.","Infrequent bowel movements or difficulty passing stool.","ألم وانتفاخ في البطن، وجفاف وصلابة البراز.","Abdominal pain, bloating, and hard, dry stools.","قلة الألياف والسوائل، قلة الحركة، وبعض الأدوية.","Low fiber and fluid intake, inactivity, and certain medications.","Duphalac (لاكتولوز)، زيادة الألياف والسوائل.","Duphalac (lactulose), increased fiber and fluid intake."],
+ ["التهاب المسالك البولية","Urinary Tract Infection (UTI)","عدوى بكتيرية تصيب المثانة أو الكلى.","A bacterial infection of the bladder or kidneys.","حرقة عند التبول، كثرة التبول، ألم أسفل البطن، وقد يصاحبها حرارة.","Burning urination, urinary frequency, lower abdominal pain, and possibly fever.","بكتيريا الإشريكية القولونية (E. coli) في الغالب.","Most commonly Escherichia coli (E. coli).","Cipro (سيبروفلوكساسين)، Monurol (فوسفوميسين)؛ مضاد حيوي بوصفة طبية، مع شرب السوائل بكثرة.","Cipro (ciprofloxacin), Monurol (fosfomycin); antibiotics by prescription, with plenty of fluids."],
+ ["قرحة المعدة","Peptic Ulcer Disease","تقرح في جدار المعدة أو الاثني عشر.","Ulceration of the stomach or duodenal lining.","ألم في أعلى البطن (قد يزيد أو يخف بعد الأكل)، غثيان، وانتفاخ.","Upper abdominal pain (may worsen or ease with meals), nausea, and bloating.","جرثومة المعدة (Helicobacter pylori) والاستعمال المفرط لمضادات الالتهاب غير الستيرويدية.","Helicobacter pylori infection and excessive use of NSAIDs.","Nexium (إيزوميبرازول)، وعلاج استئصال الجرثومة مثل Klacid (كلاريثروميسين) عند وجودها.","Nexium (esomeprazole), plus H. pylori eradication therapy such as Klacid (clarithromycin) when infection is present."],
+ ["الربو","Asthma","مرض مزمن يسبب التهاب وتضيق الشعب الهوائية.","A chronic disease causing airway inflammation and narrowing.","ضيق نفس، أزيز، سعال خاصة ليلاً أو عند الجهد.","Shortness of breath, wheezing, and cough, especially at night or during exertion.","مسببات الحساسية (غبار، وبر الحيوانات، حبوب اللقاح)، التدخين، والعدوى.","Allergens (dust, pet dander, pollen), smoking, and respiratory infections.","Ventolin (سالبيوتامول) لتوسيع الشعب عند النوبات، وبخاخات الكورتيزون الوقائية بإشراف الطبيب.","Ventolin (salbutamol) as a reliever; preventive inhaled corticosteroids under medical supervision."],
+ ["التهاب المفاصل","Arthritis","التهاب أو تآكل في المفاصل، ومن أشهر أنواعه الفصال العظمي والروماتويدي.","Joint inflammation or degeneration; the most common types are osteoarthritis and rheumatoid arthritis.","ألم، تيبس (خاصة صباحاً)، تورم، وتحدد الحركة.","Pain, stiffness (especially in the morning), swelling, and reduced mobility.","التقدم في العمر والتآكل، أو اضطراب مناعي ذاتي كما في الروماتويد.","Aging and wear-and-tear, or autoimmune disease as in rheumatoid arthritis.","Celebrex (سيليكوكسيب)، Voltaren (ديكلوفيناك)، مع العلاج الطبيعي.","Celebrex (celecoxib), Voltaren (diclofenac), along with physiotherapy."],
+ ["النقرس","Gout","التهاب مفصلي ناتج عن ترسب بلورات حمض اليوريك.","Inflammatory arthritis caused by deposition of uric acid crystals.","ألم شديد مفاجئ واحمرار وتورم، وغالباً في إبهام القدم.","Sudden severe pain, redness, and swelling, most often in the big toe.","ارتفاع حمض اليوريك، الإفراط في اللحوم الحمراء والمأكولات البحرية والكحول.","Elevated uric acid, and excess red meat, seafood, and alcohol.","Arcoxia (إيتوريكوكسيب) أو كولشيسين أثناء النوبة؛ Allopurinol (ألوبيورينول) للوقاية بين النوبات.","Arcoxia (etoricoxib) or colchicine during attacks; allopurinol for prevention between attacks."],
+ ["فقر الدم (الأنيميا) بسبب نقص الحديد","Iron-Deficiency Anemia","انخفاض الهيموغلوبين نتيجة نقص الحديد.","Low hemoglobin due to iron deficiency.","دوخة، شحوب، تعب، خفقان، وتساقط الشعر.","Dizziness, pallor, fatigue, palpitations, and hair loss.","سوء التغذية، فقدان الدم (مثل غزارة الدورة)، وضعف الامتصاص.","Poor nutrition, blood loss (e.g., heavy menstruation), and malabsorption.","Ferro-Gradumet (كبريتات الحديدوز)، مع تحديد السبب وفق الطبيب.","Ferro-Gradumet (ferrous sulfate), with the underlying cause identified by a physician."],
+ ["ارتفاع الكوليسترول","Hypercholesterolemia","ارتفاع مستوى الدهون (الكوليسترول) في الدم.","Elevated blood cholesterol levels.","لا أعراض عادة، ويُكشف بفحص الدهون في الدم.","Usually asymptomatic; detected by a blood lipid profile.","الدهون المشبعة، قلة الحركة، العوامل الوراثية.","Saturated fats, physical inactivity, and genetic factors.","Lipitor (أتورفاستاتين)، Crestor (روسوفاستاتين)، مع حمية غذائية.","Lipitor (atorvastatin), Crestor (rosuvastatin), along with a healthy diet."],
+ ["البواسير","Hemorrhoids","تورم وتمدد في أوردة الشرج والمستقيم.","Swollen and dilated veins in the anus and rectum.","ألم، حكة، ونزيف أحمر فاتح عند التبرز.","Pain, itching, and bright red bleeding during defecation.","الإمساك المزمن، الجهد أثناء التبرز، الحمل، والسمنة.","Chronic constipation, straining, pregnancy, and obesity.","Daflon (ديوزمين/هسبيريدين)، مراهم وتحاميل موضعية، وزيادة الألياف.","Daflon (diosmin/hesperidin), topical ointments and suppositories, and increased fiber."],
+ ["قصور الغدة الدرقية","Hypothyroidism","نقص إفراز هرمونات الغدة الدرقية.","Underproduction of thyroid hormones.","زيادة الوزن، خمول، برودة، جفاف الجلد، وإمساك.","Weight gain, lethargy, cold intolerance, dry skin, and constipation.","التهاب الغدة الدرقية المناعي (هاشيموتو) غالباً.","Most commonly autoimmune thyroiditis (Hashimoto's disease).","Thyrox (ليفوثيروكسين) بجرعة يحددها الطبيب حسب فحص TSH.","Thyrox (levothyroxine), at a dose set by the physician based on TSH levels."],
+ ["الأرتيكاريا (الشرى)","Urticaria (Hives)","طفح جلدي بارز مصحوب بحكة.","Raised, itchy skin welts.","حكة، احمرار، وانتفاخات جلدية متنقلة.","Itching, redness, and transient raised wheals.","الحساسية من غذاء أو دواء، العدوى، أو أسباب غير معروفة.","Food or drug allergy, infections, or unknown triggers.","Telfast (فيكسوفينادين)، Zyrtec (سيتريزين).","Telfast (fexofenadine), Zyrtec (cetirizine)."],
+ ["حب الشباب","Acne Vulgaris","التهاب الغدد الدهنية والجريبات الشعرية.","Inflammation of the sebaceous glands and hair follicles.","بثور، رؤوس سوداء وبيضاء، وقد تترك ندوباً.","Pimples, blackheads, whiteheads, and possible scarring.","التغيرات الهرمونية، فرط الإفراز الدهني، وبكتيريا الجلد.","Hormonal changes, excess sebum, and skin bacteria.","Doxycycline (دوكسيسيكلين) بوصفة طبية، ومستحضرات موضعية مثل البنزويل بيروكسايد.","Doxycycline (by prescription) and topical agents such as benzoyl peroxide."],
+ ["التهاب الأذن الوسطى","Otitis Media","التهاب في الأذن الوسطى خلف طبلة الأذن.","Inflammation of the middle ear behind the eardrum.","ألم في الأذن، حرارة، ضعف سمع مؤقت، وطنين.","Ear pain, fever, temporary hearing loss, and tinnitus.","عدوى بكتيرية أو فيروسية، غالباً بعد رشح.","Bacterial or viral infection, often following a cold.","مسكنات الألم؛ Augmentin (أموكسيسيلين/كلافولانيك) عند الحاجة بوصفة طبية؛ قطرات حسب الحالة.","Analgesics; Augmentin (amoxicillin/clavulanate) when indicated and prescribed; ear drops depending on the case."],
+ ["هشاشة العظام","Osteoporosis","انخفاض كثافة العظام وزيادة قابليتها للكسر.","Reduced bone density with increased fracture risk.","غالباً صامتة حتى حدوث كسر، وقد يظهر ألم الظهر وانحناء القامة.","Often silent until a fracture occurs; back pain and loss of height may develop.","نقص الكالسيوم وفيتامين D، سن اليأس، والتقدم في العمر.","Calcium and vitamin D deficiency, menopause, and aging.","الكالسيوم وفيتامين D، وأدوية تقوية العظام بإشراف الطبيب.","Calcium and vitamin D, plus bone-strengthening drugs under medical supervision."],
+ ["حصى الكلى","Kidney Stones (Nephrolithiasis)","ترسبات معدنية صلبة تتكون في الكلى.","Hard mineral deposits that form in the kidneys.","مغص كلوي شديد يمتد من الخاصرة إلى الأسفل، دم في البول، غثيان.","Severe renal colic radiating from the flank downward, blood in the urine, and nausea.","قلة شرب الماء، حمية غنية بالأملاح والبروتين الحيواني، وعوامل وراثية.","Low fluid intake, high-salt and high-animal-protein diet, and genetic factors.","مسكنات مثل Voltaren (ديكلوفيناك حقن)، وشرب السوائل بكثرة؛ وقد يلزم تفتيت الحصى أو إزالتها.","Analgesics such as Voltaren (diclofenac injection), high fluid intake; stone fragmentation or removal may be needed."],
+ ["الأرق","Insomnia","صعوبة في بدء النوم أو الاستمرار فيه.","Difficulty falling or staying asleep.","إرهاق نهاري، ضعف التركيز، وتقلب المزاج.","Daytime fatigue, poor concentration, and mood changes.","التوتر والقلق، عادات نوم سيئة، الكافيين.","Stress and anxiety, poor sleep habits, and caffeine.","تحسين عادات النوم؛ Panadol Night (باراسيتامول + ديفينهيدرامين) لفترة قصيرة؛ أعشاب مهدئة كالمليسة.","Sleep hygiene; Panadol Night (paracetamol + diphenhydramine) short-term; calming herbs such as lemon balm."],
+ ["التهاب اللثة","Gingivitis","التهاب اللثة نتيجة تراكم البلاك.","Gum inflammation caused by plaque accumulation.","احمرار وتورم ونزيف اللثة، ورائحة فم كريهة.","Red, swollen, bleeding gums and bad breath.","سوء نظافة الفم وتراكم الجير.","Poor oral hygiene and tartar buildup.","تنظيف الأسنان عند الطبيب، غسول فموي مطهر؛ Flagyl (ميترونيدازول) عند الحاجة بوصفة طبية.","Professional dental cleaning, antiseptic mouthwash; Flagyl (metronidazole) when needed and prescribed."],
+ ["دوار الحركة","Motion Sickness","غثيان ودوخة تحدث أثناء السفر.","Nausea and dizziness occurring during travel.","دوخة، غثيان، قيء، وتعرق بارد.","Dizziness, nausea, vomiting, and cold sweats.","تعارض الإشارات بين الأذن الداخلية والبصر أثناء الحركة.","Conflicting signals between the inner ear and vision during movement.","Dramamine (ديمنهيدرينات) قبل السفر بنصف ساعة تقريباً؛ ويمكن أن يخفف Motilium (دومبيريدون) الغثيان.","Dramamine (dimenhydrinate) about 30 minutes before travel; Motilium (domperidone) may relieve nausea."],
+ ["التشنج العضلي","Muscle Spasm","انقباض لا إرادي ومؤلم في العضلة.","Sudden, involuntary, and painful muscle contraction.","شد وألم عضلي موضعي.","Localized muscle tightness and pain.","الإجهاد البدني، الجفاف، ونقص الأملاح.","Physical strain, dehydration, and electrolyte imbalance.","Cataflam (ديكلوفيناك)، مراهم موضعية، تمدد وراحة.","Cataflam (diclofenac), topical ointments, stretching, and rest."],
+ ["جفاف العين","Dry Eye Syndrome","نقص كمية الدموع أو جودتها.","Insufficient quantity or quality of tears.","حرقة، إحساس بوجود جسم غريب، واحمرار.","Burning, foreign-body sensation, and redness.","الاستخدام المطول للشاشات، الجو الجاف، والتقدم في العمر.","Prolonged screen use, dry environments, and aging.","قطرات الدموع الاصطناعية، وفترات راحة للعين.","Artificial tear drops and regular eye rest."],
+ ["عدوى جرثومة المعدة","Helicobacter pylori Infection","عدوى بكتيرية مزمنة في المعدة.","A chronic bacterial infection of the stomach.","غثيان، ألم أو حرقة في المعدة، وانتفاخ.","Nausea, stomach pain or burning, and bloating.","العدوى بجرثومة Helicobacter pylori عبر الطعام والماء الملوثين.","Infection with Helicobacter pylori via contaminated food or water.","علاج ثلاثي أو رباعي: Klacid (كلاريثروميسين)، Amoxil (أموكسيسيلين)، Nexium (إيزوميبرازول)، بوصفة طبية.","Triple or quadruple therapy: Klacid (clarithromycin), Amoxil (amoxicillin), Nexium (esomeprazole), by prescription."],
+ ["التهاب القصبات الهوائية","Bronchitis","التهاب الشعب الهوائية.","Inflammation of the bronchial tubes.","سعال مع بلغم، ضيق نفس خفيف، وتعب.","Cough with phlegm, mild shortness of breath, and fatigue.","فيروسات غالباً، والتدخين في الحالات المزمنة.","Mostly viral; smoking in chronic cases.","مقشعات مثل Prospan؛ Zithromax (أزيثروميسين) فقط عند ثبوت عدوى بكتيرية وبوصفة طبية.","Expectorants such as Prospan; Zithromax (azithromycin) only if a bacterial infection is confirmed and prescribed."],
+ ["الحزام الناري","Herpes Zoster (Shingles)","طفح مؤلم ناتج عن إعادة تنشيط فيروس الحماق.","A painful rash caused by reactivation of the varicella-zoster virus.","ألم حارق، وطفح حويصلي على شكل شريط في جانب واحد من الجسم.","Burning pain and a blistering rash in a band on one side of the body.","إعادة تنشيط فيروس الحماق (جدري الماء) الكامن في الأعصاب.","Reactivation of latent varicella-zoster (chickenpox) virus in nerve tissue.","Acyclovir (أسيكلوفير) مضاد فيروسي يُبدأ مبكراً، مع مسكنات الألم.","Acyclovir (antiviral) started early, with analgesics."],
+ ["التهاب الملتحمة","Conjunctivitis (Pink Eye)","التهاب الغشاء الشفاف الذي يغطي العين.","Inflammation of the thin membrane covering the eye.","احمرار، حكة، دموع أو إفرازات.","Redness, itching, tearing, or discharge.","عدوى فيروسية أو بكتيرية أو حساسية.","Viral or bacterial infection, or allergy.","قطرات مضاد حيوي في الحالات البكتيرية، أو مضاد حساسية في الحالات التحسسية، حسب الطبيب.","Antibiotic drops for bacterial cases, or antihistamine drops for allergic cases, as directed by a physician."],
+ ["الدوالي","Varicose Veins","توسع والتواء الأوردة السطحية، وخاصة في الساقين.","Enlarged, twisted superficial veins, especially in the legs.","ألم وثقل في الساق، تورم، وظهور أوردة بارزة.","Leg pain and heaviness, swelling, and visible bulging veins.","الوقوف الطويل، الوراثة، الحمل، والسمنة.","Prolonged standing, genetics, pregnancy, and obesity.","Daflon (ديوزمين/هسبيريدين)، جوارب ضاغطة، وتجنب الوقوف الطويل.","Daflon (diosmin/hesperidin), compression stockings, and avoiding prolonged standing."],
+ ["الالتهابات الفطرية الجلدية","Fungal Skin Infections (Tinea)","عدوى فطرية سطحية في الجلد.","Superficial fungal infections of the skin.","حكة، احمرار، وتقشر على شكل حلقات.","Itching, redness, and scaly ring-shaped patches.","فطريات جلدية تنتشر في الأجواء الرطبة.","Dermatophyte fungi that thrive in moist environments.","كريمات مضادة للفطريات (مثل كلوتريمازول أو تيربينافين)، مع إبقاء الجلد جافاً.","Topical antifungal creams (e.g., clotrimazole or terbinafine), while keeping the skin dry."],
+ ["الاكتئاب الخفيف","Mild Depression","اضطراب في المزاج يؤثر على الحياة اليومية.","A mood disorder that affects daily functioning.","حزن مستمر، فقدان الاهتمام، تغير الشهية والنوم.","Persistent sadness, loss of interest, and changes in appetite and sleep.","ضغوط نفسية واجتماعية، عوامل وراثية وبيولوجية.","Psychological and social stress, and genetic and biological factors.","العلاج النفسي والدعم الاجتماعي ونمط حياة صحي، واستشارة الطبيب لتقييم الحاجة لدواء.","Psychotherapy, social support, and a healthy lifestyle; consult a physician to assess the need for medication."],
+ ["نقص فيتامين د","Vitamin D Deficiency","انخفاض مستوى فيتامين د في الدم، وهو شائع.","Low blood vitamin D level, a common condition.","ألم في العظام والعضلات، تعب، وضعف عام.","Bone and muscle pain, fatigue, and general weakness.","قلة التعرض للشمس، وقلة المصادر الغذائية.","Limited sun exposure and low dietary intake.","Vitamin D3 (كوليكالسيفيرول) بجرعة يحددها الطبيب بحسب نتيجة الفحص.","Vitamin D3 (cholecalciferol) at a dose determined by the physician based on blood tests."],
+ ["فتق الحجاب الحاجز (فتق الفرجة)","Hiatal Hernia","انزلاق جزء من المعدة إلى الصدر عبر فتحة الحجاب الحاجز.","Protrusion of part of the stomach into the chest through the diaphragm opening.","حرقة، ارتجاع، وصعوبة في البلع أحياناً.","Heartburn, reflux, and occasional difficulty swallowing.","ضعف عضلات الحجاب الحاجز، السمنة، والسعال المزمن.","Weakened diaphragm muscles, obesity, and chronic cough.","Nexium (إيزوميبرازول) للأعراض، وقد تلزم الجراحة في الحالات الشديدة.","Nexium (esomeprazole) for symptoms; surgery may be required in severe cases."],
+ ["التهاب المرارة","Cholecystitis","التهاب المرارة، وغالباً بسبب الحصى.","Inflammation of the gallbladder, usually due to gallstones.","ألم في أعلى البطن الأيمن، غثيان، وحرارة.","Right upper abdominal pain, nausea, and fever.","حصى المرارة التي تسد القناة المرارية، والأطعمة الدسمة كمحرض.","Gallstones obstructing the bile duct; fatty meals may trigger attacks.","مسكنات ومضادات حيوية في المستشفى، وغالباً استئصال المرارة جراحياً.","Analgesics and antibiotics in hospital, and usually surgical removal of the gallbladder."],
+ ["الصدفية","Psoriasis","مرض جلدي مناعي مزمن.","A chronic immune-mediated skin disease.","لويحات حمراء مغطاة بقشور فضية، وحكة.","Red plaques covered with silvery scales, with itching.","خلل في الجهاز المناعي مع استعداد وراثي.","Immune dysregulation with genetic predisposition.","مراهم الكورتيزون الموضعية ومرطبات، وعلاجات أخرى بإشراف طبيب الجلدية.","Topical corticosteroids and emollients, and other therapies under a dermatologist."],
+ ["الإكزيما (التهاب الجلد التأتبي)","Eczema (Atopic Dermatitis)","التهاب جلدي مزمن مرتبط بالحساسية.","A chronic allergy-related inflammatory skin condition.","حكة، جفاف، واحمرار الجلد.","Itching, dryness, and redness of the skin.","عوامل وراثية، ومحسسات ومهيجات بيئية.","Genetic factors, environmental allergens, and irritants.","مرطبات طبية بانتظام، وكورتيزون موضعي عند اشتداد الأعراض.","Regular medical emollients and topical corticosteroids during flares."],
+ ["نقص الكالسيوم","Hypocalcemia (Calcium Deficiency)","انخفاض مستوى الكالسيوم في الدم.","Low blood calcium level.","تشنجات وتنميل في الأطراف والفم، وشد عضلي.","Muscle cramps, numbness and tingling in the extremities and around the mouth.","قلة الكالسيوم في الغذاء، نقص فيتامين د، وبعض الأمراض.","Low dietary calcium, vitamin D deficiency, and certain diseases.","مكملات الكالسيوم وفيتامين د بإشراف الطبيب.","Calcium and vitamin D supplements under medical supervision."],
+ ["التهاب البروستاتا","Prostatitis","التهاب غدة البروستاتا.","Inflammation of the prostate gland.","صعوبة وألم في التبول، ألم حوضي، وقد تظهر حرارة.","Difficult or painful urination, pelvic pain, and possibly fever.","عدوى بكتيرية في الغالب.","Most commonly bacterial infection.","Cipro (سيبروفلوكساسين) أو مضاد حيوي مناسب بوصفة طبية ولمدة كافية.","Cipro (ciprofloxacin) or another suitable antibiotic, prescribed for an adequate duration."],
+ ["قرح الفم (القلاع)","Aphthous Ulcers (Canker Sores)","تقرحات بيضاء مؤلمة داخل الفم.","Painful white ulcers inside the mouth.","ألم وحرقة، خاصة عند الأكل والكلام.","Pain and burning, especially when eating or speaking.","التوتر، إصابة موضعية، نقص الحديد وفيتامين B12 وحمض الفوليك.","Stress, local trauma, and deficiencies of iron, vitamin B12, or folic acid.","جل فموي موضعي أو غسول مطهر، وتعويض النقص الغذائي إن وُجد.","Topical oral gels or antiseptic rinses, and correction of any nutritional deficiency."],
+ ["سلس البول الليلي عند الأطفال","Nocturnal Enuresis (Bedwetting)","التبول اللاإرادي أثناء النوم عند الأطفال.","Involuntary urination during sleep in children.","تبول ليلي متكرر.","Recurrent nighttime urination.","عوامل وراثية، تأخر نضج التحكم بالمثانة، أو أسباب نفسية وعضوية.","Genetic factors, delayed bladder control maturation, or psychological and organic causes.","تعديل السلوك والتقليل من السوائل مساءً؛ والعلاج الدوائي حسب تقييم الطبيب.","Behavioral measures and limiting evening fluids; medication only after medical evaluation."],
+ ["الكبد الدهني","Fatty Liver Disease (Steatotic Liver Disease)","تراكم الدهون في خلايا الكبد.","Excess fat accumulation in liver cells.","غالباً بلا أعراض، وقد يظهر إرهاق وانزعاج في أعلى البطن.","Often asymptomatic; fatigue and upper abdominal discomfort may occur.","السمنة، مقاومة الإنسولين، وارتفاع الدهون.","Obesity, insulin resistance, and high blood lipids.","إنقاص الوزن، حمية صحية، نشاط بدني؛ وقد يُستعمل شوك الجمل (ميلك ثيسل) كمساعد.","Weight loss, a healthy diet, and exercise; milk thistle may be used as an adjunct."],
+ ["التهاب الأوتار","Tendinitis","التهاب أو إجهاد في الوتر.","Inflammation or irritation of a tendon.","ألم وتورم قرب المفصل، يزداد بالحركة.","Pain and swelling near a joint that worsens with movement.","الإفراط في الحركة المتكررة أو الرياضة.","Overuse from repetitive movement or sports.","راحة، كمادات باردة، Voltaren (ديكلوفيناك) موضعي أو فموي، وعلاج طبيعي.","Rest, cold compresses, Voltaren (diclofenac) topical or oral, and physiotherapy."],
+ ["التهاب الزائدة الدودية","Appendicitis","التهاب حاد في الزائدة الدودية، وهو حالة طارئة.","Acute inflammation of the appendix; a medical emergency.","ألم يبدأ حول السرة ثم ينتقل إلى أسفل البطن الأيمن، غثيان، وحرارة.","Pain that begins around the navel then shifts to the right lower abdomen, with nausea and fever.","انسداد تجويف الزائدة.","Obstruction of the appendiceal lumen.","جراحة عاجلة؛ راجع الطوارئ فوراً ولا تتناول مسكنات قبل التشخيص.","Urgent surgery; go to the emergency department immediately and avoid painkillers before diagnosis."],
+ ["متلازمة التعب المزمن","Chronic Fatigue Syndrome","إرهاق مستمر غير مبرر لا يزول بالراحة.","Persistent, unexplained fatigue that is not relieved by rest.","تعب شديد، مشاكل في التركيز والنوم، وآلام عضلية.","Profound fatigue, poor concentration and sleep, and muscle pain.","السبب غير معروف، وتُدرس عوامل فيروسية ومناعية.","The cause is unknown; viral and immune factors are under study.","علاج داعم: تنظيم النشاط، النوم الجيد، تقييم نقص الفيتامينات، وإشراف الطبيب.","Supportive care: activity pacing, good sleep, evaluation for vitamin deficiencies, and medical follow-up."]
 ];
 
-/* ============ طبقة البيانات ============ */
+/* كل عشبة: [اسم ar, en, فوائد ar, en, استخدام ar, en] */
+const herbsList = [
+ ["البابونج","Chamomile","يساعد على الاسترخاء وتحسين النوم، ويخفف تشنجات الجهاز الهضمي.","Promotes relaxation and sleep, and relieves digestive spasms.","تُنقع ملعقة صغيرة من الأزهار المجففة في كوب ماء مغلي 5–10 دقائق، ثم تُصفّى وتُشرب مرة إلى مرتين يومياً. يُحذر منها لمن لديهم حساسية من نباتات الفصيلة النجمية.","Steep 1 teaspoon of dried flowers in a cup of boiling water for 5–10 minutes, strain, and drink once or twice daily. Avoid if allergic to plants of the daisy family."],
+ ["اليانسون","Anise","يعمل كطارد للغازات ومقشّع يساعد على تخفيف السعال وإخراج البلغم.","Acts as a carminative and expectorant, easing cough and loosening phlegm.","تُغلى ملعقة صغيرة من البذور 3 دقائق، ثم يُغطى الكوب وتُترك المنقوعة لتفتر قبل شربها.","Boil 1 teaspoon of seeds for 3 minutes, cover, and let it cool slightly before drinking."],
+ ["الزعتر","Thyme","له خصائص مضادة للميكروبات ومقشّعة، ويفيد في السعال والتهاب الحلق.","Has antimicrobial and expectorant properties; useful for cough and sore throat.","يُحضّر كمنقوع بنقعه في ماء مغلي 10 دقائق، أو يُستخدم كغرغرة للحلق.","Prepare as an infusion by steeping in boiling water for 10 minutes, or use as a gargle for the throat."],
+ ["المرمية","Sage","تدعم الذاكرة والهضم، وتخفف التعرق الزائد وبعض أعراض سن اليأس.","Supports memory and digestion, and may reduce excessive sweating and some menopausal symptoms.","تُنقع الأوراق في ماء مغلي 5 دقائق. تُتجنب أثناء الحمل والرضاعة، ولا يُنصح بالإكثار منها.","Steep the leaves in boiling water for 5 minutes. Avoid during pregnancy and breastfeeding, and do not use in excess."],
+ ["النعناع","Peppermint","يخفف أعراض القولون العصبي وعسر الهضم والغثيان.","Relieves symptoms of irritable bowel syndrome, indigestion, and nausea.","تُنقع أوراقه الطازجة أو المجففة في ماء ساخن وتُشرب بعد الوجبات. قد يزيد الحرقة لدى مرضى الارتجاع المعدي المريئي.","Steep fresh or dried leaves in hot water and drink after meals. May worsen heartburn in people with GERD."],
+ ["الزنجبيل","Ginger","يخفف الغثيان (ومنه غثيان السفر والحمل)، وله تأثير مضاد للالتهاب.","Relieves nausea (including motion sickness and morning sickness) and has anti-inflammatory effects.","يُقطّع أو يُبشر الجذر الطازج ويُغلى 5 دقائق، ويمكن إضافة العسل والليمون. يُستشار الطبيب عند تناول أدوية مميعة للدم.","Slice or grate fresh root and boil for 5 minutes; honey and lemon may be added. Consult a physician if you take blood thinners."],
+ ["القرفة","Cinnamon","قد تساهم بشكل محدود في تحسين حساسية الإنسولين وضبط سكر الدم.","May modestly improve insulin sensitivity and blood sugar control.","تُغلى أعواد القرفة أو يُضاف مسحوقها بكميات قليلة للمشروبات الدافئة. على مرضى السكري استشارة الطبيب، ولا تغني عن علاجهم.","Boil cinnamon sticks or add small amounts of powder to warm drinks. People with diabetes should consult a physician; it does not replace medication."],
+ ["الكركم","Turmeric","يحتوي على الكركمين ذي الخصائص المضادة للأكسدة والالتهاب، وقد يخفف آلام المفاصل.","Contains curcumin, with antioxidant and anti-inflammatory properties that may ease joint pain.","يُخلط مع قليل من الفلفل الأسود وحليب أو ماء دافئ لتحسين الامتصاص. يُتجنب عند وجود حصى مرارية أو أثناء تناول مميعات الدم.","Mix with a pinch of black pepper in warm milk or water to improve absorption. Avoid with gallstones or while taking blood thinners."],
+ ["الكمون","Cumin","يساعد على الهضم ويخفف الانتفاخ والغازات.","Aids digestion and relieves bloating and gas.","تُغلى ملعقة صغيرة من البذور وتُشرب دافئة قبل أو بعد الوجبات.","Boil 1 teaspoon of seeds and drink warm before or after meals."],
+ ["إكليل الجبل (الروزماري)","Rosemary","غني بمضادات الأكسدة، ويُستخدم تقليدياً لتنشيط التركيز والذاكرة.","Rich in antioxidants and traditionally used to support concentration and memory.","يُستعمل كمنقوع دافئ أو كنكهة للطعام بكميات معتدلة. يُتجنب بجرعات علاجية أثناء الحمل.","Use as a warm infusion or as a culinary herb in moderate amounts. Avoid therapeutic doses during pregnancy."],
+ ["الشمرة (الشومر)","Fennel","يخفف الانتفاخ والمغص ويُستعمل تقليدياً لتحفيز إدرار الحليب.","Relieves bloating and cramps and is traditionally used to support lactation.","تُهرس البذور وتُنقع في ماء ساخن 10 دقائق ثم تُصفّى. استشر الطبيب قبل إعطائها للرضع أو الإكثار منها أثناء الرضاعة.","Crush the seeds, steep in hot water for 10 minutes, and strain. Consult a physician before giving it to infants or using large amounts while breastfeeding."],
+ ["البقدونس","Parsley","له تأثير مُدرّ للبول خفيف ويدعم وظيفة الكلى.","Has a mild diuretic effect and supports kidney function.","يُغلى كوب من الأوراق الطازجة المفرومة ويُشرب كوب واحد يومياً. يُتجنب بكميات علاجية أثناء الحمل ولمرضى الكلى دون استشارة الطبيب.","Simmer a cup of chopped fresh leaves and drink one cup daily. Avoid therapeutic amounts during pregnancy and in kidney disease without medical advice."],
+ ["المليسة (الترنجان)","Lemon Balm","تخفف القلق والتوتر الخفيف وتساعد على النوم.","Eases mild anxiety and stress and helps promote sleep.","تُنقع الأوراق الطازجة أو المجففة في ماء مغلي 5–10 دقائق وتُشرب مساءً.","Steep fresh or dried leaves in boiling water for 5–10 minutes and drink in the evening."],
+ ["حبة البركة","Black Seed (Nigella sativa)","قد تدعم المناعة وتملك خصائص مضادة للأكسدة، لكن الأدلة السريرية عليها لا تزال محدودة.","May support immunity and has antioxidant properties, although clinical evidence remains limited.","تُطحن طازجة وتُخلط مع العسل بكمية صغيرة. تُتجنب أثناء الحمل، وتُستشار الطبيب عند تناول أدوية السكري أو ضغط الدم.","Grind fresh and mix a small amount with honey. Avoid during pregnancy; consult a physician if taking diabetes or blood pressure medication."],
+ ["الحلبة","Fenugreek","تحفز الشهية وتدعم الهضم، وقد تساهم في خفض سكر الدم.","Stimulates appetite, supports digestion, and may help lower blood sugar.","تُنقع البذور ليلاً ثم تُغلى وتُشرب. تُتجنب أثناء الحمل، ويحتاج مرضى السكري لمراقبة السكر.","Soak seeds overnight, then boil and drink. Avoid during pregnancy; people with diabetes should monitor blood sugar."],
+ ["البردقوش (المردقوش)","Marjoram","يساعد على الهضم ويخفف التوتر والمغص الخفيف.","Aids digestion and eases tension and mild cramps.","يُصب الماء المغلي على الأوراق وتُترك 7 دقائق ثم تُشرب. تُتجنب بكميات كبيرة أثناء الحمل.","Pour boiling water over the leaves, steep for 7 minutes, then drink. Avoid large amounts during pregnancy."],
+ ["الكزبرة","Coriander","تدعم الهضم، وقد تساهم في خفض سكر الدم والكوليسترول.","Supports digestion and may help lower blood sugar and cholesterol.","تُغلى ملعقة صغيرة من البذور وتُشرب دافئة بعد الأكل.","Boil 1 teaspoon of seeds and drink warm after meals."],
+ ["عرق السوس","Licorice","يهدئ السعال والتهاب الحلق وقد يخفف عسر الهضم، لكنه قد يرفع ضغط الدم ويخفض البوتاسيوم.","Soothes cough and sore throat and may ease indigestion, but can raise blood pressure and lower potassium.","يُنقع الجذر في الماء ويُشرب بكميات قليلة ولفترة قصيرة. يُتجنب لمرضى الضغط والقلب والكلى وأثناء الحمل.","Soak the root in water and drink in small amounts for short periods. Avoid in hypertension, heart or kidney disease, and during pregnancy."],
+ ["الهيل (الحبهان)","Cardamom","يخفف الغازات وعسر الهضم ويحسّن نكهة المشروبات.","Relieves gas and indigestion and adds flavor to beverages.","يُهرس ويُضاف إلى القهوة أو الشاي أو يُغلى مع الماء.","Crush and add to coffee or tea, or boil in water."],
+ ["الخطمية","Marshmallow Root (Althaea officinalis)","تحتوي على مواد مخاطية تلطّف الحلق المتهيج وتخفف السعال الجاف.","Contains mucilage that soothes an irritated throat and eases dry cough.","تُنقع الجذور أو الأزهار في ماء بارد أو فاتر عدة ساعات ثم تُصفّى وتُشرب. قد تؤخر امتصاص بعض الأدوية، فاترك فاصلاً بينهما.","Soak roots or flowers in cold or lukewarm water for several hours, strain, and drink. It may delay absorption of some medicines, so separate doses."],
+ ["القنفذية (إشنسا)","Echinacea","قد تقلل مدة نزلات البرد وشدتها قليلاً إذا استُخدمت مبكراً.","May modestly shorten the duration and severity of colds when started early.","تُستعمل كشاي أو مستخلص سائل عند بداية الأعراض ولفترة قصيرة (حتى 10 أيام تقريباً). تُتجنب في أمراض المناعة الذاتية.","Use as tea or liquid extract at symptom onset for a short period (up to about 10 days). Avoid in autoimmune diseases."],
+ ["الزعفران","Saffron","قد يحسّن المزاج ويخفف أعراض الاكتئاب الخفيف.","May improve mood and relieve symptoms of mild depression.","يُنقع عدد قليل جداً من الخيوط (أقل من 30 ملغ يومياً) في ماء ساخن أو حليب. الجرعات الكبيرة سامة وتُتجنب أثناء الحمل.","Steep a very small number of threads (under 30 mg per day) in hot water or milk. Large doses are toxic and should be avoided during pregnancy."],
+ ["القرنفل","Clove","يحتوي على الأوجينول ذي التأثير المسكّن والمطهّر الموضعي لألم الأسنان.","Contains eugenol, which has local analgesic and antiseptic effects for toothache.","يُوضع زيته مخففاً على القطنة لتلامس السن المؤلم برفق، أو يُمضغ مسمار واحد. يُتجنب الزيت النقي على اللثة، وتجنبه عند الأطفال.","Apply diluted oil on cotton to the sore tooth gently, or chew a single bud. Avoid pure oil on the gums and do not use in children."],
+ ["الريحان (الحبق)","Basil","يخفف المغص والانتفاخ ويساعد على الهضم.","Relieves cramps and bloating and aids digestion.","تُنقع الأوراق الطازجة في ماء مغلي وتُشرب دافئة كشاي عشبي.","Steep fresh leaves in boiling water and drink warm as an herbal tea."],
+ ["اللافندر (الخزامى)","Lavender","يساعد على الاسترخاء وتحسين النوم وتخفيف القلق الخفيف.","Promotes relaxation, improves sleep, and eases mild anxiety.","يُشرب منقوع الأزهار خفيفاً كشاي، أو يُستنشق زيته العطري. لا يُشرب الزيت العطري.","Drink a light infusion of the flowers as tea, or inhale the essential oil. Never ingest the essential oil."]
+];
+
+/* ============ الأدوات الأساسية ============ */
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm = s => String(s ?? '').toLowerCase().replace(/[\u064B-\u065F]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim();
 const FIELDS = ['name','category','active','indication','price','alternative'];
 const configured = !!firebaseConfig.projectId;
 let F = null, meds = [], isAdmin = false, editingId = null;
+
+let lang = 'ar';
+try { lang = localStorage.getItem('jp_lang') === 'en' ? 'en' : 'ar'; } catch {}
+const tr = k => I18N[lang][k] ?? I18N.ar[k] ?? k;
+const pick = (arr, i) => arr[i * 2 + (lang === 'ar' ? 0 : 1)];
 
 if (configured) {
   try {
@@ -281,16 +378,16 @@ function showTab(id) {
 
 /* ============ العرض ============ */
 const medCard = m => `<div class="res"><h4>${esc(m.name)}</h4>
-  <p><strong>الاستخدام:</strong> ${esc(m.indication)}</p>
-  <p><strong>التركيبة:</strong> ${esc(m.active)}</p>
-  <p><strong>السعر:</strong> ${esc(m.price)}</p>
-  ${m.alternative ? `<p class="alt">البدائل: ${esc(m.alternative)}</p>` : ''}</div>`;
+  <p><strong>${tr('usage')}</strong> ${esc(m.indication)}</p>
+  <p><strong>${tr('comp')}</strong> ${esc(m.active)}</p>
+  <p><strong>${tr('price')}</strong> ${esc(m.price)}</p>
+  ${m.alternative ? `<p class="alt">${tr('alts')} ${esc(m.alternative)}</p>` : ''}</div>`;
 
 const cats = () => [...new Set(meds.map(m => m.category).filter(Boolean))];
 
 function renderCats() {
   const c = cats();
-  $('#cats').innerHTML = c.length ? c.map(x => `<div class="item" data-cat="${esc(x)}"><h3>💊 ${esc(x)}</h3><p>${meds.filter(m => m.category === x).length} دواء</p></div>`).join('') : '<p class="empty">لا توجد أدوية بعد.</p>';
+  $('#cats').innerHTML = c.length ? c.map(x => `<div class="item" data-cat="${esc(x)}"><h3>💊 ${esc(x)}</h3><p>${tr('medsCount')(meds.filter(m => m.category === x).length)}</p></div>`).join('') : `<p class="empty">${tr('noMedsYet')}</p>`;
   $('#catResults').innerHTML = '';
 }
 
@@ -302,11 +399,11 @@ function search(q) {
 function doSearch() {
   $('#sugg').style.display = 'none';
   const q = $('#q').value;
-  if (!q.trim()) { $('#results').innerHTML = '<p class="empty">يرجى إدخال اسم للبحث.</p>'; return; }
+  if (!q.trim()) { $('#results').innerHTML = `<p class="empty">${tr('enterName')}</p>`; return; }
   const r = search(q);
   $('#results').innerHTML = r.length
-    ? `<p style="color:var(--primary);font-weight:700;margin-bottom:10px">تم العثور على ${r.length} نتيجة${r.length > 30 ? ' (يعرض أول 30)' : ''}:</p>` + r.slice(0,30).map(medCard).join('')
-    : '<p class="empty">لم نجد أدوية مطابقة لبحثك.</p>';
+    ? `<p style="color:var(--primary);font-weight:700;margin-bottom:10px">${tr('found')(r.length)}${r.length > 30 ? tr('first30') : ''}:</p>` + r.slice(0,30).map(medCard).join('')
+    : `<p class="empty">${tr('noMatch')}</p>`;
 }
 
 let t;
@@ -323,8 +420,12 @@ $('#q').addEventListener('input', () => {
 $('#q').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
 $('#goBtn').addEventListener('click', doSearch);
 
-$('#diseases').innerHTML = diseasesList.map(d => `<div class="item"><h3>🏥 ${esc(d.title)}</h3><p>${esc(d.desc)}</p><div class="det"><strong>الأعراض:</strong><p>${esc(d.symptoms)}</p><strong>الأسباب:</strong><p>${esc(d.causes)}</p><strong style="color:var(--accent)">العلاج المقترح:</strong><p>${esc(d.drugs)}</p></div></div>`).join('');
-$('#herbs').innerHTML = herbsList.map(h => `<div class="item"><h3>🌿 ${esc(h.name)}</h3><p>اضغط لعرض الفوائد وطريقة الاستخدام</p><div class="det"><strong>الفوائد:</strong><p>${esc(h.benefits)}</p><strong style="color:var(--accent)">طريقة الاستخدام:</strong><p>${esc(h.usage)}</p></div></div>`).join('');
+function renderDiseases() {
+  $('#diseases').innerHTML = diseasesList.map((d, n) => `<div class="item"><h3>🏥 ${n + 1}. ${esc(pick(d,0))}</h3><p>${esc(pick(d,1))}</p><div class="det"><strong>${tr('symptoms')}</strong><p>${esc(pick(d,2))}</p><strong>${tr('causes')}</strong><p>${esc(pick(d,3))}</p><strong style="color:var(--accent)">${tr('treatment')}</strong><p>${esc(pick(d,4))}</p></div></div>`).join('');
+}
+function renderHerbs() {
+  $('#herbs').innerHTML = herbsList.map(h => `<div class="item"><h3>🌿 ${esc(pick(h,0))}</h3><p>${tr('tapHerb')}</p><div class="det"><strong>${tr('benefits')}</strong><p>${esc(pick(h,1))}</p><strong style="color:var(--accent)">${tr('howTo')}</strong><p>${esc(pick(h,2))}</p></div></div>`).join('');
+}
 $('#cDis').textContent = diseasesList.length;
 $('#cHerbs').textContent = herbsList.length;
 
@@ -332,42 +433,42 @@ $('#cHerbs').textContent = herbsList.length;
 function renderAdmin() {
   const box = $('#adminTab');
   if (!isAdmin) {
-    box.innerHTML = `<h1>دخول المشرف</h1><div class="search" style="margin-top:16px">
-      <input type="email" id="lEmail" placeholder="البريد الإلكتروني" style="margin-bottom:10px;direction:ltr">
-      <input type="password" id="lPass" placeholder="كلمة المرور" style="margin-bottom:10px;direction:ltr">
-      <button class="btn" style="width:100%" data-act="login">دخول</button><p id="lErr" class="empty"></p></div>`;
+    box.innerHTML = `<h1>${tr('adminLoginH')}</h1><div class="search" style="margin-top:16px">
+      <input type="email" id="lEmail" placeholder="${tr('email')}" style="margin-bottom:10px;direction:ltr">
+      <input type="password" id="lPass" placeholder="${tr('pass')}" style="margin-bottom:10px;direction:ltr">
+      <button class="btn" style="width:100%" data-act="login">${tr('login')}</button><p id="lErr" class="empty"></p></div>`;
     return;
   }
   const e = meds.find(m => m.id === editingId) || {};
   const q = norm($('#aq')?.value || '');
   const list = meds.filter(m => !q || norm(m.name + m.active).includes(q));
-  box.innerHTML = `<h1>لوحة المشرف</h1>
-  ${F ? '' : '<div class="notice info">الوضع التجريبي: البيانات محفوظة في متصفحك فقط ولن يراها الزوار. فعّل Firebase لنشرها للجميع.</div>'}
-  <h3 style="color:var(--primary)">${editingId ? 'تعديل دواء' : 'إضافة دواء'}</h3>
+  box.innerHTML = `<h1>${tr('adminH')}</h1>
+  ${F ? '' : `<div class="notice info">${tr('demo')}</div>`}
+  <h3 style="color:var(--primary)">${editingId ? tr('editMed') : tr('addMed')}</h3>
   <div class="form">
-    <input id="f_name" placeholder="اسم الدواء *" value="${esc(e.name)}">
-    <input id="f_category" list="catList" placeholder="التصنيف *" value="${esc(e.category)}">
+    <input id="f_name" placeholder="${tr('fName')}" value="${esc(e.name)}">
+    <input id="f_category" list="catList" placeholder="${tr('fCat')}" value="${esc(e.category)}">
     <datalist id="catList">${cats().map(c => `<option value="${esc(c)}">`).join('')}</datalist>
-    <input id="f_active" placeholder="المادة الفعالة" value="${esc(e.active)}">
-    <input id="f_price" placeholder="السعر (مثال: 4.20 JOD)" value="${esc(e.price)}">
-    <input class="full" id="f_indication" placeholder="الاستخدام / الاستطباب" value="${esc(e.indication)}">
-    <input class="full" id="f_alternative" placeholder="البدائل (مثال: Biso (2.90), Bisocor (2.50))" value="${esc(e.alternative)}">
+    <input id="f_active" placeholder="${tr('fActive')}" value="${esc(e.active)}">
+    <input id="f_price" placeholder="${tr('fPrice')}" value="${esc(e.price)}">
+    <input class="full" id="f_indication" placeholder="${tr('fInd')}" value="${esc(e.indication)}">
+    <input class="full" id="f_alternative" placeholder="${tr('fAlt')}" value="${esc(e.alternative)}">
   </div>
   <div class="tools">
-    <button class="btn" data-act="save">${editingId ? '💾 حفظ التعديل' : '➕ إضافة'}</button>
-    ${editingId ? '<button class="btn sec" data-act="cancel">إلغاء</button>' : ''}
+    <button class="btn" data-act="save">${editingId ? tr('saveEdit') : tr('add')}</button>
+    ${editingId ? `<button class="btn sec" data-act="cancel">${tr('cancel')}</button>` : ''}
   </div>
   <div class="tools">
-    <button class="btn sec sm" data-act="export">⬇️ تصدير JSON</button>
-    <label class="btn sec sm">⬆️ استيراد JSON/CSV<input type="file" id="imp" accept=".json,.csv" class="hidden"></label>
-    <button class="btn sm" style="background:#64748b" data-act="logout">تسجيل خروج</button>
+    <button class="btn sec sm" data-act="export">${tr('exportJson')}</button>
+    <label class="btn sec sm">${tr('importFile')}<input type="file" id="imp" accept=".json,.csv" class="hidden"></label>
+    <button class="btn sm" style="background:#64748b" data-act="logout">${tr('logout')}</button>
   </div>
-  <p class="sub" style="margin-bottom:8px">ملف CSV: الأعمدة بالترتيب name,category,active,indication,price,alternative</p>
-  <input id="aq" placeholder="ابحث في الأدوية المضافة..." value="${esc($('#aq')?.value || '')}" style="margin:10px 0">
-  <p style="font-weight:700;margin-bottom:8px">${list.length} دواء</p>
+  <p class="sub" style="margin-bottom:8px">${tr('csvHint')}</p>
+  <input id="aq" placeholder="${tr('adminSearch')}" value="${esc($('#aq')?.value || '')}" style="margin:10px 0">
+  <p style="font-weight:700;margin-bottom:8px">${tr('medsCount')(list.length)}</p>
   ${list.slice(0, 100).map(m => `<div class="admin-row"><div><b>${esc(m.name)}</b> <small>${esc(m.category)} · ${esc(m.price)}</small></div>
-    <div><button class="btn sm sec" data-edit="${esc(m.id)}">تعديل</button> <button class="btn sm red" data-del="${esc(m.id)}">حذف</button></div></div>`).join('')}
-  ${list.length > 100 ? '<p class="sub">يعرض أول 100، استخدم البحث للوصول للباقي.</p>' : ''}`;
+    <div><button class="btn sm sec" data-edit="${esc(m.id)}">${tr('edit')}</button> <button class="btn sm red" data-del="${esc(m.id)}">${tr('del')}</button></div></div>`).join('')}
+  ${list.length > 100 ? `<p class="sub">${tr('first100')}</p>` : ''}`;
   $('#aq').addEventListener('input', () => { const p = $('#aq').selectionStart; renderAdmin(); $('#aq').focus(); $('#aq').setSelectionRange(p,p); });
   $('#imp').addEventListener('change', importFile);
 }
@@ -398,37 +499,58 @@ async function importFile(ev) {
       items = rows.map(r => Object.fromEntries(FIELDS.map((f,i) => [f, (r[i] || '').trim()])));
     }
     items = items.filter(m => m.name).map(m => Object.fromEntries(FIELDS.map(f => [f, String(m[f] ?? '').trim()])));
-    if (!items.length) return alert('لا توجد بيانات صالحة في الملف.');
-    if (!confirm(`سيتم إضافة ${items.length} دواء. متابعة؟`)) return;
-    await store.bulk(items); await reload(); alert('تم الاستيراد ✅');
-  } catch (e) { alert('خطأ بالملف: ' + e.message); }
+    if (!items.length) return alert(tr('noData'));
+    if (!confirm(tr('confirmImport')(items.length))) return;
+    await store.bulk(items); await reload(); alert(tr('imported'));
+  } catch (e) { alert(tr('fileErr') + e.message); }
 }
+
+/* ============ تبديل اللغة / Language switch ============ */
+function applyLang() {
+  const html = document.documentElement;
+  html.lang = lang;
+  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.title = tr('pageTitle');
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = tr(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = tr(el.dataset.i18nPh); });
+  $('#langBtn').textContent = lang === 'ar' ? 'English' : 'عربي';
+  renderDiseases();
+  renderHerbs();
+  renderCats();
+  if ($('#q').value.trim()) doSearch(); else $('#results').innerHTML = '';
+  if (isAdmin || !$('#adminTab').classList.contains('hidden')) renderAdmin();
+}
+$('#langBtn').addEventListener('click', () => {
+  lang = lang === 'ar' ? 'en' : 'ar';
+  try { localStorage.setItem('jp_lang', lang); } catch {}
+  applyLang();
+});
 
 /* ============ الأحداث ============ */
 document.addEventListener('click', async e => {
   const t = e.target;
   const tab = t.closest('[data-tab]'); if (tab) return showTab(tab.dataset.tab);
   if (t.closest('#adminLink')) return showTab('adminTab');
-  const pick = t.closest('[data-pick]'); if (pick) { $('#q').value = pick.dataset.pick; return doSearch(); }
+  const pk = t.closest('[data-pick]'); if (pk) { $('#q').value = pk.dataset.pick; return doSearch(); }
   if (!t.closest('.search')) $('#sugg').style.display = 'none';
 
   const cat = t.closest('[data-cat]');
   if (cat) {
     const c = cat.dataset.cat;
-    $('#catResults').innerHTML = `<h3 style="color:var(--primary);margin-bottom:10px">أدوية: ${esc(c)}</h3>` + meds.filter(m => m.category === c).map(medCard).join('');
+    $('#catResults').innerHTML = `<h3 style="color:var(--primary);margin-bottom:10px">${tr('medsOf')} ${esc(c)}</h3>` + meds.filter(m => m.category === c).map(medCard).join('');
     return;
   }
   const item = t.closest('.item:not([data-cat])'); if (item) return item.classList.toggle('open');
 
   const ed = t.closest('[data-edit]'); if (ed) { editingId = ed.dataset.edit; renderAdmin(); return scrollTo({top: $('#adminTab').offsetTop, behavior: 'smooth'}); }
   const del = t.closest('[data-del]');
-  if (del) { if (confirm('حذف هذا الدواء نهائياً؟')) { await store.remove(del.dataset.del); await reload(); } return; }
+  if (del) { if (confirm(tr('confirmDel'))) { await store.remove(del.dataset.del); await reload(); } return; }
 
   const act = t.closest('[data-act]')?.dataset.act;
   if (act === 'login') {
     if (!F) { isAdmin = true; $('#adminNav').classList.remove('hidden'); return renderAdmin(); }
     try { await F.au.signInWithEmailAndPassword(F.auth, $('#lEmail').value, $('#lPass').value); }
-    catch { $('#lErr').textContent = 'بيانات الدخول غير صحيحة.'; }
+    catch { $('#lErr').textContent = tr('loginErr'); }
   }
   if (act === 'logout') { if (F) await F.au.signOut(F.auth); isAdmin = false; $('#adminNav').classList.add('hidden'); showTab('searchTab'); }
   if (act === 'cancel') { editingId = null; renderAdmin(); }
@@ -440,9 +562,9 @@ document.addEventListener('click', async e => {
   }
   if (act === 'save') {
     const m = Object.fromEntries(FIELDS.map(f => [f, $('#f_'+f).value.trim()]));
-    if (!m.name || !m.category) return alert('الاسم والتصنيف مطلوبان.');
+    if (!m.name || !m.category) return alert(tr('reqFields'));
     try { await store.save(m, editingId); editingId = null; await reload(); }
-    catch (err) { alert('فشل الحفظ: ' + err.message); }
+    catch (err) { alert(tr('saveFail') + err.message); }
   }
 });
 
@@ -452,6 +574,7 @@ if (F) F.au.onAuthStateChanged(F.auth, u => {
   if (!$('#adminTab').classList.contains('hidden')) renderAdmin();
 });
 
+applyLang();
 reload();
 </script>
 </body>
