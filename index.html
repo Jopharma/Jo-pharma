@@ -2,132 +2,94 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Jo Pharma: المرجع الدوائي الأردني للأدوية، الأسعار، البدائل، الأمراض والأعشاب.">
-<title>Jo Pharma | المرجع الدوائي والصيدلاني الأردني</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Jo Pharma: المرجع الدوائي الأردني للأدوية والأسعار والبدائل والأمراض والأعشاب.">
+<meta name="theme-color" content="#1e3a8a">
+<title>Jo Pharma | المرجع الدوائي الأردني</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--primary:#1e3a8a;--accent:#f97316;--accent-h:#ea580c;--bg:#f8fafc;--card:#fff;--dark:#0f172a;--muted:#475569;--border:#e2e8f0}
+:root{--pri:#1e3a8a;--hd:#1e3a8a;--acc:#ea580c;--bg:#f8fafc;--card:#fff;--tx:#0f172a;--mut:#475569;--bd:#e2e8f0;--soft:#f1f5f9;--b2:#1e3a8a;--sh:0 8px 22px rgba(15,23,42,.10);--nb:#fff7ed;--nbd:#fed7aa;--nt:#9a3412;--ib:#eff6ff;--ibd:#bfdbfe;--it:#1e40af;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--pri:#8bb4ff;--hd:#0a1330;--acc:#ff9a4d;--bg:#070d1c;--card:#0f1830;--tx:#e8edf7;--mut:#9aa8c4;--bd:#1f2c4d;--soft:#142041;--b2:#2f5bd6;--sh:0 10px 28px rgba(0,0,0,.55);--nb:#2a1a0e;--nbd:#6b3a14;--nt:#fdba74;--ib:#0e1c3a;--ibd:#23407a;--it:#a5c4ff;color-scheme:dark}}
+:root[data-theme="dark"]{--pri:#8bb4ff;--hd:#0a1330;--acc:#ff9a4d;--bg:#070d1c;--card:#0f1830;--tx:#e8edf7;--mut:#9aa8c4;--bd:#1f2c4d;--soft:#142041;--b2:#2f5bd6;--sh:0 10px 28px rgba(0,0,0,.55);--nb:#2a1a0e;--nbd:#6b3a14;--nt:#fdba74;--ib:#0e1c3a;--ibd:#23407a;--it:#a5c4ff;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Tajawal','Inter',sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
-html[lang="en"] body{font-family:'Inter','Tajawal',sans-serif}
-header{background:var(--primary);color:#fff;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50;flex-wrap:wrap;gap:8px}
-.logo{font-size:24px;font-weight:800;direction:ltr}.logo span{color:var(--accent)}
-nav{display:flex;gap:6px;flex-wrap:wrap}
-nav button{background:none;border:0;color:#e2e8f0;font:700 14px inherit;font-family:inherit;padding:8px 14px;border-radius:8px;cursor:pointer}
-nav button:hover,nav button.active{background:rgba(255,255,255,.15);color:#fff}
-.lang-btn{background:#fff;color:var(--primary);border:0;border-radius:20px;font-family:inherit;font-weight:800;font-size:14px;padding:7px 16px;cursor:pointer;transition:.2s}
-.lang-btn:hover{background:var(--accent);color:#fff}
-.container{max-width:1100px;margin:24px auto;padding:0 14px}
-.card{background:var(--card);padding:28px 20px;border-radius:16px;border:1px solid var(--border);box-shadow:0 4px 8px rgba(0,0,0,.04);margin-bottom:24px;animation:fade .4s}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}}
-h1{color:var(--primary);font-size:26px;text-align:center;margin-bottom:6px}
-.sub{text-align:center;color:var(--muted);font-size:15px}
-.stats{display:flex;justify-content:center;gap:12px;margin:16px 0;flex-wrap:wrap}
-.stats div{background:rgba(30,58,138,.06);padding:8px 18px;border-radius:12px;font-weight:700;color:var(--primary)}
-.stats b{color:var(--accent);font-size:20px}
-.notice{background:#fff7ed;border:1px solid #ffedd5;color:#c2410c;padding:10px;border-radius:8px;font-size:13px;text-align:center;margin:12px 0}
-.notice.info{background:#eff6ff;border-color:#dbeafe;color:#1e40af}
-.search{position:relative;max-width:620px;margin:0 auto}
-.row{display:flex;gap:8px}
-input,select,textarea{font-family:inherit;font-size:16px;padding:12px 14px;border:2px solid var(--border);border-radius:10px;width:100%;outline:none;background:#fff}
-input:focus,select:focus,textarea:focus{border-color:var(--primary)}
-.btn{background:var(--accent);color:#fff;border:0;border-radius:10px;font-family:inherit;font-weight:700;font-size:15px;padding:12px 22px;cursor:pointer;white-space:nowrap;display:inline-block}
-.btn:hover{background:var(--accent-h)}
-.btn.sec{background:var(--primary)}.btn.red{background:#ef4444}.btn.sm{padding:6px 12px;font-size:13px}
-.sugg{position:absolute;top:100%;inset-inline:0;background:#fff;border:1px solid var(--border);border-radius:0 0 10px 10px;box-shadow:0 10px 15px rgba(0,0,0,.1);z-index:20;max-height:250px;overflow:auto;display:none}
-.sugg div{padding:10px 14px;cursor:pointer;border-bottom:1px solid #f1f5f9;font-size:14px}
-.sugg div:hover{background:#f8fafc;color:var(--primary)}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:18px}
-.item{background:#f8fafc;padding:18px;border-radius:12px;border:1px solid var(--border);border-inline-start:5px solid var(--primary);cursor:pointer;transition:.2s}
-.item:hover{background:#fff;transform:translateY(-3px);box-shadow:0 8px 14px rgba(0,0,0,.08)}
-.item h3{color:var(--primary);font-size:17px;margin-bottom:6px}
-.det{margin-top:12px;padding-top:12px;border-top:1px dashed var(--border);font-size:14px;display:none}
-.item.open .det{display:block}
-.det strong,.res strong{color:var(--primary)}
-.det p{margin-bottom:6px;color:var(--muted)}
-.res{background:#f8fafc;padding:16px;border-radius:10px;border:1px solid var(--border);border-inline-start:5px solid var(--accent);margin-bottom:10px}
-.res h4{color:var(--primary);font-size:18px;margin-bottom:4px}
-.res .alt{color:var(--accent-h);font-weight:700}
-.empty{text-align:center;color:#b45309;padding:16px}
+body{font-family:'Tajawal','Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:60}
+header{background:var(--hd);color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);z-index:50;flex-wrap:wrap;gap:8px}
+.logo{font-size:22px;font-weight:800;direction:ltr}.logo span{color:#fb923c}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+button,.btn{font-family:inherit;cursor:pointer}
+nav button{background:none;border:0;color:#e2e8f0;font-weight:700;font-size:14px;padding:7px 12px;border-radius:8px}
+nav button:hover,nav button[aria-current=page]{background:rgba(255,255,255,.18);color:#fff}
+.tl{display:flex;gap:6px}.tl button{background:#fff;color:#1e3a8a;border:0;border-radius:18px;font-weight:800;font-size:13px;padding:6px 13px}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+#search{background:radial-gradient(120% 80% at 50% 0,var(--soft),var(--card) 65%)}
+input:focus,select:focus{box-shadow:0 0 0 4px color-mix(in srgb,var(--pri) 25%,transparent)}
+.res:hover,.item:hover{box-shadow:var(--sh)}
+button.cat{display:flex;flex-direction:column;gap:2px;align-items:flex-start;background:var(--card);cursor:pointer;transition:.2s}
+button.cat:hover{border-color:var(--acc)}.cat .ic{font-size:28px;line-height:1.3}.cat small{color:var(--mut);font-weight:400}
+main{max-width:1000px;margin:20px auto;padding:0 14px}
+.card{background:var(--card);padding:26px 18px;border-radius:20px;border:1px solid var(--bd);box-shadow:var(--sh);animation:in .3s}
+@keyframes in{from{opacity:0;transform:translateY(10px)}}
+h1{color:var(--pri);font-size:25px;text-align:center}
+.sub{text-align:center;color:var(--mut);font-size:15px}
+.stats{display:flex;justify-content:center;gap:10px;margin:14px 0;flex-wrap:wrap}
+.stats div{background:var(--soft);padding:6px 16px;border-radius:12px;font-weight:700;color:var(--pri)}.stats b{color:var(--acc);font-size:19px}
+.note{background:var(--nb);border:1px solid var(--nbd);color:var(--nt);padding:10px 12px;border-radius:10px;font-size:13px;text-align:center;margin:12px 0}
+.note.i{background:var(--ib);border-color:var(--ibd);color:var(--it)}
+.row{display:flex;gap:8px;max-width:680px;margin:0 auto 10px}
+input,select{font-family:inherit;font-size:16px;padding:11px 13px;border:2px solid var(--bd);border-radius:10px;width:100%;background:var(--card);color:var(--tx)}
+input:focus,select:focus{border-color:var(--pri);outline:0}
+.btn{background:var(--acc);color:#fff;border:0;border-radius:10px;font-weight:700;font-size:15px;padding:11px 20px;white-space:nowrap;text-decoration:none;display:inline-block}
+.btn:hover{filter:brightness(.92)}.btn.sec{background:var(--b2)}.btn.red{background:#dc2626}.btn.sm{padding:5px 12px;font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:16px}
+.item{background:var(--soft);padding:14px 16px;border-radius:12px;border:1px solid var(--bd);border-inline-start:5px solid var(--pri)}
+.item summary{cursor:pointer;font-weight:700;color:var(--pri);font-size:16px}
+.item .d{margin-top:10px;padding-top:10px;border-top:1px dashed var(--bd);font-size:14px;color:var(--mut)}.item .d b{color:var(--pri)}.item .d b.a{color:var(--acc)}
+button.item{text-align:start;font-size:16px;font-weight:700;color:var(--pri)}button.item:hover{transform:translateY(-2px)}
+.res{background:var(--soft);padding:14px 16px;border-radius:10px;border:1px solid var(--bd);border-inline-start:5px solid var(--acc);margin-bottom:10px}
+.res h3{color:var(--pri);font-size:18px}.res small{color:var(--mut);font-weight:400;font-size:13px}.res b{color:var(--pri)}.res .alt b{color:var(--acc)}
+.act{display:flex;gap:6px;margin-top:8px}
+.cnt{color:var(--pri);font-weight:700;margin:10px 0}.empty{text-align:center;color:#b45309;padding:14px}
 .hidden{display:none!important}
-.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:14px 0}
-.form .full{grid-column:1/-1}
-.admin-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff;flex-wrap:wrap}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
-.wa{position:fixed;bottom:16px;right:16px;background:#22c55e;color:#fff;padding:10px 16px;border-radius:12px;z-index:60;text-decoration:none;display:flex;flex-direction:column;align-items:center;font-size:12px;box-shadow:0 4px 12px rgba(34,197,94,.3)}
-.wa b{direction:ltr;font-size:15px}
-footer{text-align:center;padding:22px 16px 80px;background:var(--dark);color:#94a3b8;font-size:13px;margin-top:30px}
-footer a{color:#94a3b8;cursor:pointer;text-decoration:underline}
-@media(max-width:700px){.row{flex-direction:column}header{justify-content:center}}
+.sk{height:84px;border-radius:10px;margin-bottom:10px;background:linear-gradient(90deg,var(--soft),var(--bd),var(--soft));background-size:200%;animation:sh 1.2s infinite}@keyframes sh{to{background-position:-200%}}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}.form .full{grid-column:1/-1}
+.ar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;flex-wrap:wrap}
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+#toast{position:fixed;inset-inline:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:auto;width:max-content;max-width:90%;background:#0f172a;color:#fff;padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.3s;z-index:70}#toast.on{opacity:1}
+footer{text-align:center;padding:20px 14px;color:var(--mut);font-size:13px}footer a{color:var(--pri)}
+@media(max-width:600px){.row{flex-direction:column}header{justify-content:center}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <header>
   <div class="logo"><span>JO</span> Pharma</div>
-  <nav>
-    <button data-tab="searchTab" class="active" data-i18n="tSearch">البحث الرئيسي</button>
-    <button data-tab="categoriesTab" data-i18n="tCats">تصنيفات الأدوية</button>
-    <button data-tab="diseasesTab" data-i18n="tDis">دليل الأمراض</button>
-    <button data-tab="herbsTab" data-i18n="tHerbs">موسوعة الأعشاب</button>
-    <button data-tab="adminTab" id="adminNav" class="hidden" data-i18n="tAdmin">⚙️ لوحة المشرف</button>
+  <nav aria-label="main">
+    <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="admin" id="adminNav" class="hidden" data-i="nA"></button>
   </nav>
-  <button class="lang-btn" id="langBtn" type="button">English</button>
+  <div class="tl"><button id="thBtn" aria-label="theme">🌓</button><button id="langBtn"></button></div>
 </header>
 
-<div class="container">
-  <section id="searchTab" class="card tab">
-    <h1 data-i18n="h1">المرجع الدوائي والطبي الأردني</h1>
-    <p class="sub" data-i18n="sub">ابحث عن الأدوية، الأسعار، والبدائل المعتمدة في الأردن</p>
-    <div class="stats">
-      <div><b id="cMeds">0</b> <span data-i18n="statMeds">دواء</span></div>
-      <div><b id="cDis">0</b> <span data-i18n="statDis">مرض</span></div>
-      <div><b id="cHerbs">0</b> <span data-i18n="statHerbs">عشبة</span></div>
-    </div>
-    <div class="notice" data-i18n="notice">⚠️ الأسعار استرشادية وقد تختلف بحسب الصيدليات أو تحديثات المؤسسة العامة للغذاء والدواء. المعلومات للتثقيف فقط ولا تغني عن استشارة الطبيب أو الصيدلاني.</div>
-    <div class="search">
-      <div class="row">
-        <input type="text" id="q" data-i18n-ph="ph" placeholder="اسم الدواء أو المادة الفعالة (مثال: Panadol)" autocomplete="off">
-        <button class="btn" id="goBtn" data-i18n="go">بحث</button>
-      </div>
-      <div id="sugg" class="sugg"></div>
-    </div>
-    <div id="results" style="margin-top:20px"></div>
+<main>
+  <section id="search" class="card tab">
+    <h1 data-i="h1"></h1><p class="sub" data-i="sub"></p>
+    <div class="stats"><div><b id="cM">0</b> <span data-i="med"></span></div><div><b id="cD">0</b> <span data-i="dis"></span></div><div><b id="cH">0</b> <span data-i="herb"></span></div></div>
+    <div class="note" data-i="note"></div>
+    <div class="row"><input id="q" type="search" autocomplete="off" aria-label="search"><select id="fc" aria-label="category" style="max-width:200px"></select></div>
+    <div id="res" aria-live="polite"></div>
   </section>
-
-  <section id="categoriesTab" class="card tab hidden">
-    <h1 data-i18n="catsH">تصنيفات الأدوية</h1><p class="sub" data-i18n="catsSub">اختر الفئة لعرض أدويتها</p>
-    <div class="grid" id="cats"></div>
-    <div id="catResults" style="margin-top:16px"></div>
-  </section>
-
-  <section id="diseasesTab" class="card tab hidden">
-    <h1 data-i18n="disH">الدليل الطبي للأمراض</h1><p class="sub" data-i18n="disSub">اضغط على المرض لعرض التفاصيل</p>
-    <div class="notice" data-i18n="disNotice">ℹ️ الأدوية المذكورة أمثلة تجارية للتعريف فقط، ويُحدد الطبيب العلاج المناسب والجرعة. المضادات الحيوية تُصرف بوصفة طبية ولا تُستعمل إلا عند وجود عدوى بكتيرية.</div>
-    <div class="grid" id="diseases"></div>
-  </section>
-
-  <section id="herbsTab" class="card tab hidden">
-    <h1 data-i18n="herbsH">موسوعة الأعشاب الطبية</h1><p class="sub" data-i18n="herbsSub">الفوائد وطريقة الاستخدام الآمنة</p>
-    <div class="notice" data-i18n="herbsNotice">ℹ️ الأعشاب قد تتداخل مع الأدوية وقد لا تناسب الحوامل والمرضعات والأطفال ومرضى الأمراض المزمنة. استشر الطبيب أو الصيدلاني قبل استعمالها.</div>
-    <div class="grid" id="herbs"></div>
-  </section>
-
-  <section id="adminTab" class="card tab hidden"></section>
-</div>
-
-<a href="https://wa.me/962781775710" target="_blank" rel="noopener" class="wa">
-  <span data-i18n="wa">للاقتراحات والتنبيه عن الأخطاء العلمية والإملائية</span><b>📞 +962781775710</b>
-</a>
-<footer><span data-i18n="copy">جميع الحقوق محفوظة © Jo Pharma 2026</span> &nbsp;|&nbsp; <a id="adminLink" data-i18n="adminLink">دخول المشرف</a></footer>
+  <section id="cats" class="card tab hidden"><h1 data-i="nC"></h1><div class="grid" id="catGrid"></div></section>
+  <section id="diseases" class="card tab hidden"><h1 data-i="nD"></h1><div class="note i" data-i="dn"></div><input id="df" type="search" data-ph="filt" style="margin-top:8px"><div class="grid" id="dList"></div></section>
+  <section id="herbs" class="card tab hidden"><h1 data-i="nH"></h1><div class="note i" data-i="hn"></div><input id="hf" type="search" data-ph="filt" style="margin-top:8px"><div class="grid" id="hList"></div></section>
+  <section id="admin" class="card tab hidden"></section>
+</main>
+<footer><span data-i="rights"></span> · <a href="#admin" data-i="alink"></a> · <a href="https://wa.me/962781775710" target="_blank" rel="noopener" data-i="wa"></a></footer>
+<div id="toast" role="status"></div>
 
 <script type="module">
-/* =====================================================
-   1) إعدادات Firebase / Firebase configuration
-   ===================================================== */
-const firebaseConfig = {
+/* ===== 1) Firebase: ضع إعداداتك هنا (اتركها فارغة = وضع تجريبي محلي) ===== */
+const CFG = {
   apiKey: "AIzaSyCzr8CudqT_meouBh1y32yEZg3fFumIXyM",
   authDomain: "jopharma-eb3da.firebaseapp.com",
   projectId: "jopharma-eb3da",
@@ -136,91 +98,31 @@ const firebaseConfig = {
   appId: "1:888807152542:web:bce93d5856402af69e948f"
 };
 
-/* =====================================================
-   2) قاموس الترجمة / UI dictionary
-   ===================================================== */
-const I18N = {
-  ar: {
-    pageTitle: 'Jo Pharma | المرجع الدوائي والصيدلاني الأردني',
-    tSearch: 'البحث الرئيسي', tCats: 'تصنيفات الأدوية', tDis: 'دليل الأمراض', tHerbs: 'موسوعة الأعشاب', tAdmin: '⚙️ لوحة المشرف',
-    h1: 'المرجع الدوائي والطبي الأردني',
-    sub: 'ابحث عن الأدوية، الأسعار، والبدائل المعتمدة في الأردن',
-    statMeds: 'دواء', statDis: 'مرض', statHerbs: 'عشبة',
-    notice: '⚠️ الأسعار استرشادية وقد تختلف بحسب الصيدليات أو تحديثات المؤسسة العامة للغذاء والدواء. المعلومات للتثقيف فقط ولا تغني عن استشارة الطبيب أو الصيدلاني.',
-    ph: 'اسم الدواء أو المادة الفعالة (مثال: Panadol)', go: 'بحث',
-    catsH: 'تصنيفات الأدوية', catsSub: 'اختر الفئة لعرض أدويتها',
-    disH: 'الدليل الطبي للأمراض', disSub: 'اضغط على المرض لعرض التفاصيل',
-    disNotice: 'ℹ️ الأدوية المذكورة أمثلة تجارية للتعريف فقط، ويُحدد الطبيب العلاج المناسب والجرعة. المضادات الحيوية تُصرف بوصفة طبية ولا تُستعمل إلا عند وجود عدوى بكتيرية.',
-    herbsH: 'موسوعة الأعشاب الطبية', herbsSub: 'الفوائد وطريقة الاستخدام الآمنة',
-    herbsNotice: 'ℹ️ الأعشاب قد تتداخل مع الأدوية وقد لا تناسب الحوامل والمرضعات والأطفال ومرضى الأمراض المزمنة. استشر الطبيب أو الصيدلاني قبل استعمالها.',
-    wa: 'للاقتراحات والتنبيه عن الأخطاء العلمية والإملائية',
-    copy: 'جميع الحقوق محفوظة © Jo Pharma 2026', adminLink: 'دخول المشرف',
-    noMedsYet: 'لا توجد أدوية بعد.', medsCount: n => `${n} دواء`,
-    found: n => `تم العثور على ${n} نتيجة`, first30: ' (يعرض أول 30)',
-    enterName: 'يرجى إدخال اسم للبحث.', noMatch: 'لم نجد أدوية مطابقة لبحثك.',
-    usage: 'الاستخدام:', comp: 'التركيبة:', price: 'السعر:', alts: 'البدائل:',
-    medsOf: 'أدوية:',
-    symptoms: 'الأعراض:', causes: 'الأسباب:', treatment: 'العلاج المقترح:',
-    tapHerb: 'اضغط لعرض الفوائد وطريقة الاستخدام', benefits: 'الفوائد:', howTo: 'طريقة الاستخدام:',
-    /* admin */
-    adminLoginH: 'دخول المشرف', email: 'البريد الإلكتروني', pass: 'كلمة المرور', login: 'دخول', loginErr: 'بيانات الدخول غير صحيحة.',
-    adminH: 'لوحة المشرف',
-    demo: 'الوضع التجريبي: البيانات محفوظة في متصفحك فقط ولن يراها الزوار. فعّل Firebase لنشرها للجميع.',
-    editMed: 'تعديل دواء', addMed: 'إضافة دواء',
-    fName: 'اسم الدواء *', fCat: 'التصنيف *', fActive: 'المادة الفعالة', fPrice: 'السعر (مثال: 4.20 JOD)',
-    fInd: 'الاستخدام / الاستطباب', fAlt: 'البدائل (مثال: Biso (2.90), Bisocor (2.50))',
-    saveEdit: '💾 حفظ التعديل', add: '➕ إضافة', cancel: 'إلغاء',
-    exportJson: '⬇️ تصدير JSON', importFile: '⬆️ استيراد JSON/CSV', logout: 'تسجيل خروج',
-    csvHint: 'ملف CSV: الأعمدة بالترتيب name,category,active,indication,price,alternative',
-    adminSearch: 'ابحث في الأدوية المضافة...', first100: 'يعرض أول 100، استخدم البحث للوصول للباقي.',
-    edit: 'تعديل', del: 'حذف', confirmDel: 'حذف هذا الدواء نهائياً؟',
-    reqFields: 'الاسم والتصنيف مطلوبان.', saveFail: 'فشل الحفظ: ',
-    noData: 'لا توجد بيانات صالحة في الملف.', confirmImport: n => `سيتم إضافة ${n} دواء. متابعة؟`,
-    imported: 'تم الاستيراد ✅', fileErr: 'خطأ بالملف: '
-  },
-  en: {
-    pageTitle: 'Jo Pharma | Jordanian Drug & Pharmacy Reference',
-    tSearch: 'Main Search', tCats: 'Drug Categories', tDis: 'Disease Guide', tHerbs: 'Herbal Encyclopedia', tAdmin: '⚙️ Admin Panel',
-    h1: 'Jordanian Drug & Medical Reference',
-    sub: 'Search for medicines, prices, and approved alternatives available in Jordan',
-    statMeds: 'Medicines', statDis: 'Diseases', statHerbs: 'Herbs',
-    notice: '⚠️ Prices are indicative and may vary between pharmacies or following updates by the Jordan Food and Drug Administration (JFDA). This information is for educational purposes only and does not replace consultation with a physician or pharmacist.',
-    ph: 'Drug name or active ingredient (e.g., Panadol)', go: 'Search',
-    catsH: 'Drug Categories', catsSub: 'Select a category to view its medicines',
-    disH: 'Medical Disease Guide', disSub: 'Tap a condition to view details',
-    disNotice: 'ℹ️ The medicines listed are brand-name examples for reference only. The appropriate treatment and dose must be determined by a physician. Antibiotics require a prescription and should be used only for confirmed bacterial infections.',
-    herbsH: 'Medicinal Herbs Encyclopedia', herbsSub: 'Benefits and safe use',
-    herbsNotice: 'ℹ️ Herbs may interact with medications and may not be suitable during pregnancy or breastfeeding, for children, or for patients with chronic conditions. Consult a physician or pharmacist before use.',
-    wa: 'Suggestions and reports of scientific or spelling errors',
-    copy: 'All rights reserved © Jo Pharma 2026', adminLink: 'Admin login',
-    noMedsYet: 'No medicines available yet.', medsCount: n => `${n} medicine${n === 1 ? '' : 's'}`,
-    found: n => `${n} result${n === 1 ? '' : 's'} found`, first30: ' (showing the first 30)',
-    enterName: 'Please enter a name to search.', noMatch: 'No matching medicines were found.',
-    usage: 'Indication:', comp: 'Active ingredient:', price: 'Price:', alts: 'Alternatives:',
-    medsOf: 'Medicines:',
-    symptoms: 'Symptoms:', causes: 'Causes:', treatment: 'Suggested treatment:',
-    tapHerb: 'Tap to view benefits and directions for use', benefits: 'Benefits:', howTo: 'Directions for use:',
-    adminLoginH: 'Admin Login', email: 'Email', pass: 'Password', login: 'Log in', loginErr: 'Incorrect email or password.',
-    adminH: 'Admin Panel',
-    demo: 'Demo mode: data is stored in your browser only and will not be visible to visitors. Enable Firebase to publish it for everyone.',
-    editMed: 'Edit medicine', addMed: 'Add medicine',
-    fName: 'Medicine name *', fCat: 'Category *', fActive: 'Active ingredient', fPrice: 'Price (e.g., 4.20 JOD)',
-    fInd: 'Indication / use', fAlt: 'Alternatives (e.g., Biso (2.90), Bisocor (2.50))',
-    saveEdit: '💾 Save changes', add: '➕ Add', cancel: 'Cancel',
-    exportJson: '⬇️ Export JSON', importFile: '⬆️ Import JSON/CSV', logout: 'Log out',
-    csvHint: 'CSV file: columns in this order: name,category,active,indication,price,alternative',
-    adminSearch: 'Search added medicines...', first100: 'Showing the first 100. Use search to find the rest.',
-    edit: 'Edit', del: 'Delete', confirmDel: 'Permanently delete this medicine?',
-    reqFields: 'Name and category are required.', saveFail: 'Save failed: ',
-    noData: 'No valid data found in the file.', confirmImport: n => `${n} medicine(s) will be added. Continue?`,
-    imported: 'Import completed ✅', fileErr: 'File error: '
-  }
+/* ===== 2) الترجمة [عربي, English] ===== */
+const T = {
+ nS:['البحث','Search'],nC:['التصنيفات','Categories'],nD:['الأمراض','Diseases'],nH:['الأعشاب','Herbs'],nA:['⚙️ المشرف','⚙️ Admin'],
+ h1:['المرجع الدوائي والطبي الأردني','Jordanian Drug & Medical Reference'],
+ sub:['ابحث عن الأدوية والأسعار والبدائل','Search medicines, prices and alternatives'],
+ med:['دواء','Medicines'],dis:['مرض','Diseases'],herb:['عشبة','Herbs'],
+ note:['⚠️ الأسعار استرشادية وقد تختلف بحسب الصيدليات أو تحديثات المؤسسة العامة للغذاء والدواء. المعلومات للتثقيف فقط ولا تغني عن استشارة الطبيب أو الصيدلاني.','⚠️ Prices are indicative and may vary between pharmacies or following updates by the Jordan Food and Drug Administration (JFDA). This information is for educational purposes only and does not replace consultation with a physician or pharmacist.'],
+ dn:['ℹ️ الأدوية المذكورة أمثلة تجارية للتعريف فقط، ويُحدد الطبيب العلاج المناسب والجرعة. المضادات الحيوية تُصرف بوصفة طبية ولا تُستعمل إلا عند وجود عدوى بكتيرية.','ℹ️ The medicines listed are brand-name examples for reference only. The appropriate treatment and dose must be determined by a physician. Antibiotics require a prescription and should be used only for confirmed bacterial infections.'],
+ hn:['ℹ️ الأعشاب قد تتداخل مع الأدوية وقد لا تناسب الحوامل والمرضعات والأطفال ومرضى الأمراض المزمنة. استشر الطبيب أو الصيدلاني قبل استعمالها.','ℹ️ Herbs may interact with medications and may not be suitable during pregnancy or breastfeeding, for children, or for patients with chronic conditions. Consult a physician or pharmacist before use.'],
+ ph:['اسم الدواء أو المادة الفعالة','Drug name or active ingredient'],filt:['تصفية…','Filter…'],all:['كل التصنيفات','All categories'],
+ found:['نتيجة','results'],none:['لا توجد نتائج مطابقة.','No matching results.'],more:['عرض المزيد','Show more'],
+ use:['الاستخدام','Indication'],comp:['المادة الفعالة','Active ingredient'],price:['السعر','Price'],alt:['البدائل','Alternatives'],
+ sym:['الأعراض','Symptoms'],cau:['الأسباب','Causes'],trt:['العلاج المقترح','Suggested treatment'],ben:['الفوائد','Benefits'],how:['طريقة الاستخدام','Directions'],
+ copy:['نسخ','Copy'],rep:['إبلاغ عن خطأ','Report error'],copied:['تم النسخ ✅','Copied ✅'],
+ rights:['© Jo Pharma 2026','© Jo Pharma 2026'],alink:['دخول المشرف','Admin login'],wa:['اقتراحات وتصحيحات','Suggestions & corrections'],
+ lg:['دخول المشرف','Admin login'],em:['البريد الإلكتروني','Email'],pw:['كلمة المرور','Password'],in:['دخول','Log in'],out:['خروج','Log out'],
+ bad:['بيانات الدخول غير صحيحة','Incorrect credentials'],demo:['وضع تجريبي: البيانات محفوظة في متصفحك فقط.','Demo mode: data is stored in your browser only.'],
+ fn:['اسم الدواء *','Name *'],fc:['التصنيف *','Category *'],fa:['المادة الفعالة','Active ingredient'],fp:['السعر','Price'],fi:['الاستخدام','Indication'],fl:['البدائل','Alternatives'],
+ add:['➕ إضافة','➕ Add'],save:['💾 حفظ','💾 Save'],cancel:['إلغاء','Cancel'],exp:['⬇️ تصدير JSON','⬇️ Export JSON'],ed:['تعديل','Edit'],del:['حذف','Delete'],
+ cdel:['حذف هذا الدواء نهائياً؟','Delete this medicine permanently?'],req:['الاسم والتصنيف مطلوبان','Name and category are required'],ok:['تم الحفظ ✅','Saved ✅'],
+ as:['بحث في المضاف…','Search added…'],noCfg:['فشل الاتصال بالخادم، تعذر فتح لوحة المشرف','Server connection failed; admin unavailable'],noCat:['لا توجد أدوية في هذا التصنيف بعد.','No medicines in this category yet.']
 };
+const t = k => (T[k] || [k, k])[lang === 'ar' ? 0 : 1];
 
-/* =====================================================
-   3) الأمراض (50) والأعشاب (25) — ثنائية اللغة
-   كل مرض: [عنوان ar, en, وصف ar, en, أعراض ar, en, أسباب ar, en, علاج ar, en]
-   ===================================================== */
+/* ===== 3) البيانات: الصق مصفوفاتك الكاملة هنا بنفس الصيغة ===== */
 const diseasesList = [
  ["الرشح والإنفلونزا","Common Cold and Influenza","عدوى فيروسية تصيب الجهاز التنفسي العلوي.","Viral infections of the upper respiratory tract.","احتقان الأنف، عطاس، التهاب الحلق، سعال، وارتفاع الحرارة في الإنفلونزا.","Nasal congestion, sneezing, sore throat, cough, and fever (more common with influenza).","فيروسات الرينو (الرشح) وفيروس الإنفلونزا.","Rhinoviruses (common cold) and influenza viruses.","Panadol Cold & Flu (باراسيتامول مع مضاد احتقان)، فيتامين C، سوائل وراحة.","Panadol Cold & Flu (paracetamol with a decongestant), vitamin C, fluids, and rest."],
  ["التهاب اللوزتين","Tonsillitis","التهاب اللوزتين، وغالباً ما يكون فيروسياً وأحياناً بكتيرياً.","Inflammation of the tonsils, most often viral and sometimes bacterial.","صعوبة وألم عند البلع، ارتفاع الحرارة، تضخم الغدد اللمفاوية في الرقبة.","Painful swallowing, fever, and swollen cervical lymph nodes.","فيروسات، أو بكتيريا المكورات العقدية (Group A Streptococcus).","Viruses, or Group A Streptococcus bacteria.","Panadol (باراسيتامول) للألم والحرارة؛ Augmentin (أموكسيسيلين/حمض الكلافولانيك) عند ثبوت العدوى البكتيرية وبوصفة طبية.","Paracetamol (Panadol) for pain and fever; Augmentin (amoxicillin/clavulanic acid) only for confirmed bacterial infection and by prescription."],
@@ -273,8 +175,6 @@ const diseasesList = [
  ["التهاب الزائدة الدودية","Appendicitis","التهاب حاد في الزائدة الدودية، وهو حالة طارئة.","Acute inflammation of the appendix; a medical emergency.","ألم يبدأ حول السرة ثم ينتقل إلى أسفل البطن الأيمن، غثيان، وحرارة.","Pain that begins around the navel then shifts to the right lower abdomen, with nausea and fever.","انسداد تجويف الزائدة.","Obstruction of the appendiceal lumen.","جراحة عاجلة؛ راجع الطوارئ فوراً ولا تتناول مسكنات قبل التشخيص.","Urgent surgery; go to the emergency department immediately and avoid painkillers before diagnosis."],
  ["متلازمة التعب المزمن","Chronic Fatigue Syndrome","إرهاق مستمر غير مبرر لا يزول بالراحة.","Persistent, unexplained fatigue that is not relieved by rest.","تعب شديد، مشاكل في التركيز والنوم، وآلام عضلية.","Profound fatigue, poor concentration and sleep, and muscle pain.","السبب غير معروف، وتُدرس عوامل فيروسية ومناعية.","The cause is unknown; viral and immune factors are under study.","علاج داعم: تنظيم النشاط، النوم الجيد، تقييم نقص الفيتامينات، وإشراف الطبيب.","Supportive care: activity pacing, good sleep, evaluation for vitamin deficiencies, and medical follow-up."]
 ];
-
-/* كل عشبة: [اسم ar, en, فوائد ar, en, استخدام ar, en] */
 const herbsList = [
  ["البابونج","Chamomile","يساعد على الاسترخاء وتحسين النوم، ويخفف تشنجات الجهاز الهضمي.","Promotes relaxation and sleep, and relieves digestive spasms.","تُنقع ملعقة صغيرة من الأزهار المجففة في كوب ماء مغلي 5–10 دقائق، ثم تُصفّى وتُشرب مرة إلى مرتين يومياً. يُحذر منها لمن لديهم حساسية من نباتات الفصيلة النجمية.","Steep 1 teaspoon of dried flowers in a cup of boiling water for 5–10 minutes, strain, and drink once or twice daily. Avoid if allergic to plants of the daisy family."],
  ["اليانسون","Anise","يعمل كطارد للغازات ومقشّع يساعد على تخفيف السعال وإخراج البلغم.","Acts as a carminative and expectorant, easing cough and loosening phlegm.","تُغلى ملعقة صغيرة من البذور 3 دقائق، ثم يُغطى الكوب وتُترك المنقوعة لتفتر قبل شربها.","Boil 1 teaspoon of seeds for 3 minutes, cover, and let it cool slightly before drinking."],
@@ -302,280 +202,179 @@ const herbsList = [
  ["الريحان (الحبق)","Basil","يخفف المغص والانتفاخ ويساعد على الهضم.","Relieves cramps and bloating and aids digestion.","تُنقع الأوراق الطازجة في ماء مغلي وتُشرب دافئة كشاي عشبي.","Steep fresh leaves in boiling water and drink warm as an herbal tea."],
  ["اللافندر (الخزامى)","Lavender","يساعد على الاسترخاء وتحسين النوم وتخفيف القلق الخفيف.","Promotes relaxation, improves sleep, and eases mild anxiety.","يُشرب منقوع الأزهار خفيفاً كشاي، أو يُستنشق زيته العطري. لا يُشرب الزيت العطري.","Drink a light infusion of the flowers as tea, or inhale the essential oil. Never ingest the essential oil."]
 ];
+const SAMPLE = [];
+/* التصنيفات حسب الاستعمال [أيقونة, عربي (يُخزَّن), English] — فارغة حتى تضيف أدوية */
+const CATS = [
+ ['💓','أدوية الضغط','Blood pressure'],['🩸','أدوية السكري','Diabetes'],['🫀','أدوية القلب والأوعية','Cardiovascular'],['🧪','أدوية الكوليسترول والدهون','Cholesterol & lipids'],
+ ['🩹','مسكنات الألم ومضادات الالتهاب','Pain relievers & NSAIDs'],['🌡️','خافضات الحرارة','Antipyretics'],['🦠','المضادات الحيوية','Antibiotics'],['🍄','مضادات الفطريات','Antifungals'],
+ ['🧬','مضادات الفيروسات','Antivirals'],['🪱','أدوية الطفيليات والديدان','Antiparasitics'],['🫁','أدوية الربو والجهاز التنفسي','Asthma & respiratory'],['🤧','أدوية السعال والرشح','Cough & cold'],
+ ['🌼','مضادات الحساسية','Antihistamines'],['🍽️','أدوية المعدة والحموضة','Stomach & acid'],['🚽','أدوية الإسهال والإمساك','Diarrhea & constipation'],['🌀','أدوية الغثيان والدوار','Nausea & vertigo'],
+ ['🧠','أدوية الأعصاب والصرع','Neurology & epilepsy'],['😴','أدوية النوم والقلق','Sleep & anxiety'],['🙂','أدوية الاكتئاب والنفسية','Antidepressants & psychiatric'],['🦴','أدوية العظام والمفاصل','Bone & joints'],
+ ['🥛','الفيتامينات والمعادن','Vitamins & minerals'],['🩸','أدوية فقر الدم','Anemia'],['🧫','مميعات الدم','Anticoagulants'],['🦋','أدوية الغدة الدرقية','Thyroid'],
+ ['💉','الهرمونات والكورتيزون','Hormones & corticosteroids'],['🤰','أدوية النساء والحمل','Women’s health & pregnancy'],['💊','وسائل منع الحمل','Contraceptives'],['🚹','أدوية البروستاتا والمسالك البولية','Urology & prostate'],
+ ['👁️','أدوية العيون','Eye care'],['👂','أدوية الأذن والأنف والحنجرة','ENT'],['🧴','أدوية الجلدية','Dermatology'],['🦷','أدوية الفم والأسنان','Oral & dental'],
+ ['👶','أدوية الأطفال','Pediatric'],['🫘','أدوية الكلى','Renal'],['🍂','أدوية الكبد','Liver'],['🎗️','أدوية الأورام','Oncology'],['🛡️','أدوية المناعة وزراعة الأعضاء','Immunology & transplant']
+];
 
-/* ============ الأدوات الأساسية ============ */
-const $ = s => document.querySelector(s);
+/* ===== 4) أدوات ===== */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm = s => String(s ?? '').toLowerCase().replace(/[\u064B-\u065F]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim();
-const FIELDS = ['name','category','active','indication','price','alternative'];
-const configured = !!firebaseConfig.projectId;
-let F = null, meds = [], isAdmin = false, editingId = null;
+const ls = { get(k,d){ try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } }, set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)) } catch {} } };
+let lang = ls.get('jp_lang','ar'), meds = [], admin = false, editId = null, F = null, lim = 20, ready = false;
+const demo = !CFG.projectId;
+const toast = m => { const e = $('#toast'); e.textContent = m; e.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => e.classList.remove('on'), 2200) };
+const debounce = (f, ms) => { let h; return (...a) => { clearTimeout(h); h = setTimeout(() => f(...a), ms) } };
+const pick = (a, i) => a[i * 2 + (lang === 'ar' ? 0 : 1)];
 
-let lang = 'ar';
-try { lang = localStorage.getItem('jp_lang') === 'en' ? 'en' : 'ar'; } catch {}
-const tr = k => I18N[lang][k] ?? I18N.ar[k] ?? k;
-const pick = (arr, i) => arr[i * 2 + (lang === 'ar' ? 0 : 1)];
-
-if (configured) {
+if (!demo) {
   try {
-    const v = '10.12.2', base = `https://www.gstatic.com/firebasejs/${v}/`;
-    const [app, fs, au] = await Promise.all([import(base+'firebase-app.js'), import(base+'firebase-firestore.js'), import(base+'firebase-auth.js')]);
-    const a = app.initializeApp(firebaseConfig);
-    F = { fs, au, db: fs.getFirestore(a), auth: au.getAuth(a) };
-  } catch (e) { console.error('Firebase failed', e); }
+    const b = 'https://www.gstatic.com/firebasejs/10.12.2/';
+    const [a, fs, au] = await Promise.all([import(b+'firebase-app.js'), import(b+'firebase-firestore.js'), import(b+'firebase-auth.js')]);
+    const app = a.initializeApp(CFG);
+    F = { fs, au, db: fs.getFirestore(app), auth: au.getAuth(app) };
+  } catch (e) { console.error(e) }
 }
 
+/* ===== 5) التخزين (مع كاش 10 دقائق لتوفير القراءات) ===== */
 const store = {
   async list() {
-    if (F) { const s = await F.fs.getDocs(F.fs.collection(F.db,'medicines')); return s.docs.map(d => ({id:d.id, ...d.data()})); }
-    return JSON.parse(localStorage.getItem('jp_meds') || '[]');
+    if (!F) return demo ? ls.get('jp_meds', SAMPLE) : [];
+    const c = ls.get('jp_cache', null);
+    if (c && Date.now() - c.t < 6e5) return c.d;
+    const s = await F.fs.getDocs(F.fs.collection(F.db,'medicines'));
+    const d = s.docs.map(x => ({ id: x.id, ...x.data() }));
+    ls.set('jp_cache', { t: Date.now(), d }); return d;
   },
   async save(m, id) {
-    if (F) {
-      if (id) await F.fs.setDoc(F.fs.doc(F.db,'medicines',id), m);
-      else await F.fs.addDoc(F.fs.collection(F.db,'medicines'), m);
-    } else {
-      const all = JSON.parse(localStorage.getItem('jp_meds') || '[]');
-      if (id) { const i = all.findIndex(x => x.id === id); all[i] = {...m, id}; }
-      else all.push({...m, id: 'l' + Date.now() + Math.random().toString(36).slice(2,6)});
-      localStorage.setItem('jp_meds', JSON.stringify(all));
-    }
+    if (F) { id ? await F.fs.setDoc(F.fs.doc(F.db,'medicines',id), m) : await F.fs.addDoc(F.fs.collection(F.db,'medicines'), m); ls.set('jp_cache', null) }
+    else { const a = ls.get('jp_meds', SAMPLE); id ? a[a.findIndex(x => x.id === id)] = { ...m, id } : a.push({ ...m, id: 'l' + Date.now() }); ls.set('jp_meds', a) }
   },
   async remove(id) {
-    if (F) await F.fs.deleteDoc(F.fs.doc(F.db,'medicines',id));
-    else localStorage.setItem('jp_meds', JSON.stringify(JSON.parse(localStorage.getItem('jp_meds') || '[]').filter(x => x.id !== id)));
-  },
-  async bulk(items) {
-    if (F) {
-      for (let i = 0; i < items.length; i += 400) {
-        const b = F.fs.writeBatch(F.db);
-        items.slice(i, i+400).forEach(m => b.set(F.fs.doc(F.fs.collection(F.db,'medicines')), m));
-        await b.commit();
-      }
-    } else {
-      const all = JSON.parse(localStorage.getItem('jp_meds') || '[]');
-      items.forEach(m => all.push({...m, id: 'l' + Date.now() + Math.random().toString(36).slice(2,6)}));
-      localStorage.setItem('jp_meds', JSON.stringify(all));
-    }
+    if (F) { await F.fs.deleteDoc(F.fs.doc(F.db,'medicines',id)); ls.set('jp_cache', null) }
+    else ls.set('jp_meds', ls.get('jp_meds', SAMPLE).filter(x => x.id !== id));
   }
 };
-
 async function reload() {
-  try { meds = await store.list(); } catch (e) { console.error(e); meds = []; }
-  meds.sort((a,b) => (a.name||'').localeCompare(b.name||'', 'en'));
-  $('#cMeds').textContent = meds.length;
-  renderCats();
-  if (isAdmin) renderAdmin();
+  try { meds = await store.list() } catch (e) { console.error(e); meds = [] }
+  meds.sort((a,b) => (a.name || '').localeCompare(b.name || '', 'en'));
+  ready = true; $('#cM').textContent = meds.length;
+  renderCats(); doSearch(); if (admin) renderAdmin();
 }
 
-/* ============ التبويبات ============ */
-function showTab(id) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.add('hidden'));
-  $('#'+id).classList.remove('hidden');
-  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === id));
-  if (id === 'adminTab') renderAdmin();
-}
-
-/* ============ العرض ============ */
-const medCard = m => `<div class="res"><h4>${esc(m.name)}</h4>
-  <p><strong>${tr('usage')}</strong> ${esc(m.indication)}</p>
-  <p><strong>${tr('comp')}</strong> ${esc(m.active)}</p>
-  <p><strong>${tr('price')}</strong> ${esc(m.price)}</p>
-  ${m.alternative ? `<p class="alt">${tr('alts')} ${esc(m.alternative)}</p>` : ''}</div>`;
-
-const cats = () => [...new Set(meds.map(m => m.category).filter(Boolean))];
-
-function renderCats() {
-  const c = cats();
-  $('#cats').innerHTML = c.length ? c.map(x => `<div class="item" data-cat="${esc(x)}"><h3>💊 ${esc(x)}</h3><p>${tr('medsCount')(meds.filter(m => m.category === x).length)}</p></div>`).join('') : `<p class="empty">${tr('noMedsYet')}</p>`;
-  $('#catResults').innerHTML = '';
-}
-
+/* ===== 6) البحث: ترتيب بالصلة + كلمات متعددة + فلتر تصنيف ===== */
+const FL = ['name','active','category','indication','alternative'];
 function search(q) {
-  const n = norm(q);
-  return meds.filter(m => FIELDS.some(f => f !== 'price' && norm(m[f]).includes(n)));
+  const n = norm(q), ws = n.split(/\s+/).filter(Boolean), c = $('#fc').value;
+  return meds.filter(m => !c || m.category === c).map(m => {
+    const h = FL.map(f => norm(m[f])), hay = h.join(' ');
+    if (!ws.every(w => hay.includes(w))) return null;
+    return { m, s: (h[0].startsWith(n) ? 5 : h[0].includes(n) ? 3 : 0) + (h[1].includes(n) ? 2 : 0) };
+  }).filter(Boolean).sort((a,b) => b.s - a.s).map(x => x.m);
 }
-
+const card = m => `<article class="res"><h3>${esc(m.name)} <small>${cinfo(m.category).i} ${esc(cinfo(m.category).n)}</small></h3>
+ <p><b>${t('use')}:</b> ${esc(m.indication)}</p><p><b>${t('comp')}:</b> ${esc(m.active)}</p><p><b>${t('price')}:</b> ${esc(m.price)}</p>
+ ${m.alternative ? `<p class="alt"><b>${t('alt')}:</b> ${esc(m.alternative)}</p>` : ''}
+ <div class="act"><button class="btn sm sec" data-copy="${esc(m.id)}">${t('copy')}</button><a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/962781775710?text=${encodeURIComponent('Jo Pharma: ' + m.name)}">${t('rep')}</a></div></article>`;
 function doSearch() {
-  $('#sugg').style.display = 'none';
-  const q = $('#q').value;
-  if (!q.trim()) { $('#results').innerHTML = `<p class="empty">${tr('enterName')}</p>`; return; }
-  const r = search(q);
-  $('#results').innerHTML = r.length
-    ? `<p style="color:var(--primary);font-weight:700;margin-bottom:10px">${tr('found')(r.length)}${r.length > 30 ? tr('first30') : ''}:</p>` + r.slice(0,30).map(medCard).join('')
-    : `<p class="empty">${tr('noMatch')}</p>`;
+  const box = $('#res');
+  if (!ready) { box.innerHTML = '<div class="sk"></div><div class="sk"></div>'; return }
+  if (!norm($('#q').value) && !$('#fc').value) { box.innerHTML = ''; return }
+  const r = search($('#q').value);
+  box.innerHTML = r.length ? `<p class="cnt">${r.length} ${t('found')}</p>` + r.slice(0, lim).map(card).join('') + (r.length > lim ? `<button class="btn sec" data-more>${t('more')}</button>` : '') : `<p class="empty">${t($('#fc').value && !norm($('#q').value) ? 'noCat' : 'none')}</p>`;
+}
+const cats = () => [...new Set([...CATS.map(c => c[1]), ...meds.map(m => m.category).filter(Boolean)])];
+const cinfo = a => { const c = CATS.find(x => x[1] === a); return c ? { i: c[0], n: lang === 'ar' ? c[1] : c[2] } : { i: '💊', n: a || '' } };
+function renderCats() {
+  const c = cats(), cur = $('#fc').value;
+  $('#fc').innerHTML = `<option value="">${t('all')}</option>` + c.map(x => `<option ${x === cur ? 'selected' : ''} value="${esc(x)}">${cinfo(x).i} ${esc(cinfo(x).n)}</option>`).join('');
+  $('#catGrid').innerHTML = c.map(x => `<button class="item cat" data-cat="${esc(x)}"><span class="ic">${cinfo(x).i}</span><span>${esc(cinfo(x).n)}</span><small>${meds.filter(m => m.category === x).length} ${t('med')}</small></button>`).join('');
 }
 
-let t;
-$('#q').addEventListener('input', () => {
-  clearTimeout(t);
-  t = setTimeout(() => {
-    const q = $('#q').value, box = $('#sugg');
-    if (norm(q).length < 2) { box.style.display = 'none'; return; }
-    const r = search(q).slice(0, 8);
-    box.innerHTML = r.map(m => `<div data-pick="${esc(m.name)}"><strong>${esc(m.name)}</strong> <small style="color:#64748b">(${esc(m.active)} - ${esc(m.price)})</small></div>`).join('');
-    box.style.display = r.length ? 'block' : 'none';
-  }, 150);
-});
-$('#q').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
-$('#goBtn').addEventListener('click', doSearch);
-
-function renderDiseases() {
-  $('#diseases').innerHTML = diseasesList.map((d, n) => `<div class="item"><h3>🏥 ${n + 1}. ${esc(pick(d,0))}</h3><p>${esc(pick(d,1))}</p><div class="det"><strong>${tr('symptoms')}</strong><p>${esc(pick(d,2))}</p><strong>${tr('causes')}</strong><p>${esc(pick(d,3))}</p><strong style="color:var(--accent)">${tr('treatment')}</strong><p>${esc(pick(d,4))}</p></div></div>`).join('');
+/* ===== 7) الأمراض والأعشاب (details = يعمل بالكيبورد) ===== */
+function renderLists() {
+  const df = norm($('#df').value), hf = norm($('#hf').value);
+  $('#dList').innerHTML = diseasesList.map((d, n) => ({ d, n })).filter(x => !df || norm(x.d.join(' ')).includes(df)).map(({ d, n }) =>
+   `<details class="item"><summary>🏥 ${n + 1}. ${esc(pick(d,0))}</summary><div class="d"><p>${esc(pick(d,1))}</p><b>${t('sym')}</b><p>${esc(pick(d,2))}</p><b>${t('cau')}</b><p>${esc(pick(d,3))}</p><b class="a">${t('trt')}</b><p>${esc(pick(d,4))}</p></div></details>`).join('');
+  $('#hList').innerHTML = herbsList.filter(h => !hf || norm(h.join(' ')).includes(hf)).map(h =>
+   `<details class="item"><summary>🌿 ${esc(pick(h,0))}</summary><div class="d"><b>${t('ben')}</b><p>${esc(pick(h,1))}</p><b class="a">${t('how')}</b><p>${esc(pick(h,2))}</p></div></details>`).join('');
+  $('#cD').textContent = diseasesList.length; $('#cH').textContent = herbsList.length;
 }
-function renderHerbs() {
-  $('#herbs').innerHTML = herbsList.map(h => `<div class="item"><h3>🌿 ${esc(pick(h,0))}</h3><p>${tr('tapHerb')}</p><div class="det"><strong>${tr('benefits')}</strong><p>${esc(pick(h,1))}</p><strong style="color:var(--accent)">${tr('howTo')}</strong><p>${esc(pick(h,2))}</p></div></div>`).join('');
-}
-$('#cDis').textContent = diseasesList.length;
-$('#cHerbs').textContent = herbsList.length;
 
-/* ============ لوحة المشرف ============ */
+/* ===== 8) لوحة المشرف ===== */
 function renderAdmin() {
-  const box = $('#adminTab');
-  if (!isAdmin) {
-    box.innerHTML = `<h1>${tr('adminLoginH')}</h1><div class="search" style="margin-top:16px">
-      <input type="email" id="lEmail" placeholder="${tr('email')}" style="margin-bottom:10px;direction:ltr">
-      <input type="password" id="lPass" placeholder="${tr('pass')}" style="margin-bottom:10px;direction:ltr">
-      <button class="btn" style="width:100%" data-act="login">${tr('login')}</button><p id="lErr" class="empty"></p></div>`;
-    return;
+  const b = $('#admin'), e = meds.find(m => m.id === editId) || {};
+  if (!admin) {
+    b.innerHTML = `<h1>${t('lg')}</h1><div style="max-width:380px;margin:14px auto;display:grid;gap:10px">${demo ? `<div class="note i">${t('demo')}</div>` : ''}
+     <input id="lE" type="email" placeholder="${t('em')}" style="direction:ltr" autocomplete="username"><input id="lP" type="password" placeholder="${t('pw')}" style="direction:ltr" autocomplete="current-password">
+     <button class="btn" data-act="login">${t('in')}</button></div>`; return;
   }
-  const e = meds.find(m => m.id === editingId) || {};
-  const q = norm($('#aq')?.value || '');
-  const list = meds.filter(m => !q || norm(m.name + m.active).includes(q));
-  box.innerHTML = `<h1>${tr('adminH')}</h1>
-  ${F ? '' : `<div class="notice info">${tr('demo')}</div>`}
-  <h3 style="color:var(--primary)">${editingId ? tr('editMed') : tr('addMed')}</h3>
-  <div class="form">
-    <input id="f_name" placeholder="${tr('fName')}" value="${esc(e.name)}">
-    <input id="f_category" list="catList" placeholder="${tr('fCat')}" value="${esc(e.category)}">
-    <datalist id="catList">${cats().map(c => `<option value="${esc(c)}">`).join('')}</datalist>
-    <input id="f_active" placeholder="${tr('fActive')}" value="${esc(e.active)}">
-    <input id="f_price" placeholder="${tr('fPrice')}" value="${esc(e.price)}">
-    <input class="full" id="f_indication" placeholder="${tr('fInd')}" value="${esc(e.indication)}">
-    <input class="full" id="f_alternative" placeholder="${tr('fAlt')}" value="${esc(e.alternative)}">
-  </div>
-  <div class="tools">
-    <button class="btn" data-act="save">${editingId ? tr('saveEdit') : tr('add')}</button>
-    ${editingId ? `<button class="btn sec" data-act="cancel">${tr('cancel')}</button>` : ''}
-  </div>
-  <div class="tools">
-    <button class="btn sec sm" data-act="export">${tr('exportJson')}</button>
-    <label class="btn sec sm">${tr('importFile')}<input type="file" id="imp" accept=".json,.csv" class="hidden"></label>
-    <button class="btn sm" style="background:#64748b" data-act="logout">${tr('logout')}</button>
-  </div>
-  <p class="sub" style="margin-bottom:8px">${tr('csvHint')}</p>
-  <input id="aq" placeholder="${tr('adminSearch')}" value="${esc($('#aq')?.value || '')}" style="margin:10px 0">
-  <p style="font-weight:700;margin-bottom:8px">${tr('medsCount')(list.length)}</p>
-  ${list.slice(0, 100).map(m => `<div class="admin-row"><div><b>${esc(m.name)}</b> <small>${esc(m.category)} · ${esc(m.price)}</small></div>
-    <div><button class="btn sm sec" data-edit="${esc(m.id)}">${tr('edit')}</button> <button class="btn sm red" data-del="${esc(m.id)}">${tr('del')}</button></div></div>`).join('')}
-  ${list.length > 100 ? `<p class="sub">${tr('first100')}</p>` : ''}`;
-  $('#aq').addEventListener('input', () => { const p = $('#aq').selectionStart; renderAdmin(); $('#aq').focus(); $('#aq').setSelectionRange(p,p); });
-  $('#imp').addEventListener('change', importFile);
+  const q = norm($('#aq')?.value || ''), list = meds.filter(m => !q || norm(m.name + m.active).includes(q));
+  b.innerHTML = `<h1>${t('nA')}</h1>${demo ? `<div class="note i">${t('demo')}</div>` : ''}
+   <div class="form"><input id="f_name" placeholder="${t('fn')}" value="${esc(e.name)}"><select id="f_category"><option value="">${t('fc')}</option>${cats().map(c => `<option value="${esc(c)}" ${c === e.category ? 'selected' : ''}>${cinfo(c).i} ${esc(cinfo(c).n)}</option>`).join('')}</select>
+   <input id="f_active" placeholder="${t('fa')}" value="${esc(e.active)}"><input id="f_price" placeholder="${t('fp')}" value="${esc(e.price)}">
+   <input class="full" id="f_indication" placeholder="${t('fi')}" value="${esc(e.indication)}"><input class="full" id="f_alternative" placeholder="${t('fl')}" value="${esc(e.alternative)}"></div>
+   <div class="tools"><button class="btn" data-act="save">${editId ? t('save') : t('add')}</button>${editId ? `<button class="btn sec" data-act="cancel">${t('cancel')}</button>` : ''}<button class="btn sec sm" data-act="export">${t('exp')}</button><button class="btn sm" style="background:#64748b" data-act="logout">${t('out')}</button></div>
+   <input id="aq" type="search" placeholder="${t('as')}" value="${esc($('#aq')?.value || '')}" style="margin:8px 0">
+   ${list.slice(0, 100).map(m => `<div class="ar"><div><b>${esc(m.name)}</b> <small>${esc(cinfo(m.category).n)}</small></div><div><button class="btn sm sec" data-edit="${esc(m.id)}">${t('ed')}</button> <button class="btn sm red" data-del="${esc(m.id)}">${t('del')}</button></div></div>`).join('')}`;
+  $('#aq').addEventListener('input', () => { const p = $('#aq').selectionStart; renderAdmin(); const a = $('#aq'); a.focus(); a.setSelectionRange(p, p) });
 }
 
-function parseCSV(text) {
-  const rows = []; let row = [], cur = '', q = false;
-  for (let i = 0; i < text.length; i++) {
-    const c = text[i];
-    if (q) { if (c === '"' && text[i+1] === '"') { cur += '"'; i++; } else if (c === '"') q = false; else cur += c; }
-    else if (c === '"') q = true;
-    else if (c === ',') { row.push(cur); cur = ''; }
-    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i+1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = ''; }
-    else cur += c;
-  }
-  if (cur || row.length) { row.push(cur); rows.push(row); }
-  return rows.filter(r => r.some(x => x.trim()));
+/* ===== 9) التنقل بالهاش + اللغة + المظهر ===== */
+function route() {
+  let id = location.hash.slice(1); if (!$('#' + id)?.classList.contains('tab')) id = 'search';
+  if (id === 'admin' && !admin && !$('#lE')) renderAdmin();
+  $$('.tab').forEach(s => s.classList.toggle('hidden', s.id !== id));
+  $$('nav button').forEach(b => b.toggleAttribute('aria-current', b.dataset.go === id) || (b.dataset.go === id ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current')));
+  if (id === 'admin') renderAdmin();
 }
-
-async function importFile(ev) {
-  const file = ev.target.files[0]; if (!file) return;
-  try {
-    const text = (await file.text()).replace(/^\uFEFF/, '');
-    let items;
-    if (file.name.endsWith('.json')) items = JSON.parse(text);
-    else {
-      let rows = parseCSV(text);
-      if (rows[0] && norm(rows[0][0]) === 'name') rows = rows.slice(1);
-      items = rows.map(r => Object.fromEntries(FIELDS.map((f,i) => [f, (r[i] || '').trim()])));
-    }
-    items = items.filter(m => m.name).map(m => Object.fromEntries(FIELDS.map(f => [f, String(m[f] ?? '').trim()])));
-    if (!items.length) return alert(tr('noData'));
-    if (!confirm(tr('confirmImport')(items.length))) return;
-    await store.bulk(items); await reload(); alert(tr('imported'));
-  } catch (e) { alert(tr('fileErr') + e.message); }
-}
-
-/* ============ تبديل اللغة / Language switch ============ */
 function applyLang() {
-  const html = document.documentElement;
-  html.lang = lang;
-  html.dir = lang === 'ar' ? 'rtl' : 'ltr';
-  document.title = tr('pageTitle');
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = tr(el.dataset.i18n); });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el => { el.placeholder = tr(el.dataset.i18nPh); });
-  $('#langBtn').textContent = lang === 'ar' ? 'English' : 'عربي';
-  renderDiseases();
-  renderHerbs();
-  renderCats();
-  if ($('#q').value.trim()) doSearch(); else $('#results').innerHTML = '';
-  if (isAdmin || !$('#adminTab').classList.contains('hidden')) renderAdmin();
+  document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.title = lang === 'ar' ? 'Jo Pharma | المرجع الدوائي الأردني' : 'Jo Pharma | Jordanian Drug Reference';
+  $$('[data-i]').forEach(e => e.textContent = t(e.dataset.i));
+  $$('[data-ph]').forEach(e => e.placeholder = t(e.dataset.ph));
+  $('#q').placeholder = t('ph'); $('#langBtn').textContent = lang === 'ar' ? 'English' : 'عربي';
+  renderLists(); renderCats(); doSearch(); if ($('#admin').innerHTML) renderAdmin();
 }
-$('#langBtn').addEventListener('click', () => {
-  lang = lang === 'ar' ? 'en' : 'ar';
-  try { localStorage.setItem('jp_lang', lang); } catch {}
-  applyLang();
-});
+$('#langBtn').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; ls.set('jp_lang', lang); applyLang() };
+$('#thBtn').onclick = () => { const d = document.documentElement, dark = getComputedStyle(d).colorScheme === 'dark'; d.dataset.theme = dark ? 'light' : 'dark'; ls.set('jp_theme', d.dataset.theme) };
+const th = ls.get('jp_theme', null); if (th) document.documentElement.dataset.theme = th;
+window.addEventListener('hashchange', route);
+$('#q').addEventListener('input', debounce(() => { lim = 20; doSearch() }, 180));
+$('#fc').addEventListener('change', () => { lim = 20; doSearch() });
+$('#df').addEventListener('input', debounce(renderLists, 150)); $('#hf').addEventListener('input', debounce(renderLists, 150));
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'lP') $('[data-act=login]').click() });
 
-/* ============ الأحداث ============ */
+/* ===== 10) الأحداث ===== */
 document.addEventListener('click', async e => {
-  const t = e.target;
-  const tab = t.closest('[data-tab]'); if (tab) return showTab(tab.dataset.tab);
-  if (t.closest('#adminLink')) return showTab('adminTab');
-  const pk = t.closest('[data-pick]'); if (pk) { $('#q').value = pk.dataset.pick; return doSearch(); }
-  if (!t.closest('.search')) $('#sugg').style.display = 'none';
-
-  const cat = t.closest('[data-cat]');
-  if (cat) {
-    const c = cat.dataset.cat;
-    $('#catResults').innerHTML = `<h3 style="color:var(--primary);margin-bottom:10px">${tr('medsOf')} ${esc(c)}</h3>` + meds.filter(m => m.category === c).map(medCard).join('');
-    return;
+  const g = e.target.closest('[data-go]'); if (g) { location.hash = g.dataset.go; return }
+  if (e.target.closest('[data-more]')) { lim += 20; return doSearch() }
+  const c = e.target.closest('[data-cat]'); if (c) { $('#fc').value = c.dataset.cat; $('#q').value = ''; location.hash = 'search'; return doSearch() }
+  const cp = e.target.closest('[data-copy]');
+  if (cp) { const m = meds.find(x => x.id === cp.dataset.copy); try { await navigator.clipboard.writeText(`${m.name} | ${m.active} | ${m.price}`); toast(t('copied')) } catch {} return }
+  const ed = e.target.closest('[data-edit]'); if (ed) { editId = ed.dataset.edit; renderAdmin(); return scrollTo({ top: 0, behavior: 'smooth' }) }
+  const dl = e.target.closest('[data-del]'); if (dl) { if (confirm(t('cdel'))) { await store.remove(dl.dataset.del); await reload() } return }
+  const a = e.target.closest('[data-act]')?.dataset.act; if (!a) return;
+  if (a === 'login') {
+    if (demo) admin = true;
+    else if (!F) return toast(t('noCfg'));
+    else try { await F.au.signInWithEmailAndPassword(F.auth, $('#lE').value, $('#lP').value) } catch { return toast(t('bad')) }
+    $('#adminNav').classList.remove('hidden'); renderAdmin();
   }
-  const item = t.closest('.item:not([data-cat])'); if (item) return item.classList.toggle('open');
-
-  const ed = t.closest('[data-edit]'); if (ed) { editingId = ed.dataset.edit; renderAdmin(); return scrollTo({top: $('#adminTab').offsetTop, behavior: 'smooth'}); }
-  const del = t.closest('[data-del]');
-  if (del) { if (confirm(tr('confirmDel'))) { await store.remove(del.dataset.del); await reload(); } return; }
-
-  const act = t.closest('[data-act]')?.dataset.act;
-  if (act === 'login') {
-    if (!F) { isAdmin = true; $('#adminNav').classList.remove('hidden'); return renderAdmin(); }
-    try { await F.au.signInWithEmailAndPassword(F.auth, $('#lEmail').value, $('#lPass').value); }
-    catch { $('#lErr').textContent = tr('loginErr'); }
+  if (a === 'logout') { if (F) await F.au.signOut(F.auth); admin = false; $('#adminNav').classList.add('hidden'); location.hash = 'search' }
+  if (a === 'cancel') { editId = null; renderAdmin() }
+  if (a === 'export') {
+    const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob([JSON.stringify(meds.map(({ id, ...r }) => r), null, 2)], { type: 'application/json' })); l.download = 'jopharma-medicines.json'; l.click();
   }
-  if (act === 'logout') { if (F) await F.au.signOut(F.auth); isAdmin = false; $('#adminNav').classList.add('hidden'); showTab('searchTab'); }
-  if (act === 'cancel') { editingId = null; renderAdmin(); }
-  if (act === 'export') {
-    const data = meds.map(m => Object.fromEntries(FIELDS.map(f => [f, m[f] || ''])));
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'}));
-    a.download = 'jopharma-medicines.json'; a.click();
-  }
-  if (act === 'save') {
-    const m = Object.fromEntries(FIELDS.map(f => [f, $('#f_'+f).value.trim()]));
-    if (!m.name || !m.category) return alert(tr('reqFields'));
-    try { await store.save(m, editingId); editingId = null; await reload(); }
-    catch (err) { alert(tr('saveFail') + err.message); }
+  if (a === 'save') {
+    const m = Object.fromEntries(['name','category','active','indication','price','alternative'].map(f => [f, $('#f_' + f).value.trim().slice(0, 300)]));
+    if (!m.name || !m.category) return toast(t('req'));
+    try { await store.save(m, editId); editId = null; await reload(); toast(t('ok')) } catch (er) { toast(er.message) }
   }
 });
+if (F) F.au.onAuthStateChanged(F.auth, u => { admin = !!u; $('#adminNav').classList.toggle('hidden', !u); if (location.hash === '#admin') renderAdmin() });
 
-if (F) F.au.onAuthStateChanged(F.auth, u => {
-  isAdmin = !!u;
-  $('#adminNav').classList.toggle('hidden', !u);
-  if (!$('#adminTab').classList.contains('hidden')) renderAdmin();
-});
-
-applyLang();
-reload();
+applyLang(); route(); reload();
 </script>
 </body>
 </html>
