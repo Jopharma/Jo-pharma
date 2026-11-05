@@ -118,7 +118,7 @@ const T = {
  fn:['اسم الدواء *','Name *'],fc:['التصنيف *','Category *'],fa:['المادة الفعالة','Active ingredient'],fp:['السعر','Price'],fi:['الاستخدام','Indication'],fl:['البدائل','Alternatives'],
  add:['➕ إضافة','➕ Add'],save:['💾 حفظ','💾 Save'],cancel:['إلغاء','Cancel'],exp:['⬇️ تصدير JSON','⬇️ Export JSON'],ed:['تعديل','Edit'],del:['حذف','Delete'],
  cdel:['حذف هذا الدواء نهائياً؟','Delete this medicine permanently?'],req:['الاسم والتصنيف مطلوبان','Name and category are required'],ok:['تم الحفظ ✅','Saved ✅'],
- as:['بحث في المضاف…','Search added…'],noCfg:['فشل الاتصال بالخادم، تعذر فتح لوحة المشرف','Server connection failed; admin unavailable'],noCat:['لا توجد أدوية في هذا التصنيف بعد.','No medicines in this category yet.']
+ as:['بحث في المضاف…','Search added…'],imp:['⬆️ استيراد JSON/CSV','⬆️ Import JSON/CSV'],nod:['لا توجد بيانات صالحة في الملف','No valid data in the file'],cimp:['سيتم إضافتها. متابعة؟','will be added. Continue?'],imok:['تم الاستيراد ✅','Import completed ✅'],csvh:['CSV: الأعمدة بالترتيب name,category,active,indication,price,alternative','CSV columns in order: name,category,active,indication,price,alternative'],noCfg:['فشل الاتصال بالخادم، تعذر فتح لوحة المشرف','Server connection failed; admin unavailable'],noCat:['لا توجد أدوية في هذا التصنيف بعد.','No medicines in this category yet.']
 };
 const t = k => (T[k] || [k, k])[lang === 'ar' ? 0 : 1];
 
@@ -253,6 +253,10 @@ const store = {
   async remove(id) {
     if (F) { await F.fs.deleteDoc(F.fs.doc(F.db,'medicines',id)); ls.set('jp_cache', null) }
     else ls.set('jp_meds', ls.get('jp_meds', SAMPLE).filter(x => x.id !== id));
+  },
+  async bulk(items) {
+    if (F) { for (let i = 0; i < items.length; i += 400) { const b = F.fs.writeBatch(F.db); items.slice(i, i + 400).forEach(m => b.set(F.fs.doc(F.fs.collection(F.db, 'medicines')), m)); await b.commit() } ls.set('jp_cache', null) }
+    else { const a = ls.get('jp_meds', SAMPLE); items.forEach(m => a.push({ ...m, id: 'l' + Date.now() + Math.random().toString(36).slice(2, 6) })); ls.set('jp_meds', a) }
   }
 };
 async function reload() {
@@ -314,11 +318,44 @@ function renderAdmin() {
    <div class="form"><input id="f_name" placeholder="${t('fn')}" value="${esc(e.name)}"><select id="f_category"><option value="">${t('fc')}</option>${cats().map(c => `<option value="${esc(c)}" ${c === e.category ? 'selected' : ''}>${cinfo(c).i} ${esc(cinfo(c).n)}</option>`).join('')}</select>
    <input id="f_active" placeholder="${t('fa')}" value="${esc(e.active)}"><input id="f_price" placeholder="${t('fp')}" value="${esc(e.price)}">
    <input class="full" id="f_indication" placeholder="${t('fi')}" value="${esc(e.indication)}"><input class="full" id="f_alternative" placeholder="${t('fl')}" value="${esc(e.alternative)}"></div>
-   <div class="tools"><button class="btn" data-act="save">${editId ? t('save') : t('add')}</button>${editId ? `<button class="btn sec" data-act="cancel">${t('cancel')}</button>` : ''}<button class="btn sec sm" data-act="export">${t('exp')}</button><button class="btn sm" style="background:#64748b" data-act="logout">${t('out')}</button></div>
+   <div class="tools"><button class="btn" data-act="save">${editId ? t('save') : t('add')}</button>${editId ? `<button class="btn sec" data-act="cancel">${t('cancel')}</button>` : ''}<button class="btn sec sm" data-act="export">${t('exp')}</button><label class="btn sec sm">${t('imp')}<input type="file" id="imp" hidden></label><button class="btn sm" style="background:#64748b" data-act="logout">${t('out')}</button></div>
+   <p style="color:var(--mut);font-size:13px">${t('csvh')}</p>
    <input id="aq" type="search" placeholder="${t('as')}" value="${esc($('#aq')?.value || '')}" style="margin:8px 0">
    ${list.slice(0, 100).map(m => `<div class="ar"><div><b>${esc(m.name)}</b> <small>${esc(cinfo(m.category).n)}</small></div><div><button class="btn sm sec" data-edit="${esc(m.id)}">${t('ed')}</button> <button class="btn sm red" data-del="${esc(m.id)}">${t('del')}</button></div></div>`).join('')}`;
   $('#aq').addEventListener('input', () => { const p = $('#aq').selectionStart; renderAdmin(); const a = $('#aq'); a.focus(); a.setSelectionRange(p, p) });
 }
+
+/* ===== استيراد JSON / CSV ===== */
+const FLD = ['name','category','active','indication','price','alternative'];
+const fixCat = c => { const n = norm(c); const x = CATS.find(k => norm(k[1]) === n || norm(k[2]) === n); return x ? x[1] : String(c || '').trim() };
+function parseCSV(s) {
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (q) { if (c === '"' && s[i + 1] === '"') { cur += '"'; i++ } else if (c === '"') q = false; else cur += c }
+    else if (c === '"') q = true;
+    else if (c === ',') { row.push(cur); cur = '' }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && s[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = '' }
+    else cur += c;
+  }
+  if (cur || row.length) { row.push(cur); rows.push(row) }
+  return rows.filter(r => r.some(x => x.trim()));
+}
+async function importFile(ev) {
+  const file = ev.target.files[0]; if (!file || !admin) return;
+  try {
+    const text = (await file.text()).replace(/^\uFEFF/, '');
+    let items;
+    if (/\.csv$/i.test(file.name)) { let r = parseCSV(text); if (r[0] && norm(r[0][0]) === 'name') r = r.slice(1); items = r.map(x => Object.fromEntries(FLD.map((f, i) => [f, (x[i] || '').trim()]))) }
+    else { items = JSON.parse(text); if (!Array.isArray(items)) items = Object.values(items) }
+    items = items.filter(m => m && m.name).map(m => Object.fromEntries(FLD.map(f => [f, f === 'category' ? fixCat(m[f]) : String(m[f] ?? '').trim().slice(0, 300)])));
+    if (!items.length) return toast(t('nod'));
+    if (!confirm(items.length + ' ' + t('cimp'))) return;
+    await store.bulk(items); await reload(); toast(t('imok'));
+  } catch (er) { toast(er.message) }
+  ev.target.value = '';
+}
+document.addEventListener('change', e => { if (e.target.id === 'imp') importFile(e) });
 
 /* ===== 9) التنقل بالهاش + اللغة + المظهر ===== */
 function route() {
@@ -356,16 +393,15 @@ document.addEventListener('click', async e => {
   const dl = e.target.closest('[data-del]'); if (dl) { if (confirm(t('cdel'))) { await store.remove(dl.dataset.del); await reload() } return }
   const a = e.target.closest('[data-act]')?.dataset.act; if (!a) return;
   if (a === 'login') {
-    if (demo) admin = true;
-    else if (!F) return toast(t('noCfg'));
-    else try { await F.au.signInWithEmailAndPassword(F.auth, $('#lE').value, $('#lP').value) } catch { return toast(t('bad')) }
-    $('#adminNav').classList.remove('hidden'); renderAdmin();
+    if (!F) return toast(t('noCfg'));
+    try { await F.au.signInWithEmailAndPassword(F.auth, $('#lE').value, $('#lP').value) } catch { return toast(t('bad')) }
   }
   if (a === 'logout') { if (F) await F.au.signOut(F.auth); admin = false; $('#adminNav').classList.add('hidden'); location.hash = 'search' }
   if (a === 'cancel') { editId = null; renderAdmin() }
   if (a === 'export') {
     const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob([JSON.stringify(meds.map(({ id, ...r }) => r), null, 2)], { type: 'application/json' })); l.download = 'jopharma-medicines.json'; l.click();
   }
+  if (!admin && ['save','export','cancel'].includes(a)) return;
   if (a === 'save') {
     const m = Object.fromEntries(['name','category','active','indication','price','alternative'].map(f => [f, $('#f_' + f).value.trim().slice(0, 300)]));
     if (!m.name || !m.category) return toast(t('req'));
