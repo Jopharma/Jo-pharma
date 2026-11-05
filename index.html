@@ -41,7 +41,7 @@ h1{color:var(--pri);font-size:25px;text-align:center}
 input,select{font-family:inherit;font-size:16px;padding:11px 13px;border:2px solid var(--bd);border-radius:10px;width:100%;background:var(--card);color:var(--tx)}
 input:focus,select:focus{border-color:var(--pri);outline:0}
 .btn{background:var(--acc);color:#fff;border:0;border-radius:10px;font-weight:700;font-size:15px;padding:11px 20px;white-space:nowrap;text-decoration:none;display:inline-block}
-.btn:hover{filter:brightness(.92)}.btn.sec{background:var(--b2)}.btn.red{background:#dc2626}.btn.sm{padding:5px 12px;font-size:13px}
+.btn:hover{filter:brightness(.92)}.btn.sec{background:var(--b2)}.btn.sm{padding:5px 12px;font-size:13px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:16px}
 .item{background:var(--soft);padding:14px 16px;border-radius:12px;border:1px solid var(--bd);border-inline-start:5px solid var(--pri)}
 .item summary{cursor:pointer;font-weight:700;color:var(--pri);font-size:16px}
@@ -53,9 +53,6 @@ button.item{text-align:start;font-size:16px;font-weight:700;color:var(--pri)}but
 .cnt{color:var(--pri);font-weight:700;margin:10px 0}.empty{text-align:center;color:#b45309;padding:14px}
 .hidden{display:none!important}
 .sk{height:84px;border-radius:10px;margin-bottom:10px;background:linear-gradient(90deg,var(--soft),var(--bd),var(--soft));background-size:200%;animation:sh 1.2s infinite}@keyframes sh{to{background-position:-200%}}
-.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:12px 0}.form .full{grid-column:1/-1}
-.ar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px;border:1px solid var(--bd);border-radius:10px;margin-bottom:8px;flex-wrap:wrap}
-.tools{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 #toast{position:fixed;inset-inline:0;bottom:calc(16px + env(safe-area-inset-bottom,0px));margin:auto;width:max-content;max-width:90%;background:#0f172a;color:#fff;padding:10px 18px;border-radius:10px;opacity:0;pointer-events:none;transition:.3s;z-index:70}#toast.on{opacity:1}
 footer{text-align:center;padding:20px 14px;color:var(--mut);font-size:13px}footer a{color:var(--pri)}
 @media(max-width:600px){.row{flex-direction:column}header{justify-content:center}}
@@ -66,7 +63,7 @@ footer{text-align:center;padding:20px 14px;color:var(--mut);font-size:13px}foote
 <header>
   <div class="logo"><span>JO</span> Pharma</div>
   <nav aria-label="main">
-    <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="admin" id="adminNav" class="hidden" data-i="nA"></button>
+    <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button>
   </nav>
   <div class="tl"><button id="thBtn" aria-label="theme">🌓</button><button id="langBtn"></button></div>
 </header>
@@ -82,25 +79,14 @@ footer{text-align:center;padding:20px 14px;color:var(--mut);font-size:13px}foote
   <section id="cats" class="card tab hidden"><h1 data-i="nC"></h1><div class="grid" id="catGrid"></div></section>
   <section id="diseases" class="card tab hidden"><h1 data-i="nD"></h1><div class="note i" data-i="dn"></div><input id="df" type="search" data-ph="filt" style="margin-top:8px"><div class="grid" id="dList"></div></section>
   <section id="herbs" class="card tab hidden"><h1 data-i="nH"></h1><div class="note i" data-i="hn"></div><input id="hf" type="search" data-ph="filt" style="margin-top:8px"><div class="grid" id="hList"></div></section>
-  <section id="admin" class="card tab hidden"></section>
 </main>
-<footer><span data-i="rights"></span> · <a href="#admin" data-i="alink"></a> · <a href="https://wa.me/962781775710" target="_blank" rel="noopener" data-i="wa"></a></footer>
+<footer><span data-i="rights"></span> · <a href="https://wa.me/962781775710" target="_blank" rel="noopener" data-i="wa"></a></footer>
 <div id="toast" role="status"></div>
 
 <script type="module">
-/* ===== 1) Firebase: ضع إعداداتك هنا (اتركها فارغة = وضع تجريبي محلي) ===== */
-const CFG = {
-  apiKey: "AIzaSyCzr8CudqT_meouBh1y32yEZg3fFumIXyM",
-  authDomain: "jopharma-eb3da.firebaseapp.com",
-  projectId: "jopharma-eb3da",
-  storageBucket: "jopharma-eb3da.firebasestorage.app",
-  messagingSenderId: "888807152542",
-  appId: "1:888807152542:web:bce93d5856402af69e948f"
-};
-
-/* ===== 2) الترجمة [عربي, English] ===== */
+/* ===== 1) الترجمة [عربي, English] ===== */
 const T = {
- nS:['البحث','Search'],nC:['التصنيفات','Categories'],nD:['الأمراض','Diseases'],nH:['الأعشاب','Herbs'],nA:['⚙️ المشرف','⚙️ Admin'],
+ nS:['البحث','Search'],nC:['التصنيفات','Categories'],nD:['الأمراض','Diseases'],nH:['الأعشاب','Herbs'],
  h1:['المرجع الدوائي والطبي الأردني','Jordanian Drug & Medical Reference'],
  sub:['ابحث عن الأدوية والأسعار والبدائل','Search medicines, prices and alternatives'],
  med:['دواء','Medicines'],dis:['مرض','Diseases'],herb:['عشبة','Herbs'],
@@ -112,17 +98,13 @@ const T = {
  use:['الاستخدام','Indication'],comp:['المادة الفعالة','Active ingredient'],price:['السعر','Price'],alt:['البدائل','Alternatives'],
  sym:['الأعراض','Symptoms'],cau:['الأسباب','Causes'],trt:['العلاج المقترح','Suggested treatment'],ben:['الفوائد','Benefits'],how:['طريقة الاستخدام','Directions'],
  copy:['نسخ','Copy'],rep:['إبلاغ عن خطأ','Report error'],copied:['تم النسخ ✅','Copied ✅'],
- rights:['© Jo Pharma 2026','© Jo Pharma 2026'],alink:['دخول المشرف','Admin login'],wa:['اقتراحات وتصحيحات','Suggestions & corrections'],
- lg:['دخول المشرف','Admin login'],em:['البريد الإلكتروني','Email'],pw:['كلمة المرور','Password'],in:['دخول','Log in'],out:['خروج','Log out'],
- bad:['بيانات الدخول غير صحيحة','Incorrect credentials'],demo:['وضع تجريبي: البيانات محفوظة في متصفحك فقط.','Demo mode: data is stored in your browser only.'],
- fn:['اسم الدواء *','Name *'],fc:['التصنيف *','Category *'],fa:['المادة الفعالة','Active ingredient'],fp:['السعر','Price'],fi:['الاستخدام','Indication'],fl:['البدائل','Alternatives'],
- add:['➕ إضافة','➕ Add'],save:['💾 حفظ','💾 Save'],cancel:['إلغاء','Cancel'],exp:['⬇️ تصدير JSON','⬇️ Export JSON'],ed:['تعديل','Edit'],del:['حذف','Delete'],
- cdel:['حذف هذا الدواء نهائياً؟','Delete this medicine permanently?'],req:['الاسم والتصنيف مطلوبان','Name and category are required'],ok:['تم الحفظ ✅','Saved ✅'],
- as:['بحث في المضاف…','Search added…'],imp:['⬆️ استيراد JSON/CSV','⬆️ Import JSON/CSV'],nod:['لا توجد بيانات صالحة في الملف','No valid data in the file'],cimp:['سيتم إضافتها. متابعة؟','will be added. Continue?'],imok:['تم الاستيراد ✅','Import completed ✅'],csvh:['CSV: الأعمدة بالترتيب name,category,active,indication,price,alternative','CSV columns in order: name,category,active,indication,price,alternative'],noCfg:['فشل الاتصال بالخادم، تعذر فتح لوحة المشرف','Server connection failed; admin unavailable'],noCat:['لا توجد أدوية في هذا التصنيف بعد.','No medicines in this category yet.']
+ rights:['© Jo Pharma 2026','© Jo Pharma 2026'],wa:['اقتراحات وتصحيحات','Suggestions & corrections'],
+ noCat:['لا توجد أدوية في هذا التصنيف بعد.','No medicines in this category yet.'],
+ loadErr:['تعذر تحميل ملف الأدوية','Could not load the medicines file']
 };
 const t = k => (T[k] || [k, k])[lang === 'ar' ? 0 : 1];
 
-/* ===== 3) البيانات: الصق مصفوفاتك الكاملة هنا بنفس الصيغة ===== */
+/* ===== 2) البيانات ===== */
 const diseasesList = [
  ["الرشح والإنفلونزا","Common Cold and Influenza","عدوى فيروسية تصيب الجهاز التنفسي العلوي.","Viral infections of the upper respiratory tract.","احتقان الأنف، عطاس، التهاب الحلق، سعال، وارتفاع الحرارة في الإنفلونزا.","Nasal congestion, sneezing, sore throat, cough, and fever (more common with influenza).","فيروسات الرينو (الرشح) وفيروس الإنفلونزا.","Rhinoviruses (common cold) and influenza viruses.","Panadol Cold & Flu (باراسيتامول مع مضاد احتقان)، فيتامين C، سوائل وراحة.","Panadol Cold & Flu (paracetamol with a decongestant), vitamin C, fluids, and rest."],
  ["التهاب اللوزتين","Tonsillitis","التهاب اللوزتين، وغالباً ما يكون فيروسياً وأحياناً بكتيرياً.","Inflammation of the tonsils, most often viral and sometimes bacterial.","صعوبة وألم عند البلع، ارتفاع الحرارة، تضخم الغدد اللمفاوية في الرقبة.","Painful swallowing, fever, and swollen cervical lymph nodes.","فيروسات، أو بكتيريا المكورات العقدية (Group A Streptococcus).","Viruses, or Group A Streptococcus bacteria.","Panadol (باراسيتامول) للألم والحرارة؛ Augmentin (أموكسيسيلين/حمض الكلافولانيك) عند ثبوت العدوى البكتيرية وبوصفة طبية.","Paracetamol (Panadol) for pain and fever; Augmentin (amoxicillin/clavulanic acid) only for confirmed bacterial infection and by prescription."],
@@ -202,8 +184,8 @@ const herbsList = [
  ["الريحان (الحبق)","Basil","يخفف المغص والانتفاخ ويساعد على الهضم.","Relieves cramps and bloating and aids digestion.","تُنقع الأوراق الطازجة في ماء مغلي وتُشرب دافئة كشاي عشبي.","Steep fresh leaves in boiling water and drink warm as an herbal tea."],
  ["اللافندر (الخزامى)","Lavender","يساعد على الاسترخاء وتحسين النوم وتخفيف القلق الخفيف.","Promotes relaxation, improves sleep, and eases mild anxiety.","يُشرب منقوع الأزهار خفيفاً كشاي، أو يُستنشق زيته العطري. لا يُشرب الزيت العطري.","Drink a light infusion of the flowers as tea, or inhale the essential oil. Never ingest the essential oil."]
 ];
-const SAMPLE = [];
-/* التصنيفات حسب الاستعمال [أيقونة, عربي (يُخزَّن), English] — فارغة حتى تضيف أدوية */
+
+/* التصنيفات [أيقونة, عربي (يُخزَّن في JSON), English] */
 const CATS = [
  ['💓','أدوية الضغط','Blood pressure'],['🩸','أدوية السكري','Diabetes'],['🫀','أدوية القلب والأوعية','Cardiovascular'],['🧪','أدوية الكوليسترول والدهون','Cholesterol & lipids'],
  ['🩹','مسكنات الألم ومضادات الالتهاب','Pain relievers & NSAIDs'],['🌡️','خافضات الحرارة','Antipyretics'],['🦠','المضادات الحيوية','Antibiotics'],['🍄','مضادات الفطريات','Antifungals'],
@@ -216,62 +198,45 @@ const CATS = [
  ['👶','أدوية الأطفال','Pediatric'],['🫘','أدوية الكلى','Renal'],['🍂','أدوية الكبد','Liver'],['🎗️','أدوية الأورام','Oncology'],['🛡️','أدوية المناعة وزراعة الأعضاء','Immunology & transplant']
 ];
 
-/* ===== 4) أدوات ===== */
+/* ===== 3) أدوات ===== */
 const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm = s => String(s ?? '').toLowerCase().replace(/[\u064B-\u065F]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim();
 const ls = { get(k,d){ try { return JSON.parse(localStorage.getItem(k)) ?? d } catch { return d } }, set(k,v){ try { localStorage.setItem(k, JSON.stringify(v)) } catch {} } };
-let lang = ls.get('jp_lang','ar'), meds = [], admin = false, editId = null, F = null, lim = 20, ready = false;
-const demo = !CFG.projectId;
+let lang = ls.get('jp_lang','ar'), meds = [], lim = 20, ready = false;
 const toast = m => { const e = $('#toast'); e.textContent = m; e.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => e.classList.remove('on'), 2200) };
 const debounce = (f, ms) => { let h; return (...a) => { clearTimeout(h); h = setTimeout(() => f(...a), ms) } };
 const pick = (a, i) => a[i * 2 + (lang === 'ar' ? 0 : 1)];
 
-if (!demo) {
-  try {
-    const b = 'https://www.gstatic.com/firebasejs/10.12.2/';
-    const [a, fs, au] = await Promise.all([import(b+'firebase-app.js'), import(b+'firebase-firestore.js'), import(b+'firebase-auth.js')]);
-    const app = a.initializeApp(CFG);
-    F = { fs, au, db: fs.getFirestore(app), auth: au.getAuth(app) };
-  } catch (e) { console.error(e) }
-}
+/* ===== 4) تحميل الأدوية من medicines.json ===== */
+const fixCat = c => { const n = norm(c); const x = CATS.find(k => norm(k[1]) === n || norm(k[2]) === n); return x ? x[1] : String(c || '').trim() };
+const FLD = ['name','category','active','indication','price','alternative'];
 
-/* ===== 5) التخزين (مع كاش 10 دقائق لتوفير القراءات) ===== */
-const store = {
-  async list() {
-    if (!F) return demo ? ls.get('jp_meds', SAMPLE) : [];
-    const c = ls.get('jp_cache', null);
-    if (c && Date.now() - c.t < 6e5) return c.d;
-    const s = await F.fs.getDocs(F.fs.collection(F.db,'medicines'));
-    const d = s.docs.map(x => ({ id: x.id, ...x.data() }));
-    ls.set('jp_cache', { t: Date.now(), d }); return d;
-  },
-  async save(m, id) {
-    if (F) { id ? await F.fs.setDoc(F.fs.doc(F.db,'medicines',id), m) : await F.fs.addDoc(F.fs.collection(F.db,'medicines'), m); ls.set('jp_cache', null) }
-    else { const a = ls.get('jp_meds', SAMPLE); id ? a[a.findIndex(x => x.id === id)] = { ...m, id } : a.push({ ...m, id: 'l' + Date.now() }); ls.set('jp_meds', a) }
-  },
-  async remove(id) {
-    if (F) { await F.fs.deleteDoc(F.fs.doc(F.db,'medicines',id)); ls.set('jp_cache', null) }
-    else ls.set('jp_meds', ls.get('jp_meds', SAMPLE).filter(x => x.id !== id));
-  },
-  async bulk(items) {
-    if (F) { for (let i = 0; i < items.length; i += 400) { const b = F.fs.writeBatch(F.db); items.slice(i, i + 400).forEach(m => b.set(F.fs.doc(F.fs.collection(F.db, 'medicines')), m)); await b.commit() } ls.set('jp_cache', null) }
-    else { const a = ls.get('jp_meds', SAMPLE); items.forEach(m => a.push({ ...m, id: 'l' + Date.now() + Math.random().toString(36).slice(2, 6) })); ls.set('jp_meds', a) }
-  }
-};
+async function loadMeds() {
+  const r = await fetch('medicines.json', { cache: 'no-cache' });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const data = await r.json();
+  const arr = Array.isArray(data) ? data : Object.values(data);
+  return arr.filter(m => m && m.name).map((m, i) => {
+    const o = Object.fromEntries(FLD.map(f => [f, String(m[f] ?? '').trim()]));
+    o.category = fixCat(o.category);
+    o.id = 'm' + i;
+    return o;
+  });
+}
 async function reload() {
-  try { meds = await store.list() } catch (e) { console.error(e); meds = [] }
-  meds.sort((a,b) => (a.name || '').localeCompare(b.name || '', 'en'));
+  try { meds = await loadMeds() } catch (e) { console.error(e); meds = []; toast(t('loadErr')) }
+  meds.sort((a, b) => (a.name || '').localeCompare(b.name || '', 'en'));
   ready = true; $('#cM').textContent = meds.length;
-  renderCats(); doSearch(); if (admin) renderAdmin();
+  renderCats(); doSearch();
 }
 
-/* ===== 6) البحث: ترتيب بالصلة + كلمات متعددة + فلتر تصنيف ===== */
-const FL = ['name','active','category','indication','alternative'];
+/* ===== 5) البحث: ترتيب بالصلة + كلمات متعددة + فلتر تصنيف ===== */
+const SF = ['name','active','category','indication','alternative'];
 function search(q) {
   const n = norm(q), ws = n.split(/\s+/).filter(Boolean), c = $('#fc').value;
   return meds.filter(m => !c || m.category === c).map(m => {
-    const h = FL.map(f => norm(m[f])), hay = h.join(' ');
+    const h = SF.map(f => norm(m[f])), hay = h.join(' ');
     if (!ws.every(w => hay.includes(w))) return null;
     return { m, s: (h[0].startsWith(n) ? 5 : h[0].includes(n) ? 3 : 0) + (h[1].includes(n) ? 2 : 0) };
   }).filter(Boolean).sort((a,b) => b.s - a.s).map(x => x.m);
@@ -295,7 +260,7 @@ function renderCats() {
   $('#catGrid').innerHTML = c.map(x => `<button class="item cat" data-cat="${esc(x)}"><span class="ic">${cinfo(x).i}</span><span>${esc(cinfo(x).n)}</span><small>${meds.filter(m => m.category === x).length} ${t('med')}</small></button>`).join('');
 }
 
-/* ===== 7) الأمراض والأعشاب (details = يعمل بالكيبورد) ===== */
+/* ===== 6) الأمراض والأعشاب ===== */
 function renderLists() {
   const df = norm($('#df').value), hf = norm($('#hf').value);
   $('#dList').innerHTML = diseasesList.map((d, n) => ({ d, n })).filter(x => !df || norm(x.d.join(' ')).includes(df)).map(({ d, n }) =>
@@ -305,65 +270,11 @@ function renderLists() {
   $('#cD').textContent = diseasesList.length; $('#cH').textContent = herbsList.length;
 }
 
-/* ===== 8) لوحة المشرف ===== */
-function renderAdmin() {
-  const b = $('#admin'), e = meds.find(m => m.id === editId) || {};
-  if (!admin) {
-    b.innerHTML = `<h1>${t('lg')}</h1><div style="max-width:380px;margin:14px auto;display:grid;gap:10px">${demo ? `<div class="note i">${t('demo')}</div>` : ''}
-     <input id="lE" type="email" placeholder="${t('em')}" style="direction:ltr" autocomplete="username"><input id="lP" type="password" placeholder="${t('pw')}" style="direction:ltr" autocomplete="current-password">
-     <button class="btn" data-act="login">${t('in')}</button></div>`; return;
-  }
-  const q = norm($('#aq')?.value || ''), list = meds.filter(m => !q || norm(m.name + m.active).includes(q));
-  b.innerHTML = `<h1>${t('nA')}</h1>${demo ? `<div class="note i">${t('demo')}</div>` : ''}
-   <div class="form"><input id="f_name" placeholder="${t('fn')}" value="${esc(e.name)}"><select id="f_category"><option value="">${t('fc')}</option>${cats().map(c => `<option value="${esc(c)}" ${c === e.category ? 'selected' : ''}>${cinfo(c).i} ${esc(cinfo(c).n)}</option>`).join('')}</select>
-   <input id="f_active" placeholder="${t('fa')}" value="${esc(e.active)}"><input id="f_price" placeholder="${t('fp')}" value="${esc(e.price)}">
-   <input class="full" id="f_indication" placeholder="${t('fi')}" value="${esc(e.indication)}"><input class="full" id="f_alternative" placeholder="${t('fl')}" value="${esc(e.alternative)}"></div>
-   <div class="tools"><button class="btn" data-act="save">${editId ? t('save') : t('add')}</button>${editId ? `<button class="btn sec" data-act="cancel">${t('cancel')}</button>` : ''}<button class="btn sec sm" data-act="export">${t('exp')}</button><label class="btn sec sm">${t('imp')}<input type="file" id="imp" hidden></label><button class="btn sm" style="background:#64748b" data-act="logout">${t('out')}</button></div>
-   <p style="color:var(--mut);font-size:13px">${t('csvh')}</p>
-   <input id="aq" type="search" placeholder="${t('as')}" value="${esc($('#aq')?.value || '')}" style="margin:8px 0">
-   ${list.slice(0, 100).map(m => `<div class="ar"><div><b>${esc(m.name)}</b> <small>${esc(cinfo(m.category).n)}</small></div><div><button class="btn sm sec" data-edit="${esc(m.id)}">${t('ed')}</button> <button class="btn sm red" data-del="${esc(m.id)}">${t('del')}</button></div></div>`).join('')}`;
-  $('#aq').addEventListener('input', () => { const p = $('#aq').selectionStart; renderAdmin(); const a = $('#aq'); a.focus(); a.setSelectionRange(p, p) });
-}
-
-/* ===== استيراد JSON / CSV ===== */
-const FLD = ['name','category','active','indication','price','alternative'];
-const fixCat = c => { const n = norm(c); const x = CATS.find(k => norm(k[1]) === n || norm(k[2]) === n); return x ? x[1] : String(c || '').trim() };
-function parseCSV(s) {
-  const rows = []; let row = [], cur = '', q = false;
-  for (let i = 0; i < s.length; i++) {
-    const c = s[i];
-    if (q) { if (c === '"' && s[i + 1] === '"') { cur += '"'; i++ } else if (c === '"') q = false; else cur += c }
-    else if (c === '"') q = true;
-    else if (c === ',') { row.push(cur); cur = '' }
-    else if (c === '\n' || c === '\r') { if (c === '\r' && s[i + 1] === '\n') i++; row.push(cur); rows.push(row); row = []; cur = '' }
-    else cur += c;
-  }
-  if (cur || row.length) { row.push(cur); rows.push(row) }
-  return rows.filter(r => r.some(x => x.trim()));
-}
-async function importFile(ev) {
-  const file = ev.target.files[0]; if (!file || !admin) return;
-  try {
-    const text = (await file.text()).replace(/^\uFEFF/, '');
-    let items;
-    if (/\.csv$/i.test(file.name)) { let r = parseCSV(text); if (r[0] && norm(r[0][0]) === 'name') r = r.slice(1); items = r.map(x => Object.fromEntries(FLD.map((f, i) => [f, (x[i] || '').trim()]))) }
-    else { items = JSON.parse(text); if (!Array.isArray(items)) items = Object.values(items) }
-    items = items.filter(m => m && m.name).map(m => Object.fromEntries(FLD.map(f => [f, f === 'category' ? fixCat(m[f]) : String(m[f] ?? '').trim().slice(0, 300)])));
-    if (!items.length) return toast(t('nod'));
-    if (!confirm(items.length + ' ' + t('cimp'))) return;
-    await store.bulk(items); await reload(); toast(t('imok'));
-  } catch (er) { toast(er.message) }
-  ev.target.value = '';
-}
-document.addEventListener('change', e => { if (e.target.id === 'imp') importFile(e) });
-
-/* ===== 9) التنقل بالهاش + اللغة + المظهر ===== */
+/* ===== 7) التنقل + اللغة + المظهر ===== */
 function route() {
   let id = location.hash.slice(1); if (!$('#' + id)?.classList.contains('tab')) id = 'search';
-  if (id === 'admin' && !admin && !$('#lE')) renderAdmin();
   $$('.tab').forEach(s => s.classList.toggle('hidden', s.id !== id));
-  $$('nav button').forEach(b => b.toggleAttribute('aria-current', b.dataset.go === id) || (b.dataset.go === id ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current')));
-  if (id === 'admin') renderAdmin();
+  $$('nav button').forEach(b => b.dataset.go === id ? b.setAttribute('aria-current','page') : b.removeAttribute('aria-current'));
 }
 function applyLang() {
   document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -371,7 +282,7 @@ function applyLang() {
   $$('[data-i]').forEach(e => e.textContent = t(e.dataset.i));
   $$('[data-ph]').forEach(e => e.placeholder = t(e.dataset.ph));
   $('#q').placeholder = t('ph'); $('#langBtn').textContent = lang === 'ar' ? 'English' : 'عربي';
-  renderLists(); renderCats(); doSearch(); if ($('#admin').innerHTML) renderAdmin();
+  renderLists(); renderCats(); doSearch();
 }
 $('#langBtn').onclick = () => { lang = lang === 'ar' ? 'en' : 'ar'; ls.set('jp_lang', lang); applyLang() };
 $('#thBtn').onclick = () => { const d = document.documentElement, dark = getComputedStyle(d).colorScheme === 'dark'; d.dataset.theme = dark ? 'light' : 'dark'; ls.set('jp_theme', d.dataset.theme) };
@@ -380,35 +291,15 @@ window.addEventListener('hashchange', route);
 $('#q').addEventListener('input', debounce(() => { lim = 20; doSearch() }, 180));
 $('#fc').addEventListener('change', () => { lim = 20; doSearch() });
 $('#df').addEventListener('input', debounce(renderLists, 150)); $('#hf').addEventListener('input', debounce(renderLists, 150));
-document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'lP') $('[data-act=login]').click() });
 
-/* ===== 10) الأحداث ===== */
+/* ===== 8) الأحداث ===== */
 document.addEventListener('click', async e => {
   const g = e.target.closest('[data-go]'); if (g) { location.hash = g.dataset.go; return }
   if (e.target.closest('[data-more]')) { lim += 20; return doSearch() }
   const c = e.target.closest('[data-cat]'); if (c) { $('#fc').value = c.dataset.cat; $('#q').value = ''; location.hash = 'search'; return doSearch() }
   const cp = e.target.closest('[data-copy]');
-  if (cp) { const m = meds.find(x => x.id === cp.dataset.copy); try { await navigator.clipboard.writeText(`${m.name} | ${m.active} | ${m.price}`); toast(t('copied')) } catch {} return }
-  const ed = e.target.closest('[data-edit]'); if (ed) { editId = ed.dataset.edit; renderAdmin(); return scrollTo({ top: 0, behavior: 'smooth' }) }
-  const dl = e.target.closest('[data-del]'); if (dl) { if (confirm(t('cdel'))) { await store.remove(dl.dataset.del); await reload() } return }
-  const a = e.target.closest('[data-act]')?.dataset.act; if (!a) return;
-  if (a === 'login') {
-    if (!F) return toast(t('noCfg'));
-    try { await F.au.signInWithEmailAndPassword(F.auth, $('#lE').value, $('#lP').value) } catch { return toast(t('bad')) }
-  }
-  if (a === 'logout') { if (F) await F.au.signOut(F.auth); admin = false; $('#adminNav').classList.add('hidden'); location.hash = 'search' }
-  if (a === 'cancel') { editId = null; renderAdmin() }
-  if (a === 'export') {
-    const l = document.createElement('a'); l.href = URL.createObjectURL(new Blob([JSON.stringify(meds.map(({ id, ...r }) => r), null, 2)], { type: 'application/json' })); l.download = 'jopharma-medicines.json'; l.click();
-  }
-  if (!admin && ['save','export','cancel'].includes(a)) return;
-  if (a === 'save') {
-    const m = Object.fromEntries(['name','category','active','indication','price','alternative'].map(f => [f, $('#f_' + f).value.trim().slice(0, 300)]));
-    if (!m.name || !m.category) return toast(t('req'));
-    try { await store.save(m, editId); editId = null; await reload(); toast(t('ok')) } catch (er) { toast(er.message) }
-  }
+  if (cp) { const m = meds.find(x => x.id === cp.dataset.copy); try { await navigator.clipboard.writeText(`${m.name} | ${m.active} | ${m.price}`); toast(t('copied')) } catch {} }
 });
-if (F) F.au.onAuthStateChanged(F.auth, u => { admin = !!u; $('#adminNav').classList.toggle('hidden', !u); if (location.hash === '#admin') renderAdmin() });
 
 applyLang(); route(); reload();
 </script>
