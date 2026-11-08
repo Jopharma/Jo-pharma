@@ -314,7 +314,7 @@ const sameAct=m=>{const a=norm(m.active);if(!a)return[];return(byAct.get(a)||[])
 const card=m=>{
   const alts=m.alternative?m.alternative.split(/[,،;؛\n]+/).map(x=>x.trim()).filter(Boolean):[];
   const sa=sameAct(m),fv=favs.includes(m.name),ci=cinfo(m.category);
-  return `<article class="res"><h3><a href="#med=${esc(m.id)}" style="color:inherit;text-decoration:none">${hl(m.name)}</a> ${m.category?`<small>${ci.i} ${esc(ci.n)}</small>`:''}</h3>
+  return `<article class="res"><h3><a href="#med=${esc(m.id)}" data-med="${esc(m.id)}" style="color:inherit;text-decoration:none">${hl(m.name)}</a> ${m.category?`<small>${ci.i} ${esc(ci.n)}</small>`:''} <a class="btn sm" href="#med=${esc(m.id)}" data-med="${esc(m.id)}" style="font-weight:700;vertical-align:middle">${t('more')}</a></h3>
  ${m.indication?`<p><b>${t('use')}:</b> ${hl(m.indication)}</p>`:''}${m.active?`<p><b>${t('comp')}:</b> ${hl(m.active)}</p>`:''}
  <p><b>${t('price')}:</b> <span class="pr" dir="ltr">${esc(m.price||'—')}</span></p>
  ${alts.length?`<div class="alt"><b>${t('alt')}:</b>${chips(alts.map(x=>({q:x,l:x})))}</div>`:''}
@@ -387,13 +387,14 @@ document.addEventListener('keydown',e=>{if(e.key==='/'&&!/INPUT|SELECT|TEXTAREA/
 /* ===== 8) الأحداث ===== */
 const medText=m=>`${m.name}${m.active?' | '+m.active:''} | ${m.price}`;
 document.addEventListener('click',async e=>{
-  const g=e.target.closest('[data-go]');if(g){location.hash=g.dataset.go;return}
+  const md=e.target.closest('[data-med]');if(md){e.preventDefault();openMed(md.dataset.med);return}
+  const g=e.target.closest('[data-go]');if(g){e.preventDefault();goTab(g.dataset.go);return}
   if(e.target.closest('[data-more]')){lim+=20;return doSearch()}
   if(e.target.closest('[data-top]'))return scrollTo({top:0,behavior:'smooth'});
   if(e.target.closest('[data-clearq]')){$('#q').value='';$('#q').focus();return doSearch()}
   if(e.target.closest('[data-clr]')){recent=[];ls.set('jp_recent',recent);return doSearch()}
-  const c=e.target.closest('[data-cat]');if(c){$('#fc').value=c.dataset.cat;$('#q').value='';lim=20;location.hash='search';return doSearch()}
-  const s=e.target.closest('[data-q]');if(s){$('#q').value=s.dataset.q;$('#fc').value='';lim=20;addRecent(s.dataset.q);if(location.hash!=='#search')location.hash='search';doSearch();$('#search').scrollIntoView({behavior:'smooth'});return}
+  const c=e.target.closest('[data-cat]');if(c){$('#fc').value=c.dataset.cat;$('#q').value='';lim=20;goTab('search');return doSearch()}
+  const s=e.target.closest('[data-q]');if(s){$('#q').value=s.dataset.q;$('#fc').value='';lim=20;addRecent(s.dataset.q);goTab('search');doSearch();$('#search').scrollIntoView({behavior:'smooth'});return}
   const f=e.target.closest('[data-fav]');if(f){const m=meds.find(x=>x.id===f.dataset.fav);if(!m)return;
     favs=favs.includes(m.name)?favs.filter(x=>x!==m.name):[...favs,m.name];ls.set('jp_fav',favs);
     if(location.hash==='#favs')renderFavs();else{const on=favs.includes(m.name);f.setAttribute('aria-pressed',on);f.textContent=on?'★':'☆';favBadge()}return}
@@ -439,10 +440,19 @@ const MON=[
 const CATG={'المضادات الحيوية':'لا تُستعمل إلا عند عدوى بكتيرية وبوصفة طبية، وأكمل المدة كما حددها الطبيب.','أدوية الجلدية':'استعمل بحسب إرشاد الطبيب أو الصيدلاني، وتجنب وضعه على الجروح المفتوحة أو العينين ما لم يُذكر ذلك.','أدوية العيون':'اغسل يديك قبل الاستعمال ولا تلمس رأس القطارة للعين. لا تشارك العبوة، وتخلّص منها بعد المدة المحددة بعد الفتح.','الفيتامينات والمعادن':'المكملات لا تغني عن غذاء متوازن؛ لا تتجاوز الجرعة المكتوبة، واستشر الطبيب مع الحمل أو الأمراض المزمنة أو الأدوية الأخرى.','أدوية الضغط':'لا توقف دواء الضغط فجأة دون استشارة الطبيب، وقِس الضغط بانتظام.','أدوية السكري':'التزم بالمواعيد وراقب السكر، وتعرّف على أعراض الهبوط.','الهرمونات والكورتيزون':'لا تتوقف عن الكورتيزون الفموي فجأة بعد استعمال طويل دون استشارة الطبيب.'};
 const RXC=new Set(['المضادات الحيوية','مضادات الفيروسات','أدوية الاكتئاب والنفسية','أدوية الأعصاب والصرع','مميعات الدم','أدوية الأورام','أدوية المناعة وزراعة الأعضاء','الهرمونات والكورتيزون','أدوية السكري','أدوية الغدة الدرقية','أدوية الضغط','أدوية القلب والأوعية','أدوية الكوليسترول والدهون']);
 const monOf=m=>{const a=norm(m.active);if(!a)return null;const x=MON.find(([k])=>k.some(z=>a.includes(z)));return x?x[1]:null};
+function goTab(id){
+  try{if(location.hash!=='#'+id)location.hash=id}catch(e){}
+  $$('.tab').forEach(s=>s.classList.toggle('hidden',s.id!==id));
+  $$('nav button').forEach(b=>b.dataset.go===id?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+  if(id==='favs')renderFavs();
+  document.title=lang==='ar'?'Jo Pharma | المرجع الدوائي الأردني':'Jo Pharma | Jordanian Drug Reference';
+  scrollTo({top:0});
+}
+function openMed(id){try{location.hash='med='+id}catch(e){}showMed(id)}
 function showMed(id){
   $$('.tab').forEach(s=>s.classList.toggle('hidden',s.id!=='med'));
   $$('nav button').forEach(b=>b.removeAttribute('aria-current'));
-  const box=$('#med'),m=meds.find(x=>x.id===id),back=`<a class="btn sec sm" href="#search">→ ${t('nS')}</a>`;
+  const box=$('#med'),m=meds.find(x=>x.id===id),back=`<a class="btn sec sm" href="#search" data-go="search">→ ${t('nS')}</a>`;
   if(!ready||!m){box.innerHTML=back+`<p class="empty">${ready?t('none'):'…'}</p>`;return}
   const k=monOf(m),ci=cinfo(m.category),sa=sameAct(m),fv=favs.includes(m.name),rx=RXC.has(m.category);
   document.title=m.name+' | Jo Pharma';
