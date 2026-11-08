@@ -19,10 +19,14 @@
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Jo Pharma"><meta property="og:locale" content="ar_JO">
 <meta property="og:title" content="Jo Pharma | المرجع الدوائي الأردني"><meta property="og:description" content="ابحث عن الأدوية والأسعار والبدائل في الأردن.">
-<meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💊%3C/text%3E%3C/svg%3E">
+<meta property="og:image" content="https://YOUR-DOMAIN.com/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://YOUR-DOMAIN.com/og-image.png">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Jo Pharma","inLanguage":["ar","en"],"description":"المرجع الدوائي الأردني"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Jo Pharma","url":"https://YOUR-DOMAIN.com/","inLanguage":["ar","en"],"description":"المرجع الدوائي الأردني"},{"@type":"Organization","name":"Jo Pharma","url":"https://jopharma.net/","logo":"https://jopharma.net/logo.png"}]}</script>
 <script>try{var __t=JSON.parse(localStorage.getItem('jp_theme'));if(__t)document.documentElement.dataset.theme=__t}catch(e){}</script>
 <meta name="theme-color" content="#1e3a8a">
 <title>Jo Pharma | المرجع الدوائي الأردني</title>
@@ -36,7 +40,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
 body{font-family:'Tajawal','Inter',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--hd);z-index:60}
 header{background:var(--hd);color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:env(safe-area-inset-top,0px);z-index:50;flex-wrap:wrap;gap:8px}
-.logo{font-size:22px;font-weight:800;direction:ltr}.logo span{color:#fb923c}
+.logo{font-size:22px;font-weight:800;direction:ltr;display:flex;align-items:center;gap:9px;color:#fff;text-decoration:none}.logo b{font-weight:800}.logo i{font-style:normal;color:#fb923c}
 nav{display:flex;gap:4px;flex-wrap:wrap}
 button,.btn{font-family:inherit;cursor:pointer}
 nav button{background:none;border:0;color:#e2e8f0;font-weight:700;font-size:14px;padding:7px 12px;border-radius:8px}
@@ -101,7 +105,11 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
 <body>
 <a class="skip" href="#main" data-i="skip"></a>
 <header>
-  <div class="logo"><span>JO</span> Pharma</div>
+  <a class="logo" href="#search" data-go="search" aria-label="Jo Pharma"><svg width="38" height="38" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f56c4"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+<linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
+<clipPath id="cl"><rect x="106" y="176" width="300" height="160" rx="80"/></clipPath></defs><rect x="16" y="16" width="480" height="480" rx="112" fill="url(#g)"/><g transform="rotate(-45 256 256)"><g clip-path="url(#cl)"><rect x="106" y="176" width="150" height="160" fill="#fff"/><rect x="256" y="176" width="150" height="160" fill="url(#o)"/><rect x="256" y="176" width="150" height="46" fill="#fff" opacity=".18"/></g>
+<rect x="106" y="176" width="300" height="160" rx="80" fill="none" stroke="#fff" stroke-width="6" opacity=".9"/>
+<path transform="rotate(45 181 256)" d="M181 226v60M151 256h60" stroke="#1e3a8a" stroke-width="20" stroke-linecap="round"/></g></svg><b><i>JO</i> Pharma</b></a>
   <nav aria-label="main">
     <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="favs"><span data-i="nF"></span><span class="bdg hidden" id="fN"></span></button>
   </nav>
