@@ -497,6 +497,7 @@ document.addEventListener('click',async e=>{
     if(location.hash==='#favs')renderFavs();else{const on=favs.includes(m.name);f.setAttribute('aria-pressed',on);f.textContent=on?'★':'☆';favBadge()}return}
   const cp=e.target.closest('[data-copy]');
   if(cp){const m=meds.find(x=>x.id===cp.dataset.copy);try{await navigator.clipboard.writeText(medText(m));toast(t('copied'))}catch{}return}
+  const sh=e.target.closest('[data-share]');
   if(sh){const m=meds.find(x=>x.id===sh.dataset.share),url='https://jopharma.net/drug/'+m.slug+'.html';
     if(navigator.share){try{await navigator.share({title:'Jo Pharma',text:medText(m),url});return}catch{}}
     try{await navigator.clipboard.writeText(medText(m)+'\n'+url);toast(t('copied'))}catch{}}
@@ -596,6 +597,97 @@ const A0={'بنادول':'panadol','اوغمنتين':'augmentin','كونكور'
 const ALIAS=Object.fromEntries(Object.entries(A0).map(([k,v])=>[norm(k),v]));
 /*CORE-END*/
 
+/* ===== التداخلات الدوائية: كل قاعدة موثّقة في نشرة دواء أو مرجع رسمي ===== */
+const G={
+ qt:['amiodarone','azithromycin','ciprofloxacin','clarithromycin','domperidone','donepezil','escitalopram','fluconazole','moxifloxacin','ondansetron'],
+ nsaid:['ibuprofen','diclofenac','aceclofenac','etoricoxib','celecoxib','dexketoprofen'],
+ ssri:['sertraline','escitalopram','paroxetine','fluvoxamine','duloxetine','venlafaxine'],
+ fq:['ciprofloxacin','moxifloxacin'],cs:['prednisolone','dexamethasone'],
+ ppi:['omeprazole','esomeprazole'],pde5:['sildenafil','tadalafil'],nit:['isosorbide']
+};
+const SV={c:0,a:1,m:2};
+const SVL={c:['ممنوع الجمع','Contraindicated'],a:['يُتجنب الجمع أو بإشراف طبي','Avoid / medical supervision'],m:['يحتاج مراقبة أو تعديل جرعة','Monitor / dose adjustment']};
+const RULES=[
+{a:G.qt,b:G.qt,s:'a',
+ ar:'كلا الدواءين مصنّف «خطر معروف» لإطالة QT واضطراب نظم القلب الخطير (Torsades de Pointes). الجمع يزيد الخطر؛ يُتجنب غالباً، وإن لزم يكون بإشراف الطبيب مع تخطيط قلب وفحص البوتاسيوم والمغنيسيوم.',
+ en:'Both drugs have a Known Risk of QT prolongation and torsades de pointes. Combining raises the risk; usually avoided, otherwise only under medical supervision with ECG and electrolyte checks.',
+ src:'CredibleMeds (Known Risk of TdP)'},
+{a:['domperidone'],b:G.qt.filter(x=>x!=='domperidone'&&x!=='azithromycin'),s:'c',
+ ar:'نشرة الدومبيريدون تمنع جمعه مع الأدوية المطيلة لـQT ومع مثبطات CYP3A4 القوية (مثل الكلاريثروميسين ومضادات الفطريات الأزولية).',
+ en:'The domperidone label contraindicates combining it with QT-prolonging drugs and strong CYP3A4 inhibitors (e.g. clarithromycin, azole antifungals).',
+ src:'نشرة Domperidone (EMA SmPC · Health Canada)'},
+{a:['ticagrelor'],b:['clarithromycin'],s:'c',
+ ar:'الكلاريثروميسين مثبّط قوي لـCYP3A4 ويرفع تركيز تيكاغريلور بشكل كبير. الجمع ممنوع بحسب نشرة الدواء.',
+ en:'Clarithromycin is a strong CYP3A4 inhibitor and substantially raises ticagrelor exposure. Contraindicated per the label.',
+ src:'نشرة Brilinta (AstraZeneca · Health Canada · Medsafe)'},
+{a:['tizanidine'],b:['ciprofloxacin','fluvoxamine'],s:'c',
+ ar:'السيبروفلوكساسين والفلوفوكسامين يثبّطان CYP1A2 فيرتفع تركيز التيزانيدين عدة أضعاف مع هبوط ضغط ونعاس شديدين. الجمع ممنوع.',
+ en:'Ciprofloxacin and fluvoxamine inhibit CYP1A2 and raise tizanidine levels several-fold, causing marked hypotension and sedation. Contraindicated.',
+ src:'نشرة Tizanidine (FDA · Novartis Sirdalud)'},
+{a:['clopidogrel'],b:G.ppi,s:'a',
+ ar:'الأوميبرازول والإيزوميبرازول يقللان تحويل الكلوبيدوغريل إلى شكله الفعّال فيضعف تأثيره. تنصح نشرة FDA بتجنب الجمع، وتباعد الجرعات لا يحل المشكلة.',
+ en:'They reduce activation of clopidogrel and weaken its effect. The FDA label advises avoiding the combination; spacing doses does not fix it.',
+ src:'نشرة Plavix (FDA)'},
+{a:G.pde5,b:G.nit,s:'c',
+ ar:'الجمع مع النيترات قد يسبب هبوط ضغط مهدداً للحياة. الجمع ممنوع.',
+ en:'Combining with nitrates can cause life-threatening hypotension. Contraindicated.',
+ src:'نشرة Viagra (Pfizer · Health Canada) · ACC/AHA'},
+{a:['simvastatin'],b:['clarithromycin'],s:'c',
+ ar:'الكلاريثروميسين يرفع تركيز السيمفاستاتين ويزيد خطر انحلال العضلات (Rhabdomyolysis). الجمع ممنوع بحسب نشرة Zocor.',
+ en:'Clarithromycin raises simvastatin levels and the risk of rhabdomyolysis. Contraindicated per the Zocor label.',
+ src:'نشرة Zocor (FDA) · تنبيه FDA 2011'},
+{a:['simvastatin'],b:['amiodarone','amlodipine'],s:'m',
+ ar:'الحد الأقصى لجرعة السيمفاستاتين بحسب النشرة هو 20 ملغ يومياً عند الجمع (خطر اعتلال العضلات).',
+ en:'Per the label, the maximum simvastatin dose is 20 mg/day when combined (myopathy risk).',
+ src:'نشرة Zocor (FDA) · MHRA'},
+{a:['atorvastatin'],b:['clarithromycin'],s:'m',
+ ar:'يُفضّل تجنب الجمع، وإن لزم فالحد الأقصى للأتورفاستاتين 20 ملغ يومياً (خطر اعتلال العضلات).',
+ en:'Avoid if possible; if needed, atorvastatin should not exceed 20 mg/day (myopathy risk).',
+ src:'MHRA Drug Safety Update · NHS Tayside'},
+{a:['lamotrigine'],b:['valproate'],s:'a',
+ ar:'الفالبروات يضاعف تركيز اللاموتريجين أكثر من مرتين ويزيد خطر الطفح الجلدي الخطير (ستيفنز-جونسون). يتطلب جرعة مخفّضة وإشرافاً طبياً.',
+ en:'Valproate more than doubles lamotrigine levels and raises the risk of serious rash (Stevens-Johnson). Needs a reduced dose and medical supervision.',
+ src:'نشرة Lamictal (FDA · GSK)'},
+{a:['amiodarone'],b:['digoxin'],s:'m',
+ ar:'الأميودارون يرفع تركيز الديجوكسين بنحو 70% وقد يصل لمستوى سام. يراجع الطبيب الجرعة ويراقب مستوى الدواء.',
+ en:'Amiodarone raises digoxin levels by about 70%, possibly to toxic levels. The doctor should review the dose and monitor levels.',
+ src:'نشرة Cordarone'},
+{a:G.fq,b:G.cs,s:'m',
+ ar:'الجمع مع الكورتيكوستيرويدات الفموية يزيد خطر التهاب الأوتار وتمزقها (تحذير FDA المؤطّر). أوقف الكينولون عند ألم الأوتار وراجع الطبيب.',
+ en:'Combining with oral corticosteroids raises the risk of tendinitis and tendon rupture (FDA boxed warning). Stop the quinolone at tendon pain and see a doctor.',
+ src:'FDA Boxed Warning (Fluoroquinolones)'},
+{a:['clopidogrel'],b:G.nsaid,s:'m',
+ ar:'الجمع مع مضادات الالتهاب (NSAIDs) يزيد خطر النزيف المعدي المعوي.',
+ en:'Combining with NSAIDs increases the risk of gastrointestinal bleeding.',
+ src:'نشرة Plavix (FDA)'},
+{a:['clopidogrel'],b:G.ssri,s:'m',
+ ar:'مضادات الاكتئاب من فئة SSRI/SNRI تزيد خطر النزيف مع الكلوبيدوغريل.',
+ en:'SSRI/SNRI antidepressants increase the risk of bleeding with clopidogrel.',
+ src:'نشرة Plavix (FDA)'},
+{a:G.ssri,b:G.nsaid,s:'m',
+ ar:'مضادات الاكتئاب SSRI/SNRI تزيد خطر النزيف، والجمع مع مضادات الالتهاب (NSAIDs) يزيده أكثر.',
+ en:'SSRI/SNRI antidepressants increase bleeding risk, and adding an NSAID raises it further.',
+ src:'نشرة Zoloft (FDA)'}
+];
+/* أدوية حقل المادة الفعالة فيها فارغ: تحقق منها يدوياً قبل النشر */
+const BRAND_ING={sirdalud:'tizanidine',faverin:'fluvoxamine',plagin:'clopidogrel',platil:'clopidogrel',isorem:'isosorbide',cipro:'ciprofloxacin',ciproquin:'ciprofloxacin',cipropharm:'ciprofloxacin',ciprover:'ciprofloxacin',simvatin:'simvastatin',amlodar:'amlodipine'};
+const ALLI=[...new Set(RULES.flatMap(r=>[...r.a,...r.b]))];
+const TOPICAL=/\b(gel|emugel|emulgel|cream|oint|ointment|lotion|spray|eye|ear|nasal|shampoo|foam|vaginal|ovules?|mouthwash|topical)\b|e\/d/i;
+const ingsOf=m=>{if(TOPICAL.test(m.name))return[];const f=norm(m.name).split(/[^a-z]+/)[0],s=norm(m.active)+' '+(BRAND_ING[f]||'');return ALLI.filter(k=>s.includes(k))};
+let IXI=null;
+function ixIndex(){IXI=new Map();RULES.forEach((r,i)=>r.a.forEach(x=>r.b.forEach(y=>{if(x===y)return;[[x,y],[y,x]].forEach(([p,q])=>{(IXI.get(p)||IXI.set(p,[]).get(p)).push({p:q,i})})})))}
+function ixHtml(m){
+  if(!IXI)ixIndex();
+  const win=new Map();
+  ingsOf(m).forEach(k=>(IXI.get(k)||[]).forEach(({p,i})=>{const o=win.get(p);if(o===undefined||SV[RULES[i].s]<SV[RULES[o].s])win.set(p,i)}));
+  if(!win.size)return'';
+  const by=new Map();win.forEach((i,p)=>(by.get(i)||by.set(i,[]).get(i)).push(p));
+  const ar=lang==='ar',L=[...by].sort((x,y)=>SV[RULES[x[0]].s]-SV[RULES[y[0]].s]);
+  return `<div class="note" style="text-align:start"><b>⚠️ ${ar?'تداخلات دوائية موثّقة':'Documented drug interactions'}</b>`+
+   L.map(([i,ps])=>{const r=RULES[i];return `<p style="margin-top:10px"><span class="tg">${SVL[r.s][ar?0:1]}</span> <b dir="ltr">${esc(ps.join(' · '))}</b><br>${esc(ar?r.ar:r.en)}<br><small class="mut">${esc(r.src)}</small></p>`}).join('')+
+   `<p class="mut"><small>${ar?'قائمة مختارة وغير شاملة. أخبر الصيدلاني أو الطبيب بكل أدويتك قبل أي دواء جديد.':'A selected, non-exhaustive list. Tell your pharmacist or doctor about all your medicines before starting a new one.'}</small></p></div>`;
+}
+
 function goTab(id){
   try{if(location.hash!=='#'+id)location.hash=id}catch(e){}
   $$('.tab').forEach(s=>s.classList.toggle('hidden',s.id!==id));
@@ -623,6 +715,7 @@ function showMed(id){
   ${firstW?`<div class="note"><b>${t('keyW')}:</b> ${esc(firstW)}</div>`:''}
   ${m.active?`<p><b>${t('comp')}:</b> ${esc(m.active)}</p>`:`<p class="mut">${t('noAct')}</p>`}${m.indication?`<p><b>${t('use')}:</b> ${esc(m.indication)}</p>`:''}
   ${k?sec(t('about'),k.d,1)+sec(t('warn'),k.w,1)+ix+sec(t('se'),k.s):sec(t('gen'),CATG[m.category]||'راجع نشرة الدواء المرفقة واسأل الصيدلاني عن طريقة الاستعمال والتداخلات.',1)}
+  ${ixHtml(m)}
   ${sec(t('docT'),t('docB'))}
   ${sa.length?`<h3 style="margin-top:14px;color:var(--pri)">${t('same')}</h3>`+chips(sa.map(x=>({q:x.name,l:x.name,e:x.price+(x.up!=null?' · ≈'+x.up.toFixed(x.up<0.1?3:2):'')})),'g')+`<p class="mut"><small>${t('sameN')}</small></p>`:''}
   <div class="note" style="margin-top:16px">${t('noDose')}</div>
