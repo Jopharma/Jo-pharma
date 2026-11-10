@@ -133,6 +133,16 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
 }
 @media print{.bn{display:none!important}}
 
+
+/* ===== v3: بحث متقدم + دليل الأمراض + الأدوات ===== */
+.flt{max-width:680px;gap:6px;flex-wrap:wrap}.flt select,.flt input{flex:1;min-width:120px;padding:7px 10px;font-size:14px}
+.fz{background:var(--ib);border:1px solid var(--ibd);color:var(--it);border-radius:10px;padding:8px 12px;margin:8px 0;font-size:14px}
+.tl2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-top:14px}
+.tool{background:var(--soft);border:1px solid var(--bd);border-radius:14px;padding:14px}.tool h2{color:var(--pri);font-size:18px;margin-bottom:6px}
+.tool label{display:block;font-size:13px;color:var(--mut);margin-top:8px}.tool .btn{margin-top:10px}.tool ul{padding-inline-start:18px;font-size:14px;margin-top:8px}.tool li{margin:4px 0}
+.bmi{font-size:26px;font-weight:800;color:var(--acc);margin-top:8px}
+.al{background:var(--nb);border:2px solid var(--acc);color:var(--nt);border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:700}
+.dx{border-inline-start:5px solid var(--acc)}
 </style>
 </head>
 <body>
@@ -144,7 +154,7 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
 <rect x="106" y="176" width="300" height="160" rx="80" fill="none" stroke="#fff" stroke-width="6" opacity=".9"/>
 <path transform="rotate(45 181 256)" d="M181 226v60M151 256h60" stroke="#1e3a8a" stroke-width="20" stroke-linecap="round"/></g></svg><b><i>JO</i> Pharma</b></a>
   <nav aria-label="main">
-    <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="favs"><span data-i="nF"></span><span class="bdg hidden fbd" id="fN"></span></button>
+    <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="tools" data-i="nT"></button><button data-go="favs"><span data-i="nF"></span><span class="bdg hidden fbd" id="fN"></span></button>
   </nav>
   <div class="tl"><button id="thBtn" aria-label="theme" aria-pressed="false">🌓</button><button id="langBtn"></button></div>
 </header>
@@ -155,6 +165,7 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
     <div class="row"><div class="iw"><input id="q" type="search" autocomplete="off" enterkeyhint="search" aria-label="search"><button id="qx" class="x hidden" data-clearq data-al="qx">×</button><div id="sg" class="sg hidden" role="listbox"></div></div><select id="fc" aria-label="category" style="max-width:200px"></select></div>
     <div class="stats"><div><b id="cM">0</b> <span data-i="med"></span></div><div><b id="cD">0</b> <span data-i="dis"></span></div><div><b id="cH">0</b> <span data-i="herb"></span></div></div>
     <details class="note nd"><summary data-i="noteS"></summary><div data-i="note" style="margin-top:6px"></div></details>
+    <div class="row flt"><select id="fs" aria-label="التركيز"></select><select id="ff" aria-label="الشكل الدوائي"></select><input id="fp" type="number" min="0" step="0.5" inputmode="decimal" placeholder="أقصى سعر (JOD)" aria-label="أقصى سعر"></div>
     <div class="row r2"><select id="sort" data-al="sortL"></select></div>
     <div id="res" aria-live="polite"></div>
   </section>
@@ -163,8 +174,14 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
   <section id="herbs" class="card tab hidden"><h1 data-i="nH"></h1><div class="note i" data-i="hn"></div><input id="hf" type="search" data-ph="filt" style="margin-top:8px"><div class="grid" id="hList"></div></section>
   <section id="favs" class="card tab hidden"><h1 data-i="nF"></h1><div id="fList"></div></section>
   <section id="med" class="card tab hidden"></section>
+  <section id="dpage" class="card tab hidden"></section>
+  <section id="tools" class="card tab hidden"><h1 data-i="nT"></h1><p class="sub">أدوات مجانية بسيطة · بياناتك تبقى على جهازك</p><div class="tl2">
+  <div class="tool"><h2>⚖️ حاسبة مؤشر كتلة الجسم</h2><label>الوزن (كغ)<input id="bw" type="number" inputmode="decimal" min="1"></label><label>الطول (سم)<input id="bh" type="number" inputmode="decimal" min="50"></label><button class="btn" id="bBtn">احسب</button><div id="bo" aria-live="polite"></div></div>
+  <div class="tool"><h2>⏰ حاسبة مواعيد الجرعات</h2><label>اسم الدواء<input id="rn" type="text"></label><label>كل كم ساعة (كما وصف الطبيب)<select id="ri"><option>4</option><option>6</option><option selected>8</option><option>12</option><option>24</option></select></label><label>موعد أول جرعة<input id="rs" type="datetime-local"></label><label>عدد الأيام<input id="rd" type="number" value="5" min="1" max="60"></label><button class="btn" id="rBtn">أنشئ الجدول</button><div id="ro" aria-live="polite"></div></div>
+  <div class="tool"><h2>🔒 سجلي الدوائي والحساسيات</h2><p class="mut"><small>يُحفظ في متصفحك فقط (localStorage)، ولا يُرسل لأي خادم ولا يراه أحد. إن كتبت حساسية لدواء أو مادة، سنُنبّهك في صفحة أي دواء يحتويها.</small></p><select id="pt" aria-label="النوع" style="margin-top:8px"><option value="m">دواء أستخدمه</option><option value="a">حساسية</option></select><input id="pn" type="text" placeholder="الاسم (مثال: Penicillin)" style="margin-top:6px"><button class="btn" id="pAdd">إضافة</button><ul id="pl"></ul><button class="btn sm sec" id="pClr">مسح الكل</button></div>
+  </div></section>
 </main>
-<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="cats"><i>📂</i><span data-i="nC"></span></button><button data-go="diseases"><i>🏥</i><span data-i="nD"></span></button><button data-go="herbs"><i>🌿</i><span data-i="nH"></span></button><button data-go="favs"><i>★</i><span data-i="nF"></span><span class="bdg hidden fbd"></span></button></nav>
+<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="cats"><i>📂</i><span data-i="nC"></span></button><button data-go="diseases"><i>🏥</i><span data-i="nD"></span></button><button data-go="herbs"><i>🌿</i><span data-i="nH"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="favs"><i>★</i><span data-i="nF"></span><span class="bdg hidden fbd"></span></button></nav>
 <footer>
   <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
     <a href="about.html" style="font-weight: 700;">من نحن</a>
@@ -735,6 +752,135 @@ function showSg(){
 }
 $('#q').addEventListener('input',showSg);
 $('#q').addEventListener('focusout',()=>setTimeout(()=>$('#sg').classList.add('hidden'),250));
+
+
+/* ===== إضافات v3 ===== */
+Object.assign(T,{nT:['الأدوات','Tools']});
+const REVIEW_DATE='2026-11-10'; /* عدّله عند كل مراجعة علمية فعلية للمحتوى */
+const FRM={tab:'أقراص',cap:'كبسولات',sach:'أكياس/فوار',sup:'تحاميل',inj:'حقن',liq:'شراب/محلول',top:'موضعي (كريم/جل)'};
+/* 1) بحث ذكي: مطابقة صوتية عربي↔إنجليزي + تصحيح الأخطاء + تصفية */
+const AR={ب:'b',پ:'b',ت:'t',ث:'t',ط:'t',ج:'j',غ:'j',گ:'j',خ:'k',ك:'k',ق:'k',د:'d',ذ:'d',ض:'d',ر:'r',ز:'z',ظ:'z',س:'s',ش:'s',ص:'s',ف:'f',ڤ:'f',ل:'l',م:'m',ن:'n'};
+const skAr=s=>[...norm(s)].map(c=>AR[c]||'').join('').replace(/(.)\1+/g,'$1');
+const skEn=s=>s.toLowerCase().replace(/ph/g,'f').replace(/c(?=[ei])/g,'s').replace(/sh|ch/g,'s').replace(/[cq]/g,'k').replace(/x/g,'ks').replace(/p/g,'b').replace(/v/g,'f').replace(/[gj]/g,'j').replace(/[^a-z]/g,'').replace(/[aeiouywh]/g,'').replace(/(.)\1+/g,'$1');
+let VK=null,FUZ=null;
+const vk=()=>VK&&VK.n===meds.length?VK.a:(VK={n:meds.length,a:(()=>{const m=new Map();meds.forEach(x=>(x.name+' '+x.active).toLowerCase().split(/[^a-z]+/).forEach(w=>{if(w.length>=4&&!STOP.has(w)){const e=m.get(w)||{w,n:0,k:skEn(w)};e.n++;m.set(w,e)}}));return[...m.values()].filter(e=>e.k.length>=3)})()}).a;
+function fuzzy(q){
+  const w=norm(q).split(/\s+/)[0];if(!w||w.length<3)return null;
+  const ar=/[\u0600-\u06FF]/.test(w),k=ar?skAr(w):skEn(w);if(k.length<3)return null;
+  const tol=k.length>=5?1:0;let b=null,bs=1e9;
+  for(const e of vk()){if(Math.abs(e.k.length-k.length)>tol)continue;const d=lev(k,e.k);if(d>tol)continue;const s=d*1000+(ar?0:lev(w,e.w)*10)-e.n;if(s<bs){bs=s;b=e.w}}
+  return b;
+}
+const _se=search;
+search=function(q){
+  let r=_se(q);FUZ=null;
+  if(!r.length&&norm(q)){const c=fuzzy(q);if(c){const r2=_se(c);if(r2.length){r=r2;FUZ=c}}}
+  const s=$('#fs').value,f=$('#ff').value,p=parseFloat($('#fp').value);
+  return r.filter(m=>(!s||m.sp.st===s)&&(!f||m.sp.form===f)&&(!(p>=0)||(m.pv!=null&&m.pv<=p)));
+};
+const _ds=doSearch;
+doSearch=function(){FUZ=null;_ds();const b=$('#res');if(FUZ&&b.querySelector('.res'))b.insertAdjacentHTML('afterbegin',`<div class="fz">عرضنا نتائج «<b dir="ltr">${esc(FUZ)}</b>» لأقرب تطابق مع ما كتبته (تصحيح إملائي/مطابقة صوتية).</div>`)};
+function fillF(){
+  const c=new Map();meds.forEach(m=>m.sp.st&&c.set(m.sp.st,(c.get(m.sp.st)||0)+1));
+  const top=[...c].sort((a,b)=>b[1]-a[1]).slice(0,40).map(x=>x[0]).sort((a,b)=>parseFloat(a)-parseFloat(b)),s0=$('#fs').value,f0=$('#ff').value;
+  $('#fs').innerHTML='<option value="">كل التراكيز</option>'+top.map(x=>`<option ${x===s0?'selected':''}>${esc(x)}</option>`).join('');
+  $('#ff').innerHTML='<option value="">كل الأشكال</option>'+Object.entries(FRM).map(([k,v])=>`<option value="${k}" ${k===f0?'selected':''}>${v}</option>`).join('');
+}
+const _rc=renderCats;renderCats=function(){_rc();fillF()};
+['#fs','#ff','#fp'].forEach(s=>$(s).addEventListener('input',()=>{lim=20;doSearch()}));
+
+/* سجلي الدوائي + تنبيه الحساسية */
+let my=ls.get('jp_my',[]);
+const myAl=m=>{const h=norm(m.name+' '+m.active);return my.filter(x=>x.t==='a').map(x=>x.n).filter(n=>{const q=norm(n);return q.length>=3&&(h.includes(q)||(ALIAS[q]&&h.includes(ALIAS[q])))})};
+const myRender=()=>{$('#pl').innerHTML=my.length?my.map((x,i)=>`<li>${x.t==='a'?'⚠️ حساسية':'💊 دواء'}: <b dir="auto">${esc(x.n)}</b> <button class="btn sm sec" data-myd="${i}" aria-label="حذف">×</button></li>`).join(''):'<li class="mut">لا يوجد شيء محفوظ بعد.</li>'};
+$('#pAdd').onclick=()=>{const n=$('#pn').value.trim();if(!n)return;my=[...my,{t:$('#pt').value,n}];ls.set('jp_my',my);$('#pn').value='';myRender();toast('تم الحفظ على جهازك ✅')};
+$('#pl').addEventListener('click',e=>{const b=e.target.closest('[data-myd]');if(b){my.splice(+b.dataset.myd,1);ls.set('jp_my',my);myRender()}});
+$('#pClr').onclick=()=>{if(confirm('حذف كل بياناتك المحفوظة؟')){my=[];ls.set('jp_my',my);myRender()}};
+myRender();
+
+/* 2) صفحة الدواء: حمل ورضاعة + استخدام + مصادر + تاريخ المراجعة */
+const _sm=showMed;
+showMed=function(id){
+  _sm(id);const m=meds.find(x=>x.id===id);if(!ready||!m)return;
+  const box=$('#med'),k=monOf(m),al=myAl(m),q=encodeURIComponent((norm(m.active)||m.name).split('/')[0].trim());
+  const pr=k?(k.w.split(/(?<=[.؛])\s/).filter(s=>/الحمل|الرضاع/.test(s)).join(' ')||''):'';
+  const use=(m.type?'':(CATG[m.category]||''));
+  const mine=my.some(x=>x.t==='m'&&norm(m.name+' '+m.active).includes(norm(x.n))&&norm(x.n).length>=3);
+  const sec=(h,x)=>`<details class="item dd" open><summary>${h}</summary><div class="d"><p>${x}</p></div></details>`;
+  const h=`<h3 style="margin-top:14px;color:var(--pri)">📋 معلومات إضافية</h3>`
+   +sec('🏭 الشركة المصنّعة / المالكة للعلامة',esc(m.mfr||MFR[(m.name.toLowerCase().match(/[a-z]+/)||[''])[0]]||'غير مدرجة بعد؛ راجع العبوة أو اسأل الصيدلاني.'))
+   +sec('🤰 الحمل والرضاعة',esc(pr||'لا تتوفر معلومات مفصلة هنا. استشر الطبيب أو الصيدلاني قبل الاستعمال أثناء الحمل أو الرضاعة.'))
+   +sec('📄 طريقة الاستخدام',esc((use?use+' ':'')+'الجرعة وطريقة الاستعمال حسب نشرة الدواء المعتمدة المرفقة بالعبوة أو وصفة الطبيب.'))
+   +`<p class="mut"><small>🔎 <b>المصدر:</b> <a href="https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=${q}" target="_blank" rel="noopener">DailyMed</a> · <a href="https://vsearch.nlm.nih.gov/vivisimo/cgi-bin/query-meta?v%3Aproject=medlineplus&query=${q}" target="_blank" rel="noopener">MedlinePlus</a> · <a href="https://www.nhs.uk/search/results?q=${q}" target="_blank" rel="noopener">NHS</a><br>🗓️ <b>آخر مراجعة علمية للمحتوى:</b> ${k?REVIEW_DATE:'لا توجد مراجعة علمية مفصلة لهذا الدواء بعد'}</small></p>`;
+  const a=box.querySelector('.act');a?a.insertAdjacentHTML('beforebegin',h):box.insertAdjacentHTML('beforeend',h);
+  const w=(al.length?`<div class="al">⚠️ سجلت حساسية من «${esc(al.join('، '))}» وقد يحتوي هذا الدواء عليها. راجع الطبيب أو الصيدلاني قبل الاستعمال.</div>`:'')+(mine?`<div class="note i">💊 هذا الدواء ضمن سجلك الدوائي.</div>`:'');
+  if(w)box.insertAdjacentHTML('afterbegin',w);
+};
+
+/* 6) دليل الأمراض: صفحة مستقلة لكل مرض */
+const DG=[
+ [/الرشح|اللوزتين|السعال|الجيوب|القصبات|الأذن|الربو/,'اشرب سوائل بكثرة وارتح، تجنب التدخين والغبار، استعمل غسول الأنف بمحلول ملحي، وارفع رأسك عند النوم.','ضيق نفس أو ألم في الصدر أو ازرقاق الشفاه، حرارة 39°م فأكثر أو تستمر أكثر من 3 أيام، صعوبة في البلع مع سيلان اللعاب، تيبّس الرقبة، سعال بدم، أو عدم تحسن الربو بعد البخاخ المسكّن.'],
+ [/الارتجاع|القولون|الإسهال|الإمساك|القرحة|المعدة|الفتق|المرارة|البواسير|الكبد|الزائدة/,'وجبات صغيرة متكررة، قلّل الدهون والمقليات والكافيين، اشرب سوائل (خاصة مع الإسهال)، وزد الألياف والماء عند الإمساك.','دم في البراز أو قيء دموي أو أسود، ألم بطن شديد أو مستمر خاصة أسفل البطن الأيمن مع حرارة، علامات جفاف (قلة بول، دوخة)، فقدان وزن غير مبرر، صعوبة بلع، أو اصفرار العين والجلد.'],
+ [/الضغط|السكري|الكوليسترول|الغدة/,'قلّل الملح والسكريات، مارس نشاطاً بدنياً منتظماً، حافظ على وزن صحي، قِس القراءات دورياً، ولا توقف دواءك دون استشارة الطبيب.','ألم أو ضغط في الصدر، ضيق نفس مفاجئ، ضعف أو تنميل في جهة واحدة أو صعوبة في الكلام، صداع شديد مفاجئ، تشوش وعي، أو عطش شديد مع قيء وتنفس سريع (السكري).'],
+ [/الشقيقة|المفاصل|النقرس|هشاشة|التشنج|الأوتار/,'راحة نسبية، كمادات (باردة للالتهاب الحاد ودافئة للشد العضلي)، تمارين إطالة خفيفة، وتجنب المحفزات المعروفة لديك.','ألم مفاجئ شديد غير معتاد أو «أسوأ صداع في حياتك»، ضعف أو تنميل، تورم مفصل ساخن مع حرارة، إصابة بعد سقوط، أو عدم الاستجابة للمسكنات.'],
+ [/المسالك|الكلى|البروستاتا|سلس/,'اشرب ماءً بكثرة، لا تحبس البول، واحرص على النظافة الشخصية.','حرارة مع ألم في الخاصرة، دم في البول، عدم القدرة على التبول، قيء مستمر، أو مغص شديد.'],
+ [/الأرتيكاريا|حب الشباب|الفطرية|الصدفية|الإكزيما|الحزام/,'رطّب البشرة، تجنب المحفزات المعروفة والحك، استعمل ماءً فاتراً ومنظفات لطيفة.','تورم الوجه أو الشفتين أو صعوبة في التنفس، طفح ينتشر بسرعة مع حرارة، بثور مؤلمة قرب العين، أو علامات عدوى (احمرار متزايد، صديد).'],
+ [/العين|الملتحمة/,'لا تفرك العين، اغسل يديك، لا تشارك المناشف، وأوقف العدسات اللاصقة مؤقتاً.','ألم شديد أو نقص أو تشوش في الرؤية، حساسية شديدة للضوء، أو إصابة بمادة كيميائية أو جسم غريب.'],
+ [/الأرق|الاكتئاب|التعب/,'نظّم مواعيد النوم، قلّل الكافيين والشاشات ليلاً، مارس نشاطاً بدنياً، وتواصل مع من تثق بهم.','أفكار بإيذاء النفس أو إنهاء الحياة (اطلب مساعدة فورية أو اذهب للطوارئ)، أو عجز عن أداء الحياة اليومية لأكثر من أسبوعين.'],
+ [/فقر الدم|فيتامين|الكالسيوم/,'تغذية متوازنة غنية بمصادر العنصر الناقص، وافحص مستواه بالتحليل قبل أي مكمل.','دوخة شديدة أو إغماء، خفقان، ضيق نفس، شحوب شديد، أو تشنجات وخدر مستمر.'],
+ [/اللثة|القلاع|الفم/,'فرشاة ناعمة، غسول فم بماء وملح دافئ، وتجنب الأطعمة الحارة والحامضة.','قرحة تستمر أكثر من 3 أسابيع، تورم الوجه أو صعوبة بالبلع، حرارة، أو نزف غزير.'],
+ [/./,'اتبع تعليمات الطبيب والصيدلاني، سجّل أعراضك، واحرص على الراحة والترطيب والنوم الكافي.','تفاقم الأعراض أو عدم تحسنها خلال أيام، حرارة عالية، ألم شديد، ضيق نفس، أو إغماء.']];
+const dgOf=n=>DG.find(g=>g[0].test(n));
+/* شركات مالكة للعلامات التجارية العالمية الواضحة فقط (مفتاح = أول كلمة من الاسم) */
+const MFR={concor:'Merck KGaA',glucophage:'Merck KGaA',euthyrox:'Merck KGaA',nexium:'AstraZeneca',atacand:'AstraZeneca',exforge:'Novartis',augmentin:'GSK',ventolin:'GSK',gaviscon:'Reckitt',aptamil:'Nutricia (Danone)',bebelac:'Nutricia (Danone)',similac:'Abbott',cerelac:'Nestlé',nan:'Nestlé',accu:'Roche',sebamed:'Sebapharma GmbH & Co. KG',lacalut:'Dr. Theiss Naturwaren'};
+/* تفاصيل خاصة بكل مرض: [عناية ذاتية, متى تراجع الطبيب فوراً, الوقاية] (حسب فهرس المرض) */
+const DX={
+0:['الراحة، السوائل الدافئة، الغرغرة بماء وملح، غسول أو رذاذ الأنف الملحي، والعسل للسعال لمن عمره فوق سنة. المضادات الحيوية لا تنفع ضد الفيروسات.','ضيق نفس أو صفير، ألم في الصدر، حرارة عالية تستمر أكثر من 3 أيام، ألم شديد في الأذن أو الجيوب، أعراض لا تتحسن بعد 10 أيام، أو ظهور الأعراض عند رضيع أو مريض مزمن أو ضعيف المناعة.','غسل اليدين، تجنب لمس الوجه، الابتعاد عن المصابين، ولقاح الإنفلونزا السنوي لمن يُنصح لهم به.'],
+1:['الراحة، السوائل، الغرغرة بماء وملح للكبار، ومسكنات الألم والحرارة حسب النشرة. إن كان السبب بكتيرياً فالطبيب يقرر المضاد الحيوي بعد الفحص.','صعوبة في البلع تمنع شرب السوائل، سيلان اللعاب، صعوبة في التنفس أو صوت مكتوم، تورم في جانب الحلق، تيبّس الرقبة، حرارة عالية، أو طفح جلدي مع التهاب الحلق.','غسل اليدين، عدم مشاركة الأكواب والأواني، وتغيير فرشاة الأسنان بعد الشفاء.'],
+2:['سوائل دافئة، العسل لمن عمره فوق سنة، بخار الماء وترطيب الهواء، وتجنب التدخين والمهيجات. السعال الرطب يساعد على تنظيف المجاري، فلا يُكبت دون سبب.','سعال مع دم، ضيق نفس أو صفير، ألم في الصدر، حرارة عالية، سعال يدوم أكثر من 3 أسابيع، فقدان وزن غير مبرر، أو سعال عند رضيع.','الإقلاع عن التدخين، غسل اليدين، ولقاحات الإنفلونزا والمكورات الرئوية لمن يُنصح لهم.'],
+3:['الاستلقاء في غرفة هادئة معتمة، كمادة باردة على الجبهة، شرب الماء، وتدوين المحفزات (قلة النوم، تأخر الوجبات، الإجهاد، بعض الأطعمة).','صداع مفاجئ وشديد جداً، صداع مع حرارة وتيبّس الرقبة، ضعف أو تنميل في جهة واحدة، تغيّر جديد في الكلام أو الرؤية، صداع بعد إصابة في الرأس، أو صداع جديد بعد عمر 50.','نوم ووجبات منتظمة، شرب الماء، نشاط بدني، وتجنب المحفزات. الإفراط في المسكنات قد يسبب صداعاً ارتداديّاً؛ وإن تكررت النوبات يناقش الطبيب علاجاً وقائياً.'],
+4:['وجبات صغيرة، عدم الأكل قبل النوم بساعتين إلى ثلاث، رفع رأس السرير، تقليل الدهون والمقليات والكافيين والشوكولاتة والأطعمة الحارة، إنقاص الوزن الزائد، والإقلاع عن التدخين.','صعوبة أو ألم عند البلع، قيء متكرر أو دموي، براز أسود، فقدان وزن غير مبرر، أو أعراض تستمر رغم العلاج. وألم الصدر المصحوب بضيق نفس أو تعرّق أو امتداد للذراع أو الفك يحتاج إسعافاً فوراً لأنه قد يكون قلبياً.','تجنب المحفزات الغذائية، والحفاظ على وزن صحي، وعدم الاستلقاء بعد الأكل مباشرة.'],
+5:['تدوين الأطعمة المحفزة، وجبات منتظمة، زيادة الألياف القابلة للذوبان تدريجياً، شرب الماء، نشاط بدني منتظم، تقليل التوتر، ونوم كافٍ.','دم في البراز، فقدان وزن غير مبرر، إسهال يوقظك ليلاً، فقر دم، حرارة، ألم يتزايد، بداية الأعراض بعد عمر 50، أو تاريخ عائلي لسرطان القولون.','نمط حياة منتظم، تجنب المحفزات الغذائية الشخصية، وإدارة التوتر.'],
+6:['تقليل الملح، نظام غني بالخضار والفواكه، إنقاص الوزن الزائد، نشاط معتدل منتظم، الإقلاع عن التدخين، تقليل الكحول، قياس الضغط بجهاز موثوق، والالتزام بالدواء الموصوف دون إيقافه فجأة.','قراءة مرتفعة جداً (مثل 180/120 أو أكثر) مع صداع شديد أو ألم صدر أو ضيق نفس أو تشوش الرؤية أو ضعف وتنميل أو اضطراب الكلام: اذهب إلى الطوارئ فوراً.','وزن صحي، قلة الملح، نشاط بدني، وفحص دوري للضغط خاصة مع التاريخ العائلي.'],
+7:['غذاء متوازن يقلل السكريات المكررة، نشاط بدني منتظم، فحص السكر كما يحدد الطبيب، عناية يومية بالقدمين، فحوص دورية للعين والكلى والقدم، وعدم التدخين.','عطش شديد وتبول كثير مع قيء أو نعاس شديد أو نفَس برائحة الأسيتون؛ هبوط سكر (تعرّق، رجفة، تشوش) لا يتحسن بتناول سكر سريع؛ أو جرح في القدم لا يلتئم أو يحمرّ ويتورم ويؤلم.','وزن صحي ونشاط بدني وغذاء متوازن يقللون خطر الإصابة أو يؤخرونها، مع الفحص المبكر لمن لديهم عوامل خطر.'],
+8:['غسول الأنف بمحلول ملحي معقم (ماء مغلي ومبرّد أو معقم)، بخار دافئ، سوائل، راحة، وكمادات دافئة على الوجه.','تورم أو احمرار حول العين أو تغيّر في الرؤية، صداع شديد، تيبّس الرقبة، حرارة عالية، أعراض تدوم أكثر من 10 أيام أو تتحسن ثم تسوء.','علاج الحساسية، تجنب الدخان، واستعمال غسول الأنف عند الرشح.'],
+9:['تعويض السوائل والأملاح (محلول الإماهة الفموي)، الاستمرار في الأكل الخفيف، وتجنب الكحول والكافيين والدهون، مع غسل اليدين.','علامات الجفاف (عطش شديد، فم جاف، قلة البول، دوخة)، دم أو صديد في البراز، حرارة عالية، ألم بطن شديد، إسهال يدوم أكثر من 3 إلى 4 أيام، أو الإسهال عند رضيع أو مسن.','غسل اليدين، سلامة الغذاء والماء، وحفظ الأطعمة بالتبريد المناسب.'],
+10:['الألياف (فواكه، خضار، حبوب كاملة) تدريجياً، ماء كافٍ، نشاط بدني، وعدم تأجيل الذهاب إلى الحمام مع روتين ثابت.','دم في البراز، ألم بطن شديد أو انتفاخ مع قيء، فقدان وزن غير مبرر، تغيّر مفاجئ ومستمر في عادات الإخراج، أو عدم خروج براز وغازات.','غذاء غني بالألياف، شرب الماء، ونشاط بدني منتظم.'],
+11:['شرب ماء كافٍ، عدم حبس البول، النظافة الشخصية (المسح من الأمام للخلف)، والتبول بعد العلاقة الزوجية. المضاد الحيوي يحدده الطبيب بعد التحليل.','حرارة وقشعريرة أو ألم في الخاصرة (قد تعني وصول العدوى للكلى)، دم في البول، قيء، أعراض عند حامل أو رجل أو طفل، أو عدم التحسن خلال يوم إلى يومين من العلاج.','ماء كافٍ، عدم حبس البول، النظافة الشخصية، والتبول بعد العلاقة الزوجية.']
+};
+
+function showDis(n){
+  $$('.tab').forEach(s=>s.classList.toggle('hidden',s.id!=='dpage'));
+  $$('nav button').forEach(b=>b.dataset.go==='diseases'?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current'));
+  const box=$('#dpage'),d=diseasesList[n],back=`<a class="btn sec sm" href="#diseases" data-go="diseases">→ ${t('nD')}</a>`;
+  if(!d){box.innerHTML=back+`<p class="empty">${t('none')}</p>`;return}
+  const g0=dgOf(d[0]),x=DX[n],g=x?[0,x[0],x[1]]:g0,nm=pick(d,0),sec=(h,x,c)=>`<details class="item dd ${c||''}" open><summary>${h}</summary><div class="d">${x}</div></details>`;
+  document.title=nm+' | Jo Pharma';
+  box.innerHTML=`${back}<h1 dir="auto" style="margin-top:10px">🏥 ${esc(nm)}</h1><p class="sub">${esc(pick(d,1))}</p>
+  ${lang==='en'?`<div class="note i">${t('enOnly')}</div>`:''}
+  ${sec('🩺 '+t('sym'),`<p>${esc(pick(d,2))}</p>`)}${sec('🔎 '+t('cau'),`<p>${esc(pick(d,3))}</p>`)}
+  ${x?'':`<div class="note i">هذه الصفحة تعرض إرشادات عامة للمجموعة؛ التفاصيل الخاصة بهذا المرض قيد الإعداد والمراجعة.</div>`}${sec('🏠 نصائح العناية الذاتية',`<p>${esc(g[1])}</p>`)}
+  ${sec('💊 الخيارات العلاجية العامة',`<p>${esc(pick(d,4))}</p>${brands(pick(d,4))}<p class="mut"><small>أدوية مقترحة للتعريف فقط وليست وصفة علاجية. يحدد الطبيب أو الصيدلاني الدواء والجرعة المناسبين، وكثير منها يُصرف بوصفة طبية.</small></p>`)}
+  ${x?sec('🛡️ الوقاية',`<p>${esc(x[2])}</p>`):''}${sec('🚨 متى تراجع الطبيب فوراً؟',`<p>${esc(g[2])}</p><p><b>اتصل بالإسعاف أو اذهب للطوارئ فوراً</b> عند: ضيق نفس شديد، ألم صدر، فقدان وعي، نزيف لا يتوقف، أو ضعف مفاجئ في الوجه أو الأطراف.</p>`,'dx')}
+  <p class="mut"><small>${t('srcT')}: MedlinePlus · NHS · BNF · <a href="methodology.html">${lang==='ar'?'المنهجية والمراجع':'Methodology'}</a> · آخر مراجعة: ${REVIEW_DATE}</small></p>`;
+  scrollTo({top:0});
+}
+const _rt=route;route=function(){const h=location.hash.slice(1);if(h.startsWith('disease='))return showDis(+h.slice(8));_rt()};
+const _rl=renderLists;renderLists=function(){_rl();$$('#dList details').forEach(el=>{const n=parseInt(el.querySelector('summary').textContent.replace(/^\D+/,''))-1;el.querySelector('.d').insertAdjacentHTML('beforeend',`<p style="margin-top:8px"><a class="btn sm" href="#disease=${n}">صفحة المرض الكاملة ←</a></p>`)})};
+
+/* 9) الأدوات */
+$('#bBtn').onclick=()=>{const w=+$('#bw').value,h=+$('#bh').value/100,o=$('#bo');if(!(w>0&&h>.5)){o.textContent='أدخل وزنك (كغ) وطولك (سم).';return}
+  const b=w/h/h,c=b<18.5?'نحافة':b<25?'وزن طبيعي':b<30?'وزن زائد':'سمنة';
+  o.innerHTML=`<div class="bmi" dir="ltr">${b.toFixed(1)}</div><b>${c}</b> <small class="mut">(تصنيف منظمة الصحة العالمية للبالغين فقط؛ لا يناسب الأطفال والحوامل والرياضيين، ولا يغني عن تقييم الطبيب)</small>`};
+let SCH=[];
+$('#rBtn').onclick=()=>{const h=+$('#ri').value,d=Math.min(+$('#rd').value||1,60),s=new Date($('#rs').value),o=$('#ro');if(isNaN(s)){o.textContent='اختر موعد أول جرعة.';return}
+  SCH=[];for(let i=0;i<Math.min(Math.ceil(d*24/h),200);i++)SCH.push(new Date(+s+i*h*36e5));
+  const f=x=>x.toLocaleString(lang==='ar'?'ar-JO':'en-GB',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  o.innerHTML=`<ul>${SCH.slice(0,12).map(x=>`<li>${f(x)}</li>`).join('')}</ul>${SCH.length>12?`<small class="mut">… و${SCH.length-12} موعداً آخر</small><br>`:''}<button class="btn sm sec" id="icsB">تنزيل للتقويم (.ics)</button><p class="mut"><small>للتذكير بالجرعات التي وصفها الطبيب فقط؛ الموقع لا يحدد جرعات.</small></p>`;
+  $('#icsB').onclick=()=>{const z=x=>x.toISOString().replace(/[-:]|\.\d+/g,''),nm=($('#rn').value.trim()||'دواء').replace(/[,;\n]/g,' ');
+    const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//JoPharma//AR',...SCH.flatMap((x,i)=>['BEGIN:VEVENT',`UID:jp${+s}-${i}@jopharma.net`,'DTSTAMP:'+z(new Date()),'DTSTART:'+z(x),'DTEND:'+z(new Date(+x+9e5)),'SUMMARY:💊 '+nm,'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+nm,'END:VALARM','END:VEVENT']),'END:VCALENDAR'].join('\r\n');
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='jo-pharma-reminders.ics';a.click()};
+};
 
 try{applyLang();route();syncTheme()}catch(e){console.error(e)}
 reload();
