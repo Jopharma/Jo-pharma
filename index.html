@@ -143,20 +143,79 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
 .bmi{font-size:26px;font-weight:800;color:var(--acc);margin-top:8px}
 .al{background:var(--nb);border:2px solid var(--acc);color:var(--nt);border-radius:10px;padding:10px 12px;margin:10px 0;font-weight:700}
 .dx{border-inline-start:5px solid var(--acc)}
+
+/* ===== v4: الحسابات + منبّهات الجرعات ===== */
+.hl{display:flex;align-items:center;gap:10px;min-width:0}
+.hb{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:6px;background:#fff;color:#1e3a8a;border:0;border-radius:18px;font-weight:800;font-size:13px;padding:6px 13px;min-height:34px;line-height:1.2;white-space:nowrap}
+.hb:hover{filter:brightness(.94)}
+.hb.ic{padding:6px 11px;font-size:16px}
+.hb.in{padding:4px 12px 4px 5px}
+.hbn{max-width:90px;overflow:hidden;text-overflow:ellipsis}
+.av{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--ab);color:var(--at);font-size:14px;font-weight:800;flex:none}
+.av.big{width:48px;height:48px;font-size:22px}
+.bdg2{position:absolute;top:-6px;inset-inline-end:-6px;min-width:19px;height:19px;padding:0 4px;border-radius:10px;background:var(--ab);color:var(--at);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--hd);line-height:1}
+@media(pointer:coarse){.hb{min-height:40px}}
+@media(max-width:700px){
+  header{flex-wrap:nowrap;justify-content:space-between;padding:8px 10px;gap:6px}
+  .logo{font-size:19px;gap:6px}.logo svg{width:32px;height:32px}
+  .hl{gap:6px}.tl{gap:4px}.tl button{padding:6px 10px}.hb.ic{padding:6px 10px}
+}
+@media(max-width:520px){.hbt,.hbn{display:none}.hb.in{padding:4px}}
+@media(min-width:701px) and (max-width:1000px){.hbt,.hbn{display:none}.hb.in{padding:4px}}
+@media(max-width:359px){header{flex-wrap:wrap;justify-content:center}}
+#toast{z-index:130}
+/* نوافذ منبثقة */
+.mdl{position:fixed;inset:0;z-index:100;background:rgba(2,6,23,.62);display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 14px calc(16px + env(safe-area-inset-bottom,0px));overflow-y:auto;-webkit-overflow-scrolling:touch}
+.mdl.al{z-index:110}
+.mbox{position:relative;background:var(--card);color:var(--tx);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--sh);width:100%;max-width:420px;padding:22px 18px 18px;margin:auto;animation:in .25s}
+.mx{position:absolute;top:6px;inset-inline-end:8px;background:none;border:0;font-size:28px;line-height:1;color:var(--mut);padding:4px 10px;min-height:44px;min-width:44px}
+.mbox h2{color:var(--pri);font-size:21px;text-align:center;margin:0 28px 4px}
+.mbox .sub{font-size:14px}
+.mbox label,.rf label{display:block;font-size:13px;color:var(--mut);font-weight:700;margin:10px 0 4px}
+.seg{display:flex;gap:4px;background:var(--soft);padding:4px;border-radius:12px;margin:12px 0 2px}
+.seg button{flex:1;border:0;background:none;color:var(--mut);font-weight:700;font-size:14px;padding:8px;border-radius:9px}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--pri);box-shadow:var(--sh)}
+.er{background:var(--nb);border:1px solid var(--nbd);color:var(--nt);padding:8px 10px;border-radius:10px;font-size:13px;margin-top:10px}
+.er.ok{background:var(--ib);border-color:var(--ibd);color:var(--it)}
+.or{text-align:center;color:var(--mut);font-size:13px;margin:12px 0 8px}
+.lnk{background:none;border:0;color:var(--pri);text-decoration:underline;font-size:13px;padding:8px 4px}
+.acc{display:flex;align-items:center;gap:12px;margin:14px 0}
+.stk{display:grid;gap:8px;margin-top:12px}.stk .btn{width:100%;text-align:center}
+.alI{font-size:46px;text-align:center;line-height:1.2;animation:rg 1s ease-in-out infinite}
+@keyframes rg{0%,100%{transform:rotate(0)}20%{transform:rotate(-14deg)}40%{transform:rotate(14deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(8deg)}}
+/* صفحة المنبّهات */
+#reminders .btn.add{width:100%;margin:12px 0 4px;text-align:center}
+.nbx{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;background:var(--ib);border:1px solid var(--ibd);color:var(--it);border-radius:12px;padding:10px 12px;margin:12px 0 6px;font-size:14px}
+.nbx.w{background:var(--nb);border-color:var(--nbd);color:var(--nt)}
+.rh{color:var(--pri);font-size:18px;margin:20px 0 8px}
+.ti{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;background:var(--soft);border:1px solid var(--bd);border-inline-start:5px solid var(--pri);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.ti.ok{border-inline-start-color:#16a34a}.ti.ok .nm{opacity:.75}.ti.ms{border-inline-start-color:var(--acc)}
+.ti .tm{font-weight:800;font-size:16px;color:var(--pri);min-width:64px}
+.ti .nm{flex:1;min-width:140px}.ti .nm b{display:block;overflow-wrap:anywhere}.ti .nm small{display:block;font-size:12px}
+.rf{background:var(--soft);border:1px solid var(--bd);border-radius:14px;padding:14px;margin:12px 0}
+.rf h3{color:var(--pri);font-size:17px}
+.tr{display:flex;gap:6px;align-items:center;margin-top:6px}.tr input{flex:1;direction:ltr;text-align:center}
+.dy{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.chip[aria-pressed=true]{background:var(--b2);color:#fff;border-color:var(--b2)}
+.rw2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:420px){.rw2{grid-template-columns:1fr}}
+.rc .meta{margin-top:4px}
+.rc.off{opacity:.65}
+.rc .tg{font-size:13px;padding:1px 9px}
 </style>
 </head>
 <body>
 <a class="skip" href="#main" data-i="skip"></a>
 <header>
-  <a class="logo" href="#search" data-go="search" aria-label="Jo Pharma"><svg width="38" height="38" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f56c4"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
+  <div class="hl"><a class="logo" href="#search" data-go="search" aria-label="Jo Pharma"><svg width="38" height="38" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f56c4"/><stop offset="1" stop-color="#1e3a8a"/></linearGradient>
 <linearGradient id="o" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fb923c"/><stop offset="1" stop-color="#ea580c"/></linearGradient>
 <clipPath id="cl"><rect x="106" y="176" width="300" height="160" rx="80"/></clipPath></defs><rect x="16" y="16" width="480" height="480" rx="112" fill="url(#g)"/><g transform="rotate(-45 256 256)"><g clip-path="url(#cl)"><rect x="106" y="176" width="150" height="160" fill="#fff"/><rect x="256" y="176" width="150" height="160" fill="url(#o)"/><rect x="256" y="176" width="150" height="46" fill="#fff" opacity=".18"/></g>
 <rect x="106" y="176" width="300" height="160" rx="80" fill="none" stroke="#fff" stroke-width="6" opacity=".9"/>
-<path transform="rotate(45 181 256)" d="M181 226v60M151 256h60" stroke="#1e3a8a" stroke-width="20" stroke-linecap="round"/></g></svg><b><i>JO</i> Pharma</b></a>
+<path transform="rotate(45 181 256)" d="M181 226v60M151 256h60" stroke="#1e3a8a" stroke-width="20" stroke-linecap="round"/></g></svg><b><i>JO</i> Pharma</b></a><button id="authBtn" class="hb" type="button" aria-haspopup="dialog"></button></div>
   <nav aria-label="main">
     <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="tools" data-i="nT"></button><button data-go="favs"><span data-i="nF"></span><span class="bdg hidden fbd" id="fN"></span></button>
   </nav>
-  <div class="tl"><button id="thBtn" aria-label="theme" aria-pressed="false">🌓</button><button id="langBtn"></button></div>
+  <div class="tl"><button id="bellBtn" class="hb ic" type="button"></button><button id="thBtn" aria-label="theme" aria-pressed="false">🌓</button><button id="langBtn"></button></div>
 </header>
 
 <main id="main">
@@ -180,6 +239,7 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
   <div class="tool"><h2>⏰ حاسبة مواعيد الجرعات</h2><label>اسم الدواء<input id="rn" type="text"></label><label>كل كم ساعة (كما وصف الطبيب)<select id="ri"><option>4</option><option>6</option><option selected>8</option><option>12</option><option>24</option></select></label><label>موعد أول جرعة<input id="rs" type="datetime-local"></label><label>عدد الأيام<input id="rd" type="number" value="5" min="1" max="60"></label><button class="btn" id="rBtn">أنشئ الجدول</button><div id="ro" aria-live="polite"></div></div>
   <div class="tool"><h2>🔒 سجلي الدوائي والحساسيات</h2><p class="mut"><small>يُحفظ في متصفحك فقط (localStorage)، ولا يُرسل لأي خادم ولا يراه أحد. إن كتبت حساسية لدواء أو مادة، سنُنبّهك في صفحة أي دواء يحتويها.</small></p><select id="pt" aria-label="النوع" style="margin-top:8px"><option value="m">دواء أستخدمه</option><option value="a">حساسية</option></select><input id="pn" type="text" placeholder="الاسم (مثال: Penicillin)" style="margin-top:6px"><button class="btn" id="pAdd">إضافة</button><ul id="pl"></ul><button class="btn sm sec" id="pClr">مسح الكل</button></div>
   </div></section>
+  <section id="reminders" class="card tab hidden" aria-live="polite"></section>
 </main>
 <nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="cats"><i>📂</i><span data-i="nC"></span></button><button data-go="diseases"><i>🏥</i><span data-i="nD"></span></button><button data-go="herbs"><i>🌿</i><span data-i="nH"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="favs"><i>★</i><span data-i="nF"></span><span class="bdg hidden fbd"></span></button></nav>
 <footer>
@@ -194,6 +254,8 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
   <span data-i="rights"></span> · <a href="https://wa.me/962781775710" target="_blank" rel="noopener" data-i="wa"></a>
 </footer>
 
+<div id="authM" class="mdl hidden" role="dialog" aria-modal="true" aria-labelledby="authH"><div class="mbox"><button class="mx" type="button" data-mclose="authM" aria-label="Close">×</button><div id="authB"></div></div></div>
+<div id="alM" class="mdl al hidden" role="alertdialog" aria-modal="true"><div class="mbox"><div id="alB"></div></div></div>
 <div id="toast" role="status"></div>
 <button id="top" class="hidden" data-top aria-label="Top">↑</button>
 <noscript><p style="text-align:center;padding:20px">يتطلب البحث التفاعلي تفعيل JavaScript. يمكنك تصفح <a href="/drug/">فهرس الأدوية</a> بدونه.</p></noscript>
@@ -881,6 +943,437 @@ $('#rBtn').onclick=()=>{const h=+$('#ri').value,d=Math.min(+$('#rd').value||1,60
     const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//JoPharma//AR',...SCH.flatMap((x,i)=>['BEGIN:VEVENT',`UID:jp${+s}-${i}@jopharma.net`,'DTSTAMP:'+z(new Date()),'DTSTART:'+z(x),'DTEND:'+z(new Date(+x+9e5)),'SUMMARY:💊 '+nm,'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+nm,'END:VALARM','END:VEVENT']),'END:VCALENDAR'].join('\r\n');
     const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar'}));a.download='jo-pharma-reminders.ics';a.click()};
 };
+
+/* ===== v4: حسابات المستخدمين + منبّهات مواعيد الجرعات ===== */
+(function(){
+/* ---------- الإعدادات ----------
+   FIREBASE_CONFIG = null  → حسابات محلية على نفس الجهاز والمتصفح (تعمل فوراً بدون إعداد).
+   ضع إعدادات مشروع Firebase هنا لتفعيل حسابات حقيقية (بريد + Google) تتزامن بين كل الأجهزة. مثال:
+   const FIREBASE_CONFIG={apiKey:"...",authDomain:"xxx.firebaseapp.com",projectId:"xxx",appId:"..."};
+*/
+const FIREBASE_CONFIG=null;
+const FIRE_WIN=30*60*1000,SNOOZE=10*60*1000,SW_URL='/sw.js';
+
+/* ---------- أدوات ---------- */
+const ut=(a,e)=>lang==='ar'?a:e;
+const p2=n=>String(n).padStart(2,'0');
+const iso=d=>d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());
+const addD=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const nid=()=>'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const fmtT=tm=>{const[h,m]=tm.split(':').map(Number);try{return new Date(2000,0,1,h,m).toLocaleTimeString(lang==='ar'?'ar-JO':'en-GB',{hour:'numeric',minute:'2-digit',hour12:lang==='ar'})}catch{return tm}};
+const DN=()=>lang==='ar'?['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت']:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const setH=(el,h)=>{if(el&&el.dataset.h!==h){el.innerHTML=h;el.dataset.h=h}};
+const clean=e=>String(e||'').trim().toLowerCase();
+const okMail=e=>/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+const fail=(a,e)=>{const x=new Error(ut(a,e));x.own=1;return x};
+const BADC=['البريد أو كلمة المرور غير صحيحة.','Incorrect email or password.'];
+const FBE={
+ 'auth/email-already-in-use':['هذا البريد مسجّل مسبقاً. جرّب تسجيل الدخول.','This email is already registered. Try signing in.'],
+ 'auth/invalid-email':['البريد الإلكتروني غير صحيح.','Invalid email address.'],
+ 'auth/weak-password':['كلمة المرور ضعيفة (6 أحرف على الأقل).','Password is too weak (min 6 characters).'],
+ 'auth/invalid-credential':BADC,'auth/wrong-password':BADC,'auth/user-not-found':BADC,
+ 'auth/too-many-requests':['محاولات كثيرة. انتظر قليلاً ثم أعد المحاولة.','Too many attempts. Please wait and try again.'],
+ 'auth/network-request-failed':['تحقق من اتصالك بالإنترنت.','Check your internet connection.'],
+ 'auth/popup-closed-by-user':['أُغلقت نافذة Google قبل إكمال الدخول.','The Google window was closed before signing in.'],
+ 'auth/unauthorized-domain':['هذا النطاق غير مضاف في إعدادات Firebase.','This domain is not authorized in Firebase.']
+};
+const errMsg=e=>{if(e&&e.own)return e.message;const m=FBE[e&&e.code];return m?ut(m[0],m[1]):ut('حدث خطأ، حاول مرة أخرى.','Something went wrong. Please try again.')};
+
+/* ---------- الحالة ---------- */
+const U={u:null};
+let REM=[],FB=null,PEND=null,ALQ=[],FE=null,AM='in',MS=false;
+const kRem=()=>'jp_rem:'+U.u.uid,kLog=()=>'jp_log:'+U.u.uid;
+const getLog=()=>{const L=U.u?ls.get(kLog(),{}):{};L.fired=L.fired||{};L.taken=L.taken||{};L.snooze=L.snooze||{};return L};
+const saveLog=L=>{if(!U.u)return;const cut=iso(addD(new Date(),-3));['fired','taken'].forEach(f=>{for(const k in L[f])if(k.split('|')[1]<cut)delete L[f][k]});ls.set(kLog(),L)};
+
+/* ---------- الحسابات ---------- */
+async function hashPw(pw,salt){
+  try{
+    const en=new TextEncoder(),key=await crypto.subtle.importKey('raw',en.encode(pw),'PBKDF2',false,['deriveBits']);
+    const b=await crypto.subtle.deriveBits({name:'PBKDF2',salt:en.encode(salt),iterations:120000,hash:'SHA-256'},key,256);
+    return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+  }catch{let h=5381;for(const c of salt+pw)h=((h<<5)+h+c.charCodeAt(0))|0;return 'f'+h}
+}
+const rndS=()=>{try{return [...crypto.getRandomValues(new Uint8Array(12))].map(x=>x.toString(16).padStart(2,'0')).join('')}catch{return String(Math.random()).slice(2)}};
+const AUTH={
+  cloud:false,
+  async init(){
+    if(FIREBASE_CONFIG){
+      try{
+        const b='https://www.gstatic.com/firebasejs/10.12.2/';
+        const[A,Au,Fs]=await Promise.all([import(b+'firebase-app.js'),import(b+'firebase-auth.js'),import(b+'firebase-firestore.js')]);
+        const app=A.initializeApp(FIREBASE_CONFIG);
+        FB={Au,Fs,auth:Au.getAuth(app),db:Fs.getFirestore(app)};
+        this.cloud=true;
+        Au.onAuthStateChanged(FB.auth,u=>setUser(u?{uid:u.uid,name:u.displayName||(u.email||'').split('@')[0],email:u.email||''}:null));
+        return;
+      }catch(e){console.error('Firebase init failed; using local accounts',e);FB=null}
+    }
+    const s=ls.get('jp_sess',null),a=ls.get('jp_accts',{});
+    setUser(s&&a[s.email]?{uid:'l:'+s.email,name:a[s.email].name,email:s.email}:null);
+  },
+  async signUp(name,email,pw){
+    email=clean(email);name=String(name||'').trim()||email.split('@')[0];
+    if(!okMail(email))throw fail('البريد الإلكتروني غير صحيح.','Invalid email address.');
+    if(String(pw).length<6)throw fail('كلمة المرور 6 أحرف على الأقل.','Password must be at least 6 characters.');
+    if(this.cloud){const c=await FB.Au.createUserWithEmailAndPassword(FB.auth,email,pw);try{await FB.Au.updateProfile(c.user,{displayName:name})}catch{}return setUser({uid:c.user.uid,name,email})}
+    const a=ls.get('jp_accts',{});
+    if(a[email])throw fail('هذا البريد مسجّل مسبقاً على هذا الجهاز.','This email is already registered on this device.');
+    const salt=rndS();a[email]={name,salt,hash:await hashPw(pw,salt)};ls.set('jp_accts',a);ls.set('jp_sess',{email});
+    return setUser({uid:'l:'+email,name,email});
+  },
+  async signIn(email,pw){
+    email=clean(email);
+    if(!okMail(email))throw fail('البريد الإلكتروني غير صحيح.','Invalid email address.');
+    if(this.cloud){await FB.Au.signInWithEmailAndPassword(FB.auth,email,pw);return}
+    const x=ls.get('jp_accts',{})[email];
+    if(!x||x.hash!==await hashPw(pw,x.salt))throw fail(BADC[0],BADC[1]);
+    ls.set('jp_sess',{email});return setUser({uid:'l:'+email,name:x.name,email});
+  },
+  async google(){await FB.Au.signInWithPopup(FB.auth,new FB.Au.GoogleAuthProvider())},
+  async reset(email){email=clean(email);if(!okMail(email))throw fail('اكتب بريدك الإلكتروني أولاً.','Enter your email first.');await FB.Au.sendPasswordResetEmail(FB.auth,email)},
+  async signOut(){if(this.cloud)await FB.Au.signOut(FB.auth);else{ls.set('jp_sess',null);await setUser(null)}}
+};
+async function setUser(u){
+  if(u&&U.u&&U.u.uid===u.uid){U.u=u;renderAuthUI();renderRem();return}
+  U.u=u;REM=[];ALQ=[];stopRing();$('#alM').classList.add('hidden');
+  if(u)await loadRem();
+  renderAuthUI();renderRem();tick();
+  if(u&&!MS){MS=true;const L=getLog(),n=slotsOn(new Date()).filter(s=>s.t<new Date()-FIRE_WIN&&!L.taken[s.k]).length;if(n)toast(ut('لديك '+n+' جرعة فائتة اليوم','You have '+n+' missed dose(s) today'))}
+  if(u&&PEND){const r=PEND;PEND=null;REM.push(r);skipPast(r);saveRem();goTab('reminders');renderRem();updateBadge();toast(ut('تمت إضافة المنبّه ✅','Reminder added ✅'))}
+}
+
+/* ---------- تخزين المنبّهات (محلي + سحابي عند تفعيل Firebase) ---------- */
+async function loadRem(){
+  REM=ls.get(kRem(),[]);
+  if(AUTH.cloud){
+    try{const s=await FB.Fs.getDoc(FB.Fs.doc(FB.db,'users',U.u.uid));
+      if(s.exists()&&Array.isArray(s.data().reminders)){REM=s.data().reminders;ls.set(kRem(),REM)}else if(REM.length)await cloudSave()
+    }catch(e){console.error(e)}
+  }
+}
+let svT;
+function saveRem(){if(!U.u)return;ls.set(kRem(),REM);if(AUTH.cloud){clearTimeout(svT);svT=setTimeout(cloudSave,600)}}
+async function cloudSave(){try{await FB.Fs.setDoc(FB.Fs.doc(FB.db,'users',U.u.uid),{reminders:REM,updated:Date.now()},{merge:true})}catch(e){console.error(e);toast(ut('تعذّرت المزامنة؛ حُفظ المنبّه على جهازك.','Sync failed; saved on this device.'))}}
+
+/* ---------- الجدولة ---------- */
+function slotsFor(r,d,any){
+  const day=iso(d),wd=d.getDay();
+  if((!any&&!r.on)||(r.start&&day<r.start)||(r.end&&day>r.end)||(r.days&&r.days.length&&!r.days.includes(wd)))return[];
+  return r.times.map(tm=>{const[h,m]=tm.split(':').map(Number);return{r,tm,k:r.id+'|'+day+'|'+tm,t:new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m)}})
+    .filter(s=>(!r.t0||+s.t>=r.t0)&&(!r.t1||+s.t<=r.t1));
+}
+const slotsOn=d=>REM.flatMap(r=>slotsFor(r,d)).sort((a,b)=>a.t-b.t);
+function slotByKey(k){const[id,day,tm]=k.split('|'),r=REM.find(x=>x.id===id);if(!r)return null;const[y,mo,d]=day.split('-').map(Number),[h,mi]=tm.split(':').map(Number);return{r,tm,k,t:new Date(y,mo-1,d,h,mi)}}
+function nextSlot(){const now=new Date();for(let i=0;i<8;i++){const s=slotsOn(addD(now,i)).find(x=>x.t>now);if(s)return{s,i}}return null}
+function skipPast(r){const L=getLog(),now=new Date();[-1,0].forEach(o=>slotsFor(r,addD(now,o)).forEach(s=>{if(s.t<=now)L.fired[s.k]=+now}));saveLog(L)}
+function tick(){
+  if(!U.u)return;
+  const now=new Date(),L=getLog(),due=[];let ch=false;
+  [-1,0].forEach(o=>slotsOn(addD(now,o)).forEach(s=>{
+    if(L.fired[s.k]||L.taken[s.k])return;
+    const df=now-s.t;
+    if(df>=0&&df<=FIRE_WIN){L.fired[s.k]=+now;ch=true;due.push(s)}
+  }));
+  for(const k in L.snooze){if(+now>=L.snooze[k]){delete L.snooze[k];ch=true;if(!L.taken[k]){const s=slotByKey(k);if(s)due.push(s)}}}
+  if(ch)saveLog(L);
+  if(due.length)ring(due);
+  updateBadge();
+  if(location.hash==='#reminders'&&!document.hidden)renderRemTop();
+}
+function updateBadge(){
+  const n=$('#bellN');if(!n)return;
+  let c=0;
+  if(U.u){const L=getLog(),now=new Date();c=slotsOn(now).filter(s=>!L.taken[s.k]&&(s.t>now||now-s.t<=FIRE_WIN)).length}
+  n.textContent=c>99?'99+':c;n.classList.toggle('hidden',!c);
+}
+
+/* ---------- التنبيه: صوت + اهتزاز + نافذة + إشعار النظام ---------- */
+let AC=null,RI=null,TI=null,T0='';
+const beep=()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();const o=AC.createOscillator(),g=AC.createGain(),n=AC.currentTime;o.type='sine';o.frequency.value=880;o.connect(g);g.connect(AC.destination);g.gain.setValueAtTime(.0001,n);g.gain.exponentialRampToValueAtTime(.35,n+.02);g.gain.exponentialRampToValueAtTime(.0001,n+.3);o.start(n);o.stop(n+.32)}catch{}};
+addEventListener('pointerdown',()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();AC.resume&&AC.resume()}catch{}},{once:true});
+function stopRing(){clearInterval(RI);clearInterval(TI);RI=TI=null;if(T0){document.title=T0;T0=''}}
+function startRing(){
+  stopRing();let c=0;
+  const burst=()=>{beep();setTimeout(beep,420);setTimeout(beep,840);try{navigator.vibrate&&navigator.vibrate([300,150,300,150,500])}catch{}};
+  burst();RI=setInterval(()=>{if(++c>=6){clearInterval(RI);RI=null;return}burst()},9000);
+  T0=document.title;let f=0;TI=setInterval(()=>{document.title=(f++%2)?T0:'⏰ '+ut('موعد الدواء!','Dose time!')},1000);
+}
+async function sysNotify(title,body,tag,force){
+  if(!('Notification' in window)||Notification.permission!=='granted')return false;
+  if(!force&&!document.hidden&&document.hasFocus())return false;
+  const o={body,tag,icon:'/apple-touch-icon.png',badge:'/favicon-48.png',lang:lang,dir:lang==='ar'?'rtl':'ltr',requireInteraction:true,renotify:true,vibrate:[300,150,300],data:{url:location.origin+'/#reminders'}};
+  try{const reg=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();if(reg){await reg.showNotification(title,o);return true}}catch{}
+  try{new Notification(title,o);return true}catch{return false}
+}
+function ring(items){
+  items.forEach(s=>{if(!ALQ.includes(s.k))ALQ.push(s.k)});
+  renderAlarm();openM('alM');startRing();
+  const f=items[0];
+  sysNotify('💊 '+ut('حان موعد جرعتك','Time for your dose'),f.r.name+(f.r.dose?' — '+f.r.dose:'')+(items.length>1?ut(' (+'+(items.length-1)+' أخرى)',' (+'+(items.length-1)+' more)'):''),'jp-'+f.k);
+}
+function renderAlarm(){
+  const L=ALQ.map(slotByKey).filter(Boolean);
+  $('#alB').innerHTML=`<div class="alI" aria-hidden="true">⏰</div><h2>${ut('حان موعد جرعتك','Time for your dose')}</h2>`
+   +L.map(s=>`<div class="ti"><span class="tm" dir="ltr">${esc(fmtT(s.tm))}</span><div class="nm"><b dir="auto">${esc(s.r.name)}</b>${s.r.dose?`<small class="mut" dir="auto">${esc(s.r.dose)}</small>`:''}</div><div class="act"><button class="btn sm" data-altk="${esc(s.k)}">✅ ${ut('تم أخذها','Taken')}</button><button class="btn sm sec" data-alsn="${esc(s.k)}">⏱ ${ut('بعد 10 دقائق','In 10 min')}</button></div></div>`).join('')
+   +`<button class="btn sec" data-mclose="alM" style="width:100%;margin-top:6px">${ut('إغلاق','Close')}</button>`;
+}
+function mark(k,v){const L=getLog();if(v)L.taken[k]=Date.now();else delete L.taken[k];delete L.snooze[k];saveLog(L);ALQ=ALQ.filter(x=>x!==k);afterAl()}
+function snooze(k){const L=getLog();L.snooze[k]=Date.now()+SNOOZE;saveLog(L);ALQ=ALQ.filter(x=>x!==k);toast(ut('سنذكّرك بعد 10 دقائق','We will remind you in 10 minutes'));afterAl()}
+function afterAl(){if(ALQ.length)renderAlarm();else closeM('alM');updateBadge();renderRemTop()}
+
+/* ---------- النوافذ ---------- */
+const lock=()=>{document.body.style.overflow='hidden'};
+const unlock=()=>{if(!$$('.mdl:not(.hidden)').length)document.body.style.overflow=''};
+function openM(id){$('#'+id).classList.remove('hidden');lock()}
+function closeM(id){$('#'+id).classList.add('hidden');unlock();if(id==='alM'){ALQ=[];stopRing()}}
+const ini=u=>(u.name||u.email||'?').trim().charAt(0).toUpperCase();
+
+function renderAuthUI(){
+  const b=$('#authBtn'),u=U.u;
+  if(u){
+    b.className='hb in';b.innerHTML=`<span class="av" aria-hidden="true">${esc(ini(u))}</span><span class="hbn">${esc((u.name||'').split(' ')[0])}</span>`;
+    b.setAttribute('aria-label',ut('حسابي','My account'));b.title=u.email;
+  }else{
+    b.className='hb';b.innerHTML=`<span aria-hidden="true">👤</span><span class="hbt">${ut('تسجيل الدخول','Sign in')}</span>`;
+    b.setAttribute('aria-label',ut('تسجيل الدخول','Sign in'));b.title=ut('تسجيل الدخول','Sign in');
+  }
+  const bl=$('#bellBtn');
+  bl.innerHTML='<span aria-hidden="true">🔔</span><span id="bellN" class="bdg2 hidden"></span>';
+  bl.setAttribute('aria-label',ut('منبّهات الأدوية','Medicine reminders'));bl.title=ut('منبّهات الأدوية','Medicine reminders');
+  updateBadge();
+}
+function authHTML(mode){
+  const up=mode==='up',cl=AUTH.cloud;
+  return `<h2 id="authH">${up?ut('إنشاء حساب جديد','Create account'):ut('تسجيل الدخول','Sign in')}</h2>
+  <p class="sub">${ut('احفظ منبّهات أدويتك في حسابك الخاص.','Keep your medicine reminders in your own account.')}</p>
+  <div class="seg"><button type="button" data-auth="in" aria-pressed="${!up}">${ut('تسجيل الدخول','Sign in')}</button><button type="button" data-auth="up" aria-pressed="${up}">${ut('حساب جديد','New account')}</button></div>
+  <form id="authF" novalidate>
+   ${up?`<label for="afN">${ut('الاسم','Name')}</label><input id="afN" autocomplete="name" maxlength="40">`:''}
+   <label for="afE">${ut('البريد الإلكتروني','Email')}</label><input id="afE" type="email" inputmode="email" autocomplete="email" dir="ltr" required>
+   <label for="afP">${ut('كلمة المرور','Password')}</label><input id="afP" type="password" autocomplete="${up?'new-password':'current-password'}" dir="ltr" minlength="6" required>
+   <div id="afErr" class="er hidden" role="alert"></div>
+   <button class="btn" id="afGo" type="submit" style="width:100%;margin-top:14px">${up?ut('إنشاء الحساب','Create account'):ut('دخول','Sign in')}</button>
+  </form>
+  ${cl?`${!up?`<p style="text-align:center"><button class="lnk" id="afR" type="button">${ut('نسيت كلمة المرور؟','Forgot password?')}</button></p>`:''}<div class="or">${ut('أو','or')}</div><button class="btn sec" id="afG" type="button" style="width:100%">${ut('المتابعة عبر Google','Continue with Google')}</button>`
+   :`<p class="mut" style="font-size:12px;margin-top:12px;text-align:center">${ut('ملاحظة: الحساب محفوظ على هذا الجهاز والمتصفح فقط.','Note: your account is stored on this device and browser only.')}</p>`}`;
+}
+function openAuth(mode){
+  if(U.u)return openAcct();
+  AM=mode;const em=($('#afE')||{}).value||'';
+  $('#authB').innerHTML=authHTML(mode);
+  if(em)$('#afE').value=em;
+  openM('authM');
+  setTimeout(()=>{const f=$(mode==='up'?'#afN':'#afE');f&&f.focus()},60);
+}
+function openAcct(){
+  const u=U.u;
+  $('#authB').innerHTML=`<h2 id="authH">${ut('حسابي','My account')}</h2>
+  <div class="acc"><span class="av big" aria-hidden="true">${esc(ini(u))}</span><div><b dir="auto">${esc(u.name)}</b><br><small class="mut" dir="ltr">${esc(u.email)}</small></div></div>
+  ${AUTH.cloud?'':`<p class="mut" style="font-size:12px">${ut('الحساب والمنبّهات محفوظة على هذا الجهاز والمتصفح فقط.','Your account and reminders are stored on this device and browser only.')}</p>`}
+  <div class="stk"><button class="btn" data-gor type="button">⏰ ${ut('منبّهاتي','My reminders')}</button><button class="btn sec" data-logout type="button">${ut('تسجيل الخروج','Sign out')}</button></div>`;
+  openM('authM');
+}
+async function doAuth(){
+  const up=AM==='up',go=$('#afGo'),er=$('#afErr');
+  const show=(m,ok)=>{er.textContent=m;er.classList.toggle('ok',!!ok);er.classList.remove('hidden')};
+  er.classList.add('hidden');
+  const email=$('#afE').value,pw=$('#afP').value;
+  if(!okMail(clean(email)))return show(ut('اكتب بريداً إلكترونياً صحيحاً.','Enter a valid email address.'));
+  if(!pw)return show(ut('اكتب كلمة المرور.','Enter your password.'));
+  const old=go.textContent;go.disabled=true;go.textContent='…';
+  try{
+    if(up)await AUTH.signUp($('#afN').value,email,pw);else await AUTH.signIn(email,pw);
+    closeM('authM');toast(ut('أهلاً بك ✅','Welcome ✅'));
+  }catch(x){show(errMsg(x))}
+  finally{go.disabled=false;go.textContent=old}
+}
+
+/* ---------- صفحة المنبّهات ---------- */
+function notifBox(){
+  const s='Notification' in window?Notification.permission:'na';
+  if(s==='granted')return `<div class="nbx"><span>✅ ${ut('الإشعارات مفعّلة على هذا الجهاز.','Notifications are enabled on this device.')}</span><button class="btn sm sec" data-ntest type="button">${ut('تجربة إشعار','Send a test')}</button></div>`;
+  if(s==='denied')return `<div class="nbx w">⚠️ ${ut('الإشعارات محظورة. فعّلها من إعدادات الموقع في المتصفح (القفل 🔒 بجانب العنوان ← الإشعارات).','Notifications are blocked. Enable them in your browser’s site settings (🔒 next to the address).')}</div>`;
+  if(s==='na')return `<div class="nbx w">⚠️ ${ut('هذا المتصفح لا يدعم الإشعارات. على iPhone: أضف الموقع إلى الشاشة الرئيسية (مشاركة ← إضافة إلى الشاشة الرئيسية) ثم افتحه من هناك.','This browser does not support notifications. On iPhone: add the site to your Home Screen (Share → Add to Home Screen) and open it from there.')}</div>`;
+  return `<div class="nbx w"><span>🔔 ${ut('فعّل الإشعارات ليصلك تنبيه على هاتفك عند كل جرعة.','Enable notifications to get an alert on your phone at each dose.')}</span><button class="btn sm" data-nreq type="button">${ut('تفعيل','Enable')}</button></div>`;
+}
+function todayHTML(){
+  const now=new Date(),L=getLog(),sl=slotsOn(now);
+  if(!sl.length)return `<p class="mut">${ut('لا جرعات مجدولة اليوم.','No doses scheduled today.')}</p>`;
+  return sl.map(s=>{
+    const tk=L.taken[s.k],past=s.t<now;
+    const lab=tk?'✅ '+ut('تم أخذها','Taken'):past?'⚠️ '+ut('فائتة','Missed'):'⏳ '+ut('قادمة','Upcoming');
+    return `<div class="ti ${tk?'ok':past?'ms':''}"><span class="tm" dir="ltr">${esc(fmtT(s.tm))}</span><div class="nm"><b dir="auto">${esc(s.r.name)}</b>${s.r.dose?`<small class="mut" dir="auto">${esc(s.r.dose)}</small>`:''}<small>${lab}</small></div>${tk?`<button class="btn sm sec" data-tkun="${esc(s.k)}" type="button">${ut('تراجع','Undo')}</button>`:`<button class="btn sm" data-tk="${esc(s.k)}" type="button">${ut('تم أخذها','Taken')}</button>`}</div>`;
+  }).join('');
+}
+function renderRemTop(){
+  const top=$('#remTop');if(!top||!U.u)return;
+  setH(top,notifBox()+`<p class="mut" style="font-size:12px;margin:2px 0 0">ℹ️ ${ut('يعمل التنبيه والموقع مفتوح (حتى لو كان في الخلفية). لتنبيه مضمون والمتصفح مغلق، أضف المنبّه إلى تقويم هاتفك بزر 📅.','Alerts work while the site is open (even in the background). For guaranteed alerts with the browser closed, add the reminder to your phone calendar with 📅.')}</p><h2 class="rh">📋 ${ut('جرعات اليوم','Today’s doses')}</h2>`+todayHTML());
+  const n=nextSlot(),sub=$('#remSub');
+  if(sub)sub.textContent=n?ut('الجرعة القادمة: ','Next dose: ')+n.s.r.name+' · '+fmtT(n.s.tm)+(n.i===0?'':n.i===1?ut(' (غداً)',' (tomorrow)'):' ('+iso(n.s.t)+')'):ut('لا جرعات قادمة. أضف منبّهاً جديداً.','No upcoming doses. Add a new reminder.');
+}
+function daysTxt(r){const d=r.days||[];return d.length===7||!d.length?ut('كل يوم','Every day'):d.map(i=>DN()[i]).join('، ')}
+function renderRemList(){
+  const l=$('#remList');if(!l||!U.u)return;
+  const today=iso(new Date());
+  setH(l,REM.length?REM.map(r=>{
+    const ended=r.end&&r.end<today;
+    return `<article class="res rc ${r.on&&!ended?'':'off'}"><h3 dir="auto">💊 ${esc(r.name)}${r.dose?` <small dir="auto">${esc(r.dose)}</small>`:''}</h3>
+    <p class="meta">${r.times.map(t=>`<span class="tg g" dir="ltr">${esc(fmtT(t))}</span>`).join('')}</p>
+    <p class="mut" style="font-size:13px">${esc(daysTxt(r))} · ${ut('من','from')} ${esc(r.start||'')}${r.end?' '+ut('إلى','to')+' '+esc(r.end):' · '+ut('مستمر','ongoing')}${ended?' · '+ut('انتهى','ended'):''}</p>
+    <div class="act"><button class="btn sm ${r.on?'':'sec'}" data-rtog="${esc(r.id)}" type="button" aria-pressed="${!!r.on}">${r.on?'🔔 '+ut('مفعّل','On'):'🔕 '+ut('متوقف','Off')}</button><button class="btn sm sec" data-rics="${esc(r.id)}" type="button">📅 ${ut('تقويم الهاتف','Phone calendar')}</button><button class="btn sm sec" data-redit="${esc(r.id)}" type="button">${ut('تعديل','Edit')}</button><button class="btn sm sec" data-rdel="${esc(r.id)}" type="button">${ut('حذف','Delete')}</button></div></article>`;
+  }).join(''):`<p class="empty">${ut('لا توجد منبّهات بعد. اضغط «إضافة منبّه جديد» للبدء.','No reminders yet. Tap “Add new reminder” to start.')}</p>`);
+}
+function renderRem(){
+  const box=$('#reminders');if(!box)return;
+  if(!U.u){
+    box.dataset.s='';
+    box.innerHTML=`<h1>⏰ ${ut('منبّهات الأدوية','Medicine reminders')}</h1><p class="sub">${ut('سجّل دخولك لتنشئ منبّهات لمواعيد أدويتك ويصلك تنبيه على هاتفك عند كل جرعة.','Sign in to create reminders for your medicine times and get an alert on your phone at each dose.')}</p>
+    <div class="stk" style="max-width:320px;margin:18px auto 6px"><button class="btn" data-auth="in" type="button">${ut('تسجيل الدخول','Sign in')}</button><button class="btn sec" data-auth="up" type="button">${ut('إنشاء حساب جديد','Create an account')}</button></div>`;
+    return;
+  }
+  if(box.dataset.s!=='in'){
+    box.dataset.s='in';FE=null;
+    box.innerHTML=`<h1>⏰ ${ut('منبّهات الأدوية','Medicine reminders')}</h1><p class="sub" id="remSub"></p>
+    <button class="btn add" data-rnew type="button">＋ ${ut('إضافة منبّه جديد','Add new reminder')}</button><div id="remForm"></div>
+    <div id="remTop"></div><h2 class="rh">💊 ${ut('منبّهاتي','My reminders')}</h2><div id="remList"></div>
+    <p class="mut" style="font-size:12px;margin-top:14px">${ut('هذه الأداة للتذكير فقط؛ الموقع لا يحدد الجرعات. اتبع وصفة الطبيب أو نشرة الدواء.','This tool is a reminder only; the site does not set doses. Follow your doctor’s prescription or the leaflet.')}</p>`;
+  }
+  const t=$('#remTop'),l=$('#remList');if(t)t.dataset.h='';if(l)l.dataset.h='';
+  renderRemTop();renderRemList();
+}
+
+/* ---------- نموذج إضافة/تعديل منبّه ---------- */
+const trow=v=>`<div class="tr"><input type="time" value="${esc(v||'')}" required><button class="btn sm sec" type="button" data-rtdel aria-label="${ut('حذف الوقت','Remove time')}">×</button></div>`;
+function openForm(id){
+  const r=id?REM.find(x=>x.id===id):null;FE=r?r.id:null;
+  const v=r||{name:'',dose:'',times:['08:00'],days:[0,1,2,3,4,5,6],start:iso(new Date()),end:''};
+  const n=r&&r.end&&!r.t0?Math.max(1,Math.round((new Date(r.end)-new Date(r.start))/864e5)+1):'';
+  const pre=[[1,ut('مرة يومياً','Once daily')],[2,ut('مرتين (كل 12 ساعة)','Twice (every 12h)')],[3,ut('3 مرات (كل 8 ساعات)','3 times (every 8h)')],[4,ut('4 مرات (كل 6 ساعات)','4 times (every 6h)')]];
+  $('#remForm').innerHTML=`<form id="remF" class="rf" novalidate><h3>${r?ut('تعديل المنبّه','Edit reminder'):ut('منبّه جديد','New reminder')}</h3>
+  <label for="rfN">${ut('اسم الدواء','Medicine name')}</label><input id="rfN" maxlength="60" list="rfDL" autocomplete="off" dir="auto" value="${esc(v.name)}"><datalist id="rfDL"></datalist>
+  <label for="rfD">${ut('الجرعة / ملاحظة (اختياري)','Dose / note (optional)')}</label><input id="rfD" maxlength="80" dir="auto" placeholder="${ut('مثال: حبة واحدة بعد الأكل','e.g. one tablet after food')}" value="${esc(v.dose||'')}">
+  <label>${ut('أوقات التنبيه','Alert times')}</label><div id="rfT">${v.times.map(trow).join('')}</div>
+  <div class="chips"><button type="button" class="chip g" data-rtadd>＋ ${ut('وقت','Time')}</button>${pre.map(p=>`<button type="button" class="chip" data-rpre="${p[0]}">${p[1]}</button>`).join('')}</div>
+  <label>${ut('الأيام','Days')}</label><div class="dy" id="rfY">${DN().map((d,i)=>`<button type="button" class="chip" data-d="${i}" aria-pressed="${(v.days||[]).includes(i)}">${d}</button>`).join('')}</div>
+  <div class="rw2"><div><label for="rfS">${ut('يبدأ في','Starts on')}</label><input id="rfS" type="date" value="${esc(v.start||iso(new Date()))}"></div>
+  <div><label for="rfL">${ut('عدد الأيام (فارغ = مستمر)','Number of days (empty = ongoing)')}</label><input id="rfL" type="number" min="1" max="365" inputmode="numeric" value="${n}"></div></div>
+  <div id="rfE" class="er hidden" role="alert"></div>
+  <div class="act" style="margin-top:14px"><button class="btn" type="submit">${ut('حفظ المنبّه','Save reminder')}</button><button class="btn sec" type="button" data-rcancel>${ut('إلغاء','Cancel')}</button></div></form>`;
+  $('#remForm').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>$('#rfN').focus({preventScroll:true}),250);
+}
+const closeForm=()=>{const f=$('#remForm');if(f)f.innerHTML='';FE=null};
+function preset(n){
+  const first=($('#rfT input')||{}).value||'08:00',[h,m]=first.split(':').map(Number),base=h*60+m,st=1440/n;
+  const ts=Array.from({length:n},(_,i)=>{const x=Math.round(base+i*st)%1440;return p2(Math.floor(x/60))+':'+p2(x%60)}).sort();
+  $('#rfT').innerHTML=ts.map(trow).join('');
+}
+function saveForm(){
+  const er=$('#rfE'),name=$('#rfN').value.trim(),dose=$('#rfD').value.trim();
+  const times=[...new Set($$('#rfT input').map(i=>i.value).filter(Boolean))].sort();
+  const days=$$('#rfY button[aria-pressed=true]').map(b=>+b.dataset.d);
+  const start=$('#rfS').value||iso(new Date()),n=parseInt($('#rfL').value,10);
+  const bad=!name?ut('اكتب اسم الدواء.','Enter the medicine name.'):!times.length?ut('أضف وقتاً واحداً على الأقل.','Add at least one time.'):!days.length?ut('اختر يوماً واحداً على الأقل.','Pick at least one day.'):'';
+  if(bad){er.textContent=bad;er.classList.remove('hidden');return}
+  const end=n>0?iso(addD(new Date(start+'T00:00:00'),n-1)):'';
+  const r={id:FE||nid(),name,dose,times,days,start,end,on:true};
+  if(FE){const i=REM.findIndex(x=>x.id===FE);if(i>=0){r.on=REM[i].on;REM[i]=r}else REM.push(r)}else REM.push(r);
+  skipPast(r);saveRem();closeForm();renderRem();updateBadge();
+  toast(ut('تم حفظ المنبّه ✅','Reminder saved ✅'));
+}
+
+/* ---------- تقويم الهاتف (.ics): يعمل حتى والمتصفح مغلق ---------- */
+const lf=d=>d.getFullYear()+p2(d.getMonth()+1)+p2(d.getDate())+'T'+p2(d.getHours())+p2(d.getMinutes())+'00';
+const ie=s=>String(s||'').replace(/[\\;,]/g,m=>'\\'+m).replace(/\r?\n/g,'\\n');
+function remICS(r){
+  const stamp=lf(new Date()),L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//JoPharma//Reminders//AR','CALSCALE:GREGORIAN'];
+  const ev=(id,st,extra)=>{L.push('BEGIN:VEVENT','UID:'+id+'@jopharma.net','DTSTAMP:'+stamp,'DTSTART:'+lf(st),'DTEND:'+lf(new Date(+st+6e5)),'SUMMARY:'+ie('💊 '+r.name),...(r.dose?['DESCRIPTION:'+ie(r.dose)]:[]),...extra,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+ie('💊 '+r.name),'TRIGGER:PT0S','END:VALARM','END:VEVENT')};
+  if(r.t0){
+    let c=0;const s0=new Date(r.t0);s0.setHours(0,0,0,0);
+    for(let i=0;i<400&&c<200;i++){slotsFor(r,addD(s0,i),true).forEach(s=>{if(c<200){ev(r.id+'-'+s.k.replace(/\W/g,''),s.t,[]);c++}});if(r.t1&&+addD(s0,i)>r.t1)break}
+  }else{
+    const BD=['SU','MO','TU','WE','TH','FR','SA'],d=r.days||[];
+    const rule='RRULE:FREQ=DAILY'+(d.length&&d.length<7?';BYDAY='+d.map(i=>BD[i]).join(','):'')+(r.end?';UNTIL='+r.end.replace(/-/g,'')+'T235959':'');
+    r.times.forEach(tm=>{const[h,m]=tm.split(':').map(Number),[y,mo,da]=(r.start||iso(new Date())).split('-').map(Number);ev(r.id+'-'+tm.replace(':',''),new Date(y,mo-1,da,h,m),[rule])});
+  }
+  L.push('END:VCALENDAR');return L.join('\r\n');
+}
+function dlICS(name,txt){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)}
+
+/* ---------- ربط حاسبة الجرعات الموجودة بالمنبّهات ---------- */
+const _rb=$('#rBtn').onclick;
+$('#rBtn').onclick=function(ev){
+  _rb.call(this,ev);
+  const o=$('#ro');if(!o.querySelector('#icsB'))return;
+  o.insertAdjacentHTML('beforeend',`<div style="margin-top:8px"><button class="btn sm" id="r2m" type="button">🔔 ${ut('حوّلها إلى منبّه في حسابي','Turn into a reminder in my account')}</button></div>`);
+  $('#r2m').onclick=()=>{
+    const h=+$('#ri').value,s=new Date($('#rs').value),d=Math.min(+$('#rd').value||1,60);
+    if(isNaN(s))return;
+    const base=s.getHours()*60+s.getMinutes(),cnt=Math.round(24/h);
+    const times=[...new Set(Array.from({length:cnt},(_,i)=>{const x=(base+i*h*60)%1440;return p2(Math.floor(x/60))+':'+p2(x%60)}))].sort();
+    const total=Math.min(Math.ceil(d*24/h),200);
+    const r={id:nid(),name:$('#rn').value.trim()||ut('دواء','Medicine'),dose:ut('كل '+h+' ساعات','Every '+h+' hours'),times,days:[0,1,2,3,4,5,6],start:iso(s),end:iso(new Date(+s+(total-1)*h*36e5)),t0:+s,t1:+s+(total-1)*h*36e5,on:true};
+    if(!U.u){PEND=r;toast(ut('سجّل دخولك أولاً لحفظ المنبّه','Sign in first to save the reminder'));openAuth('in');return}
+    REM.push(r);skipPast(r);saveRem();goTab('reminders');renderRem();updateBadge();toast(ut('تمت إضافة المنبّه ✅','Reminder added ✅'));
+  };
+};
+
+/* ---------- الأحداث ---------- */
+document.addEventListener('click',async e=>{
+  const T=e.target,c=s=>T.closest&&T.closest(s);let x;
+  if(c('#authBtn')){U.u?openAcct():openAuth('in');return}
+  if(c('#bellBtn')){goTab('reminders');if(!U.u)openAuth('in');return}
+  if(T.classList&&T.classList.contains('mdl')&&T.id!=='alM'){closeM(T.id);return}
+  if(x=c('[data-mclose]')){closeM(x.dataset.mclose);return}
+  if(x=c('[data-auth]')){openAuth(x.dataset.auth);return}
+  if(c('[data-logout]')){await AUTH.signOut();closeM('authM');toast(ut('تم تسجيل الخروج','Signed out'));return}
+  if(c('[data-gor]')){closeM('authM');goTab('reminders');return}
+  if(c('#afG')){try{await AUTH.google();closeM('authM')}catch(x2){const er=$('#afErr');er.textContent=errMsg(x2);er.classList.remove('ok','hidden')}return}
+  if(c('#afR')){const er=$('#afErr');try{await AUTH.reset($('#afE').value);er.textContent=ut('أرسلنا رابط إعادة تعيين كلمة المرور إلى بريدك.','We sent a password reset link to your email.');er.classList.add('ok')}catch(x2){er.textContent=errMsg(x2);er.classList.remove('ok')}er.classList.remove('hidden');return}
+  if(c('[data-nreq]')){try{const p=await Notification.requestPermission();renderRemTop();if(p==='granted')sysNotify('🔔 Jo Pharma',ut('تم تفعيل الإشعارات بنجاح.','Notifications enabled successfully.'),'jp-test',true)}catch{}return}
+  if(c('[data-ntest]')){const ok=await sysNotify('💊 '+ut('إشعار تجريبي','Test notification'),ut('هكذا سيصلك تنبيه موعد الجرعة.','This is how your dose alert will look.'),'jp-test',true);if(!ok)toast(ut('تعذّر إرسال الإشعار','Could not send the notification'));return}
+  if(x=c('[data-tk]')){mark(x.dataset.tk,true);return}
+  if(x=c('[data-tkun]')){mark(x.dataset.tkun,false);return}
+  if(x=c('[data-altk]')){mark(x.dataset.altk,true);return}
+  if(x=c('[data-alsn]')){snooze(x.dataset.alsn);return}
+  if(c('[data-rnew]')){openForm();return}
+  if(x=c('[data-redit]')){openForm(x.dataset.redit);return}
+  if(x=c('[data-rtog]')){const r=REM.find(z=>z.id===x.dataset.rtog);if(r){r.on=!r.on;if(r.on)skipPast(r);saveRem();renderRem();updateBadge()}return}
+  if(x=c('[data-rdel]')){if(confirm(ut('حذف هذا المنبّه؟','Delete this reminder?'))){REM=REM.filter(z=>z.id!==x.dataset.rdel);saveRem();renderRem();updateBadge()}return}
+  if(x=c('[data-rics]')){const r=REM.find(z=>z.id===x.dataset.rics);if(r)dlICS('jo-pharma-'+r.id+'.ics',remICS(r));return}
+  if(c('[data-rcancel]')){closeForm();return}
+  if(c('[data-rtadd]')){$('#rfT').insertAdjacentHTML('beforeend',trow('12:00'));return}
+  if(x=c('[data-rtdel]')){x.parentElement.remove();return}
+  if(x=c('[data-rpre]')){preset(+x.dataset.rpre);return}
+  if(x=c('#rfY button')){x.setAttribute('aria-pressed',String(x.getAttribute('aria-pressed')!=='true'));return}
+});
+document.addEventListener('submit',e=>{
+  if(e.target.id==='authF'){e.preventDefault();doAuth()}
+  else if(e.target.id==='remF'){e.preventDefault();saveForm()}
+});
+document.addEventListener('input',e=>{
+  if(e.target.id!=='rfN')return;
+  const q=norm(e.target.value),dl=$('#rfDL');
+  dl.innerHTML=q.length<2?'':meds.filter(m=>m.h[0].includes(q)).slice(0,8).map(m=>`<option value="${esc(m.name)}">`).join('');
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){const m=$$('.mdl:not(.hidden)').filter(z=>z.id!=='alM').pop();if(m)closeM(m.id)}});
+
+/* ---------- اللغة + التشغيل ---------- */
+const _al=applyLang;
+applyLang=function(){
+  _al();renderAuthUI();
+  const b=$('#reminders');if(b)b.dataset.s='';renderRem();
+  if(!$('#authM').classList.contains('hidden'))U.u?openAcct():openAuth(AM);
+  if(!$('#alM').classList.contains('hidden'))renderAlarm();
+};
+addEventListener('hashchange',()=>{if(location.hash==='#reminders')renderRem()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
+addEventListener('focus',tick);
+setInterval(tick,15000);
+try{if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register(SW_URL).catch(()=>{})}catch{}
+AUTH.init();
+})();
 
 try{applyLang();route();syncTheme()}catch(e){console.error(e)}
 reload();
