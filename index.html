@@ -1378,28 +1378,93 @@ AUTH.init();
 try{applyLang();route();syncTheme()}catch(e){console.error(e)}
 reload();
 </script>
+<!-- كود Firebase المتكامل لمنصة JOPharma -->
 <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAnalytics, logEvent, setUserId } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
+  import { 
+    getAuth, 
+    onAuthStateChanged, 
+    GoogleAuthProvider, 
+    signInWithPopup, 
+    signOut 
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  import { 
+    getFirestore, 
+    doc, 
+    setDoc, 
+    serverTimestamp 
+  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  // 1. استبدل القيم أدناه بالمفاتيح الخاصة بمشروعك (الموجودة في Firebase Console)
   const firebaseConfig = {
-    apiKey: "AIzaSyC4RRrbbuN3u1PAIbuoX8miW5ClnGPOc78",
-    authDomain: "jopharma-db8e8.firebaseapp.com",
-    projectId: "jopharma-db8e8",
-    storageBucket: "jopharma-db8e8.firebasestorage.app",
-    messagingSenderId: "896266245618",
-    appId: "1:896266245618:web:b9cc7767dc4a0cf1f7076b",
-    measurementId: "G-4P559H85KV"
+    apiKey: "YOUR_API_KEY",
+    authDomain: "jopharma-net.firebaseapp.com",
+    projectId: "jopharma-net",
+    storageBucket: "jopharma-net.appspot.com",
+    messagingSenderId: "YOUR_SENDER_ID",
+    appId: "YOUR_APP_ID",
+    measurementId: "G-XXXXXXXXXX"
   };
 
-  // Initialize Firebase
+  // 2. تهيئة خدمات Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // 3. التتبع والتخزين التلقائي فور نجاح أي عملية دخول
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      // أ) إرسال حدث الدخول لـ Analytics
+      setUserId(analytics, user.uid);
+      logEvent(analytics, 'login', {
+        method: user.providerData[0]?.providerId || 'password'
+      });
+
+      // ب) إنشاء/تحديث سجل المستخدم في Firestore Database
+      try {
+        await setDoc(doc(db, "users", user.uid), {
+          uid: user.uid,
+          name: user.displayName || "مستخدم جديد",
+          email: user.email || "بدون إيميل",
+          photo: user.photoURL || "",
+          lastLogin: serverTimestamp()
+        }, { merge: true });
+        console.log("تم حفظ بيانات المستخدم في Firestore بنجاح");
+      } catch (error) {
+        console.error("خطأ في حفظ بيانات المستخدم في Firestore:", error);
+      }
+    }
+  });
+
+  // 4. دالة جاهزة لتسجيل الدخول عبر Google (يمكن استدعاؤها من أي زر بالموقع)
+  window.loginWithGoogle = async function() {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      console.log("تم تسجيل الدخول بنجاح بواسطة:", result.user.displayName);
+    } catch (error) {
+      console.error("خطأ أثناء تسجيل الدخول عبر Google:", error);
+      alert("تعذر تسجيل الدخول: " + error.message);
+    }
+  };
+
+  // 5. دالة جاهزة لتسجيل الخروج
+  window.logoutUser = async function() {
+    try {
+      await signOut(auth);
+      console.log("تم تسجيل الخروج بنجاح");
+    } catch (error) {
+      console.error("خطأ أثناء تسجيل الخروج:", error);
+    }
+  };
+
+  // 6. ربط الخدمات بالنافذة العامة لاستخدامها في باقي سكربتات الصفحات
+  window.auth = auth;
+  window.db = db;
+  window.analytics = analytics;
 </script>
+
 </body>
 </html>
