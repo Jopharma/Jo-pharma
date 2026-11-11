@@ -215,7 +215,7 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
   <nav aria-label="main">
     <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="tools" data-i="nT"></button><button data-go="favs"><span data-i="nF"></span><span class="bdg hidden fbd" id="fN"></span></button>
   </nav>
-  <div class="tl"><button id="bellBtn" class="hb ic" type="button"></button><button id="thBtn" aria-label="theme" aria-pressed="false">🌓</button><button id="langBtn"></button></div>
+  <div class="tl"><button id="admBtn" class="hb ic hidden" type="button" title="Admin" aria-label="Admin">📊</button><button id="bellBtn" class="hb ic" type="button"></button><button id="thBtn" aria-label="theme" aria-pressed="false">🌓</button><button id="langBtn"></button></div>
 </header>
 
 <main id="main">
@@ -240,6 +240,7 @@ mark{background:color-mix(in srgb,var(--acc) 28%,transparent);color:inherit;bord
   <div class="tool"><h2>🔒 سجلي الدوائي والحساسيات</h2><p class="mut"><small>يُحفظ في متصفحك فقط (localStorage)، ولا يُرسل لأي خادم ولا يراه أحد. إن كتبت حساسية لدواء أو مادة، سنُنبّهك في صفحة أي دواء يحتويها.</small></p><select id="pt" aria-label="النوع" style="margin-top:8px"><option value="m">دواء أستخدمه</option><option value="a">حساسية</option></select><input id="pn" type="text" placeholder="الاسم (مثال: Penicillin)" style="margin-top:6px"><button class="btn" id="pAdd">إضافة</button><ul id="pl"></ul><button class="btn sm sec" id="pClr">مسح الكل</button></div>
   </div></section>
   <section id="reminders" class="card tab hidden" aria-live="polite"></section>
+  <section id="admin" class="card tab hidden"></section>
 </main>
 <nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="cats"><i>📂</i><span data-i="nC"></span></button><button data-go="diseases"><i>🏥</i><span data-i="nD"></span></button><button data-go="herbs"><i>🌿</i><span data-i="nH"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="favs"><i>★</i><span data-i="nF"></span><span class="bdg hidden fbd"></span></button></nav>
 <footer>
@@ -951,7 +952,9 @@ $('#rBtn').onclick=()=>{const h=+$('#ri').value,d=Math.min(+$('#rd').value||1,60
    ضع إعدادات مشروع Firebase هنا لتفعيل حسابات حقيقية (بريد + Google) تتزامن بين كل الأجهزة. مثال:
    const FIREBASE_CONFIG={apiKey:"...",authDomain:"xxx.firebaseapp.com",projectId:"xxx",appId:"..."};
 */
-const FIREBASE_CONFIG=null;
+const FIREBASE_CFG={apiKey:"YOUR_API_KEY",authDomain:"jopharma-net.firebaseapp.com",projectId:"jopharma-net",storageBucket:"jopharma-net.appspot.com",messagingSenderId:"YOUR_SENDER_ID",appId:"YOUR_APP_ID"};
+const ADMIN_EMAIL="PUT_YOUR_ADMIN_EMAIL@gmail.com"; /* إيميلك: فقط هو يشوف زر الأدمن */
+const FIREBASE_CONFIG=/YOUR_/.test(FIREBASE_CFG.apiKey+FIREBASE_CFG.appId)?null:FIREBASE_CFG;
 const FIRE_WIN=30*60*1000,SNOOZE=10*60*1000,SW_URL='/sw.js';
 
 /* ---------- أدوات ---------- */
@@ -1037,10 +1040,41 @@ const AUTH={
 async function setUser(u){
   if(u&&U.u&&U.u.uid===u.uid){U.u=u;renderAuthUI();renderRem();return}
   U.u=u;REM=[];ALQ=[];stopRing();$('#alM').classList.add('hidden');
+  if(u&&AUTH.cloud)saveProfile();
   if(u)await loadRem();
   renderAuthUI();renderRem();tick();
   if(u&&!MS){MS=true;const L=getLog(),n=slotsOn(new Date()).filter(s=>s.t<new Date()-FIRE_WIN&&!L.taken[s.k]).length;if(n)toast(ut('لديك '+n+' جرعة فائتة اليوم','You have '+n+' missed dose(s) today'))}
   if(u&&PEND){const r=PEND;PEND=null;REM.push(r);skipPast(r);saveRem();goTab('reminders');renderRem();updateBadge();toast(ut('تمت إضافة المنبّه ✅','Reminder added ✅'))}
+}
+
+/* ---------- ملف المستخدم + لوحة الأدمن ---------- */
+async function saveProfile(){
+  try{const cu=FB.auth.currentUser;if(!cu)return;
+    await FB.Fs.setDoc(FB.Fs.doc(FB.db,'users',cu.uid),{uid:cu.uid,name:cu.displayName||U.u.name||'',email:cu.email||'',photo:cu.photoURL||'',
+      createdAt:Date.parse(cu.metadata.creationTime)||Date.now(),lastLogin:Date.now()},{merge:true});
+  }catch(e){console.error('profile save failed',e)}
+}
+function isAdmin(){return !!(AUTH.cloud&&U.u&&ADMIN_EMAIL&&(U.u.email||'').toLowerCase()===ADMIN_EMAIL.toLowerCase())}
+let ADM=[];
+async function renderAdmin(){
+  const el=$('#admin');if(!el)return;
+  if(!isAdmin()){el.innerHTML='<h1>🔒</h1><p class="sub">'+ut('هذه الصفحة للأدمن فقط. سجّل الدخول بحساب الأدمن.','Admins only. Sign in with the admin account.')+'</p>';return}
+  el.innerHTML='<h1>📊 '+ut('لوحة الأدمن','Admin dashboard')+'</h1><p class="sub">'+ut('جارٍ التحميل…','Loading…')+'</p>';
+  try{
+    const sn=await FB.Fs.getDocs(FB.Fs.query(FB.Fs.collection(FB.db,'users'),FB.Fs.limit(2000)));
+    ADM=sn.docs.map(d=>{const x=d.data();return{name:x.name||'',email:x.email||'',c:+x.createdAt||0,l:+x.lastLogin||0,r:Array.isArray(x.reminders)?x.reminders.length:0}}).sort((a,b)=>b.c-a.c);
+  }catch(e){console.error(e);el.innerHTML='<h1>⚠️</h1><p class="sub">'+ut('تعذّر جلب البيانات. تأكد من قواعد Firestore وأن إيميل الأدمن صحيح.','Could not load data. Check Firestore rules and the admin email.')+'<br><small>'+esc(e.message||e)+'</small></p>';return}
+  const day=864e5,t0=new Date().setHours(0,0,0,0),now=Date.now();
+  const st=[[ut('إجمالي المسجلين','Total users'),ADM.length],[ut('جدد اليوم','New today'),ADM.filter(x=>x.c>=t0).length],[ut('جدد آخر 7 أيام','New (7 days)'),ADM.filter(x=>x.c>=now-7*day).length],[ut('نشطون آخر 7 أيام','Active (7 days)'),ADM.filter(x=>x.l>=now-7*day).length],[ut('إجمالي المنبّهات','Total reminders'),ADM.reduce((a,x)=>a+x.r,0)]];
+  el.innerHTML='<h1>📊 '+ut('لوحة الأدمن','Admin dashboard')+'</h1>'+
+   '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:14px 0">'+st.map(a=>'<div style="background:var(--soft);border:1px solid var(--bd);border-radius:14px;padding:12px;text-align:center"><div style="font-size:26px;font-weight:800;color:var(--pri)">'+a[1]+'</div><div style="font-size:13px;color:var(--mut)">'+a[0]+'</div></div>').join('')+'</div>'+
+   '<input id="admQ" type="search" placeholder="'+ut('ابحث بالاسم أو الإيميل','Search name or email')+'" style="width:100%;margin-bottom:10px">'+
+   '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:14px"><thead><tr style="text-align:start;color:var(--mut)"><th style="padding:6px">#</th><th>'+ut('الاسم','Name')+'</th><th>'+ut('الإيميل','Email')+'</th><th>'+ut('تاريخ التسجيل','Joined')+'</th><th>'+ut('آخر دخول','Last login')+'</th><th>'+ut('منبّهات','Rem.')+'</th></tr></thead><tbody id="admB"></tbody></table></div>'+
+   '<button id="admCsv" type="button" class="hb" style="margin-top:12px;background:var(--pri);color:#fff">⬇️ CSV</button>';
+  const fd=ms=>ms?new Date(ms).toLocaleString(lang==='ar'?'ar-JO':'en-GB',{dateStyle:'short',timeStyle:'short'}):'-';
+  const draw=q=>{q=(q||'').toLowerCase();$('#admB').innerHTML=ADM.filter(x=>!q||(x.name+' '+x.email).toLowerCase().includes(q)).map((x,i)=>'<tr style="border-top:1px solid var(--bd)"><td style="padding:6px">'+(i+1)+'</td><td>'+esc(x.name)+'</td><td style="direction:ltr;text-align:start">'+esc(x.email)+'</td><td>'+fd(x.c)+'</td><td>'+fd(x.l)+'</td><td>'+x.r+'</td></tr>').join('')};
+  draw();$('#admQ').oninput=e=>draw(e.target.value);
+  $('#admCsv').onclick=()=>{const q=v=>'"'+String(v).replace(/"/g,'""')+'"';const csv='\ufeff'+['name,email,joined,last_login,reminders'].concat(ADM.map(x=>[q(x.name),q(x.email),q(fd(x.c)),q(fd(x.l)),x.r].join(','))).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download='jopharma-users.csv';a.click()};
 }
 
 /* ---------- تخزين المنبّهات (محلي + سحابي عند تفعيل Firebase) ---------- */
@@ -1131,6 +1165,8 @@ const ini=u=>(u.name||u.email||'?').trim().charAt(0).toUpperCase();
 
 function renderAuthUI(){
   const b=$('#authBtn'),u=U.u;
+  const ab=$('#admBtn');if(ab)ab.classList.toggle('hidden',!isAdmin());
+  if(isAdmin()&&location.hash==='#admin')renderAdmin();
   if(u){
     b.className='hb in';b.innerHTML=`<span class="av" aria-hidden="true">${esc(ini(u))}</span><span class="hbn">${esc((u.name||'').split(' ')[0])}</span>`;
     b.setAttribute('aria-label',ut('حسابي','My account'));b.title=u.email;
@@ -1368,6 +1404,8 @@ applyLang=function(){
   if(!$('#alM').classList.contains('hidden'))renderAlarm();
 };
 addEventListener('hashchange',()=>{if(location.hash==='#reminders')renderRem()});
+addEventListener('hashchange',()=>{if(location.hash==='#admin')renderAdmin()});
+{const ab=$('#admBtn');if(ab)ab.onclick=()=>{goTab('admin');renderAdmin()}}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
 addEventListener('focus',tick);
 setInterval(tick,15000);
@@ -1378,93 +1416,7 @@ AUTH.init();
 try{applyLang();route();syncTheme()}catch(e){console.error(e)}
 reload();
 </script>
-<!-- كود Firebase المتكامل لمنصة JOPharma -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getAnalytics, logEvent, setUserId } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
-  import { 
-    getAuth, 
-    onAuthStateChanged, 
-    GoogleAuthProvider, 
-    signInWithPopup, 
-    signOut 
-  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-  import { 
-    getFirestore, 
-    doc, 
-    setDoc, 
-    serverTimestamp 
-  } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-  // 1. استبدل القيم أدناه بالمفاتيح الخاصة بمشروعك (الموجودة في Firebase Console)
-  const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "jopharma-net.firebaseapp.com",
-    projectId: "jopharma-net",
-    storageBucket: "jopharma-net.appspot.com",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID",
-    measurementId: "G-XXXXXXXXXX"
-  };
-
-  // 2. تهيئة خدمات Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
-
-  // 3. التتبع والتخزين التلقائي فور نجاح أي عملية دخول
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      // أ) إرسال حدث الدخول لـ Analytics
-      setUserId(analytics, user.uid);
-      logEvent(analytics, 'login', {
-        method: user.providerData[0]?.providerId || 'password'
-      });
-
-      // ب) إنشاء/تحديث سجل المستخدم في Firestore Database
-      try {
-        await setDoc(doc(db, "users", user.uid), {
-          uid: user.uid,
-          name: user.displayName || "مستخدم جديد",
-          email: user.email || "بدون إيميل",
-          photo: user.photoURL || "",
-          lastLogin: serverTimestamp()
-        }, { merge: true });
-        console.log("تم حفظ بيانات المستخدم في Firestore بنجاح");
-      } catch (error) {
-        console.error("خطأ في حفظ بيانات المستخدم في Firestore:", error);
-      }
-    }
-  });
-
-  // 4. دالة جاهزة لتسجيل الدخول عبر Google (يمكن استدعاؤها من أي زر بالموقع)
-  window.loginWithGoogle = async function() {
-    const provider = new GoogleAuthProvider();
-    try {
-      const result = await signInWithPopup(auth, provider);
-      console.log("تم تسجيل الدخول بنجاح بواسطة:", result.user.displayName);
-    } catch (error) {
-      console.error("خطأ أثناء تسجيل الدخول عبر Google:", error);
-      alert("تعذر تسجيل الدخول: " + error.message);
-    }
-  };
-
-  // 5. دالة جاهزة لتسجيل الخروج
-  window.logoutUser = async function() {
-    try {
-      await signOut(auth);
-      console.log("تم تسجيل الخروج بنجاح");
-    } catch (error) {
-      console.error("خطأ أثناء تسجيل الخروج:", error);
-    }
-  };
-
-  // 6. ربط الخدمات بالنافذة العامة لاستخدامها في باقي سكربتات الصفحات
-  window.auth = auth;
-  window.db = db;
-  window.analytics = analytics;
-</script>
+<!-- تم دمج Firebase داخل السكربت الرئيسي (FIREBASE_CFG) لتفادي التعارض -->
 
 </body>
 </html>
