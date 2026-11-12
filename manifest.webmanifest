@@ -1,0 +1,15 @@
+{
+  "name": "Jo Pharma | المرجع الدوائي الأردني",
+  "short_name": "Jo Pharma",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "dir": "rtl",
+  "lang": "ar",
+  "background_color": "#1e3a8a",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "/favicon-48.png", "sizes": "48x48", "type": "image/png" }
+  ]
+}
