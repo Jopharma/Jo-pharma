@@ -435,7 +435,7 @@ const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const norm=s=>String(s??'').toLowerCase().replace(/[\u064B-\u065F]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim();
 /* ★★★ ضع رابط الـWorker هون مرة وحدة (بدون / بالنهاية) ★★★ */
-const AGENT_URL='https://YOUR-WORKER.workers.dev';
+const AGENT_URL=https://pharmacy-search-bot.6jkkpjc6db.workers.dev
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
 let lang=ls.get('jp_lang','ar'),meds=[],lim=20,ready=false,sortBy='rel',HW=[],byAct=new Map(),cnt=new Map();
 let favs=ls.get('jp_fav',[]),recent=ls.get('jp_recent',[]);
