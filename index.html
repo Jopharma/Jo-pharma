@@ -369,6 +369,55 @@ header{align-items:center}
 .res{content-visibility:auto;contain-intrinsic-size:auto 190px}
 button,.btn,summary,.chip{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+@media(max-width:700px){.hmb{display:none!important}.bn button{transition:transform .12s,background .15s,color .15s}.bn button[aria-current=page] i{transform:translateY(-2px) scale(1.15)}.bn button{min-width:0;flex:1}}
+.bn button:active,.seg button:active,.btn:active,.chip:active,.fav:active{transform:scale(.95)}
+.btn,.chip,.seg button,.item,.res{transition:transform .12s,box-shadow .2s,border-color .2s,filter .2s,background .2s}
+.res:hover,.item:hover{transform:translateY(-1px)}
+
+.qa{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 12px;max-width:680px;margin:0 auto 4px}
+.qa::-webkit-scrollbar{display:none}
+.qa a,.qa button{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;background:var(--card);border:1.5px solid var(--bd);color:var(--pri);font-weight:800;font-size:14px;padding:9px 14px;border-radius:999px;white-space:nowrap;text-decoration:none;cursor:pointer;transition:transform .12s,border-color .2s,background .2s}
+.qa a:first-child{background:var(--acc);border-color:var(--acc);color:#fff}
+.qa a:hover,.qa button:hover{border-color:var(--acc)}.qa a:active,.qa button:active{transform:scale(.95)}
+.qa .n{background:var(--acc);color:#fff;border-radius:999px;font-size:12px;padding:0 7px;line-height:18px}
+
+.acp{position:fixed;z-index:200;background:var(--card);border:1px solid var(--bd);border-radius:14px;box-shadow:var(--sh);max-height:min(300px,40vh);overflow:auto}
+.acp[hidden]{display:none}
+.acp div{padding:11px 14px;font-size:15px;cursor:pointer;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;gap:10px;align-items:center}
+.acp div:last-child{border:0}.acp div.on,.acp div:hover{background:var(--soft)}
+.acp small{color:var(--mut);direction:ltr;white-space:nowrap}
+/* ===== صقل التصميم ===== */
+header{padding:8px 14px;box-shadow:0 6px 18px rgba(2,8,30,.18)}
+.card{padding:22px 18px;border-radius:20px;box-shadow:0 1px 2px rgba(15,23,42,.05),0 12px 32px rgba(15,23,42,.06)}
+h1{font-size:26px;font-weight:800;line-height:1.35}
+.sub{margin:4px 0 16px}
+.iw input{height:54px;border-radius:16px;font-size:17px;border-width:1.5px;box-shadow:0 2px 8px rgba(15,23,42,.05)}
+.row select,.flt select,.flt input{height:46px;border-radius:12px;border-width:1.5px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.stats div{display:flex;flex-direction:column;align-items:center;text-align:center;border-radius:14px;padding:10px 6px;font-size:13px;line-height:1.3;gap:0}
+.stats b{font-size:22px;line-height:1.2}
+.res{border-radius:16px;padding:14px;background:var(--card);border-inline-start-width:4px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.res .pr{font-weight:800;color:var(--acc);font-size:17px}
+.res h3{font-size:17px;line-height:1.4}
+.tool{background:var(--card);border-radius:18px;padding:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+.tool h2{font-size:17px;margin-bottom:4px}.tool input,.tool select{margin-top:4px}
+.tl2{gap:16px}
+.item{border-radius:14px;background:var(--card)}
+.btn{border-radius:12px;font-weight:800}
+footer{border-top:1px solid var(--bd);margin-top:26px;padding:22px 14px}
+@media(max-width:480px){main{padding:0 10px;margin-top:12px}.card{padding:16px 12px;border-radius:18px}h1{font-size:23px}}
+#fc{max-width:none!important;width:100%}#search .row{flex-direction:column;align-items:stretch}
+
+/* ===== صفحة الأدوات: بلاطات واضحة ===== */
+#toolNav.seg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;padding:2px 0 16px}
+#toolNav.seg button{display:flex;align-items:center;justify-content:flex-start;text-align:start;white-space:normal;line-height:1.35;border-radius:16px;padding:14px 12px;font-size:14px;background:var(--card);border:1.5px solid var(--bd);min-height:64px}
+#toolNav.seg button:hover{border-color:var(--acc);background:var(--soft)}
+#tools .tl2{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
+#tools .tool h2{padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--bd)}
+#tools .tool{border-inline-start:4px solid var(--acc)}
+.advf>summary,.note.nd>summary{min-height:44px;display:flex;align-items:center}
+.hm>p{font-weight:800;color:var(--pri);margin:14px 0 6px}
 </style>
 </head>
 <body>
@@ -402,14 +451,12 @@ button,.btn,summary,.chip{touch-action:manipulation;-webkit-tap-highlight-color:
   <section id="med" class="card tab hidden"></section>
   <section id="dpage" class="card tab hidden"></section>
   <section id="tools" class="card tab hidden"><h1 data-i="nT"></h1><p class="sub" data-i="toolsSub"></p><div class="tl2">
-  <div class="tool"><h2 data-i="bmiT"></h2><label><span data-i="wKg"></span><input id="bw" type="number" inputmode="decimal" min="1"></label><label><span data-i="hCm"></span><input id="bh" type="number" inputmode="decimal" min="50"></label><button class="btn" id="bBtn" type="button" data-i="calc"></button><div id="bo" aria-live="polite"></div></div>
-  <div class="tool"><h2 data-i="doseT"></h2><label><span data-i="mName"></span><input id="rn" type="text"></label><label><span data-i="every"></span><select id="ri"><option>4</option><option>6</option><option selected>8</option><option>12</option><option>24</option></select></label><label><span data-i="firstDose"></span><input id="rs" type="datetime-local"></label><label><span data-i="nDays"></span><input id="rd" type="number" value="5" min="1" max="60"></label><button class="btn" id="rBtn" type="button" data-i="mkSched"></button><div id="ro" aria-live="polite"></div></div>
   <div class="tool"><h2 data-i="myT"></h2><p class="mut"><small data-i="myNote"></small></p><select id="pt" data-al="ptL" style="margin-top:8px"><option value="m" data-i="ptM"></option><option value="a" data-i="ptA"></option></select><input id="pn" type="text" data-ph="pnPh" style="margin-top:6px"><button class="btn" id="pAdd" type="button" data-i="add"></button><ul id="pl"></ul><button class="btn sm sec" id="pClr" type="button" data-i="clrAll"></button></div>
   </div></section>
   <section id="reminders" class="card tab hidden"></section>
   <section id="admin" class="card tab hidden"></section>
 </main>
-<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="reminders" class=""><i>⏰</i><span data-i="remN"></span><span class="bdg2 hidden" id="bellN2"></span></button></nav>
+<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="reminders" class=""><i>⏰</i><span data-i="remN"></span><span class="bdg2 hidden" id="bellN2"></span></button><button type="button" data-menu aria-haspopup="dialog" aria-controls="moreM"><i>☰</i><span id="moreLbl">المزيد</span></button></nav>
 <footer>
   <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
     <a href="about.html" style="font-weight: 700;" data-i="fAbout"></a>
@@ -1195,19 +1242,6 @@ const baseTitle=()=>lang==='ar'?'Jo Pharma | المرجع الدوائي الأ�
 const _rt=route;route=function(){const h=location.hash.slice(1);if(h.startsWith('disease='))return showDis(+h.slice(8));_rt();if(!h.startsWith('med='))document.title=baseTitle()};
 
 /* 9) الأدوات */
-$('#bBtn').onclick=()=>{const w=+$('#bw').value,h=+$('#bh').value/100,o=$('#bo');if(!(w>0&&h>.5)){o.textContent=LL('أدخل وزنك (كغ) وطولك (سم).','Enter your weight (kg) and height (cm).');return}
-  const b=w/h/h,c=b<18.5?LL('نحافة','Underweight'):b<25?LL('وزن طبيعي','Normal weight'):b<30?LL('وزن زائد','Overweight'):LL('سمنة','Obesity');
-  o.innerHTML=`<div class="bmi" dir="ltr">${b.toFixed(1)}</div><b>${c}</b> <small class="mut">${LL('(تصنيف منظمة الصحة العالمية للبالغين فقط؛ لا يناسب الأطفال والحوامل والرياضيين، ولا يغني عن تقييم الطبيب)','(WHO classification for adults only; not suitable for children, pregnant women or athletes, and does not replace a doctor’s assessment)')}</small>`};
-let SCH=[];
-$('#rBtn').onclick=()=>{const h=+$('#ri').value,d=Math.min(+$('#rd').value||1,60),s=new Date($('#rs').value),o=$('#ro');if(isNaN(s)){o.textContent=LL('اختر موعد أول جرعة.','Pick the first dose time.');return}
-  SCH=[];for(let i=0;i<Math.min(Math.ceil(d*24/h),200);i++)SCH.push(new Date(+s+i*h*36e5));
-  const f=x=>x.toLocaleString(lang==='ar'?'ar-JO':'en-GB',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
-  o.innerHTML=`<ul>${SCH.slice(0,12).map(x=>`<li>${f(x)}</li>`).join('')}</ul>${SCH.length>12?`<small class="mut">${LL('… و'+(SCH.length-12)+' موعداً آخر','… and '+(SCH.length-12)+' more')}</small><br>`:''}<button class="btn sm sec" id="icsB" type="button">${LL('تنزيل للتقويم (.ics)','Download to calendar (.ics)')}</button><p class="mut"><small>${LL('للتذكير بالجرعات التي وصفها الطبيب فقط؛ الموقع لا يحدد جرعات.','For reminding you of doses your doctor prescribed only; this site does not set doses.')}</small></p>`;
-  $('#icsB').onclick=()=>{const z=x=>x.toISOString().replace(/[-:]|\.\d+/g,''),nm=($('#rn').value.trim()||LL('دواء','Medicine')).replace(/[,;\n]/g,' ');
-    const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//JoPharma//AR',...SCH.flatMap((x,i)=>['BEGIN:VEVENT',`UID:jp${+s}-${i}@jopharma.net`,'DTSTAMP:'+z(new Date()),'DTSTART:'+z(x),'DTEND:'+z(new Date(+x+9e5)),'SUMMARY:💊 '+nm,'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+nm,'END:VALARM','END:VEVENT']),'END:VCALENDAR'].join('\r\n');
-    window.__openICS('jo-pharma-reminders.ics',ics)};
-};
-
 /* ===== v5: الحسابات + منبّهات الأدوية (تعمل بدون حساب، والحساب اختياري للمزامنة) ===== */
 (function(){
 const FIREBASE_CFG={apiKey:"AIzaSyC4RRrbbuN3u1PAIbuoX8miW5ClnGPOc78",authDomain:"jopharma-db8e8.firebaseapp.com",projectId:"jopharma-db8e8",storageBucket:"jopharma-db8e8.firebasestorage.app",messagingSenderId:"896266245618",appId:"1:896266245618:web:b9cc7767dc4a0cf1f7076b",measurementId:"G-4P559H85KV"};
@@ -1706,23 +1740,6 @@ function instHTML(p){
 }
 function openInst(p){INSTP=p||(isIOS()?'i':'a');$('#instB').innerHTML=instHTML(INSTP);openM('instM')}
 
-/* ---------- ربط حاسبة الجرعات بالمنبّهات (بدون حاجة لحساب) ---------- */
-const _rb=$('#rBtn').onclick;
-$('#rBtn').onclick=function(ev){
-  _rb.call(this,ev);
-  const o=$('#ro');if(!o.querySelector('#icsB'))return;
-  o.insertAdjacentHTML('beforeend',`<div style="margin-top:8px"><button class="btn sm" id="r2m" type="button">🔔 ${ut('حوّلها إلى منبّه','Turn into a reminder')}</button></div>`);
-  $('#r2m').onclick=()=>{
-    const h=+$('#ri').value,s=new Date($('#rs').value),d=Math.min(+$('#rd').value||1,60);
-    if(isNaN(s))return;
-    const base=s.getHours()*60+s.getMinutes(),cnt=Math.round(24/h);
-    const times=[...new Set(Array.from({length:cnt},(_,i)=>hm(base+i*h*60)))].sort();
-    const total=Math.min(Math.ceil(d*24/h),200);
-    const r={id:nid(),name:$('#rn').value.trim()||ut('دواء','Medicine'),dose:ut('كل '+h+' ساعات','Every '+h+' hours'),times,days:[0,1,2,3,4,5,6],start:iso(s),end:iso(new Date(+s+(total-1)*h*36e5)),t0:+s,t1:+s+(total-1)*h*36e5,on:true};
-    REM.push(r);skipPast(r);saveRem();goTab('reminders');renderRem();updateBadge();LASTDONE=r;$('#remB').innerHTML=doneHTML(r);openM('remM');
-  };
-};
-
 /* ---------- الأحداث ---------- */
 document.addEventListener('click',async e=>{
   const T=e.target,c=s=>T.closest&&T.closest(s);let x;
@@ -1799,9 +1816,9 @@ reload();
 (function(){
   const box=document.querySelector('#tools .tl2');
   if(box){
-    box.insertAdjacentHTML('beforeend',`<div class="tool" id="cmpT"><h2>⚖️ ${LL('مقارنة بين دوائين','Compare two medicines')}</h2><p class="mut"><small>${LL('اكتب اسم الدواءين واختر من القائمة لمقارنة السعر والمادة الفعالة والتركيز.','Type two medicine names and pick from the list to compare price, ingredient and strength.')}</small></p><label><span>${LL('الدواء الأول','First medicine')}</span><input id="ca" type="text" list="cmpl" autocomplete="off" dir="auto"></label><label><span>${LL('الدواء الثاني','Second medicine')}</span><input id="cb" type="text" list="cmpl" autocomplete="off" dir="auto"></label><datalist id="cmpl"></datalist><div id="co" aria-live="polite"></div></div>`);
+    box.insertAdjacentHTML('beforeend',`<div class="tool" id="cmpT"><h2>⚖️ ${LL('مقارنة بين دوائين','Compare two medicines')}</h2><p class="mut"><small>${LL('اكتب اسم الدواءين واختر من القائمة لمقارنة السعر والمادة الفعالة والتركيز.','Type two medicine names and pick from the list to compare price, ingredient and strength.')}</small></p><label><span>${LL('الدواء الأول','First medicine')}</span><input id="ca" type="text" autocomplete="off" dir="auto"></label><label><span>${LL('الدواء الثاني','Second medicine')}</span><input id="cb" type="text" autocomplete="off" dir="auto"></label><datalist id="cmpl"></datalist><div id="co" aria-live="polite"></div></div>`);
     let filled=false;
-    const fillL=()=>{if(filled||!ready)return;filled=true;$('#cmpl').innerHTML=meds.map(m=>`<option value="${esc(m.name)}"></option>`).join('')};
+    const fillL=()=>{if(filled||!ready)return;filled=true;void 0};
     const find=v=>{v=norm(v);return v?meds.find(m=>norm(m.name)===v):null};
     const cell=(x,dflt='—')=>`<td dir="auto">${esc(x||dflt)}</td>`;
     const run=()=>{
@@ -1892,10 +1909,10 @@ reload();
   let ix=[],bk=(ls.get('jp_basket',[])||[]).filter(x=>x&&x.id&&x.q>0),filled=false;
   const byName=v=>{v=norm(v);return v?meds.find(m=>norm(m.name)===v):null};
   const byId=id=>meds.find(m=>m.id===id);
-  const fill=()=>{if(filled||!ready)return;filled=true;const d=document.getElementById('medl2');if(d)d.innerHTML=meds.map(m=>`<option value="${esc(m.name)}"></option>`).join('')};
+  const fill=()=>{if(filled||!ready)return;filled=true;const d=document.getElementById('medl2');void 0};
   const shell=()=>{
-    $('#ixT').innerHTML=`<h2>🛡️ ${LL('فاحص التداخلات الدوائية','Drug interaction checker')}</h2><p class="mut"><small>${LL('أضف دوائين أو أكثر لتنبيهك إلى أشهر التداخلات المعروفة والمواد الفعالة المكررة.','Add two or more medicines to flag well-known interactions and duplicate ingredients.')}</small></p><div class="ac"><input id="ixi" type="text" list="medl2" autocomplete="off" dir="auto" placeholder="${LL('اسم الدواء','Medicine name')}"><button class="btn sm" id="ixa" type="button">${LL('إضافة','Add')}</button></div><ul class="ixl" id="ixl"></ul><div class="ixr" id="ixo" aria-live="polite"></div>`;
-    $('#bkT').innerHTML=`<h2>🧾 ${LL('حاسبة سلة الوصفة','Prescription basket')}</h2><p class="mut"><small>${LL('احسب التكلفة التقريبية لأدويتك مع الكميات، وشاركها أو انسخها.','Estimate the total cost of your medicines by quantity, then copy or share it.')}</small></p><div class="ac"><input id="bki" type="text" list="medl2" autocomplete="off" dir="auto" placeholder="${LL('اسم الدواء','Medicine name')}"><button class="btn sm" id="bka" type="button">${LL('إضافة','Add')}</button></div><ul class="bkl" id="bkl"></ul><div id="bko"></div>`;
+    $('#ixT').innerHTML=`<h2>🛡️ ${LL('فاحص التداخلات الدوائية','Drug interaction checker')}</h2><p class="mut"><small>${LL('أضف دوائين أو أكثر لتنبيهك إلى أشهر التداخلات المعروفة والمواد الفعالة المكررة.','Add two or more medicines to flag well-known interactions and duplicate ingredients.')}</small></p><div class="ac"><input id="ixi" type="text" autocomplete="off" dir="auto" placeholder="${LL('اسم الدواء','Medicine name')}"><button class="btn sm" id="ixa" type="button">${LL('إضافة','Add')}</button></div><ul class="ixl" id="ixl"></ul><div class="ixr" id="ixo" aria-live="polite"></div>`;
+    $('#bkT').innerHTML=`<h2>🧾 ${LL('حاسبة سلة الوصفة','Prescription basket')}</h2><p class="mut"><small>${LL('احسب التكلفة التقريبية لأدويتك مع الكميات، وشاركها أو انسخها.','Estimate the total cost of your medicines by quantity, then copy or share it.')}</small></p><div class="ac"><input id="bki" type="text" autocomplete="off" dir="auto" placeholder="${LL('اسم الدواء','Medicine name')}"><button class="btn sm" id="bka" type="button">${LL('إضافة','Add')}</button></div><ul class="bkl" id="bkl"></ul><div id="bko"></div>`;
     $('#phT').innerHTML=`<h2>📍 ${LL('صيدليات قريبة','Nearby pharmacies')}</h2><p class="mut"><small>${LL('افتح الخرائط للوصول لأقرب صيدلية أو صيدلية مناوبة الآن.','Open maps to find the nearest or an open pharmacy right now.')}</small></p><div class="phb"><a class="btn sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LL('صيدلية','pharmacy'))}">${LL('أقرب صيدلية','Nearest pharmacy')}</a><a class="btn sm sec" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LL('صيدلية مناوبة مفتوحة الآن','open 24 hour pharmacy'))}">${LL('مناوبة / مفتوحة الآن','On-duty / open now')}</a></div>`;
     ['ixi','bki'].forEach(i=>$('#'+i).addEventListener('focus',fill));
     drawIx();drawBk();
@@ -1966,7 +1983,7 @@ reload();
   function savings(){
     const box=document.querySelector('#tools .tl2');if(!box||host('svT'))return;
     box.insertAdjacentHTML('beforeend','<div class="tool" id="svT"></div>');
-    const shell=()=>{host('svT').innerHTML=`<h2>💰 ${LL('وفّر على دوائك','Save on your medicine')}</h2><p class="mut"><small>${LL('اكتب اسم دوائك لنعرض لك الأدوية البديلة بنفس المادة الفعالة والتركيز والشكل مع نسبة التوفير.','Type your medicine to see equivalents with the same ingredient, strength and form, and the savings.')}</small></p><input id="svi" type="text" list="medl2" autocomplete="off" dir="auto"><div class="ixr svr" id="svo" aria-live="polite"></div>`;
+    const shell=()=>{host('svT').innerHTML=`<h2>💰 ${LL('وفّر على دوائك','Save on your medicine')}</h2><p class="mut"><small>${LL('اكتب اسم دوائك لنعرض لك الأدوية البديلة بنفس المادة الفعالة والتركيز والشكل مع نسبة التوفير.','Type your medicine to see equivalents with the same ingredient, strength and form, and the savings.')}</small></p><input id="svi" type="text" autocomplete="off" dir="auto"><div class="ixr svr" id="svo" aria-live="polite"></div>`;
       const run=()=>{const v=norm(host('svi').value),m=v&&meds.find(x=>norm(x.name)===v),o=host('svo');if(!m){o.innerHTML='';return}
         const g=(m.key&&GROUPS.get(m.key))||[],val=x=>(m.up!=null&&x.up!=null&&m.ul===x.ul)?x.up:x.pv,base=val(m);
         const c=g.filter(x=>x!==m&&base!=null&&val(x)!=null&&val(x)<base).sort((a,b)=>val(a)-val(b)).slice(0,5);
@@ -1991,6 +2008,75 @@ reload();
   const _a4=applyLang;applyLang=function(){_a4();lab()};
 })();
 addEventListener('hashchange',()=>{if(!location.hash.startsWith('#tn'))scrollTo({top:0,behavior:'smooth'})});
+
+/* ===== شريط سفلي بأربع خانات + لمسة اهتزاز خفيفة + تسمية "المزيد" ===== */
+(function(){
+  const lbl=()=>{const e=document.getElementById('moreLbl');if(e)e.textContent=LL('المزيد','More')};lbl();
+  const _a5=applyLang;applyLang=function(){_a5();lbl()};
+  document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('.bn button,.seg button')&&navigator.vibrate)try{navigator.vibrate(8)}catch{}},{passive:true});
+  const q=document.getElementById('q');if(q){q.setAttribute('autocapitalize','off');q.setAttribute('spellcheck','false')}
+})();
+
+/* ===== شريط الاختصارات تحت البحث (الترتيب 5) ===== */
+(function(){
+  const row=document.querySelector('#search .row');if(!row)return;
+  const rc=document.querySelector('#search [data-i="remCta"]');if(rc&&rc.parentElement.tagName==='P')rc.parentElement.remove();
+  const qa=document.createElement('div');qa.className='qa';qa.setAttribute('aria-label','quick actions');row.after(qa);
+  const cnt=()=>{try{return(ls.get('jp_basket',[])||[]).length}catch{return 0}};
+  const draw=()=>{const n=cnt();qa.innerHTML=
+   `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LL('صيدلية','pharmacy'))}" target="_blank" rel="noopener">📍 ${LL('أقرب صيدلية','Nearest pharmacy')}</a>`+
+   `<button type="button" data-qa="ixT">🛡️ ${LL('التداخلات','Interactions')}</button>`+
+   `<button type="button" data-qa="svT">💰 ${LL('وفّر','Save')}</button>`+
+   `<button type="button" data-qa="bkT">🧾 ${LL('السلة','Basket')}${n?`<span class="n">${n}</span>`:''}</button>`+
+   `<button type="button" data-qa="cmpT">⚖️ ${LL('قارن','Compare')}</button>`};
+  qa.addEventListener('click',e=>{const b=e.target.closest('[data-qa]');if(!b)return;goTab('tools');
+    setTimeout(()=>{const t=document.getElementById(b.dataset.qa);if(t){t.scrollIntoView({behavior:'smooth',block:'start'});const i=t.querySelector('input');i&&i.focus({preventScroll:true})}},220)});
+  draw();addEventListener('hashchange',()=>setTimeout(draw,0));
+  const _a6=applyLang;applyLang=function(){_a6();draw()};
+})();
+
+/* ===== اقتراحات خفيفة بدل datalist الثقيلة (تمنع تجمّد الجوال) ===== */
+(function(){
+  const IDS=['ixi','bki','svi','ca','cb'],pop=document.createElement('div');
+  pop.className='acp';pop.hidden=true;pop.setAttribute('role','listbox');document.body.appendChild(pop);
+  let cur=null,items=[],ai=-1,IX=null,IXs=null,quiet=false;
+  const idx=()=>{if(!IX||IXs!==meds){IXs=meds;IX=meds.map(m=>({m,k:norm(m.name)}))}return IX};
+  const hide=()=>{pop.hidden=true;items=[];ai=-1};
+  const mark=()=>[...pop.children].forEach((d,i)=>d.classList.toggle('on',i===ai));
+  const place=el=>{const r=el.getBoundingClientRect(),h=pop.offsetHeight,below=innerHeight-r.bottom;pop.style.width=r.width+'px';pop.style.left=r.left+'px';pop.style.top=((below>=Math.min(h,180)||r.top<h)?r.bottom+4:r.top-h-4)+'px'};
+  const show=el=>{
+    const v=norm(el.value);if(!v||!ready){hide();return}
+    const a=[],b=[];for(const x of idx()){const i=x.k.indexOf(v);if(i===0)a.push(x.m);else if(i>0)b.push(x.m);if(a.length>=8)break}
+    items=a.concat(b).slice(0,8);ai=-1;
+    if(!items.length||(items.length===1&&norm(items[0].name)===v)){hide();return}
+    pop.innerHTML=items.map((m,i)=>`<div role="option" data-i="${i}"><span dir="auto">${esc(m.name)}</span><small>${esc(m.price||'')}</small></div>`).join('');
+    pop.hidden=false;place(el);
+  };
+  const pick=i=>{const m=items[i];if(!m||!cur)return;const el=cur;quiet=true;el.value=m.name;hide();
+    el.dispatchEvent(new Event('input',{bubbles:true}));el.dispatchEvent(new Event('change',{bubbles:true}));quiet=false;
+    if(el.id==='ixi'){const b=document.getElementById('ixa');b&&b.click()}else if(el.id==='bki'){const b=document.getElementById('bka');b&&b.click()}};
+  document.addEventListener('input',e=>{const t=e.target;if(quiet||!IDS.includes(t.id))return;cur=t;show(t)});
+  document.addEventListener('focusin',e=>{const t=e.target;if(IDS.includes(t.id)){cur=t;if(t.value)show(t)}else if(!pop.contains(t))hide()});
+  document.addEventListener('focusout',e=>{if(IDS.includes(e.target.id))setTimeout(()=>{if(!IDS.includes(document.activeElement&&document.activeElement.id))hide()},150)});
+  pop.addEventListener('pointerdown',e=>{e.preventDefault();const d=e.target.closest('[data-i]');if(d)pick(+d.dataset.i)});
+  document.addEventListener('keydown',e=>{
+    if(pop.hidden||!IDS.includes(e.target.id))return;
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();ai=(ai+(e.key==='ArrowDown'?1:-1)+items.length)%items.length;mark()}
+    else if(e.key==='Enter'){e.preventDefault();e.stopPropagation();pick(ai>=0?ai:0)}
+    else if(e.key==='Escape'){hide()}
+  },true);
+  addEventListener('scroll',e=>{if(e.target!==pop&&!pop.hidden)hide()},true);
+  addEventListener('resize',()=>{if(!pop.hidden&&cur)place(cur)});
+})();
+
+/* ===== ترتيب الأدوات حسب الأهمية ===== */
+(function(){
+  const box=document.querySelector('#tools .tl2');if(!box)return;
+  const g=id=>document.getElementById(id),pl=document.querySelector('#tools #pl'),my=pl&&pl.closest('.tool');
+  const d=g('medl2');if(d)d.remove();
+  ['ixT','svT','bkT','cmpT','phT'].map(g).concat([my]).filter(Boolean).forEach(el=>box.appendChild(el));
+  try{applyLang()}catch{}
+})();
 </script>
 <!-- تم دمج Firebase داخل السكربت الرئيسي (FIREBASE_CFG) لتفادي التعارض -->
 
