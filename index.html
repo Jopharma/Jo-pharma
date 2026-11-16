@@ -418,6 +418,53 @@ footer{border-top:1px solid var(--bd);margin-top:26px;padding:22px 14px}
 #tools .tool{border-inline-start:4px solid var(--acc)}
 .advf>summary,.note.nd>summary{min-height:44px;display:flex;align-items:center}
 .hm>p{font-weight:800;color:var(--pri);margin:14px 0 6px}
+
+/* ===== الإصدار الاحترافي: هوية موحّدة ===== */
+:root{--rad:18px}
+body{background:var(--bg);-webkit-font-smoothing:antialiased}
+#search{background:linear-gradient(180deg,var(--soft) 0,var(--card) 240px)}
+#search h1{font-size:27px;margin-top:6px}
+#search .sub{font-size:15px;max-width:420px;margin-inline:auto}
+.stats{gap:10px}.stats div{background:var(--card);border:1px solid var(--bd);box-shadow:none}
+.hm{text-align:center}.hm .chips{justify-content:center}.hm .chip{padding:7px 14px;font-size:14px;border-radius:999px}
+.cnt{font-size:15px;margin:14px 2px 8px}
+.res{border:1px solid var(--bd);border-inline-start:1px solid var(--bd);border-radius:var(--rad);padding:14px;transition:box-shadow .2s,border-color .2s}
+.res:hover{border-color:var(--pri)}
+.res h3 a{font-weight:800}
+.item{border:1px solid var(--bd);border-inline-start:1px solid var(--bd);border-radius:var(--rad);padding:16px}
+.item:hover{border-color:var(--pri)}
+.grid{gap:12px}
+/* شريط سفلي فاتح وواضح */
+@media(max-width:700px){
+ .bn{background:var(--card);border-top:1px solid var(--bd);box-shadow:0 -6px 20px rgba(15,23,42,.08);padding-top:4px}
+ .bn button{color:var(--mut);font-size:12px}
+ .bn button[aria-current=page]{background:var(--soft);color:var(--pri)}
+ .bn button[aria-current=page] i{transform:none}
+}
+/* صفحة الأدوات: لوحة اختيار ثم أداة واحدة واضحة */
+#toolNav{display:none!important}
+#toolLauncher{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.tt{display:flex;flex-direction:column;align-items:flex-start;gap:6px;background:var(--card);border:1.5px solid var(--bd);border-radius:var(--rad);padding:16px 14px;text-align:start;text-decoration:none;color:inherit;min-height:122px;font-family:inherit;cursor:pointer;transition:transform .12s,border-color .2s,box-shadow .2s}
+.tt:hover{border-color:var(--acc);box-shadow:var(--sh)}.tt:active{transform:scale(.97)}
+.tt .tti{width:44px;height:44px;border-radius:14px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:23px}
+.tt b{color:var(--pri);font-size:15px;line-height:1.3}.tt small{color:var(--mut);font-size:12.5px;line-height:1.45;font-weight:400}
+#toolBack{display:none;margin-bottom:12px}
+#tools.lv #toolBack{display:inline-flex;align-items:center;gap:6px}
+#tools.lv #toolLauncher,#tools.lv>h1,#tools.lv>.sub{display:none}
+#tools .tl2 .tool{display:none}
+#tools.lv .tl2 .tool.on{display:block}
+#tools .tl2{display:block;margin-top:0}
+#tools .tool{border-inline-start:1px solid var(--bd);padding:18px;max-width:620px;margin-inline:auto}
+#tools .tool h2{font-size:19px}
+#phT{display:none!important}
+
+#search{display:flex;flex-direction:column}
+#search>*{order:6;width:100%}
+#search>.seg{order:0}#search>h1{order:1}#search>.sub{order:2}
+#search>.row:not(.flt):not(.r2){order:3;max-width:680px;margin-inline:auto}
+#search>.stats{order:4}#search>.nd{order:5;max-width:680px;margin-inline:auto}
+#search>.advf{order:6;max-width:680px;margin-inline:auto}#search>#res{order:7}#search>#instBar{order:9}
+#search p:has(>[data-i="remCta"]){display:none}
 </style>
 </head>
 <body>
@@ -2017,23 +2064,6 @@ addEventListener('hashchange',()=>{if(!location.hash.startsWith('#tn'))scrollTo(
   const q=document.getElementById('q');if(q){q.setAttribute('autocapitalize','off');q.setAttribute('spellcheck','false')}
 })();
 
-/* ===== شريط الاختصارات تحت البحث (الترتيب 5) ===== */
-(function(){
-  const row=document.querySelector('#search .row');if(!row)return;
-  const rc=document.querySelector('#search [data-i="remCta"]');if(rc&&rc.parentElement.tagName==='P')rc.parentElement.remove();
-  const qa=document.createElement('div');qa.className='qa';qa.setAttribute('aria-label','quick actions');row.after(qa);
-  const cnt=()=>{try{return(ls.get('jp_basket',[])||[]).length}catch{return 0}};
-  const draw=()=>{const n=cnt();qa.innerHTML=
-   `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LL('صيدلية','pharmacy'))}" target="_blank" rel="noopener">📍 ${LL('أقرب صيدلية','Nearest pharmacy')}</a>`+
-   `<button type="button" data-qa="ixT">🛡️ ${LL('التداخلات','Interactions')}</button>`+
-   `<button type="button" data-qa="svT">💰 ${LL('وفّر','Save')}</button>`+
-   `<button type="button" data-qa="bkT">🧾 ${LL('السلة','Basket')}${n?`<span class="n">${n}</span>`:''}</button>`+
-   `<button type="button" data-qa="cmpT">⚖️ ${LL('قارن','Compare')}</button>`};
-  qa.addEventListener('click',e=>{const b=e.target.closest('[data-qa]');if(!b)return;goTab('tools');
-    setTimeout(()=>{const t=document.getElementById(b.dataset.qa);if(t){t.scrollIntoView({behavior:'smooth',block:'start'});const i=t.querySelector('input');i&&i.focus({preventScroll:true})}},220)});
-  draw();addEventListener('hashchange',()=>setTimeout(draw,0));
-  const _a6=applyLang;applyLang=function(){_a6();draw()};
-})();
 
 /* ===== اقتراحات خفيفة بدل datalist الثقيلة (تمنع تجمّد الجوال) ===== */
 (function(){
@@ -2076,6 +2106,37 @@ addEventListener('hashchange',()=>{if(!location.hash.startsWith('#tn'))scrollTo(
   const d=g('medl2');if(d)d.remove();
   ['ixT','svT','bkT','cmpT','phT'].map(g).concat([my]).filter(Boolean).forEach(el=>box.appendChild(el));
   try{applyLang()}catch{}
+})();
+
+/* ===== لوحة الأدوات: كل أداة بمكانها وبشكل واضح ===== */
+(function(){
+  const sec=document.getElementById('tools'),wrap=sec&&sec.querySelector('.tl2');if(!wrap)return;
+  const pl=sec.querySelector('#pl'),my=pl&&pl.closest('.tool');if(my)my.id='myT';
+  const MAP='https://www.google.com/maps/search/?api=1&query=';
+  const CFG={phT:['📍',['أقرب صيدلية','Nearest pharmacy'],['افتح الخرائط الآن','Open maps now']],
+   ixT:['🛡️',['فاحص التداخلات','Interactions'],['تحقق قبل الجمع بين الأدوية','Check before combining']],
+   svT:['💰',['وفّر على دوائك','Save money'],['بدائل أرخص بنفس المادة','Cheaper equivalents']],
+   bkT:['🧾',['سلة الوصفة','Prescription basket'],['احسب تكلفة أدويتك','Estimate your cost']],
+   cmpT:['⚖️',['قارن بين دوائين','Compare two'],['السعر والمادة الفعالة','Price and ingredient']],
+   myT:['🔒',['سجلي الدوائي','My record'],['أدويتك وحساسياتك','Your medicines and allergies']]};
+  const ORDER=['phT','ixT','svT','bkT','cmpT','myT'];
+  const g=id=>document.getElementById(id);
+  ORDER.map(g).filter(Boolean).forEach(el=>wrap.appendChild(el));
+  let L=g('toolLauncher'),B=g('toolBack');
+  if(!L){L=document.createElement('div');L.id='toolLauncher';B=document.createElement('button');B.id='toolBack';B.type='button';B.className='btn sm sec';wrap.before(B);wrap.before(L)}
+  const all=()=>[...wrap.querySelectorAll(':scope>.tool')];
+  const reset=()=>{sec.classList.remove('lv');all().forEach(t=>t.classList.remove('on'))};
+  const draw=()=>{
+    B.textContent='→ '+LL('الأدوات','Tools');
+    L.innerHTML=ORDER.filter(k=>g(k)).map(k=>{const c=CFG[k],a=`<span class="tti" aria-hidden="true">${c[0]}</span><b>${LL(c[1][0],c[1][1])}</b><small>${LL(c[2][0],c[2][1])}</small>`;
+      return k==='phT'?`<a class="tt" href="${MAP}${encodeURIComponent(LL('صيدلية','pharmacy'))}" target="_blank" rel="noopener">${a}</a>`:`<button class="tt" type="button" data-tool="${k}">${a}</button>`}).join('');
+  };
+  L.addEventListener('click',e=>{const b=e.target.closest('[data-tool]');if(!b)return;all().forEach(t=>t.classList.toggle('on',t.id===b.dataset.tool));sec.classList.add('lv');scrollTo({top:0})});
+  B.addEventListener('click',()=>{reset();scrollTo({top:0})});
+  document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('[data-go="tools"]'))reset()});
+  addEventListener('hashchange',()=>{if(location.hash!=='#tools')reset()});
+  draw();
+  const _a7=applyLang;applyLang=function(){_a7();draw();B.textContent='→ '+LL('الأدوات','Tools')};
 })();
 </script>
 <!-- تم دمج Firebase داخل السكربت الرئيسي (FIREBASE_CFG) لتفادي التعارض -->
