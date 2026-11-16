@@ -29,7 +29,7 @@ addEventListener('load',function(){setTimeout(function(){
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أجد بديلاً أرخص لدوائي في الأردن؟","acceptedAnswer":{"@type":"Answer","text":"ابحث عن اسم الدواء في Jo Pharma ثم افتح صفحته لترى الأدوية بنفس المادة الفعالة والتركيز مرتبة بالسعر، واسأل الصيدلاني قبل أي تبديل."}},{"@type":"Question","name":"هل أسعار الأدوية في الموقع رسمية؟","acceptedAnswer":{"@type":"Answer","text":"الأسعار استرشادية مبنية على قوائم الأدوية الأردنية وقد تختلف بين الصيدليات أو بعد تحديثات المؤسسة العامة للغذاء والدواء."}},{"@type":"Question","name":"هل يمكنني فحص التداخل بين دوائين؟","acceptedAnswer":{"@type":"Answer","text":"نعم، أداة فاحص التداخلات في قسم الأدوات تنبّه إلى أشهر التداخلات المعروفة، ولا تغني عن استشارة الطبيب أو الصيدلاني."}}]}</script>
 <link rel="canonical" href="https://jopharma.net/"><meta property="og:url" content="https://jopharma.net/">
 <title>Jo Pharma | المرجع الدوائي الأردني</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Tajawal:wght@400;500;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{--pri:#1e3a8a;--hd:#1e3a8a;--acc:#ea580c;--bg:#f8fafc;--card:#fff;--tx:#0f172a;--mut:#475569;--bd:#e2e8f0;--soft:#f1f5f9;--b2:#1e3a8a;--sh:0 8px 22px rgba(15,23,42,.10);--nb:#fff7ed;--nbd:#fed7aa;--nt:#9a3412;--ib:#eff6ff;--ibd:#bfdbfe;--it:#1e40af;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--pri:#8bb4ff;--hd:#0a1330;--acc:#ff9a4d;--bg:#070d1c;--card:#0f1830;--tx:#e8edf7;--mut:#9aa8c4;--bd:#1f2c4d;--soft:#142041;--b2:#2f5bd6;--sh:0 10px 28px rgba(0,0,0,.55);--nb:#2a1a0e;--nbd:#6b3a14;--nt:#fdba74;--ib:#0e1c3a;--ibd:#23407a;--it:#a5c4ff;color-scheme:dark}}
@@ -594,6 +594,11 @@ mark{background:color-mix(in srgb,var(--acc) 22%,transparent)}
 .qo:hover:not(:disabled){border-color:var(--acc)}
 .qo.ok{border-color:#16a34a;background:rgba(22,163,74,.16)}.qo.bad{border-color:#dc2626;background:rgba(220,38,38,.16)}
 .qo:disabled{cursor:default;opacity:1}
+.rx{background:#fffdf3 repeating-linear-gradient(transparent 0 33px,#cfd8f3 33px 34px);color:#1b2a8a;border:1px solid #e3dcc0;border-radius:8px;padding:12px 16px 14px;margin:10px 0;box-shadow:0 3px 10px rgba(0,0,0,.18);font-family:Caveat,'Segoe Script','Bradley Hand',cursive;font-size:23px;line-height:34px;text-align:left;overflow-x:auto}
+.rxh{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;border-bottom:2px solid #1b2a8a55;font-size:19px;line-height:26px;padding-bottom:4px;margin-bottom:6px}
+.rxs{font-size:34px;font-weight:700;line-height:36px}.rl{white-space:nowrap;padding:0 4px;border-radius:4px}.rl.cur{background:#fde68a88;outline:1px dashed #b45309}.rxf{text-align:right;opacity:.75;font-size:20px}
+.rt{width:100%;border-collapse:collapse;font-size:14px}.rt td{border-bottom:1px solid var(--bd);padding:6px 4px;vertical-align:top}.stt{text-align:center;margin:8px 0}
+.item .d select,.item .d input{width:100%;margin:2px 0 6px}
 </style>
 </head>
 <body>
@@ -633,7 +638,7 @@ mark{background:color-mix(in srgb,var(--acc) 22%,transparent)}
   <section id="reminders" class="card tab hidden"></section>
   <section id="admin" class="card tab hidden"></section>
 </main>
-<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="reminders" class=""><i>⏰</i><span data-i="remN"></span><span class="bdg2 hidden" id="bellN2"></span></button><button type="button" data-menu aria-haspopup="dialog" aria-controls="moreM"><i>☰</i><span id="moreLbl">المزيد</span></button></nav>
+<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="reminders" class=""><i>⏰</i><span data-i="remN"></span><span class="bdg2 hidden" id="bellN2"></span></button><button data-go="students"><i>🎓</i><span data-i="nSt"></span></button><button type="button" data-menu aria-haspopup="dialog" aria-controls="moreM"><i>☰</i><span id="moreLbl">المزيد</span></button></nav>
 <footer>
   <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
     <a href="about.html" style="font-weight: 700;" data-i="fAbout"></a>
@@ -702,7 +707,7 @@ brandL:['أدوية مذكورة:','Medicines mentioned:'],
 const t = k => (T[k] || [k, k])[lang === 'ar' ? 0 : 1];
 const LL = (a, e) => lang === 'ar' ? a : e;
 document.addEventListener('click',async e=>{if(!e.target.closest('[data-favcopy]'))return;const txt=meds.filter(m=>favs.includes(m.name)).map(m=>medText(m)).join('\n');if(navigator.share){try{await navigator.share({title:'Jo Pharma',text:txt});return}catch{}}try{await navigator.clipboard.writeText(txt);toast(t('copied'))}catch{}});
-Object.assign(T,{nSt:['طلاب الصيدلة','Pharmacy students'],stCta:['🎓 صفحة طلاب الصيدلة (اختبارات)','🎓 Pharmacy students (quizzes)'],co:['الشركة / المستودع','Company / distributor'],np:['السعر غير مُدرج','Price not listed'],vq:['بحث صوتي','Voice search'],chp:['الأرخص بنفس المادة','Cheapest, same ingredient'],favCopy:['📋 نسخ / مشاركة قائمتي','📋 Copy / share my list'],fAbout:['من نحن','About us'],fPriv:['الخصوصية','Privacy'],fCont:['اتصل بنا','Contact us']});
+Object.assign(T,{nSt:['طلاب الصيدلة','Pharmacy students'],stCta:['🎓 صفحة طلاب الصيدلة (تدريب ومراجع)','🎓 Pharmacy students (training & tools)'],co:['الشركة / المستودع','Company / distributor'],np:['السعر غير مُدرج','Price not listed'],vq:['بحث صوتي','Voice search'],chp:['الأرخص بنفس المادة','Cheapest, same ingredient'],favCopy:['📋 نسخ / مشاركة قائمتي','📋 Copy / share my list'],fAbout:['من نحن','About us'],fPriv:['الخصوصية','Privacy'],fCont:['اتصل بنا','Contact us']});
 
 /* ===== 2) البيانات ===== */
 const diseasesList = [
@@ -946,103 +951,90 @@ function favBadge(){$$('.fbd').forEach(b=>{b.textContent=favs.length;b.classList
 function renderFavs(){HW=[];const l=meds.filter(m=>favs.includes(m.name));$('#fList').innerHTML=l.length?`<p style="text-align:center;margin:8px 0"><button class="btn sm sec" type="button" data-favcopy>${t('favCopy')}</button></p>`+l.map(card).join(''):`<p class="empty">${t('noFav')}</p>`;favBadge()}
 
 /* ===== 7) التنقل + اللغة + المظهر ===== */
-/* ===== صفحة طلاب الصيدلة: اختبارات ===== */
-const QC={ph:['علم الأدوية','Pharmacology'],pt:['الصيدلانيات والحرائك الدوائية','Pharmaceutics & PK'],mt:['حسابات صيدلانية','Pharmacy math'],cl:['سريرية وإرشاد المريض','Clinical & counseling'],am:['مضادات الميكروبات','Antimicrobials'],pg:['العقاقير والأعشاب','Pharmacognosy & herbs']};
-/* [التصنيف, السؤال, [الصحيح أولاً, خطأ, خطأ, خطأ], شرح عربي, شرح إنجليزي] */
-const QB=[
-['ph','Which adverse effect is most characteristic of ACE inhibitors?',['Persistent dry cough','Gynecomastia','Reflex bradycardia','Hyperglycemia'],'تراكم البراديكينين يسبب سعالًا جافًا مستمرًا، ولذلك يُستبدل الدواء غالبًا بحاصر مستقبلات الأنجيوتنسين (ARB).','Bradykinin accumulation causes a persistent dry cough; an ARB is often substituted.'],
-['ph','Atorvastatin lowers cholesterol by inhibiting:',['HMG-CoA reductase','Lipoprotein lipase','Bile acid reabsorption','Xanthine oxidase'],'الستاتينات تثبّط إنزيم HMG-CoA reductase وهو الخطوة المحددة لسرعة تصنيع الكوليسترول في الكبد.','Statins inhibit HMG-CoA reductase, the rate-limiting step of hepatic cholesterol synthesis.'],
-['ph','Which drug is the specific antidote for paracetamol overdose?',['N-acetylcysteine','Naloxone','Flumazenil','Protamine sulfate'],'N-acetylcysteine يعوّض الغلوتاثيون ويحمي الكبد من المستقلب السام NAPQI، وتزداد فعاليته كلما بدأ مبكرًا.','N-acetylcysteine replenishes glutathione and protects the liver from the toxic metabolite NAPQI; earlier is better.'],
-['ph','The antidote for opioid-induced respiratory depression is:',['Naloxone','Flumazenil','Atropine','Physostigmine'],'Naloxone مضاد تنافسي لمستقبلات الأفيون. أما Flumazenil فهو لمضادات البنزوديازيبين.','Naloxone is a competitive opioid-receptor antagonist. Flumazenil reverses benzodiazepines.'],
-['ph','Omeprazole reduces gastric acid by:',['Irreversibly inhibiting the H+/K+ ATPase (proton pump)','Blocking histamine H2 receptors','Neutralizing gastric acid','Blocking muscarinic M1 receptors'],'مثبطات مضخة البروتون ترتبط تساهميًا بالمضخة في الخلايا الجدارية فتوقف إفراز الحمض.','Proton pump inhibitors bind covalently to the parietal-cell pump and stop acid secretion.'],
-['ph','Warfarin reduces the synthesis of clotting factors:',['II, VII, IX and X','I, V, VIII and XI','III, IV, VI and XII','VIII, XI and XII only'],'الوارفارين يثبّط إنزيم VKORC1 فتنخفض العوامل المعتمدة على فيتامين ك: II وVII وIX وX (وكذلك البروتين C وS).','Warfarin inhibits VKORC1, lowering the vitamin K–dependent factors II, VII, IX and X (and proteins C and S).'],
-['ph','Which drug is a selective COX-2 inhibitor?',['Celecoxib','Ibuprofen','Naproxen','Aspirin'],'Celecoxib يثبّط COX-2 بشكل انتقائي، بينما الباقية مثبطات غير انتقائية لـCOX-1 وCOX-2.','Celecoxib selectively inhibits COX-2; the others are non-selective COX-1/COX-2 inhibitors.'],
-['ph','Furosemide is classified as a:',['Loop diuretic','Thiazide diuretic','Potassium-sparing diuretic','Carbonic anhydrase inhibitor'],'الفيوروسيميد يثبّط مبادل Na-K-2Cl في العروة الصاعدة لهنلي.','Furosemide inhibits the Na-K-2Cl cotransporter in the thick ascending limb of the loop of Henle.'],
-['ph','Which agent reverses warfarin over-anticoagulation?',['Vitamin K (phytonadione)','Protamine sulfate','Idarucizumab','Tranexamic acid'],'فيتامين ك يعيد تصنيع العوامل الغائبة. أما Protamine فللهيبارين وIdarucizumab للـdabigatran.','Vitamin K restores the missing factors. Protamine reverses heparin; idarucizumab reverses dabigatran.'],
-['ph','Salbutamol relieves bronchospasm by stimulating:',['β2-adrenergic receptors','α1-adrenergic receptors','Muscarinic M3 receptors','Histamine H1 receptors'],'تنبيه مستقبلات β2 في العضلات الملساء القصبية يسبب ارتخاءها وتوسع الشعب الهوائية.','β2 stimulation relaxes bronchial smooth muscle and dilates the airways.'],
-['pt','The main purpose of an enteric coating is to:',['Protect the drug from gastric acid or protect the stomach from the drug','Speed up disintegration in the stomach','Increase tablet hardness only','Convert the drug to a prodrug'],'الطلاء المعوي لا يذوب في حمض المعدة ويذوب في الأمعاء، فيحمي الدواء الحساس للحمض أو يحمي المعدة من المهيّج.','Enteric coatings resist gastric acid and dissolve in the intestine, protecting acid-labile drugs or the stomach.'],
-['pt','Which route avoids hepatic first-pass metabolism?',['Sublingual','Oral tablet','Oral solution','Oral capsule'],'الامتصاص تحت اللسان يدخل الدورة الدموية الجهازية مباشرة دون المرور بالكبد أولًا.','Sublingual absorption enters the systemic circulation directly, bypassing the liver first.'],
-['pt','Bioavailability of an intravenously administered drug is:',['100%','50%','Depends on first-pass effect','Depends on gastric pH'],'الحقن الوريدي يضع الدواء مباشرة في الدم فالتوافر الحيوي 100% بالتعريف.','IV administration puts the drug straight into the blood, so bioavailability is 100% by definition.'],
-['pt','Which excipient functions mainly as a tablet disintegrant?',['Croscarmellose sodium','Magnesium stearate','Lactose','Talc'],'Croscarmellose مفكّك للأقراص. Magnesium stearate مزلّق وLactose مخفِّف وTalc مساعد انسياب.','Croscarmellose is a disintegrant. Magnesium stearate is a lubricant, lactose a diluent, talc a glidant.'],
-['pt','Steady state is reached after approximately how many half-lives of regular dosing?',['4–5','1–2','10–12','Immediately after the first dose'],'بعد 4 إلى 5 أعمار نصفية يصل التركيز إلى نحو 94–97% من الحالة المستقرة.','After 4–5 half-lives the concentration reaches roughly 94–97% of steady state.'],
-['pt','For a first-order process, the half-life is calculated as:',['0.693 / k','k / 0.693','Vd × k','CL × Vd'],'t½ = 0.693 / k حيث k ثابت الإطراح، وهو ثابت في الحركية من الدرجة الأولى.','t½ = 0.693 / k, where k is the elimination rate constant; it is constant in first-order kinetics.'],
-['pt','The loading dose depends mainly on the:',['Volume of distribution','Clearance','Renal function only','Dosing interval'],'الجرعة التحميلية = التركيز المطلوب × حجم التوزع ÷ التوافر الحيوي. أما جرعة المداومة فتعتمد على الإطراح.','Loading dose = target concentration × Vd ÷ F. The maintenance dose depends on clearance.'],
-['mt','A 5% w/v solution contains how many mg per mL?',['50 mg/mL','5 mg/mL','0.5 mg/mL','500 mg/mL'],'5% w/v تعني 5 غرام في 100 مل، أي 5000 ملغ ÷ 100 = 50 ملغ/مل.','5% w/v = 5 g per 100 mL = 5000 mg ÷ 100 = 50 mg/mL.'],
-['mt','A child weighing 15 kg needs 10 mg/kg. What is the dose?',['150 mg','15 mg','1.5 g','25 mg'],'10 ملغ/كغ × 15 كغ = 150 ملغ.','10 mg/kg × 15 kg = 150 mg.'],
-['mt','Amoxicillin suspension is 250 mg/5 mL. How many mL give a 500 mg dose?',['10 mL','5 mL','2.5 mL','20 mL'],'500 ÷ 250 = 2، و2 × 5 مل = 10 مل.','500 ÷ 250 = 2, and 2 × 5 mL = 10 mL.'],
-['mt','0.25 mg equals how many micrograms?',['250 mcg','25 mcg','2,500 mcg','0.25 mcg'],'1 ملغ = 1000 ميكروغرام، إذن 0.25 × 1000 = 250.','1 mg = 1000 mcg, so 0.25 × 1000 = 250.'],
-['mt','How many mL of a 20% solution are needed to prepare 100 mL of a 5% solution?',['25 mL','20 mL','50 mL','5 mL'],'C1V1 = C2V2، أي 20 × V = 5 × 100 فيكون V = 25 مل.','C1V1 = C2V2 → 20 × V = 5 × 100 → V = 25 mL.'],
-['mt','A tablet is taken three times daily. How many days does a 30-tablet pack last?',['10 days','30 days','3 days','15 days'],'3 أقراص يوميًا، و30 ÷ 3 = 10 أيام.','3 tablets per day; 30 ÷ 3 = 10 days.'],
-['mt','How many milligrams are in 1.5 g?',['1,500 mg','150 mg','15 mg','15,000 mg'],'1 غرام = 1000 ملغ.','1 g = 1000 mg.'],
-['mt','A 500 mL infusion must run over 4 hours. What is the rate?',['125 mL/h','100 mL/h','250 mL/h','200 mL/h'],'500 ÷ 4 = 125 مل/ساعة.','500 ÷ 4 = 125 mL/h.'],
-['cl','Levothyroxine is best taken:',['On an empty stomach, 30–60 minutes before breakfast','With a large meal','At bedtime with milk','Together with calcium or iron tablets'],'الطعام والكالسيوم والحديد تقلل امتصاصه، فيُفصل عنها بنحو 4 ساعات.','Food, calcium and iron reduce its absorption; separate from them by about 4 hours.'],
-['cl','Which advice is correct for tetracyclines?',['Avoid taking with dairy, antacids or iron','Take with calcium supplements for better absorption','Deliberately expose skin to sunlight','Stop after one dose'],'التتراسيكلين يرتبط بالكالسيوم والمغنيسيوم والحديد والألمنيوم (الخَلْب) فيقل امتصاصه، ويسبب حساسية للضوء.','Tetracyclines chelate calcium, magnesium, iron and aluminium, reducing absorption; they also cause photosensitivity.'],
-['cl','Alcohol should be avoided with metronidazole because of:',['A disulfiram-like reaction (flushing, nausea, vomiting)','Reduced absorption of metronidazole','Increased gastric acid','Photosensitivity only'],'الجمع قد يسبب احمرارًا وغثيانًا وقيئًا وخفقانًا، ويُنصح بتجنب الكحول أثناء العلاج ولمدة بعده.','The combination can cause flushing, nausea, vomiting and palpitations; avoid alcohol during and shortly after treatment.'],
-['cl','Aspirin is generally avoided in children with viral infections because of the risk of:',['Reye’s syndrome','Stevens-Johnson syndrome','Gray baby syndrome','Red man syndrome'],'Reye’s syndrome اعتلال دماغي مع تلف كبدي دهني نادر لكنه خطير.','Reye’s syndrome is a rare but serious encephalopathy with fatty liver damage.'],
-['cl','Sildenafil is contraindicated with nitrates because of the risk of:',['Severe hypotension','Hyperkalemia','QT prolongation','Serotonin syndrome'],'كلاهما يوسّع الأوعية عبر مسار cGMP فيحدث هبوط ضغط شديد.','Both vasodilate via the cGMP pathway, causing profound hypotension.'],
-['cl','Unopened insulin vials should be stored:',['In a refrigerator at 2–8 °C','In the freezer','In a car glove box','In direct sunlight'],'التجميد يتلف الإنسولين. والعبوة المفتوحة قيد الاستعمال تُحفظ عادة بدرجة حرارة الغرفة للمدة التي تحددها النشرة.','Freezing destroys insulin. An in-use vial is usually kept at room temperature for the period stated in the leaflet.'],
-['cl','Which drug class most commonly causes muscle pain and myopathy?',['Statins','Antihistamines','Proton pump inhibitors','Thiazide diuretics'],'الستاتينات قد تسبب ألمًا عضليًا واعتلالًا عضليًا، وفي النادر انحلال العضلات المخطط.','Statins can cause muscle pain and myopathy, rarely rhabdomyolysis.'],
-['cl','Which drug has a narrow therapeutic index and needs level monitoring?',['Digoxin','Paracetamol','Cetirizine','Omeprazole'],'الديجوكسين هامش أمانه ضيق، ويتأثر بوظائف الكلى والبوتاسيوم، فتُراقب مستوياته.','Digoxin has a narrow margin of safety affected by renal function and potassium, so levels are monitored.'],
-['cl','Which drink inhibits intestinal CYP3A4 and can raise levels of some statins?',['Grapefruit juice','Orange juice','Milk','Green tea'],'عصير الجريب فروت يثبّط CYP3A4 المعوي فيرفع تركيز أدوية مثل سيمفاستاتين وأتورفاستاتين.','Grapefruit juice inhibits intestinal CYP3A4 and raises levels of drugs such as simvastatin and atorvastatin.'],
-['am','Ciprofloxacin belongs to which antibiotic class?',['Fluoroquinolones','Macrolides','Cephalosporins','Tetracyclines'],'السيبروفلوكساسين فلوروكينولون ويثبّط إنزيمي DNA gyrase وtopoisomerase IV.','Ciprofloxacin is a fluoroquinolone that inhibits DNA gyrase and topoisomerase IV.'],
-['am','Beta-lactam antibiotics act by:',['Inhibiting bacterial cell wall synthesis','Binding the 30S ribosomal subunit','Inhibiting folic acid synthesis','Inhibiting DNA gyrase'],'تربط البروتينات الرابطة للبنسلين (PBPs) فتمنع تشابك الببتيدوغليكان في الجدار.','They bind penicillin-binding proteins (PBPs) and block peptidoglycan cross-linking.'],
-['am','Azithromycin inhibits protein synthesis by binding to the:',['50S ribosomal subunit','30S ribosomal subunit','DNA gyrase','RNA polymerase'],'الماكروليدات ترتبط بالوحدة 50S. أما التتراسيكلينات والأمينوغليكوزيدات فبالوحدة 30S.','Macrolides bind 50S; tetracyclines and aminoglycosides bind 30S.'],
-['am','Which antibiotic is used to treat MRSA infections?',['Vancomycin','Amoxicillin','Cefalexin','Penicillin V'],'MRSA مقاوم لمعظم البيتا-لاكتام، والفانكومايسين خيار معتمد (وكذلك linezolid).','MRSA resists most beta-lactams; vancomycin is a standard option (as is linezolid).'],
-['am','Aminoglycosides are mainly associated with:',['Nephrotoxicity and ototoxicity','Tendon rupture','Photosensitivity','Gray baby syndrome'],'السمية الكلوية والأذنية مرتبطة بالجرعة والمدة، فتُراقب المستويات ووظائف الكلى.','Nephro- and ototoxicity are dose- and duration-related, so levels and renal function are monitored.'],
-['am','Fluoroquinolones carry a warning for:',['Tendinitis and tendon rupture','Red man syndrome','Reye’s syndrome','Gray baby syndrome'],'خطر التهاب الأوتار وتمزقها يزيد مع كبار السن والستيرويدات القشرية.','The risk of tendinitis and rupture is higher in older adults and with corticosteroids.'],
-['am','Rifampicin is a strong inducer of which enzyme system?',['CYP450 (e.g. CYP3A4)','Monoamine oxidase','Xanthine oxidase','Carbonic anhydrase'],'يخفّض مستويات أدوية كثيرة مثل الوارفارين وحبوب منع الحمل.','It lowers levels of many drugs, such as warfarin and oral contraceptives.'],
-['am','Trimethoprim-sulfamethoxazole interferes with synthesis of:',['Folic acid','Peptidoglycan','Mycolic acid','Ergosterol'],'يثبّط خطوتين متتاليتين في مسار تصنيع حمض الفوليك البكتيري.','It blocks two sequential steps in the bacterial folate pathway.'],
-['pg','Digoxin is obtained from:',['Digitalis (foxglove)','Cinchona bark','Opium poppy','Rauwolfia'],'الديجوكسين من نبات الديجيتال (قفاز الثعلب) وهو من الجليكوزيدات القلبية.','Digoxin comes from Digitalis (foxglove) and is a cardiac glycoside.'],
-['pg','Morphine is obtained from:',['Papaver somniferum (opium poppy)','Atropa belladonna','Cinchona bark','Digitalis'],'المورفين قلويد رئيسي في أفيون الخشخاش.','Morphine is the main alkaloid of opium poppy.'],
-['pg','Quinine is obtained from the bark of:',['Cinchona','Willow','Ginkgo','Rauwolfia'],'الكينين قلويد من لحاء السنكونا ويُستعمل تاريخيًا لعلاج الملاريا.','Quinine is an alkaloid from cinchona bark, historically used for malaria.'],
-['pg','St John’s wort can reduce the effect of many drugs (e.g. oral contraceptives) because it:',['Induces CYP3A4 and P-glycoprotein','Inhibits CYP3A4','Binds drugs in the gut irreversibly','Increases renal reabsorption'],'هو محفّز إنزيمي قوي فيخفض مستويات السيكلوسبورين وحبوب منع الحمل وغيرها.','It is a strong enzyme inducer and lowers levels of ciclosporin, contraceptives and others.'],
-['pg','Which herb is notably associated with increased bleeding risk when combined with warfarin?',['Ginkgo biloba','Peppermint','Fennel','Thyme'],'الجنكو قد يؤثر على الصفيحات فيزيد خطر النزف عند الجمع مع مميعات الدم.','Ginkgo may affect platelet function and raise bleeding risk with anticoagulants.'],
-['pg','Salicin from willow bark is the natural precursor of:',['Aspirin (salicylates)','Morphine','Digoxin','Atropine'],'اشتُق الأسبرين تاريخيًا من حمض الساليسيليك المأخوذ من مركبات لحاء الصفصاف.','Aspirin was historically derived from salicylates found in willow bark.']
+/* ===== طلاب الصيدلة: تدريب + مراجع + حاسبات ===== */
+const RX=[
+{dr:'Dr. Khaled M. — Internal Med.',pt:'Ali S. · 58 y',l:[
+['Tab. Glucophage 850 mg  1×2 pc','Metformin',['Metronidazole','Metoprolol','Methotrexate'],'مرتين يوميًا بعد الأكل (pc).','يقلل أعراض المعدة بأخذه مع الطعام؛ يُوقف قبل الصبغة الظليلة عند ضعف الكلى.'],
+['Tab. Concor 5 mg  1×1 am','Bisoprolol',['Carvedilol','Bisacodyl','Buspirone'],'مرة صباحًا.','حاصر بيتا انتقائي؛ لا يُوقف فجأة.'],
+['Tab. Lipitor 20 mg  1×1 hs','Atorvastatin',['Rosuvastatin','Amlodipine','Simvastatin'],'مرة عند النوم (hs).','ستاتين؛ انتبه لألم العضلات والجريب فروت.']]},
+{dr:'Dr. Hana Q. — Pediatrics',pt:'Omar K. · 4 y · 16 kg',l:[
+['Susp. Augmentin 457/5 ml  5 ml bid × 7/7','Amoxicillin / Clavulanate',['Cefixime','Azithromycin','Clarithromycin'],'5 مل مرتين يوميًا لمدة 7 أيام.','يؤخذ مع بداية الأكل لتقليل الإسهال؛ المعلق يُحفظ بالثلاجة.'],
+['Syr. Panadol 120 mg/5 ml  5 ml q6h prn fever','Paracetamol',['Pantoprazole','Pregabalin','Ibuprofen'],'5 مل كل 6 ساعات عند الحاجة للحرارة.','لا يتجاوز 5 جرعات باليوم.']]},
+{dr:'Dr. Sami A. — GP',pt:'Rana T. · 35 y',l:[
+['Cap. Losec 20 mg  1×1 ac','Omeprazole',['Furosemide','Loratadine','Lisinopril'],'مرة قبل الفطور (ac).','Losec/Lasix من أشهر أزواج التشابه بالكتابة.'],
+['Tab. Zyrtec 10 mg  1×1 hs','Cetirizine',['Sertraline','Cinnarizine','Cefixime'],'مرة عند النوم.','قد يسبب نعاسًا.']]},
+{dr:'Dr. Lina H. — Chest',pt:'Yousef N. · 47 y',l:[
+['Tab. Zithromax 500 mg  1×1 × 3/7','Azithromycin',['Erythromycin','Azathioprine','Aztreonam'],'مرة يوميًا لمدة 3 أيام.','ماكروليد؛ يطيل QT عند بعض المرضى.'],
+['Inh. Ventolin 100 mcg  2 puffs q6h prn SOB','Salbutamol',['Salmeterol','Ipratropium','Budesonide'],'بختان كل 6 ساعات عند ضيق النفس.','منشّط β2 سريع المفعول للإنقاذ.'],
+['Syr. Bisolvon  1 tsp tid','Bromhexine',['Bisacodyl','Bisoprolol','Dextromethorphan'],'ملعقة صغيرة (5 مل) 3 مرات يوميًا.','مقشّع/مذيب للبلغم.']]},
+{dr:'Dr. Omar R. — Ortho',pt:'Maha D. · 52 y',l:[
+['Tab. Voltaren 50 mg  1×2 pc × 5/7','Diclofenac',['Valacyclovir','Naproxen','Tramadol'],'مرتين بعد الأكل لمدة 5 أيام.','NSAID؛ يؤخذ بعد الأكل ويُتجنب مع القرحة.'],
+['Cap. Lyrica 75 mg  1×1 hs','Pregabalin',['Gabapentin','Paroxetine','Lamotrigine'],'مرة عند النوم.','للألم العصبي؛ قد يسبب دوخة ونعاسًا.']]},
+{dr:'Dr. Nour B. — Endocrine',pt:'Salma F. · 41 y',l:[
+['Tab. Euthyrox 100 mcg  1×1 am empty stomach','Levothyroxine',['Liothyronine','Methimazole','Prednisolone'],'مرة صباحًا على الريق.','يُفصل عن الكالسيوم والحديد 4 ساعات.'],
+['Tab. Marevan 5 mg  ½ tab hs','Warfarin',['Rivaroxaban','Clopidogrel','Aspirin'],'نصف حبة عند النوم.','يحتاج متابعة INR وانتباه لتداخلات الأعشاب والمضادات الحيوية.']]},
+{dr:'Dr. Zaid J. — Psychiatry',pt:'Dina W. · 29 y',l:[
+['Tab. Cipralex 10 mg  1×1 am','Escitalopram',['Citalopram','Ciprofloxacin','Fluoxetine'],'مرة صباحًا.','SSRI؛ تأخذ أسابيع حتى يظهر الأثر.'],
+['Tab. Xanax 0.5 mg  1× hs prn','Alprazolam',['Lorazepam','Alfuzosin','Allopurinol'],'عند النوم عند اللزوم.','دواء مراقَب: صرفه بوصفة أصلية وحسب الأنظمة.']]}
 ];
-let QZ={v:'menu'};
+const REF=[
+['🩸 السكري Glucose',[['Fasting glucose سكر صائم','<100 طبيعي · 100–125 ما قبل السكري · ≥126 سكري','mg/dL (÷18 = mmol/L)'],['2-h OGTT','<140 طبيعي · 140–199 ما قبل · ≥200 سكري','mg/dL'],['HbA1c','<5.7% طبيعي · 5.7–6.4 ما قبل · ≥6.5 سكري','الهدف لمعظم المرضى <7%'],['Random عشوائي','≥200 مع أعراض = تشخيص','mg/dL'],['Hypoglycemia هبوط','<70 هبوط · <54 هبوط شديد','قاعدة 15: 15 غ سكريات سريعة، أعد القياس بعد 15 دقيقة']]],
+['❤️ الضغط BP',[['Normal طبيعي','<120 و <80','ACC/AHA 2017 (mmHg)'],['Elevated مرتفع قليلًا','120–129 و <80',''],['Stage 1','130–139 أو 80–89',''],['Stage 2','≥140 أو ≥90',''],['Crisis أزمة','>180 و/أو >120','تحتاج تقييمًا عاجلًا'],['Hypotension هبوط','<90/60','مع أعراض: دوخة/إغماء']]],
+['🧪 الدهون Lipids',[['Total Chol','<200','mg/dL'],['LDL','<100 مثالي (<70 خطر عالٍ، <55 خطر عالٍ جدًا)',''],['HDL','>40 رجال · >50 نساء',''],['Triglycerides','<150','≥500 خطر التهاب البنكرياس']]],
+['🫘 الكلى Kidney',[['Creatinine','رجال 0.7–1.3 · نساء 0.6–1.1','mg/dL (×88.4 = µmol/L)'],['eGFR','≥90 G1 · 60–89 G2 · 45–59 G3a · 30–44 G3b · 15–29 G4 · <15 G5','mL/min/1.73m²'],['BUN','7–20','mg/dL']]],
+['⚡ الأملاح Electrolytes',[['Na','135–145','mmol/L'],['K','3.5–5.0','<3.0 أو >6.0 خطر'],['Ca','8.5–10.5','mg/dL'],['Mg','1.7–2.2','mg/dL']]],
+['🔬 دم وكبد وأخرى',[['Hb','رجال 13.5–17.5 · نساء 12–15.5','g/dL'],['WBC','4–11','×10³/µL'],['Platelets','150–450','×10³/µL'],['ALT / AST','ALT 7–56 · AST 10–40','U/L، تختلف حسب المختبر'],['TSH','0.4–4.0','mIU/L'],['Uric acid','رجال 3.4–7.0 · نساء 2.4–6.0','mg/dL'],['INR','طبيعي ≈1 · الهدف 2–3 لمعظم الحالات','الصمامات الميكانيكية 2.5–3.5']]],
+['🌡️ العلامات الحيوية Vitals',[['Pulse نبض','60–100','/min'],['Resp. rate تنفس','12–20','/min'],['Temp حرارة','36.1–37.2 · حمى ≥38','°C'],['SpO₂','95–100 · <90 حرج','%'],['BMI','<18.5 نحافة · 18.5–24.9 طبيعي · 25–29.9 زيادة · ≥30 سمنة','kg/m²']]],
+['✍️ اختصارات الوصفة Sig',[['qd / od','مرة يوميًا',''],['bid','مرتين يوميًا',''],['tid','3 مرات يوميًا',''],['qid','4 مرات يوميًا',''],['q6h','كل 6 ساعات',''],['prn','عند اللزوم',''],['ac / pc','قبل / بعد الأكل',''],['hs','عند النوم',''],['stat','فورًا',''],['po / sl / top / inh','فموي / تحت اللسان / موضعي / استنشاق',''],['×7/7','لمدة 7 أيام','']]]];
+const n_=v=>parseFloat(v),r_=(x,d=1)=>Math.round(x*10**d)/10**d,B=x=>`<b>${x}</b>`,bad=x=>isFinite(x)&&x>0;
+const OUT=h=>`<div class="note i" style="text-align:start;margin-top:8px">${h}</div>`,WARN=h=>`<div class="note" style="text-align:start;margin-top:8px">⚠️ ${h}</div>`;
+const CALC=[
+{t:['💊 جرعة الأطفال (mg/kg)','Pediatric dose (mg/kg)'],f:[['pr','دواء جاهز','Preset','',[['','— اختر / Select —'],['p','Paracetamol'],['i','Ibuprofen'],['a','Amoxicillin']]],['w','الوزن kg','Weight kg'],['dose','mg/kg للجرعة','mg/kg per dose'],['fr','عدد الجرعات يوميًا','Doses/day'],['cn','التركيز mg لكل 5 مل','mg per 5 mL'],['mx','أقصى mg/kg/يوم (اختياري)','Max mg/kg/day (opt.)'],['cap','أقصى mg للجرعة (اختياري)','Max mg/dose (opt.)']],
+ pre:{p:{dose:15,fr:4,cn:120,mx:75,cap:1000},i:{dose:10,fr:3,cn:100,mx:40,cap:400},a:{dose:15,fr:3,cn:250,mx:90,cap:1000}},
+ run:v=>{const w=n_(v.w),d=n_(v.dose),f=n_(v.fr),c=n_(v.cn);if(!(bad(w)&&bad(d)&&bad(f)))return'';let mg=w*d,cap=n_(v.cap),note='';if(bad(cap)&&mg>cap){mg=cap;note=WARN('تم تقييد الجرعة بالحد الأقصى للجرعة الواحدة.')}const day=mg*f,pk=day/w,mx=n_(v.mx);let h=`الجرعة: ${B(r_(mg,1)+' mg')}`;if(bad(c))h+=` = ${B(r_(mg/(c/5),1)+' mL')}`;h+=`<br>المجموع اليومي: ${r_(day,0)} mg (${r_(pk,1)} mg/kg/يوم)`;return OUT(h)+note+(bad(mx)&&pk>mx?WARN('المجموع اليومي يتجاوز الحد الأقصى المدخل!'):'')+`<small class="mut">قيم الجاهزة استرشادية؛ راجع نشرة المنتج وعمر الطفل (باراسيتامول/إيبوبروفين لهما حدود عمرية).</small>`}},
+{t:['🫘 تصفية الكرياتينين (Cockcroft-Gault)','Creatinine clearance'],f:[['sx','الجنس','Sex','m',[['m','ذكر / Male'],['f','أنثى / Female']]],['a','العمر','Age (y)'],['w','الوزن kg','Weight kg'],['sc','Creatinine mg/dL','SCr mg/dL']],
+ run:v=>{const a=n_(v.a),w=n_(v.w),s=n_(v.sc);if(!(bad(a)&&bad(w)&&bad(s)))return'';let c=(140-a)*w/(72*s);if(v.sx==='f')c*=.85;const k=c>=90?'طبيعي':c>=60?'خفيف':c>=30?'متوسط':c>=15?'شديد':'فشل كلوي';return OUT(`CrCl ≈ ${B(r_(c,0)+' mL/min')} (${k})`)+`<small class="mut">للسمنة استخدم الوزن المصحَّح. تُعدَّل جرعات أدوية كثيرة حسب القيمة.</small>`}},
+{t:['💧 سرعة المحلول (IV)','IV drip rate'],f:[['v','الحجم mL','Volume mL'],['h','المدة بالساعات','Hours'],['df','Drop factor gtt/mL','Drop factor','20',[['10','10'],['15','15'],['20','20'],['60','60 (micro)']]]],
+ run:v=>{const a=n_(v.v),h=n_(v.h),d=n_(v.df);if(!(bad(a)&&bad(h)&&bad(d)))return'';return OUT(`${B(r_(a/h,1)+' mL/h')}<br>${B(r_(a*d/(h*60),0)+' gtt/min')}`)}},
+{t:['⚖️ BMI و BSA','BMI & BSA'],f:[['h','الطول cm','Height cm'],['w','الوزن kg','Weight kg']],
+ run:v=>{const h=n_(v.h),w=n_(v.w);if(!(bad(h)&&bad(w)))return'';const b=w/(h/100)**2;return OUT(`BMI = ${B(r_(b,1))} (${b<18.5?'نحافة':b<25?'طبيعي':b<30?'زيادة وزن':'سمنة'})<br>BSA (Mosteller) = ${B(r_(Math.sqrt(h*w/3600),2)+' m²')}`)}},
+{t:['🧴 التخفيف C1V1=C2V2','Dilution'],f:[['c1','التركيز الأصلي C1','Stock C1'],['c2','التركيز المطلوب C2','Target C2'],['v2','الحجم النهائي V2 mL','Final V2 mL']],
+ run:v=>{const a=n_(v.c1),b=n_(v.c2),c=n_(v.v2);if(!(bad(a)&&bad(b)&&bad(c)))return'';if(b>a)return WARN('C2 يجب ألا يزيد عن C1.');const v1=b*c/a;return OUT(`خذ ${B(r_(v1,2)+' mL')} وأكمل بالمذيب حتى ${c} mL (مذيب ${r_(c-v1,2)} mL)`)}},
+{t:['📅 مدة العلبة وتاريخ الانتهاء','Days supply'],f:[['q','عدد الوحدات (أقراص/مل)','Total units'],['u','الوحدات لكل جرعة','Units per dose','1'],['f','الجرعات يوميًا','Doses per day','1']],
+ run:v=>{const q=n_(v.q),u=n_(v.u),f=n_(v.f);if(!(bad(q)&&bad(u)&&bad(f)))return'';const d=Math.floor(q/(u*f)),e=new Date(Date.now()+d*864e5);return OUT(`تكفي ${B(d+' يوم')} · تنتهي تقريبًا ${e.toLocaleDateString(lang==='ar'?'ar-JO':'en-GB')}`)}},
+{t:['🔁 محوّل الوحدات','Unit converter'],f:[['k','التحويل','Convert','g',[['g','Glucose mg/dL → mmol/L'],['G','Glucose mmol/L → mg/dL'],['c','Creatinine mg/dL → µmol/L'],['C','Creatinine µmol/L → mg/dL'],['h','HbA1c % → avg glucose mg/dL'],['t','°C → °F'],['T','°F → °C'],['l','kg → lb'],['L','lb → kg'],['m','mg → mcg'],['M','mcg → mg'],['p','% w/v → mg/mL'],['ch','Cholesterol mg/dL → mmol/L']]],['x','القيمة','Value']],
+ run:v=>{const x=n_(v.x);if(!isFinite(x))return'';const m={g:[x/18,'mmol/L'],G:[x*18,'mg/dL'],c:[x*88.4,'µmol/L'],C:[x/88.4,'mg/dL'],h:[28.7*x-46.7,'mg/dL'],t:[x*9/5+32,'°F'],T:[(x-32)*5/9,'°C'],l:[x*2.2046,'lb'],L:[x/2.2046,'kg'],m:[x*1000,'mcg'],M:[x/1000,'mg'],p:[x*10,'mg/mL'],ch:[x/38.67,'mmol/L']}[v.k];return OUT(`${B(r_(m[0],2)+' '+m[1])}`)}}];
 const qshuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
-const qbest=()=>ls.get('jp_qbest',{});
-function qStart(cat){
-  const pool=QB.filter(x=>cat==='all'||x[0]===cat);
-  const list=qshuf(pool).slice(0,10).map(x=>({c:x[0],q:x[1],o:qshuf(x[2].map((t,i)=>({t,ok:i===0}))),ar:x[3],en:x[4]}));
-  QZ={v:'quiz',cat,list,i:0,score:0,sel:null,wrong:[]};qRender();
-}
+let QZ={tab:'rx',v:'menu'};
+function rxStart(){const list=qshuf(RX).slice(0,5);QZ={tab:'rx',v:'quiz',list,ri:0,li:0,sel:null,score:0,total:list.reduce((a,x)=>a+x.l.length,0),opts:null,wrong:[]};rxOpts();qRender()}
+function rxOpts(){const l=QZ.list[QZ.ri].l[QZ.li];QZ.opts=qshuf([{t:l[1],ok:1},...l[2].map(t=>({t}))])}
+function rxCard(p,cur,all){return `<div class="rx" dir="ltr"><div class="rxh"><b>${esc(p.dr)}</b><span>${esc(p.pt)}</span></div><div class="rxs">℞</div>${p.l.map((l,i)=>`<div class="rl${i===cur?' cur':''}" style="transform:rotate(${(i%2?.7:-.5)}deg) translateX(${i*4}px)">${i+1}) ${esc(l[0])}</div>`).join('')}<div class="rxf">Signature ~~~</div></div>`}
 function qRender(){
   const box=document.getElementById('students');if(!box)return;
-  const cn=k=>k==='all'?LL('أسئلة متنوعة','Mixed questions'):QC[k][lang==='ar'?0:1];
-  const head=`<h1>${LL('🎓 صفحة طلاب الصيدلة','🎓 Pharmacy students')}</h1>`;
-  if(QZ.v==='menu'){
-    const bst=qbest();
-    const cnt=k=>k==='all'?QB.length:QB.filter(x=>x[0]===k).length;
-    box.innerHTML=head+`<p class="sub">${LL('اختبارات قصيرة لمراجعة أساسيات الصيدلة. كل اختبار حتى 10 أسئلة بترتيب عشوائي مع شرح بعد كل إجابة.','Short quizzes to review pharmacy fundamentals. Up to 10 randomized questions per quiz, with an explanation after each answer.')}</p>
-    <div class="note i">${LL('الأسئلة بالإنجليزية كما في المقررات، والشرح بالعربية والإنجليزية. للمراجعة فقط ولا تغني عن المراجع الدراسية.','Questions are in English as in most courses. For revision only; they do not replace your textbooks.')}</div>
-    <div class="qg">${['all',...Object.keys(QC)].map(k=>`<button class="qc" type="button" data-qs="${k}"><b>${esc(cn(k))}</b><small>${cnt(k)} ${LL('سؤال','questions')}${bst[k]!=null?` · ${LL('أفضل نتيجة','Best')}: ${bst[k]}%`:''}</small></button>`).join('')}</div>`;
-    return;
-  }
-  if(QZ.v==='quiz'){
-    const q=QZ.list[QZ.i],ans=QZ.sel!==null;
-    box.innerHTML=head+`<div class="qp"><span>${esc(cn(QZ.cat))}</span><span>${QZ.i+1} / ${QZ.list.length} · ${LL('الدرجة','Score')}: ${QZ.score}</span></div>
-    <div class="qbar"><i style="width:${Math.round(QZ.i/QZ.list.length*100)}%"></i></div>
-    <h2 class="qq" dir="auto">${esc(q.q)}</h2>
-    <div class="qo-w">${q.o.map((o,i)=>`<button type="button" class="qo${ans?(o.ok?' ok':(i===QZ.sel?' bad':'')):''}" data-qo="${i}" ${ans?'disabled':''} dir="auto">${esc(o.t)}</button>`).join('')}</div>
-    ${ans?`<div class="note ${q.o[QZ.sel].ok?'i':''}" style="text-align:start"><b>${q.o[QZ.sel].ok?LL('✅ إجابة صحيحة','✅ Correct'):LL('❌ إجابة خاطئة','❌ Incorrect')}</b><br>${esc(lang==='ar'?q.ar:q.en)}</div><p style="text-align:center"><button class="btn" type="button" data-qn>${QZ.i+1<QZ.list.length?LL('السؤال التالي','Next question'):LL('عرض النتيجة','See result')}</button></p>`:''}
-    <p style="text-align:center"><button class="btn sm sec" type="button" data-qm>${LL('إنهاء والعودة للقائمة','Quit to menu')}</button></p>`;
-    return;
-  }
-  const n=QZ.list.length,pct=Math.round(QZ.score/n*100);
-  box.innerHTML=head+`<div class="note i"><b style="font-size:22px">${QZ.score} / ${n} (${pct}%)</b><br>${pct>=80?LL('ممتاز! مستواك قوي في هذا الموضوع.','Excellent! You are strong on this topic.'):pct>=50?LL('جيد. راجع الأسئلة الخاطئة أدناه وأعد المحاولة.','Good. Review the missed questions below and try again.'):LL('تحتاج مراجعة أكثر لهذا الموضوع. لا تقلق، أعد المحاولة.','This topic needs more review. Don’t worry, try again.')}</div>
-    ${QZ.wrong.length?`<h2>${LL('مراجعة الأسئلة الخاطئة','Review missed questions')}</h2>`+QZ.wrong.map(w=>`<div class="note" style="text-align:start"><b dir="auto">${esc(w.q)}</b><br>${LL('الصحيح','Correct')}: <span dir="auto"><b>${esc(w.o.find(o=>o.ok).t)}</b></span><br><small>${esc(lang==='ar'?w.ar:w.en)}</small></div>`).join(''):''}
-    <p style="text-align:center"><button class="btn" type="button" data-qs="${QZ.cat}">${LL('إعادة الاختبار','Retry')}</button> <button class="btn sec" type="button" data-qm>${LL('القائمة','Menu')}</button></p>`;
+  const tabs=[['rx','📝',LL('اختبار الوصفات','Rx test')],['ref','📊',LL('مراجع الأرقام','Reference')],['calc','🧮',LL('حاسبات','Calculators')]];
+  let h=`<h1>${LL('🎓 صفحة طلاب الصيدلة','🎓 Pharmacy students')}</h1><p class="sub">${LL('تدريب عملي وأدوات مرجعية لما يمر عليك يوميًا في الصيدلية.','Hands-on practice and daily-use references.')}</p><p class="stt">${tabs.map(x=>`<button type="button" class="btn sm${QZ.tab===x[0]?'':' sec'}" data-stab="${x[0]}">${x[1]} ${x[2]}</button>`).join(' ')}</p>`;
+  if(QZ.tab==='ref'){h+=`<div class="note i">${LL('قيم استرشادية عامة؛ تختلف حسب المختبر والإرشادات والحالة.','General guide values; they vary by lab, guideline and patient.')}</div>`+REF.map(g=>`<details class="item"><summary>${g[0]}</summary><div class="d" style="overflow-x:auto"><table class="rt">${g[1].map(r=>`<tr><td><b>${r[0]}</b></td><td dir="auto">${r[1]}</td><td><small class="mut" dir="auto">${r[2]}</small></td></tr>`).join('')}</table></div></details>`).join('')}
+  else if(QZ.tab==='calc'){h+=`<div class="note i">${LL('حاسبات مساعدة؛ تأكد دائمًا من الجرعة بالنشرة أو المرجع قبل الصرف.','Helper calculators; always verify doses against the leaflet or a reference.')}</div>`+CALC.map((c,ci)=>`<details class="item"><summary>${LL(c.t[0],c.t[1])}</summary><div class="d" data-calc="${ci}">${c.f.map(f=>`<label class="mut"><small>${LL(f[1],f[2])}</small></label>`+(f[4]?`<select name="${f[0]}">${f[4].map(o=>`<option value="${o[0]}"${o[0]===f[3]?' selected':''}>${o[1]}</option>`).join('')}</select>`:`<input name="${f[0]}" type="number" inputmode="decimal" step="any" min="0" value="${f[3]||''}">`)).join('')}<div class="out"></div></div></details>`).join('')}
+  else if(QZ.v==='menu'){const b=ls.get('jp_rxbest',null);h+=`<div class="note i">${LL('وصفات بخط اليد: اقرأ كل سطر وحدد الدواء. 5 وصفات عشوائية في كل محاولة، مع شرح الجرعة وملاحظة بعد كل إجابة.','Handwritten prescriptions: read each line and identify the drug. 5 random Rx per run, with an explanation after each answer.')}</div><p style="text-align:center"><button class="btn" type="button" data-rxs>${LL('ابدأ الاختبار','Start')}</button>${b!=null?`<br><small class="mut">${LL('أفضل نتيجة','Best')}: ${b}%</small>`:''}</p>`}
+  else if(QZ.v==='quiz'){const p=QZ.list[QZ.ri],l=p.l[QZ.li],ans=QZ.sel!==null;h+=`<div class="qp"><span>${LL('وصفة','Rx')} ${QZ.ri+1}/${QZ.list.length}</span><span>${LL('الدرجة','Score')}: ${QZ.score}</span></div>${rxCard(p,QZ.li)}<h2 class="qq" dir="auto">${LL(`ما الدواء في السطر ${QZ.li+1}؟`,`Which drug is on line ${QZ.li+1}?`)}</h2><div class="qo-w">${QZ.opts.map((o,i)=>`<button type="button" class="qo${ans?(o.ok?' ok':(i===QZ.sel?' bad':'')):''}" data-qo="${i}" ${ans?'disabled':''} dir="auto">${esc(o.t)}</button>`).join('')}</div>${ans?`<div class="note ${QZ.opts[QZ.sel].ok?'i':''}" style="text-align:start"><b>${QZ.opts[QZ.sel].ok?'✅':'❌'} ${esc(l[1])}</b><br>${LL('الجرعة','Sig')}: ${esc(l[3])}<br><small>${esc(l[4])}</small></div><p style="text-align:center"><button class="btn" type="button" data-qn>${QZ.li+1<p.l.length||QZ.ri+1<QZ.list.length?LL('التالي','Next'):LL('النتيجة','Result')}</button></p>`:''}<p style="text-align:center"><button class="btn sm sec" type="button" data-qm>${LL('إنهاء','Quit')}</button></p>`}
+  else{const pct=Math.round(QZ.score/QZ.total*100);h+=`<div class="note i"><b style="font-size:22px">${QZ.score} / ${QZ.total} (${pct}%)</b><br>${pct>=80?LL('ممتاز! قراءتك للوصفات قوية.','Excellent!'):LL('تدرّب أكثر على أسماء الأدوية المتشابهة (LASA).','Keep practicing look-alike names (LASA).')}</div>${QZ.wrong.length?`<h2>${LL('للمراجعة','Review')}</h2>`+QZ.wrong.map(w=>`<div class="note" style="text-align:start" dir="ltr"><b>${esc(w[0])}</b><br>= ${esc(w[1])}</div>`).join(''):''}<p style="text-align:center"><button class="btn" type="button" data-rxs>${LL('محاولة جديدة','Try again')}</button></p>`}
+  box.innerHTML=h;box.querySelectorAll('[data-calc]').forEach(d=>calcRun(d));
 }
+function calcRun(d,e){const c=CALC[+d.dataset.calc],v={};d.querySelectorAll('[name]').forEach(i=>v[i.name]=i.value);
+  if(e&&c.pre&&e.target.name==='pr'&&c.pre[e.target.value]){const p=c.pre[e.target.value];for(const k in p){d.querySelector(`[name=${k}]`).value=p[k];v[k]=p[k]}}
+  d.querySelector('.out').innerHTML=c.run(v)}
+document.addEventListener('input',e=>{const d=e.target.closest('#students [data-calc]');if(d)calcRun(d,e)});
+document.addEventListener('change',e=>{const d=e.target.closest('#students [data-calc]');if(d)calcRun(d,e)});
 document.addEventListener('click',e=>{
   const st=document.getElementById('students');if(!st||!st.contains(e.target))return;
-  const s=e.target.closest('[data-qs]'),o=e.target.closest('[data-qo]');
-  if(s){qStart(s.dataset.qs);scrollTo({top:0});return}
-  if(o&&QZ.v==='quiz'&&QZ.sel===null){const i=+o.dataset.qo,q=QZ.list[QZ.i];QZ.sel=i;if(q.o[i].ok)QZ.score++;else QZ.wrong.push(q);qRender();return}
-  if(e.target.closest('[data-qn]')){
-    if(QZ.i+1<QZ.list.length){QZ.i++;QZ.sel=null}else{QZ.v='result';const b=qbest(),pct=Math.round(QZ.score/QZ.list.length*100);if(b[QZ.cat]==null||pct>b[QZ.cat]){b[QZ.cat]=pct;ls.set('jp_qbest',b)}}
-    qRender();scrollTo({top:0});return}
-  if(e.target.closest('[data-qm]')){QZ={v:'menu'};qRender();scrollTo({top:0})}
+  const tb=e.target.closest('[data-stab]'),o=e.target.closest('[data-qo]');
+  if(tb){QZ.tab=tb.dataset.stab;if(QZ.tab==='rx'&&QZ.v==='quiz'&&!QZ.list)QZ.v='menu';qRender();return}
+  if(e.target.closest('[data-rxs]')){rxStart();scrollTo({top:0});return}
+  if(o&&QZ.v==='quiz'&&QZ.sel===null){const i=+o.dataset.qo;QZ.sel=i;const l=QZ.list[QZ.ri].l[QZ.li];if(QZ.opts[i].ok)QZ.score++;else QZ.wrong.push(l);qRender();return}
+  if(e.target.closest('[data-qn]')){const p=QZ.list[QZ.ri];QZ.sel=null;
+    if(QZ.li+1<p.l.length)QZ.li++;else if(QZ.ri+1<QZ.list.length){QZ.ri++;QZ.li=0}else{QZ.v='result';const pct=Math.round(QZ.score/QZ.total*100),b=ls.get('jp_rxbest',null);if(b==null||pct>b)ls.set('jp_rxbest',pct);qRender();scrollTo({top:0});return}
+    rxOpts();qRender();return}
+  if(e.target.closest('[data-qm]')){QZ={tab:'rx',v:'menu'};qRender();scrollTo({top:0})}
 });
 
 function route(){
