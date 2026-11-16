@@ -29,7 +29,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","name":"Jo Pharma","url":"https://jopharma.net/","inLanguage":["ar","en"],"potentialAction":{"@type":"SearchAction","target":"https://jopharma.net/?q={search_term_string}","query-input":"required name=search_term_string"},"description":"المرجع الدوائي الأردني"},{"@type":"Organization","name":"Jo Pharma","url":"https://jopharma.net/","logo":"https://jopharma.net/logo.png"}]}</script>
 <script>try{var __t=JSON.parse(localStorage.getItem('jp_theme'));if(__t)document.documentElement.dataset.theme=__t}catch(e){}try{var __l=JSON.parse(localStorage.getItem('jp_lang'));if(__l==='en'||__l==='ar'){document.documentElement.lang=__l;document.documentElement.dir=__l==='ar'?'rtl':'ltr'}}catch(e){}</script>
-<meta name="theme-color" content="#1e3a8a">
+<meta name="theme-color" content="#1e3a8a" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0a1330" media="(prefers-color-scheme: dark)">
+<meta name="twitter:title" content="Jo Pharma | المرجع الدوائي الأردني"><meta name="twitter:description" content="ابحث عن الأدوية والأسعار والبدائل في الأردن، وافحص التداخلات الدوائية واحسب سلة وصفتك.">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"كيف أجد بديلاً أرخص لدوائي في الأردن؟","acceptedAnswer":{"@type":"Answer","text":"ابحث عن اسم الدواء في Jo Pharma ثم افتح صفحته لترى الأدوية بنفس المادة الفعالة والتركيز مرتبة بالسعر، واسأل الصيدلاني قبل أي تبديل."}},{"@type":"Question","name":"هل أسعار الأدوية في الموقع رسمية؟","acceptedAnswer":{"@type":"Answer","text":"الأسعار استرشادية مبنية على قوائم الأدوية الأردنية وقد تختلف بين الصيدليات أو بعد تحديثات المؤسسة العامة للغذاء والدواء."}},{"@type":"Question","name":"هل يمكنني فحص التداخل بين دوائين؟","acceptedAnswer":{"@type":"Answer","text":"نعم، أداة فاحص التداخلات في قسم الأدوات تنبّه إلى أشهر التداخلات المعروفة، ولا تغني عن استشارة الطبيب أو الصيدلاني."}}]}</script>
 <link rel="canonical" href="https://jopharma.net/"><meta property="og:url" content="https://jopharma.net/">
 <title>Jo Pharma | المرجع الدوائي الأردني</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -333,6 +335,40 @@ header{align-items:center}
 .pm-actions{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:8px;margin-top:14px}
 .pm-src{margin-top:14px;line-height:1.7}
 
+
+.empty{color:var(--nt)}
+.tool .ac{display:flex;gap:6px;margin-top:6px}.tool .ac button{white-space:nowrap}
+.ixl,.bkl{list-style:none;display:grid;gap:6px;margin-top:8px}
+.ixl li,.bkl li{display:flex;align-items:center;gap:8px;background:var(--soft);border:1px solid var(--bd);border-radius:10px;padding:6px 10px;font-size:14px}
+.ixl li span,.bkl li span{flex:1;min-width:0;overflow-wrap:anywhere}
+.ixl button.rm,.bkl button.rm{background:none;border:0;color:var(--mut);font-size:20px;line-height:1;padding:2px 6px}
+.ixr{margin-top:10px;display:grid;gap:8px}
+.ixr .it{border:1px solid var(--bd);border-inline-start:5px solid var(--b2);border-radius:10px;padding:9px 12px;background:var(--card);font-size:14px}
+.ixr .it.h{border-inline-start-color:#dc2626;background:color-mix(in srgb,#dc2626 9%,var(--card))}
+.ixr .it.m{border-inline-start-color:#f59e0b;background:color-mix(in srgb,#f59e0b 10%,var(--card))}
+.ixr .it.ok{border-inline-start-color:#16a34a;background:color-mix(in srgb,#16a34a 9%,var(--card))}
+.ixr .it b{display:block;color:var(--pri)}
+.bkl input.q{width:64px;padding:4px 6px;font-size:14px;text-align:center}
+.bkt{display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--ib);color:var(--it);font-weight:800}
+.bkt b{font-size:20px;color:var(--acc)}
+.phb{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+@media print{header,.bn,footer,#agFab,#top,.tl{display:none!important}}
+
+.seg{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px 2px 10px;margin-bottom:6px}
+.seg::-webkit-scrollbar{display:none}
+.seg button{flex:1 0 auto;display:inline-flex;align-items:center;justify-content:center;gap:5px;background:var(--soft);border:1px solid var(--bd);color:var(--pri);font-weight:800;font-size:14px;padding:8px 15px;border-radius:999px;white-space:nowrap;transition:.15s}
+.seg button:hover{border-color:var(--acc)}
+.seg button[aria-selected=true]{background:var(--pri);color:var(--card);border-color:var(--pri)}
+.tl2 .tool{scroll-margin-top:calc(70px + env(safe-area-inset-top,0px))}
+.svr .it{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.svr .sv{color:#16a34a;font-weight:800;white-space:nowrap}
+.advf{max-width:680px;margin:6px auto 10px;border:1px solid var(--bd);border-radius:12px;background:var(--soft)}.advf>summary{cursor:pointer;font-weight:800;color:var(--pri);padding:10px 14px}.advf .row{padding:0 12px 10px;flex-wrap:wrap}.advf .row>*{flex:1 1 140px}
+
+.ixr .it.c3{border-inline-start-color:#7f1d1d;background:color-mix(in srgb,#7f1d1d 14%,var(--card))}
+.ixr .it small{font-weight:800;color:var(--mut)}
+.res{content-visibility:auto;contain-intrinsic-size:auto 190px}
+button,.btn,summary,.chip{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
@@ -344,9 +380,9 @@ header{align-items:center}
 <rect x="106" y="176" width="300" height="160" rx="80" fill="none" stroke="#fff" stroke-width="6" opacity=".9"/>
 <path transform="rotate(45 181 256)" d="M181 226v60M151 256h60" stroke="#1e3a8a" stroke-width="20" stroke-linecap="round"/></g></svg><b><i>JO</i> Pharma</b></a><button id="authBtn" class="hb" type="button" aria-haspopup="dialog"></button></div>
   <nav aria-label="main">
-    <button data-go="search" data-i="nS"></button><button data-go="cats" data-i="nC"></button><button data-go="diseases" data-i="nD"></button><button data-go="herbs" data-i="nH"></button><button data-go="tools" data-i="nT"></button><button data-go="favs"><span data-i="nF"></span><span class="bdg hidden fbd" id="fN"></span></button>
+    <button data-go="search" data-i="nS"></button><button data-go="tools" data-i="nT"></button><button data-go="herbs" data-i="nH"></button><button data-go="reminders" data-i="remN"></button>
   </nav>
-  <div class="tl"><button id="admBtn" class="hb ic hidden" type="button" title="Admin" aria-label="Admin">📊</button><button id="bellBtn" class="hb ic" type="button"></button><button id="thBtn" class="hb ic" type="button" data-al="thN" aria-label="Theme" aria-pressed="false">🌙</button><button id="langBtn" class="hb" type="button" data-al="lngN" aria-label="Language"></button></div>
+  <div class="tl"><button class="hb ic" type="button" data-go="favs" data-al="nF" aria-label="Favorites" style="position:relative">★<span class="bdg hidden fbd" id="fN"></span></button><button id="admBtn" class="hb ic hidden" type="button" title="Admin" aria-label="Admin">📊</button><button id="bellBtn" class="hb ic" type="button"></button><button id="thBtn" class="hb ic" type="button" data-al="thN" aria-label="Theme" aria-pressed="false">🌙</button><button id="langBtn" class="hb" type="button" data-al="lngN" aria-label="Language"></button></div>
 </header>
 
 <main id="main">
@@ -373,7 +409,7 @@ header{align-items:center}
   <section id="reminders" class="card tab hidden"></section>
   <section id="admin" class="card tab hidden"></section>
 </main>
-<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="reminders" class=""><i>⏰</i><span data-i="remN"></span><span class="bdg2 hidden" id="bellN2"></span></button><button data-go="favs"><i>★</i><span data-i="nF"></span><span class="bdg hidden fbd"></span></button></nav>
+<nav class="bn" aria-label="bottom"><button data-go="search"><i>🔍</i><span data-i="nS"></span></button><button data-go="tools"><i>🧰</i><span data-i="nT"></span></button><button data-go="reminders" class=""><i>⏰</i><span data-i="remN"></span><span class="bdg2 hidden" id="bellN2"></span></button></nav>
 <footer>
   <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
     <a href="about.html" style="font-weight: 700;" data-i="fAbout"></a>
@@ -1789,6 +1825,172 @@ reload();
   addEventListener('online',()=>toast(LL('عاد الاتصال بالإنترنت.','Back online.')));
   addEventListener('keydown',e=>{if(e.key!=='/'||e.ctrlKey||e.metaKey||e.altKey)return;const a=document.activeElement;if(a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)||(a&&a.isContentEditable))return;e.preventDefault();location.hash='search';const q=$('#q');if(q){q.focus();q.select()}});
 })();
+
+/* ===== إضافات Jo Pharma: فاحص التداخلات + سلة الوصفة + الصيدليات القريبة ===== */
+(function(){
+  const box=document.querySelector('#tools .tl2');if(!box)return;
+  box.insertAdjacentHTML('beforeend','<div class="tool" id="ixT"></div><div class="tool" id="bkT"></div><div class="tool" id="phT"></div>');
+  const NSAID='ibuprofen|diclofenac|naproxen|ketoprofen|celecoxib|etoricoxib|meloxicam|indomethacin|piroxicam|aceclofenac|ketorolac|mefenamic|nimesulide';
+  const ASA='acetylsalicylic|aspirin',OPI='tramadol|codeine|morphine|oxycodone|fentanyl|tapentadol',BZD='diazepam|alprazolam|lorazepam|clonazepam|bromazepam';
+  const SSRI='fluoxetine|sertraline|paroxetine|citalopram|escitalopram|fluvoxamine',SNRI=SSRI+'|venlafaxine|duloxetine',MAOI='phenelzine|tranylcypromine|moclobemide|selegiline';
+  const MAC='clarithromycin|erythromycin',AZ='ketoconazole|itraconazole|voriconazole',ACE='\\w*(pril|sartan)\\b',K='spironolactone|eplerenone|amiloride|triamterene|potassium';
+  const COAG='rivaroxaban|apixaban|dabigatran|enoxaparin|heparin|edoxaban',PLT='clopidogrel|ticagrelor|prasugrel',BB='propranolol|metoprolol|atenolol|bisoprolol|carvedilol|nebivolol|labetalol';
+  const SULF='glibenclamide|glimepiride|gliclazide|glipizide',INS='insulin',CAT='calcium|magnesium|alumin|iron|ferrous|zinc',PPI='omeprazole|esomeprazole|pantoprazole|lansoprazole|rabeprazole';
+  const QT='azithromycin|clarithromycin|erythromycin|ciprofloxacin|levofloxacin|moxifloxacin|ondansetron|haloperidol|citalopram|escitalopram|amiodarone|sotalol|domperidone|fluconazole|quetiapine';
+  const STAT='simvastatin|lovastatin|atorvastatin|rosuvastatin|pravastatin',CST='prednisolone|prednisone|dexamethasone|methylprednisolone|hydrocortisone',THZ='hydrochlorothiazide|indapamide|chlorthalidone|furosemide';
+  const R=[
+   ['sildenafil|tadalafil|vardenafil','nitroglycerin|trinitrate|isosorbide|nitrate',3,'هبوط خطير بالضغط. لا يجوز الجمع.','Severe BP drop. Do not combine.'],
+   [MAOI,SNRI+'|'+OPI,3,'خطر متلازمة السيروتونين القاتلة.','Risk of fatal serotonin syndrome.'],
+   ['linezolid',SNRI+'|tramadol',2,'خطر متلازمة السيروتونين.','Risk of serotonin syndrome.'],
+   ['simvastatin|lovastatin',MAC+'|'+AZ,3,'خطر تحلل عضلات حاد.','Risk of severe muscle breakdown.'],
+   ['atorvastatin',MAC+'|itraconazole',2,'يرفع مستوى الستاتين وخطر ألم العضلات.','Raises statin level and muscle toxicity risk.'],
+   ['simvastatin|lovastatin','amiodarone|amlodipine|diltiazem|verapamil',1,'يرفع مستوى الستاتين، قد يلزم خفض الجرعة.','Raises statin level; dose cap may be needed.'],
+   [STAT,'gemfibrozil|fusidic',2,'خطر تحلل العضلات.','Risk of muscle breakdown.'],
+   ['tizanidine','ciprofloxacin|fluvoxamine',3,'هبوط شديد بالضغط وخمول.','Severe low BP and sedation.'],
+   ['ergotamine',MAC+'|'+AZ,3,'تضيّق أوعية خطير.','Dangerous vasospasm.'],
+   ['colchicine',MAC+'|'+AZ,2,'سمّية الكولشيسين.','Colchicine toxicity.'],
+   [ACE,'sacubitril',3,'خطر وذمة وعائية.','Risk of angioedema.'],
+   ['warfarin',NSAID+'|'+ASA,2,'خطر نزيف مرتفع.','High bleeding risk.'],
+   ['warfarin','ciprofloxacin|levofloxacin|metronidazole|fluconazole|amiodarone|'+MAC+'|sulfamethoxazole|trimethoprim|rifampicin',2,'يغيّر مفعول الوارفارين ويلزم متابعة INR.','Alters warfarin effect; INR monitoring needed.'],
+   ['warfarin',SSRI+'|paracetamol|acetaminophen',1,'قد يزيد خطر النزيف أو INR.','May raise bleeding risk or INR.'],
+   [COAG,NSAID+'|'+ASA+'|'+PLT,2,'يزيد خطر النزيف.','Increases bleeding risk.'],
+   [ASA,PLT,1,'نزيف أكثر، يُجمع طبياً أحياناً بمتابعة.','More bleeding; sometimes intended under supervision.'],
+   ['clopidogrel','omeprazole|esomeprazole',2,'يقلل فعالية الكلوبيدوغريل.','Reduces clopidogrel effect.'],
+   ['clopidogrel','pantoprazole|lansoprazole',1,'قد يقلل فعالية الكلوبيدوغريل قليلاً.','May slightly reduce clopidogrel effect.'],
+   [NSAID,ASA,1,'نزيف المعدة ويضعف حماية الأسبرين للقلب.','Stomach bleeding; may blunt aspirin heart protection.'],
+   [NSAID,SSRI,1,'يزيد خطر النزيف الهضمي.','Raises GI bleeding risk.'],
+   [NSAID,CST,1,'يزيد خطر قرحة ونزيف المعدة.','Raises ulcer and GI bleeding risk.'],
+   [NSAID,'lithium',2,'يرفع مستوى الليثيوم.','Raises lithium level.'],
+   [ACE,K,2,'خطر ارتفاع البوتاسيوم.','Risk of high potassium.'],
+   [ACE,NSAID,1,'يضعف خفض الضغط ويجهد الكلى.','Weakens BP control; strains kidneys.'],
+   [ACE,'trimethoprim|sulfamethoxazole',1,'خطر ارتفاع البوتاسيوم.','Risk of high potassium.'],
+   [ACE+'|'+THZ,'lithium',2,'يرفع مستوى الليثيوم.','Raises lithium level.'],
+   ['digoxin','amiodarone|verapamil|'+MAC,2,'يرفع الديجوكسين وخطر السمّية.','Raises digoxin level and toxicity risk.'],
+   [BB,'verapamil|diltiazem',2,'بطء شديد بالقلب أو هبوط الضغط.','Severe slow heart rate or low BP.'],
+   [BB,INS+'|'+SULF,1,'قد يخفي أعراض هبوط السكر.','May mask low blood sugar symptoms.'],
+   ['ciprofloxacin|levofloxacin',INS+'|'+SULF,1,'تقلّب سكر الدم.','Blood sugar swings.'],
+   [SULF,'fluconazole|sulfamethoxazole|trimethoprim',2,'خطر هبوط السكر.','Risk of low blood sugar.'],
+   [QT,QT,2,'خطر اضطراب نظم القلب (إطالة QT).','Risk of heart rhythm problem (QT prolongation).'],
+   [SSRI,'tramadol|'+SSRI,2,'خطر متلازمة السيروتونين.','Risk of serotonin syndrome.'],
+   [SNRI,'sumatriptan|rizatriptan|zolmitriptan',1,'خطر سيروتونين خفيف إلى متوسط.','Mild-to-moderate serotonin risk.'],
+   [BZD,OPI,2,'خمول شديد وتثبيط التنفس.','Severe sedation and breathing depression.'],
+   [OPI,'gabapentin|pregabalin',1,'يزيد تثبيط التنفس والنعاس.','More drowsiness and breathing depression.'],
+   [BZD,'zolpidem|'+BZD,1,'نعاس زائد وتكرار مهدئات.','Extra sedation; duplicate sedatives.'],
+   ['\\w*floxacin',CAT,1,'يقل امتصاص المضاد، باعد ساعتين على الأقل.','Reduces antibiotic absorption; separate by 2+ hours.'],
+   ['tetracycline|doxycycline|minocycline',CAT,1,'يقل امتصاص المضاد، باعد ساعتين على الأقل.','Reduces antibiotic absorption; separate by 2+ hours.'],
+   ['levothyroxine',CAT+'|'+PPI,1,'يقل امتصاص الليفوثيروكسين، باعد 4 ساعات.','Reduces levothyroxine absorption; separate ~4 hours.'],
+   ['alendronate|risedronate','calcium|magnesium|alumin|iron',1,'يقل امتصاص الدواء، باعد نصف ساعة أو أكثر.','Reduces absorption; separate by 30+ minutes.'],
+   ['methotrexate',NSAID+'|sulfamethoxazole|trimethoprim',2,'يرفع سمّية الميثوتريكسات.','Raises methotrexate toxicity.'],
+   ['methotrexate',PPI,1,'قد يرفع مستوى الميثوتريكسات.','May raise methotrexate level.'],
+   ['carbamazepine',MAC+'|'+AZ+'|fluconazole',2,'يرفع مستوى الكاربامازيبين.','Raises carbamazepine level.'],
+   ['rifampicin','ethinylestradiol|levonorgestrel|drospirenone|desogestrel|norethisterone',2,'يقلل فعالية موانع الحمل.','Reduces contraceptive effectiveness.'],
+   ['theophylline','ciprofloxacin|'+MAC+'|fluvoxamine',2,'يرفع الثيوفيلين وخطر التسمم.','Raises theophylline and toxicity risk.'],
+   ['allopurinol','azathioprine|mercaptopurine',2,'سمّية نخاع العظم.','Bone marrow toxicity.'],
+   ['sildenafil|tadalafil|vardenafil','tamsulosin|doxazosin|prazosin|terazosin',1,'هبوط الضغط الانتصابي.','Orthostatic low BP.'],
+   ['clozapine','ciprofloxacin|fluvoxamine',2,'يرفع الكلوزابين.','Raises clozapine level.']
+  ].map(r=>[new RegExp(r[0]),new RegExp(r[1]),r[2],r[3],r[4]]);
+  let ix=[],bk=(ls.get('jp_basket',[])||[]).filter(x=>x&&x.id&&x.q>0),filled=false;
+  const byName=v=>{v=norm(v);return v?meds.find(m=>norm(m.name)===v):null};
+  const byId=id=>meds.find(m=>m.id===id);
+  const fill=()=>{if(filled||!ready)return;filled=true;const d=document.getElementById('medl2');if(d)d.innerHTML=meds.map(m=>`<option value="${esc(m.name)}"></option>`).join('')};
+  const shell=()=>{
+    $('#ixT').innerHTML=`<h2>🛡️ ${LL('فاحص التداخلات الدوائية','Drug interaction checker')}</h2><p class="mut"><small>${LL('أضف دوائين أو أكثر لتنبيهك إلى أشهر التداخلات المعروفة والمواد الفعالة المكررة.','Add two or more medicines to flag well-known interactions and duplicate ingredients.')}</small></p><div class="ac"><input id="ixi" type="text" list="medl2" autocomplete="off" dir="auto" placeholder="${LL('اسم الدواء','Medicine name')}"><button class="btn sm" id="ixa" type="button">${LL('إضافة','Add')}</button></div><ul class="ixl" id="ixl"></ul><div class="ixr" id="ixo" aria-live="polite"></div>`;
+    $('#bkT').innerHTML=`<h2>🧾 ${LL('حاسبة سلة الوصفة','Prescription basket')}</h2><p class="mut"><small>${LL('احسب التكلفة التقريبية لأدويتك مع الكميات، وشاركها أو انسخها.','Estimate the total cost of your medicines by quantity, then copy or share it.')}</small></p><div class="ac"><input id="bki" type="text" list="medl2" autocomplete="off" dir="auto" placeholder="${LL('اسم الدواء','Medicine name')}"><button class="btn sm" id="bka" type="button">${LL('إضافة','Add')}</button></div><ul class="bkl" id="bkl"></ul><div id="bko"></div>`;
+    $('#phT').innerHTML=`<h2>📍 ${LL('صيدليات قريبة','Nearby pharmacies')}</h2><p class="mut"><small>${LL('افتح الخرائط للوصول لأقرب صيدلية أو صيدلية مناوبة الآن.','Open maps to find the nearest or an open pharmacy right now.')}</small></p><div class="phb"><a class="btn sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LL('صيدلية','pharmacy'))}">${LL('أقرب صيدلية','Nearest pharmacy')}</a><a class="btn sm sec" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(LL('صيدلية مناوبة مفتوحة الآن','open 24 hour pharmacy'))}">${LL('مناوبة / مفتوحة الآن','On-duty / open now')}</a></div>`;
+    ['ixi','bki'].forEach(i=>$('#'+i).addEventListener('focus',fill));
+    drawIx();drawBk();
+  };
+  const acts=m=>norm(m.active||m.name);
+  const comps=m=>String(m.active||'').toLowerCase().split(/[\/+,;&]|\band\b/).map(x=>x.trim()).filter(x=>x.length>3);
+  function drawIx(){
+    const l=$('#ixl'),o=$('#ixo');if(!l)return;
+    l.innerHTML=ix.map(id=>{const m=byId(id);return m?`<li><span dir="auto">${esc(m.name)}${m.active?` <small class="mut">· ${esc(m.active)}</small>`:''}</span><button class="rm" data-ixr="${esc(id)}" aria-label="${LL('إزالة','Remove')}">×</button></li>`:''}).join('');
+    if(ix.length<2){o.innerHTML=ix.length?`<p class="mut"><small>${LL('أضف دواءً ثانياً للفحص.','Add a second medicine to check.')}</small></p>`:'';return}
+    const L=ix.map(byId).filter(Boolean),out=[];
+    for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){
+      const a=L[i],b=L[j],ta=acts(a),tb=acts(b),hit=[];
+      R.forEach(([x,y,lv,ar,en])=>{if((x.test(ta)&&y.test(tb))||(x.test(tb)&&y.test(ta)))hit.push([lv,LL(ar,en)])});
+      const ca=comps(a),cb=comps(b),dup=ca.find(c=>cb.includes(c));
+      if(dup)hit.push([2,LL('مادة فعالة مكررة ('+dup+'): خطر جرعة زائدة.','Duplicate active ingredient ('+dup+'): overdose risk.')]);
+      const LB={3:['c3','⛔ '+LL('ممنوع الجمع','Contraindicated')],2:['h','🔴 '+LL('خطير','Serious')],1:['m','🟡 '+LL('راقب','Monitor')]};hit.forEach(([lv,tx])=>out.push([lv,`<div class="it ${LB[lv][0]}"><b dir="auto">${esc(a.name)} + ${esc(b.name)}</b><small>${LB[lv][1]}</small><br>${esc(tx)}</div>`]));
+    }
+    const noAct=L.filter(m=>!m.active).length;
+    o.innerHTML=(out.length?out.sort((x,y)=>y[0]-x[0]).map(x=>x[1]).join(''):`<div class="it ok"><b>✅ ${LL('لا تداخلات معروفة ضمن القائمة المعتمدة','No known interactions in our reference list')}</b>${LL('هذا لا يعني الأمان المطلق.','This does not guarantee safety.')}</div>`)+(noAct?`<p class="mut"><small>${LL('بعض الأدوية بلا مادة فعالة مسجلة فلم تُفحص بدقة.','Some medicines have no recorded active ingredient so they were not checked precisely.')}</small></p>`:'')+`<p class="mut"><small>${LL('أداة تثقيفية محدودة التغطية ولا تغني عن الطبيب أو الصيدلاني. للتحقق الأوسع:','Educational tool with limited coverage; it does not replace your doctor or pharmacist. For wider checks:')} <a href="https://reference.medscape.com/drug-interactionchecker" target="_blank" rel="noopener">Medscape</a> · <a href="https://www.drugs.com/drug_interactions.html" target="_blank" rel="noopener">Drugs.com</a></small></p>`;
+  }
+  const money=n=>n.toFixed(2)+' JOD';
+  function drawBk(){
+    const l=$('#bkl'),o=$('#bko');if(!l)return;
+    let tot=0,np=0;
+    l.innerHTML=bk.map(x=>{const m=byId(x.id);if(!m)return'';if(m.pv==null)np++;else tot+=m.pv*x.q;return `<li><span dir="auto">${esc(m.name)} <small class="mut" dir="ltr">${esc(m.price||'—')}</small></span><input class="q" type="number" min="1" max="99" inputmode="numeric" value="${x.q}" data-bkq="${esc(x.id)}" aria-label="${LL('الكمية','Quantity')}"><button class="rm" data-bkr="${esc(x.id)}" aria-label="${LL('إزالة','Remove')}">×</button></li>`}).join('');
+    if(!bk.length){o.innerHTML='';return}
+    o.innerHTML=`<div class="bkt"><span>${LL('الإجمالي التقريبي','Approx. total')}</span><b dir="ltr">${money(tot)}</b></div>${np?`<p class="mut"><small>${np} ${LL('أدوية بلا سعر غير محسوبة.','items without price are not counted.')}</small></p>`:''}<div class="phb"><button class="btn sm" id="bkc" type="button">${LL('نسخ','Copy')}</button><button class="btn sm sec" id="bkw" type="button">WhatsApp</button><button class="btn sm sec" id="bkp" type="button">${LL('طباعة','Print')}</button></div>`;
+  }
+  const bkText=()=>{let tot=0;const r=bk.map(x=>{const m=byId(x.id);if(!m)return'';if(m.pv!=null)tot+=m.pv*x.q;return `• ${m.name} × ${x.q} — ${m.price||'—'}`}).filter(Boolean);return `Jo Pharma\n${r.join('\n')}\n${LL('الإجمالي التقريبي','Approx. total')}: ${money(tot)}\nhttps://jopharma.net/`};
+  const addIx=()=>{const m=byName($('#ixi').value);if(!m){toast(LL('اختر الاسم من القائمة المنسدلة.','Pick the name from the dropdown list.'));return}if(!ix.includes(m.id)){if(ix.length>=8){toast(LL('الحد الأقصى 8 أدوية.','Maximum 8 medicines.'));return}ix.push(m.id)}$('#ixi').value='';drawIx()};
+  const addBk=()=>{const m=byName($('#bki').value);if(!m){toast(LL('اختر الاسم من القائمة المنسدلة.','Pick the name from the dropdown list.'));return}const e=bk.find(x=>x.id===m.id);e?e.q=Math.min(99,e.q+1):bk.push({id:m.id,q:1});ls.set('jp_basket',bk);$('#bki').value='';drawBk()};
+  box.addEventListener('click',e=>{
+    const g=e.target.closest&&e.target.closest('button');if(!g)return;
+    if(g.id==='ixa')addIx();else if(g.id==='bka')addBk();
+    else if(g.dataset.ixr){ix=ix.filter(x=>x!==g.dataset.ixr);drawIx()}
+    else if(g.dataset.bkr){bk=bk.filter(x=>x.id!==g.dataset.bkr);ls.set('jp_basket',bk);drawBk()}
+    else if(g.id==='bkc'){(navigator.clipboard?navigator.clipboard.writeText(bkText()):Promise.reject()).then(()=>toast(LL('تم النسخ ✅','Copied ✅')),()=>toast(LL('تعذّر النسخ','Copy failed')))}
+    else if(g.id==='bkw')window.open('https://wa.me/?text='+encodeURIComponent(bkText()),'_blank','noopener');
+    else if(g.id==='bkp')window.print();
+  });
+  box.addEventListener('change',e=>{const q=e.target.dataset&&e.target.dataset.bkq;if(!q)return;const x=bk.find(z=>z.id===q);if(x){x.q=Math.max(1,Math.min(99,parseInt(e.target.value)||1));ls.set('jp_basket',bk);drawBk()}});
+  ['ixi','bki'].forEach(()=>{});
+  box.addEventListener('keydown',e=>{if(e.key!=='Enter')return;if(e.target.id==='ixi'){e.preventDefault();addIx()}else if(e.target.id==='bki'){e.preventDefault();addBk()}});
+  box.insertAdjacentHTML('beforeend','<datalist id="medl2"></datalist>');
+  shell();
+  const _a2=applyLang;applyLang=function(){_a2();shell()};
+})();
+
+/* ===== تنقّل موحّد: البحث + التصنيفات + الأمراض + الأعشاب + المفضلة، وفهرس الأدوات، وأداة التوفير ===== */
+(function(){
+  const SEG=[['search','💊',['الأدوية','Medicines']],['cats','📂',['التصنيفات','Categories']],['diseases','🏥',['الأمراض','Diseases']]];
+  const host=id=>document.getElementById(id);
+  function seg(){
+    SEG.forEach(([id])=>{const sec=host(id);if(!sec)return;let b=sec.querySelector(':scope>.seg');if(!b){b=document.createElement('div');b.className='seg';b.setAttribute('role','tablist');sec.prepend(b)}
+      b.innerHTML=SEG.map(([k,ic,n])=>`<button type="button" role="tab" data-go="${k}" aria-selected="${k===id}">${ic} ${LL(n[0],n[1])}</button>`).join('')});
+    try{favBadge()}catch{}
+  }
+  const tools=()=>[...document.querySelectorAll('#tools .tl2>.tool')];
+  function hub(){
+    const sec=host('tools'),list=tools();if(!sec||!list.length)return;
+    let b=host('toolNav');if(!b){b=document.createElement('div');b.id='toolNav';b.className='seg';sec.querySelector('.tl2').before(b)}
+    list.forEach((el,i)=>el.id=el.id||'tool'+i);
+    b.innerHTML=list.map(el=>{const h=el.querySelector('h2');return `<button type="button" data-tn="${el.id}">${esc(h?h.textContent:'')}</button>`}).join('');
+  }
+  document.addEventListener('click',e=>{const g=e.target.closest&&e.target.closest('[data-tn]');if(g){const el=host(g.dataset.tn);el&&el.scrollIntoView({behavior:'smooth',block:'start'})}});
+  /* أداة التوفير */
+  function savings(){
+    const box=document.querySelector('#tools .tl2');if(!box||host('svT'))return;
+    box.insertAdjacentHTML('beforeend','<div class="tool" id="svT"></div>');
+    const shell=()=>{host('svT').innerHTML=`<h2>💰 ${LL('وفّر على دوائك','Save on your medicine')}</h2><p class="mut"><small>${LL('اكتب اسم دوائك لنعرض لك الأدوية البديلة بنفس المادة الفعالة والتركيز والشكل مع نسبة التوفير.','Type your medicine to see equivalents with the same ingredient, strength and form, and the savings.')}</small></p><input id="svi" type="text" list="medl2" autocomplete="off" dir="auto"><div class="ixr svr" id="svo" aria-live="polite"></div>`;
+      const run=()=>{const v=norm(host('svi').value),m=v&&meds.find(x=>norm(x.name)===v),o=host('svo');if(!m){o.innerHTML='';return}
+        const g=(m.key&&GROUPS.get(m.key))||[],val=x=>(m.up!=null&&x.up!=null&&m.ul===x.ul)?x.up:x.pv,base=val(m);
+        const c=g.filter(x=>x!==m&&base!=null&&val(x)!=null&&val(x)<base).sort((a,b)=>val(a)-val(b)).slice(0,5);
+        o.innerHTML=c.length?c.map(x=>`<div class="it ok"><a href="#med=${esc(x.id)}" data-med="${esc(x.id)}" dir="auto">${esc(x.name)} <small class="mut" dir="ltr">${esc(x.price||'')}</small></a><span class="sv">−${Math.round((1-val(x)/base)*100)}%</span></div>`).join('')+`<p class="mut"><small>${LL('تأكد من الصيدلاني قبل أي تبديل.','Check with your pharmacist before switching.')}</small></p>`:`<div class="it"><b>${LL('لا يوجد بديل أرخص مطابق لهذا الدواء.','No cheaper matching equivalent found.')}</b></div>`};
+      const i=host('svi');i.addEventListener('input',run);i.addEventListener('change',run);i.addEventListener('focus',()=>host('ixi')&&host('ixi').dispatchEvent(new Event('focus')))};
+    shell();return shell;
+  }
+  let sv=savings();
+  const _a3=applyLang;applyLang=function(){_a3();seg();if(sv)sv();hub()};
+  const upd=()=>{seg();hub()};
+  addEventListener('hashchange',()=>setTimeout(seg,0));
+  upd();
+})();
+
+/* ===== ترتيب الفلاتر داخل قسم قابل للطي ===== */
+(function(){
+  const a=document.querySelector('#search .row.flt'),b=document.querySelector('#search .row.r2');if(!a||!b||document.getElementById('advF'))return;
+  const d=document.createElement('details');d.id='advF';d.className='advf';
+  const sm=document.createElement('summary');d.append(sm,a,b);
+  document.getElementById('res').before(d);
+  const lab=()=>{sm.textContent='⚙️ '+LL('فلاتر وترتيب متقدم','Advanced filters & sorting')};lab();
+  const _a4=applyLang;applyLang=function(){_a4();lab()};
+})();
+addEventListener('hashchange',()=>{if(!location.hash.startsWith('#tn'))scrollTo({top:0,behavior:'smooth'})});
 </script>
 <!-- تم دمج Firebase داخل السكربت الرئيسي (FIREBASE_CFG) لتفادي التعارض -->
 
