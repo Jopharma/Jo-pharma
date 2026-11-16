@@ -508,10 +508,7 @@ body{background:var(--bg);-webkit-font-smoothing:antialiased}
   <div style="margin-bottom: 12px; display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
     <a href="about.html" style="font-weight: 700;" data-i="fAbout"></a>
     <a href="privacy.html" style="font-weight: 700;" data-i="fPriv"></a>
-    <a href="terms.html" style="font-weight: 700;" data-i="fTerms"></a>
     <a href="contact.html" style="font-weight: 700;" data-i="fCont"></a>
-    <a href="methodology.html" style="font-weight: 700;" data-i="fMeth"></a>
-    <a href="/drug/" style="font-weight: 700;" data-i="fIdx"></a>
     <a href="#" data-inst style="font-weight: 700;"><span aria-hidden="true">📲</span> <span data-i="insN"></span></a>
   </div>
   <span data-i="rights"></span> · <a href="https://wa.me/962781775710" target="_blank" rel="noopener" data-i="wa"></a>
@@ -529,7 +526,7 @@ body{background:var(--bg);-webkit-font-smoothing:antialiased}
 <div id="agP" class="mdl hidden" role="dialog" aria-modal="true" aria-labelledby="agH"><div class="mbox"><button class="mx" type="button" data-mclose="agP" aria-label="Close">×</button>
   <div class="ag-lock"><div class="ag-li" aria-hidden="true">🔒</div><h2 id="agH" data-i="agT"></h2><p class="sub" data-i="agMsg"></p><button class="btn" type="button" data-mclose="agP" data-i="agOk" style="margin-top:14px"></button></div>
 </div></div>
-<noscript><p style="text-align:center;padding:20px">يتطلب البحث التفاعلي تفعيل JavaScript. يمكنك تصفح <a href="/drug/">فهرس الأدوية</a> بدونه.</p></noscript>
+<noscript><p style="text-align:center;padding:20px">يتطلب البحث التفاعلي تفعيل JavaScript.</p></noscript>
 
 <script type="module">
 /* ===== 1) الترجمة [عربي, English] ===== */
@@ -575,7 +572,7 @@ brandL:['أدوية مذكورة:','Medicines mentioned:'],
 const t = k => (T[k] || [k, k])[lang === 'ar' ? 0 : 1];
 const LL = (a, e) => lang === 'ar' ? a : e;
 document.addEventListener('click',async e=>{if(!e.target.closest('[data-favcopy]'))return;const txt=meds.filter(m=>favs.includes(m.name)).map(m=>medText(m)).join('\n');if(navigator.share){try{await navigator.share({title:'Jo Pharma',text:txt});return}catch{}}try{await navigator.clipboard.writeText(txt);toast(t('copied'))}catch{}});
-Object.assign(T,{co:['الشركة / المستودع','Company / distributor'],np:['السعر غير مُدرج','Price not listed'],vq:['بحث صوتي','Voice search'],chp:['الأرخص بنفس المادة','Cheapest, same ingredient'],favCopy:['📋 نسخ / مشاركة قائمتي','📋 Copy / share my list'],fAbout:['من نحن','About us'],fPriv:['الخصوصية','Privacy'],fTerms:['الشروط','Terms'],fCont:['اتصل بنا','Contact us'],fMeth:['المنهجية والمراجع','Methodology & references'],fIdx:['فهرس الأدوية','Drug index']});
+Object.assign(T,{co:['الشركة / المستودع','Company / distributor'],np:['السعر غير مُدرج','Price not listed'],vq:['بحث صوتي','Voice search'],chp:['الأرخص بنفس المادة','Cheapest, same ingredient'],favCopy:['📋 نسخ / مشاركة قائمتي','📋 Copy / share my list'],fAbout:['من نحن','About us'],fPriv:['الخصوصية','Privacy'],fCont:['اتصل بنا','Contact us']});
 
 /* ===== 2) البيانات ===== */
 const diseasesList = [
@@ -1162,7 +1159,7 @@ function showMed(id){
   ${sibsHtml}
   <div class="note" style="margin-top:16px">${t('noDose')}</div>
   <div class="pm-actions"><button class="fav" data-fav="${esc(m.id)}" aria-pressed="${fv}" aria-label="${t('fav')}">${fv?'★':'☆'}</button><button class="btn sm sec" data-copy="${esc(m.id)}">${t('copy')}</button><button class="btn sm sec" data-share="${esc(m.id)}">${t('share')}</button><a class="btn sm" target="_blank" rel="noopener" href="https://wa.me/962781775710?text=${encodeURIComponent('Jo Pharma: '+m.name)}">${t('rep')}</a></div>
-  <p class="mut pm-src"><small><b>🔎 ${t('srcT')}:</b> ${LL(SRC_NOTE,'General references: MedlinePlus, FDA (DailyMed), BNF and the WHO Essential Medicines List.')} <a href="https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=${q}" target="_blank" rel="noopener">DailyMed</a> · <a href="https://vsearch.nlm.nih.gov/vivisimo/cgi-bin/query-meta?v%3Aproject=medlineplus&query=${q}" target="_blank" rel="noopener">MedlinePlus</a> · <a href="https://www.nhs.uk/search/results?q=${q}" target="_blank" rel="noopener">NHS</a>${m.src?` · <a href="${esc(m.src)}" target="_blank" rel="noopener">${LL('صفحة الشركة','Company page')}</a>`:''} · <a href="methodology.html">${LL('المنهجية والمراجع','Methodology')}</a><br>🗓️ <b>${LL('آخر مراجعة علمية للمحتوى','Last scientific review')}:</b> ${k?REVIEW_DATE:LL('لا توجد مراجعة علمية مفصلة لهذا الدواء بعد','No detailed scientific review for this medicine yet')}${m.brand?`<br>${LL('الاستعمال العام مأخوذ كتلخيص معلوماتي ويجب مطابقته مع نشرة الدواء.','General use is an informational summary; always check it against the leaflet.')}`:''}</small></p>`;
+  <p class="mut pm-src"><small><b>🔎 ${t('srcT')}:</b> ${LL(SRC_NOTE,'General references: MedlinePlus, FDA (DailyMed), BNF and the WHO Essential Medicines List.')} <a href="https://dailymed.nlm.nih.gov/dailymed/search.cfm?labeltype=all&query=${q}" target="_blank" rel="noopener">DailyMed</a> · <a href="https://vsearch.nlm.nih.gov/vivisimo/cgi-bin/query-meta?v%3Aproject=medlineplus&query=${q}" target="_blank" rel="noopener">MedlinePlus</a> · <a href="https://www.nhs.uk/search/results?q=${q}" target="_blank" rel="noopener">NHS</a>${m.src?` · <a href="${esc(m.src)}" target="_blank" rel="noopener">${LL('صفحة الشركة','Company page')}</a>`:''}<br>🗓️ <b>${LL('آخر مراجعة علمية للمحتوى','Last scientific review')}:</b> ${k?REVIEW_DATE:LL('لا توجد مراجعة علمية مفصلة لهذا الدواء بعد','No detailed scientific review for this medicine yet')}${m.brand?`<br>${LL('الاستعمال العام مأخوذ كتلخيص معلوماتي ويجب مطابقته مع نشرة الدواء.','General use is an informational summary; always check it against the leaflet.')}`:''}</small></p>`;
   setSchema(m,co);
   scrollTo({top:0});
 }
@@ -1282,7 +1279,7 @@ function showDis(n){
   ${x?'':`<div class="note i">${LL('هذه الصفحة تعرض إرشادات عامة للمجموعة؛ التفاصيل الخاصة بهذا المرض قيد الإعداد والمراجعة.','This page shows general guidance for the group; details specific to this condition are being prepared and reviewed.')}</div>`}${sec('🏠 '+LL('نصائح العناية الذاتية','Self-care tips'),`<p>${esc(g[1])}</p>`)}
   ${sec('💊 '+LL('الخيارات العلاجية العامة','General treatment options'),`<p>${esc(pick(d,4))}</p>${brands(pick(d,4))}<p class="mut"><small>${LL('أدوية مقترحة للتعريف فقط وليست وصفة علاجية. يحدد الطبيب أو الصيدلاني الدواء والجرعة المناسبين، وكثير منها يُصرف بوصفة طبية.','Medicines listed for reference only, not a prescription. A doctor or pharmacist decides the right medicine and dose; many require a prescription.')}</small></p>`)}
   ${x?sec('🛡️ '+LL('الوقاية','Prevention'),`<p>${esc(x[2])}</p>`):''}${sec('🚨 '+LL('متى تراجع الطبيب فوراً؟','When to see a doctor right away'),`<p>${esc(g[2])}</p><p><b>${LL('اتصل بالإسعاف أو اذهب للطوارئ فوراً','Call emergency services or go to A&E immediately')}</b> ${LL('عند: ضيق نفس شديد، ألم صدر، فقدان وعي، نزيف لا يتوقف، أو ضعف مفاجئ في الوجه أو الأطراف.','for: severe shortness of breath, chest pain, loss of consciousness, bleeding that will not stop, or sudden weakness in the face or limbs.')}</p>`,'dx')}
-  <p class="mut"><small>${t('srcT')}: MedlinePlus · NHS · BNF · <a href="methodology.html">${lang==='ar'?'المنهجية والمراجع':'Methodology'}</a> · ${LL('آخر مراجعة','Last review')}: ${REVIEW_DATE}</small></p>`;
+  <p class="mut"><small>${t('srcT')}: MedlinePlus · NHS · BNF · ${LL('آخر مراجعة','Last review')}: ${REVIEW_DATE}</small></p>`;
   scrollTo({top:0});
 }
 const baseTitle=()=>lang==='ar'?'Jo Pharma | المرجع الدوائي الأردني':'Jo Pharma | Jordanian Drug Reference';
