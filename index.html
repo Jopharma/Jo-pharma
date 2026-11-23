@@ -826,6 +826,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const norm=s=>String(s??'').toLowerCase().replace(/[\u064B-\u065F]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').trim();
 /* ★★★ ضع رابط الـWorker هون مرة وحدة (بدون / بالنهاية) ★★★ */
 const AGENT_URL='https://pharmacy-search-bot.6jkkpjc6db.workers.dev';
+const PUSH_ON=false; /* غيّرها إلى true عند تشغيل الـ worker من جديد */
 const ls={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
 let lang=ls.get('jp_lang','ar'),meds=[],lim=20,ready=false,sortBy='rel',HW=[],byAct=new Map(),cnt=new Map();
 let favs=ls.get('jp_fav',[]),recent=ls.get('jp_recent',[]);
@@ -1818,7 +1819,7 @@ async function cloudSave(){if(!U.u||!FB)return;try{await FB.Fs.setDoc(FB.Fs.doc(
 
 /* ---------- إشعارات تصل حتى والموقع مغلق (Web Push) ---------- */
 const b64u=k=>{const p='='.repeat((4-k.length%4)%4),b=atob((k+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(b,c=>c.charCodeAt(0))};
-const pushOK=()=>!/YOUR-/.test(AGENT_URL)&&'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window&&Notification.permission==='granted';
+const pushOK=()=>PUSH_ON&&!/YOUR-/.test(AGENT_URL)&&'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window&&Notification.permission==='granted';
 async function swReg(){try{return await Promise.race([navigator.serviceWorker.ready,new Promise((_,j)=>setTimeout(j,4000))])}catch{return null}}
 async function pushSync(force){
   try{
@@ -1999,7 +2000,7 @@ function alPrefHTML(){const P=alP(),op=(a,v)=>a.map(o=>`<option value="${o[0]}"$
   <label>${ut('النغمة','Sound')} <select data-alp="snd">${op([['chime',ut('رنين','Chime')],['bell',ut('جرس','Bell')],['digital',ut('رقمي','Digital')]],P.snd)}</select> <button class="btn sm sec" data-alsnd type="button" aria-label="${ut('تجربة النغمة','Play sound')}">▶</button></label>
   <label>${ut('تنبيه مسبق','Heads-up')} <select data-alp="pre">${op([[0,ut('بدون','Off')],[5,ut('قبل 5 دقائق','5 min before')],[10,ut('قبل 10 دقائق','10 min before')],[15,ut('قبل 15 دقيقة','15 min before')]],P.pre)}</select></label>
   <label><input type="checkbox" data-alp="nag"${P.nag?' checked':''}> ${ut('أعد التنبيه كل 5 دقائق (حتى 3 مرات) إن لم آخذ الجرعة','Repeat every 5 min (up to 3 times) if I have not taken it')}</label></div>`}
-function notifHTML(){return notifHTML0()+alPrefHTML()}
+function notifHTML(){return notifHTML0()+(PUSH_ON?'':`<div class="nbx w">ℹ️ ${ut('التنبيهات تعمل والموقع مفتوح أو شغّال بالخلفية. لتصلك والموقع مغلق، أضف المنبّه لتقويم هاتفك (زر «أضفه لتقويم هاتفك» في المنبّه).','Alerts work while the site is open or running in the background. To get them when it is closed, add the reminder to your phone calendar (the calendar button on the reminder).')}</div>`)+alPrefHTML()}
 function notifHTML0(){
   const s='Notification' in window?Notification.permission:'na';
   if(s==='granted')return `<div class="nbx"><span>✅ ${ut('التنبيهات مفعّلة على هذا الجهاز.','Alerts are enabled on this device.')}</span><button class="btn sm sec" data-ntest type="button">${ut('تجربة','Test')}</button></div>`;
