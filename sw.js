@@ -27,12 +27,27 @@ self.addEventListener('push', e => e.waitUntil((async () => {
   await self.registration.showNotification(title, {
     body, tag: 'jp-dose', renotify: true, requireInteraction: true,
     icon: '/apple-touch-icon.png', badge: '/favicon-48.png', dir: ar ? 'rtl' : 'ltr', lang,
-    vibrate: [300, 150, 300, 150, 500], data: { url: '/#reminders' },
+    vibrate: [400, 150, 400, 150, 700], timestamp: now,
+    actions: due.length ? [
+      { action: 'taken', title: ar ? '✅ أخذتها' : '✅ Taken' },
+      { action: 'open', title: ar ? 'فتح المنبّهات' : 'Open' },
+    ] : [],
+    data: { url: '/#reminders', due: due.map(s => ({ at: s.at, name: s.name })) },
   });
 })()));
 
 self.addEventListener('notificationclick', e => {
   e.notification.close();
+  if (e.action === 'taken') {
+    const items = (e.notification.data && e.notification.data.due) || [];
+    e.waitUntil((async () => {
+      const prev = (await idbGet('taken')) || [];
+      await idbSet('taken', prev.concat(items));
+      const cl = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+      cl.forEach(c => c.postMessage({ type: 'taken', items }));
+    })());
+    return;
+  }
   const url = (e.notification.data && e.notification.data.url) || '/#reminders';
   e.waitUntil(self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(list => {
     for (const c of list) if ('focus' in c) { c.navigate && c.navigate(url).catch(() => {}); return c.focus(); }
